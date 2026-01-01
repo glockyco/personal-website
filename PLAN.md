@@ -356,34 +356,54 @@ Options:
 
 ## Implementation Phases
 
-### Phase 1: MVP
+### Phase 1: Foundation
 - [ ] Set up SvelteKit project with adapter-static
 - [ ] Basic layout (nav, footer)
 - [ ] Homepage with brief intro
 - [ ] Research page with publication list
 - [ ] Projects page with project cards
-- [ ] CV page
+- [ ] CV page (static initially)
 - [ ] Contact info
 - [ ] Deploy to Cloudflare Pages
 
-### Phase 2: Content
+### Phase 2: Content & Structure
 - [ ] Add all publications with structured data
 - [ ] Write project case studies (Erenshor, AK, others)
+- [ ] "How I Built This" expandable sections for projects
 - [ ] Create CV content
+- [ ] Embed interactive maps (iframe)
 - [ ] Add proper meta tags / SEO
 
-### Phase 3: Polish
+### Phase 3: Interactive Elements
+- [ ] Inline PDF viewer (pdf.js) for papers
+- [ ] Paper figure galleries
+- [ ] One-click BibTeX/citation copy
+- [ ] Interactive timeline CV (vis-timeline or d3)
+- [ ] PDF CV export from timeline data
 - [ ] Dark mode toggle
-- [ ] Responsive design refinements
-- [ ] Publication filters (year, topic)
-- [ ] BibTeX export for papers
-- [ ] PDF CV generation
 
-### Phase 4: Optional Enhancements
+### Phase 4: API Integrations
+- [ ] GitHub stats integration (commits, repos, languages)
+- [ ] Contribution metrics dashboard
+- [ ] Google Scholar data (manual or automated)
+- [ ] Steam guide stats
+- [ ] Wiki contribution stats (if applicable)
+- [ ] Live project status indicators
+
+### Phase 5: Advanced Features
+- [ ] Slide deck viewer (Reveal.js/Slidev integration)
+- [ ] Paper relationship graph visualization
+- [ ] Publication filters (year, topic, venue)
 - [ ] Blog with MDsveX
-- [ ] Now page
 - [ ] Search functionality
-- [ ] Analytics integration
+
+### Phase 6: Future Enhancements
+- [ ] Data exploration / SQL browser (sql.js)
+  - Schema discovery UI
+  - Pre-built example queries
+  - Visual query builder
+- [ ] Now page
+- [ ] Advanced analytics
 
 ---
 
@@ -395,6 +415,115 @@ Options:
 - This combination is rare and valuable for both audiences
 
 Emphasize this throughout the site.
+
+---
+
+## Interactive Features
+
+The portfolio should demonstrate skills through *how* it presents content, not just list achievements. Prioritize inline, interactive experiences over external links and static screenshots.
+
+### Contribution Metrics Dashboard
+
+Aggregate real data from multiple sources, fetched at build time:
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  BY THE NUMBERS                            (auto-updated)   │
+├──────────────────┬──────────────────┬──────────────────────┤
+│  RESEARCH        │  OPEN SOURCE     │  COMMUNITY           │
+│  ─────────────   │  ─────────────   │  ─────────────       │
+│  X Publications  │  Y commits       │  Z wiki articles     │
+│  N venues        │  M repos         │  K guide views       │
+└──────────────────┴──────────────────┴──────────────────────┘
+```
+
+**Data sources:**
+- **GitHub API** → commits, repos, languages, contribution calendar
+- **Google Scholar** → citations, h-index (manual or scraped)
+- **MediaWiki API** → article count, edit count, bytes contributed
+- **Steam API** → guide views, ratings, favorites
+
+### Interactive Timeline CV
+
+Replace static CV list with a zoomable, interactive timeline:
+- Multiple tracks: Education, Work, Research, Projects
+- Click to expand details
+- Milestone markers for publications, major releases
+- "Export as PDF" generates clean traditional format
+- Libraries: vis-timeline, d3, or custom Svelte implementation
+
+### Paper/Publication Experience
+
+Go beyond PDF links:
+
+| Feature | Description |
+|---------|-------------|
+| **Inline PDF viewer** | pdf.js with custom UI, stays on-site |
+| **Figure gallery** | Key figures extracted with captions, carousel view |
+| **Paper TL;DR** | 2-3 sentence summary + key contribution |
+| **One-click citation** | Copy BibTeX, formatted citations |
+| **Paper relationship graph** | Visualize connections between papers (d3/vis.js) |
+
+### Slide Deck Viewer
+
+Convert presentations to web-native format:
+- **Reveal.js** or **Slidev** (Markdown → slides) integration
+- Embedded viewer with keyboard navigation
+- Optional speaker notes toggle
+- Deep links to specific slides
+- Shows presentation skills, not just that slides exist
+
+### Embedded Project Demos
+
+**Maps (Erenshor/Ancient Kingdoms):**
+- Embed full interactive maps via iframe
+- Show the actual production site—don't hide functionality
+- Demonstrates real shipped work
+
+**Live project indicators:**
+- Status badges (online/offline)
+- Last updated timestamps
+- Usage stats where available
+
+### Data Exploration (Future)
+
+Interactive SQL explorer for project databases:
+- Uses sql.js (SQLite → WebAssembly, already used in Erenshor/AK)
+- Ship database files, query in-browser
+
+**UX challenge:** Raw SQL input isn't accessible. Solutions:
+- Pre-built "questions" (e.g., "Find all items in Heartlands")
+- Schema browser with table/column discovery
+- Visual query builder for common operations
+- Example queries with one-click execution
+
+Lower priority, but impressive differentiation when implemented.
+
+### "How I Built This" Sections
+
+Expandable technical deep-dives for each project:
+
+```
+▶ How I Built This
+  ┌─────────────────────────────────────────────────────────┐
+  │ ARCHITECTURE                                            │
+  │ [Interactive diagram showing data flow]                 │
+  │                                                         │
+  │ WHY THESE CHOICES                                       │
+  │ • deck.gl over Leaflet: 500k+ entities, needed WebGL   │
+  │ • SQLite over Postgres: No server, ships as file       │
+  └─────────────────────────────────────────────────────────┘
+```
+
+Shows engineering *thinking*, not just output.
+
+### Design Philosophy
+
+- **No audience toggle**: Clean navigation lets users self-select
+- **Progressive disclosure**: Overview → details on demand
+- **Inline over external**: Keep visitors on-site when possible
+- **Real data**: Metrics from APIs, not static claims
+- **The portfolio demonstrates the skills it claims**
 
 ---
 
@@ -419,8 +548,26 @@ pnpm dlx shadcn-svelte@next init
 
 ## Resources
 
+### Core Stack
 - [SvelteKit Docs](https://kit.svelte.dev/docs)
 - [MDsveX](https://mdsvex.pngwn.io/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [shadcn-svelte](https://www.shadcn-svelte.com/)
 - [Cloudflare Pages](https://pages.cloudflare.com/)
+
+### Interactive Features
+- [pdf.js](https://mozilla.github.io/pdf.js/) - PDF rendering in browser
+- [vis-timeline](https://visjs.github.io/vis-timeline/) - Interactive timelines
+- [Reveal.js](https://revealjs.com/) - HTML presentation framework
+- [Slidev](https://sli.dev/) - Markdown-based slides (alternative)
+- [sql.js](https://sql.js.org/) - SQLite compiled to WebAssembly
+
+### Data Visualization
+- [D3.js](https://d3js.org/) - General-purpose visualization
+- [vis-network](https://visjs.github.io/vis-network/) - Network/graph visualization
+
+### APIs
+- [GitHub REST API](https://docs.github.com/en/rest)
+- [GitHub GraphQL API](https://docs.github.com/en/graphql)
+- [MediaWiki API](https://www.mediawiki.org/wiki/API:Main_page)
+- [Steam Web API](https://developer.valvesoftware.com/wiki/Steam_Web_API)
