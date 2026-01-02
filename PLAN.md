@@ -33,41 +33,92 @@
 
 ## Site Structure
 
+### Sitemap
+
+```
+/                           # Home / Landing
+├── /research               # Publications list
+│   └── /research/[slug]    # Paper detail (includes slides/talks)
+├── /projects               # Projects grid
+│   └── /projects/[slug]    # Project detail
+├── /cv                     # Interactive timeline CV (includes teaching)
+└── /contact                # Contact info (email + links)
+```
+
+**Optional future routes:**
+- `/now` - Current focus / what I'm working on
+- `/uses` - Tools and setup (dev community standard)
+
 ### Core Sections
 
 | Section | Purpose | Content |
 |---------|---------|---------|
-| **About** | First impression | Brief bio, photo, current role, interests, contact links |
-| **Research** | Academic credibility | Papers, presentations, demos, datasets |
+| **Home** | First impression | Brief bio, photo, tagline, featured work, stats |
+| **Research** | Academic credibility | Papers, presentations (slides), demos, datasets |
 | **Projects** | Technical skills | Erenshor/AK ecosystem, other side projects |
-| **CV** | Formal credentials | Education, work, teaching, skills, downloadable PDF |
-| **Contact** | Reachability | Email, LinkedIn, GitHub, Scholar |
+| **CV** | Formal credentials | Interactive timeline, education, work, teaching, skills, PDF |
+| **Contact** | Reachability | Email, GitHub, LinkedIn, Scholar |
 
-### Optional Sections
+### Navigation
 
-| Section | Value | Notes |
-|---------|-------|-------|
-| **Blog/Writing** | SEO, thought leadership | Technical posts, research explainers, project deep-dives |
-| **Talks/Presentations** | Communication skills | Embedded slides, video links |
-| **Teaching** | Mentorship evidence | Courses, materials, student feedback |
-| **Now Page** | Shows you're active | Current focus, recent updates |
-| **Uses Page** | Dev community standard | Tools, setup (optional, fun) |
+**Desktop:**
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  [Logo/Name]       Research   Projects   CV   Contact  [GitHub] │
+└─────────────────────────────────────────────────────────────────┘
+```
 
-### Audience-Specific Emphasis
+**Mobile:** Hamburger menu with same items + social links + dark mode toggle
 
-**For Academia:**
-- Publication list with proper citations (BibTeX export)
-- Research statement/interests
-- Teaching philosophy
-- Mentorship/supervision
-- Service (reviewing, organizing)
+**Footer:**
+- Name and tagline
+- Social links (GitHub, LinkedIn, Scholar, Email)
+- Site navigation links
+- Copyright and last updated date
 
-**For Industry:**
-- Technical projects with live demos
-- Clear tech stacks
-- Problem-solving narratives
-- GitHub activity
-- Impact metrics (users, downloads)
+### Design Decisions
+
+- **Talks/Slides** - Part of Research detail pages
+- **Teaching** - Part of CV page, not a separate section
+- **Contact** - Simple email + social links, no form
+- **No audience toggle** - Clean navigation lets users self-select
+
+---
+
+## User Journeys
+
+### Academic Visitor
+Professor, postdoc, hiring committee member evaluating research credentials.
+
+```
+Home → Research → Paper Detail → [Read PDF / Copy Citation]
+                              ↘ CV → [Download PDF]
+```
+
+### Industry Recruiter
+Technical recruiter, hiring manager assessing technical skills.
+
+```
+Home → Projects → Project Detail → [View Live Demo]
+                               ↘ "How I Built This"
+     → CV → [Download PDF]
+```
+
+### Developer / Community Member
+Erenshor player, modder, open source contributor.
+
+```
+Home → Projects → Erenshor Maps → [Embedded Demo]
+                               ↘ GitHub
+```
+
+### Direct Link Visitor
+Someone who received a link to a specific paper/project.
+
+```
+Paper/Project Detail → [View content]
+                    ↘ Home → Explore other work
+```
 
 ---
 
@@ -85,7 +136,7 @@ SvelteKit + MDsveX + Tailwind CSS + TypeScript
 
 **Rationale:**
 - Already proficient in SvelteKit (from Erenshor maps)
-- MDsveX for content authoring (papers, blog posts in Markdown)
+- MDsveX for content authoring (project case studies in Markdown)
 - Tailwind + shadcn-svelte (already using)
 - Static output = fast, cheap, secure
 - Cloudflare = already using, free, fast CDN
@@ -130,24 +181,55 @@ src/
 │   │   ├── +page.svelte          # Project grid
 │   │   └── [slug]/+page.svelte   # Project detail
 │   ├── cv/+page.svelte           # CV page
-│   ├── blog/                     # Optional
-│   │   ├── +page.svelte
-│   │   └── [slug]/+page.md       # MDsveX posts
 │   └── contact/+page.svelte
 ├── lib/
 │   ├── components/
-│   │   ├── Nav.svelte
-│   │   ├── Footer.svelte
-│   │   ├── PublicationCard.svelte
-│   │   ├── ProjectCard.svelte
-│   │   └── ...
+│   │   ├── layout/
+│   │   │   ├── Nav.svelte
+│   │   │   ├── MobileNav.svelte
+│   │   │   ├── Footer.svelte
+│   │   │   ├── PageHeader.svelte
+│   │   │   └── BackLink.svelte
+│   │   ├── home/
+│   │   │   ├── HeroSection.svelte
+│   │   │   ├── StatsGrid.svelte        # Phase 4
+│   │   │   └── FeaturedGrid.svelte
+│   │   ├── research/
+│   │   │   ├── PublicationCard.svelte
+│   │   │   ├── PublicationList.svelte
+│   │   │   ├── FilterBar.svelte        # Phase 5
+│   │   │   ├── PaperHeader.svelte
+│   │   │   ├── FigureGallery.svelte    # Phase 3
+│   │   │   ├── CitationBlock.svelte
+│   │   │   ├── SlideViewer.svelte      # Phase 5
+│   │   │   └── PdfViewer.svelte        # Phase 3
+│   │   ├── projects/
+│   │   │   ├── ProjectCard.svelte
+│   │   │   ├── ProjectGrid.svelte
+│   │   │   ├── ProjectHero.svelte
+│   │   │   ├── DemoEmbed.svelte
+│   │   │   ├── HowIBuiltThis.svelte
+│   │   │   └── TechStackTags.svelte
+│   │   ├── cv/
+│   │   │   ├── TimelineView.svelte     # Phase 3
+│   │   │   ├── DetailPanel.svelte
+│   │   │   ├── TeachingSection.svelte
+│   │   │   └── SkillsSection.svelte
+│   │   ├── contact/
+│   │   │   ├── EmailBlock.svelte
+│   │   │   └── SocialLinks.svelte
+│   │   └── shared/
+│   │       ├── ActionButton.svelte
+│   │       ├── StatusBadge.svelte
+│   │       ├── TagList.svelte
+│   │       ├── DarkModeToggle.svelte
+│   │       └── RelatedContent.svelte
 │   └── data/
 │       ├── publications.ts       # Structured publication data
 │       ├── projects.ts           # Structured project data
 │       └── cv.ts                 # CV data
 └── content/                      # Markdown content (if using MDsveX)
-    ├── blog/
-    └── projects/
+    └── projects/                 # Project case studies
 ```
 
 ---
@@ -194,29 +276,6 @@ export const publications: Publication[] = [
 ];
 ```
 
-### Option B: Markdown + Frontmatter (Recommended for Blog/Long-form)
-
-Better for long-form content with rich formatting:
-
-```markdown
----
-title: Paper Title
-authors: [You, Coauthor]
-venue: CHI 2024
-year: 2024
-doi: 10.1145/...
-tags: [HCI, Visualization]
----
-
-## Abstract
-...
-
-## Key Contributions
-...
-```
-
-**Recommendation:** Use Option A for publications/projects (structured) and Option B for blog posts (long-form).
-
 ---
 
 ## UI/UX Design
@@ -233,31 +292,226 @@ tags: [HCI, Visualization]
 
 **Homepage:**
 ```
-┌─────────────────────────────────────────────────┐
-│  [Photo]  Hi, I'm [Name]                        │
-│           PhD Researcher @ [University]          │
-│           Building tools for [domain]            │
-│                                                 │
-│  [Research] [Projects] [CV] [Blog] [Contact]    │
-├─────────────────────────────────────────────────┤
-│  FEATURED                                       │
-│  ┌──────────┐ ┌──────────┐ ┌──────────┐        │
-│  │ Paper    │ │ Erenshor │ │ Recent   │        │
-│  │ 2024     │ │ Maps     │ │ Post     │        │
-│  └──────────┘ └──────────┘ └──────────┘        │
-└─────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────┐
+│ [NAV]                                                           │
+├─────────────────────────────────────────────────────────────────┤
+│  ┌────────┐  Hi, I'm Johann Glock                               │
+│  │ PHOTO  │  PhD Researcher finishing at [University]           │
+│  │        │  Building tools that bridge research and practice   │
+│  └────────┘  [View Research] [See Projects]                     │
+├─────────────────────────────────────────────────────────────────┤
+│  BY THE NUMBERS (Phase 4)                                       │
+│  ┌──────────────┐ ┌──────────────┐ ┌──────────────┐            │
+│  │ X Papers     │ │ Y Commits    │ │ Z Wiki Pages │            │
+│  └──────────────┘ └──────────────┘ └──────────────┘            │
+├─────────────────────────────────────────────────────────────────┤
+│  FEATURED WORK                                                  │
+│  ┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐   │
+│  │ Recent paper    │ │ Erenshor Maps   │ │ AK Compendium   │   │
+│  └─────────────────┘ └─────────────────┘ └─────────────────┘   │
+├─────────────────────────────────────────────────────────────────┤
+│ [FOOTER]                                                        │
+└─────────────────────────────────────────────────────────────────┘
 ```
 
 **Research page:**
-- Filter by year/topic/type
-- Each paper as card with: title, venue, year, quick actions (PDF, cite, demo)
-- Expandable abstracts
+```
+┌─────────────────────────────────────────────────────────────────┐
+│ [NAV]                                                           │
+├─────────────────────────────────────────────────────────────────┤
+│  Research & Publications                                        │
+│  Brief intro about research interests / areas                   │
+├─────────────────────────────────────────────────────────────────┤
+│  Filter: [All ▾] [2024 ▾] [Topic ▾]              [Search 🔍]   │
+├─────────────────────────────────────────────────────────────────┤
+│  ┌─────────────────────────────────────────────────────────────┐│
+│  │ Paper Title Here                                 2024 | CHI ││
+│  │ Authors: You, Coauthor A, Coauthor B                        ││
+│  │ Brief abstract or TL;DR...                       [▼ More]   ││
+│  │ [PDF] [Cite] [Demo] [Code]                                  ││
+│  └─────────────────────────────────────────────────────────────┘│
+│  ┌─────────────────────────────────────────────────────────────┐│
+│  │ Another Paper Title                              2023 | ICSE││
+│  │ ...                                                         ││
+│  └─────────────────────────────────────────────────────────────┘│
+├─────────────────────────────────────────────────────────────────┤
+│ [FOOTER]                                                        │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+**Paper detail page:**
+```
+┌─────────────────────────────────────────────────────────────────┐
+│ [NAV]                                                           │
+├─────────────────────────────────────────────────────────────────┤
+│  ← Back to Research                                             │
+├─────────────────────────────────────────────────────────────────┤
+│  Paper Title Here                                               │
+│  Authors: You, Coauthor A, Coauthor B                           │
+│  Published in CHI 2024 · DOI: 10.1145/...                       │
+│                                                                 │
+│  [PDF] [Cite] [Demo] [Code] [Slides] [Video]                    │
+├─────────────────────────────────────────────────────────────────┤
+│  TL;DR                                                          │
+│  2-3 sentence summary of key contribution...                    │
+├─────────────────────────────────────────────────────────────────┤
+│  KEY FIGURES                                                    │
+│  ┌────────┐ ┌────────┐ ┌────────┐                              │
+│  │ Fig 1  │ │ Fig 2  │ │ Fig 3  │  ← → carousel navigation     │
+│  └────────┘ └────────┘ └────────┘                              │
+│  Caption for selected figure...                                 │
+├─────────────────────────────────────────────────────────────────┤
+│  ABSTRACT                                                       │
+│  Full abstract text...                                          │
+├─────────────────────────────────────────────────────────────────┤
+│  [Embedded PDF Viewer - collapsible or tab]                     │
+├─────────────────────────────────────────────────────────────────┤
+│  CITATION                                                       │
+│  ┌─────────────────────────────────────────────────────────────┐│
+│  │ @inproceedings{glock2024paper,                              ││
+│  │   title = {...},                                            ││
+│  │   ...                                                       ││
+│  │ }                                          [Copy BibTeX]    ││
+│  └─────────────────────────────────────────────────────────────┘│
+│  [APA] [MLA] [Chicago] - format toggles                         │
+├─────────────────────────────────────────────────────────────────┤
+│  RELATED                                                        │
+│  ┌─────────────────┐ ┌─────────────────┐                       │
+│  │ Related Paper   │ │ Related Project │                       │
+│  └─────────────────┘ └─────────────────┘                       │
+├─────────────────────────────────────────────────────────────────┤
+│ [FOOTER]                                                        │
+└─────────────────────────────────────────────────────────────────┘
+```
 
 **Projects page:**
-- Grid of cards with screenshots
-- Tags for tech stack
-- Status badges (active/completed)
-- Links to live demos
+```
+┌─────────────────────────────────────────────────────────────────┐
+│ [NAV]                                                           │
+├─────────────────────────────────────────────────────────────────┤
+│  Projects                                                       │
+│  Things I've built - from research tools to community resources │
+├─────────────────────────────────────────────────────────────────┤
+│  Filter: [All ▾] [Active ▾] [Tech ▾]                           │
+├─────────────────────────────────────────────────────────────────┤
+│  ┌─────────────────────┐ ┌─────────────────────┐               │
+│  │ ┌─────────────────┐ │ │ ┌─────────────────┐ │               │
+│  │ │   Screenshot    │ │ │ │   Screenshot    │ │               │
+│  │ └─────────────────┘ │ │ └─────────────────┘ │               │
+│  │ Erenshor Maps       │ │ AK Compendium       │               │
+│  │ Interactive game... │ │ Community wiki...   │               │
+│  │ [SvelteKit][deck.gl]│ │ [MediaWiki][Python] │               │
+│  │ ● Active            │ │ ● Active            │               │
+│  └─────────────────────┘ └─────────────────────┘               │
+├─────────────────────────────────────────────────────────────────┤
+│ [FOOTER]                                                        │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+**Project detail page:**
+```
+┌─────────────────────────────────────────────────────────────────┐
+│ [NAV]                                                           │
+├─────────────────────────────────────────────────────────────────┤
+│  ← Back to Projects                                             │
+├─────────────────────────────────────────────────────────────────┤
+│  ┌─────────────────────────────────────────────────────────────┐│
+│  │                    Hero Screenshot                          ││
+│  └─────────────────────────────────────────────────────────────┘│
+│  Erenshor Interactive Maps                         ● Active     │
+│  Community tools for game exploration                           │
+│                                                                 │
+│  [Live Demo] [GitHub] [Steam Guide]                             │
+├─────────────────────────────────────────────────────────────────┤
+│  THE CHALLENGE                                                  │
+│  Players needed better tools for navigation and discovery...   │
+├─────────────────────────────────────────────────────────────────┤
+│  THE SOLUTION                                                   │
+│  Built a data pipeline that extracts game data and presents... │
+├─────────────────────────────────────────────────────────────────┤
+│  DEMO                                                           │
+│  ┌─────────────────────────────────────────────────────────────┐│
+│  │              [Embedded iframe of live maps]                 ││
+│  └─────────────────────────────────────────────────────────────┘│
+│                                    [Open in new tab →]          │
+├─────────────────────────────────────────────────────────────────┤
+│  ▶ HOW I BUILT THIS (expandable)                                │
+│  ┌─────────────────────────────────────────────────────────────┐│
+│  │ ARCHITECTURE                                                ││
+│  │ [Diagram: MelonMod → Python → SQLite → SvelteKit → deck.gl]││
+│  │                                                             ││
+│  │ TECHNICAL DECISIONS                                         ││
+│  │ • deck.gl over Leaflet: 500k+ entities needed WebGL        ││
+│  │ • SQLite: No server needed, ships as static file           ││
+│  └─────────────────────────────────────────────────────────────┘│
+├─────────────────────────────────────────────────────────────────┤
+│  TECH STACK                                                     │
+│  [SvelteKit] [TypeScript] [deck.gl] [SQLite] [Python] [C#]     │
+├─────────────────────────────────────────────────────────────────┤
+│  IMPACT                                                         │
+│  • X monthly active users                                       │
+│  • Community adoption by Z                                      │
+├─────────────────────────────────────────────────────────────────┤
+│ [FOOTER]                                                        │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+**CV page:**
+```
+┌─────────────────────────────────────────────────────────────────┐
+│ [NAV]                                                           │
+├─────────────────────────────────────────────────────────────────┤
+│  Curriculum Vitae                          [Download PDF]       │
+├─────────────────────────────────────────────────────────────────┤
+│  [Interactive Timeline - full width]                            │
+│  ┌─────────────────────────────────────────────────────────────┐│
+│  │ Education ═══════════════════                               ││
+│  │ Work      ═══════════    ════════════                       ││
+│  │ Research      ══════════════════════                        ││
+│  │ Projects          ════  ════  ══════                        ││
+│  │ ──────────────────────────────────────────────────────────  ││
+│  │ 2018    2019    2020    2021    2022    2023    2024    Now ││
+│  └─────────────────────────────────────────────────────────────┘│
+│  Click any item to see details                                  │
+├─────────────────────────────────────────────────────────────────┤
+│  [Selected item details appear here]                            │
+│  ┌─────────────────────────────────────────────────────────────┐│
+│  │ PhD in Computer Science                      2020 - Present ││
+│  │ University Name                                             ││
+│  │ Research focus: ...                                         ││
+│  │ [View related publications →]                               ││
+│  └─────────────────────────────────────────────────────────────┘│
+├─────────────────────────────────────────────────────────────────┤
+│  Or view as traditional sections:                               │
+│  [Education] [Experience] [Teaching] [Skills] [Publications]   │
+├─────────────────────────────────────────────────────────────────┤
+│ [FOOTER]                                                        │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+**Contact page:**
+```
+┌─────────────────────────────────────────────────────────────────┐
+│ [NAV]                                                           │
+├─────────────────────────────────────────────────────────────────┤
+│  Get in Touch                                                   │
+├─────────────────────────────────────────────────────────────────┤
+│  The best way to reach me is via email:                         │
+│                                                                 │
+│  ┌─────────────────────────────────────────────────────────────┐│
+│  │  📧  email@example.com                         [Copy]       ││
+│  └─────────────────────────────────────────────────────────────┘│
+├─────────────────────────────────────────────────────────────────┤
+│  You can also find me on:                                       │
+│                                                                 │
+│  ┌────────────┐ ┌────────────┐ ┌────────────┐ ┌────────────┐   │
+│  │  GitHub    │ │  LinkedIn  │ │  Scholar   │ │  Twitter   │   │
+│  │  @handle   │ │  /in/name  │ │  profile   │ │  @handle   │   │
+│  └────────────┘ └────────────┘ └────────────┘ └────────────┘   │
+├─────────────────────────────────────────────────────────────────┤
+│ [FOOTER]                                                        │
+└─────────────────────────────────────────────────────────────────┘
+```
 
 ### Color Scheme
 
@@ -394,7 +648,6 @@ Options:
 - [ ] Slide deck viewer (Reveal.js/Slidev integration)
 - [ ] Paper relationship graph visualization
 - [ ] Publication filters (year, topic, venue)
-- [ ] Blog with MDsveX
 - [ ] Search functionality
 
 ### Phase 6: Future Enhancements
