@@ -4,22 +4,42 @@
 
 **Current:** PhD student/researcher (finishing soon)
 **Target audiences:** Academia + Industry (unique bridge position)
+**Location:** Hagenberg / Linz (Austria) or Remote
+**Experience:** ~X years in software engineering, Y years in research
+
+### Research Statement
+
+My research focuses on [empirical software engineering / mining software repositories / developer tools], exploring how [data-driven approaches] can [improve developer productivity and software quality]. I combine empirical methods with tool-building to bridge the gap between research insights and practical applications.
+
+*(To be refined with specific focus areas)*
+
+### Role Targeting
+
+Open to:
+- Research Scientist / Applied Scientist positions
+- Senior Software Engineer roles (data visualization, developer tools)
+- Postdoctoral research positions
+
+### TL;DR Professional Summary
+
+PhD researcher with X years of software engineering experience. Published in top SE venues (JSS, ICSE). Ships production software used by real communities. Combines academic rigor with practical engineering.
 
 ### What to Showcase
 
 **Academic:**
-- Papers and publications
-- Presentations and talks
+- Papers and publications (with full metadata: type, awards, citations)
+- Presentations and talks (slides integrated with papers)
 - Research prototypes and demos
 - Datasets released
 - Teaching experience
+- Academic service (reviewing)
 
 **Technical/Hobby:**
 - Erenshor + Ancient Kingdoms modding ecosystem
   - Data mining and reverse engineering
   - Interactive maps (SvelteKit + deck.gl)
   - Build pipelines (Python + SQLite)
-  - Wiki contributions
+  - Wiki contributions (primary maintainer)
   - Bot writing
   - Steam guide writing
 - Other side projects
@@ -28,6 +48,7 @@
 - Prior web development experience
 - Research experience before PhD
 - Teaching (TA and during PhD)
+- Student supervision (Bachelor's, Master's, interns)
 
 ---
 
@@ -36,13 +57,14 @@
 ### Sitemap
 
 ```
-/                           # Home / Landing
-├── /research               # Publications list
+/                           # Home / Landing (with research statement)
+├── /research               # Publications list (no filters needed)
 │   └── /research/[slug]    # Paper detail (includes slides/talks)
-├── /projects               # Projects grid
+├── /projects               # Projects grid (no filters needed)
 │   └── /projects/[slug]    # Project detail
-├── /cv                     # Interactive timeline CV (includes teaching)
-└── /contact                # Contact info (email + links)
+├── /cv                     # CV with timeline + traditional view
+└── /contact                # Contact info (email + academic links)
+└── /404                    # Custom 404 page
 ```
 
 **Optional future routes:**
@@ -53,35 +75,52 @@
 
 | Section | Purpose | Content |
 |---------|---------|---------|
-| **Home** | First impression | Brief bio, photo, tagline, featured work, stats |
-| **Research** | Academic credibility | Papers, presentations (slides), demos, datasets |
-| **Projects** | Technical skills | Erenshor/AK ecosystem, other side projects |
-| **CV** | Formal credentials | Interactive timeline, education, work, teaching, skills, PDF |
-| **Contact** | Reachability | Email, GitHub, LinkedIn, Scholar |
+| **Home** | First impression | Research statement, bio, photo, tagline, featured work, optional stats |
+| **Research** | Academic credibility | Papers with full metadata, presentations (slides), demos, datasets |
+| **Projects** | Technical skills | Erenshor/AK ecosystem, other side projects, "How I Built This" |
+| **CV** | Formal credentials | Timeline view + traditional view, teaching, service, awards, PDF download |
+| **Contact** | Reachability | Email, GitHub, LinkedIn, Scholar, ORCID, Semantic Scholar, Institution |
 
 ### Navigation
 
 **Desktop:**
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│  [Logo/Name]       Research   Projects   CV   Contact  [GitHub] │
+│  [Logo/Name]   Research  Projects  CV  Contact  [GitHub] [🌙]  │
 └─────────────────────────────────────────────────────────────────┘
 ```
+- Dark mode toggle [🌙] always visible in header
+- Links open in same tab (browser default behavior)
 
 **Mobile:** Hamburger menu with same items + social links + dark mode toggle
 
 **Footer:**
 - Name and tagline
-- Social links (GitHub, LinkedIn, Scholar, Email)
+- Social links (GitHub, LinkedIn, Scholar, ORCID, Email)
 - Site navigation links
 - Copyright and last updated date
 
+**Breadcrumbs (on detail pages):**
+```
+Home > Research > Paper Title
+Home > Projects > Project Name
+```
+
 ### Design Decisions
 
-- **Talks/Slides** - Part of Research detail pages
-- **Teaching** - Part of CV page, not a separate section
-- **Contact** - Simple email + social links, no form
-- **No audience toggle** - Clean navigation lets users self-select
+| Decision | Rationale |
+|----------|-----------|
+| **No search/filters** | Too few items (4 papers, ~5 projects) |
+| **No carousels** | Poor UX, accessibility issues; use grids instead |
+| **Talks/Slides** | Part of Research detail pages |
+| **Teaching** | Part of CV page, not a separate section |
+| **Contact** | Simple email + social links, no form |
+| **No audience toggle** | Clean navigation lets users self-select |
+| **Same-tab links** | Respect browser defaults (Ctrl+Click for new tab) |
+| **Dark mode in header** | Always accessible, not buried in menu |
+| **Traditional CV as alternative** | Recruiters/committees need scannable format |
+| **Manual data entry** | Better than fragile API scrapers |
+| **Static metrics ("X+")** | Avoids API failures, clearly not real-time |
 
 ---
 
@@ -197,12 +236,11 @@ src/
 │   │   ├── research/
 │   │   │   ├── PublicationCard.svelte
 │   │   │   ├── PublicationList.svelte
-│   │   │   ├── FilterBar.svelte        # Phase 5
 │   │   │   ├── PaperHeader.svelte
-│   │   │   ├── FigureGallery.svelte    # Phase 3
+│   │   │   ├── FigureGrid.svelte       # Phase 3 (grid, not carousel)
 │   │   │   ├── CitationBlock.svelte
-│   │   │   ├── SlideViewer.svelte      # Phase 5
-│   │   │   └── PdfViewer.svelte        # Phase 3
+│   │   │   ├── SlideViewer.svelte      # Phase 5+
+│   │   │   └── PdfViewer.svelte        # Phase 3 (lazy-loaded, collapsible)
 │   │   ├── projects/
 │   │   │   ├── ProjectCard.svelte
 │   │   │   ├── ProjectGrid.svelte
@@ -236,44 +274,188 @@ src/
 
 ## Content Management
 
-### Option A: TypeScript Files (Recommended for Publications)
+All content managed via TypeScript files with Zod validation at build time.
 
-Type-safe, queryable, easy to filter/sort:
+### Publication Schema
 
 ```typescript
 // src/lib/data/publications.ts
-export type Publication = {
-    slug: string;
-    title: string;
-    authors: string[];
-    venue: string;
-    year: number;
-    abstract: string;
-    pdf?: string;
-    doi?: string;
-    tags: string[];
-    links?: {
-        demo?: string;
-        code?: string;
-        slides?: string;
-        video?: string;
-    };
+export type Author = {
+  name: string;
+  url?: string;        // Link to their website/profile
+  isMe?: boolean;      // Highlight own name
 };
 
-export const publications: Publication[] = [
-    {
-        slug: "paper-2024",
-        title: "Paper Title",
-        authors: ["You", "Coauthor"],
-        venue: "CHI 2024",
-        year: 2024,
-        abstract: "...",
-        pdf: "/papers/paper-2024.pdf",
-        doi: "10.1145/...",
-        tags: ["HCI", "Visualization"],
-        links: { demo: "https://...", code: "https://github.com/..." }
-    }
-];
+export type Publication = {
+  slug: string;
+  title: string;
+  authors: Author[];
+  venue: string;
+  year: number;
+  abstract: string;
+  tldr: string;        // 2-3 sentence summary
+
+  // Classification
+  type: 'journal' | 'conference' | 'workshop' | 'doctoral-symposium' | 'thesis' | 'preprint';
+  status: 'published' | 'in-press' | 'under-review' | 'preprint';
+  authorPosition: 'first' | 'co-first' | 'contributing' | 'senior';
+
+  // Academic metadata
+  award?: string;           // "Best Paper", "Honorable Mention"
+  acceptanceRate?: string;  // "26%"
+  citationCount?: number;   // Manual update
+
+  // Links
+  pdf?: string;
+  doi?: string;
+  arxiv?: string;
+  scholarUrl?: string;      // Google Scholar link for this paper
+  dataset?: string;
+
+  tags: string[];
+  links?: {
+    demo?: string;
+    code?: string;
+    slides?: string;
+    video?: string;
+  };
+
+  // Related content (manual curation by slug)
+  relatedPapers?: string[];
+  relatedProjects?: string[];
+
+  // Key figures for gallery (grid layout, not carousel)
+  figures?: {
+    src: string;
+    alt: string;
+    caption: string;
+  }[];
+};
+```
+
+### Project Schema
+
+```typescript
+// src/lib/data/projects.ts
+export type Project = {
+  slug: string;
+  title: string;
+  tagline: string;
+  description: string;      // The challenge
+  solution: string;         // The solution
+  status: 'active' | 'maintained' | 'archived';
+
+  // Media
+  heroImage: string;
+  screenshots?: string[];
+
+  // Links
+  liveUrl?: string;
+  githubUrl?: string;
+  steamGuideUrl?: string;
+
+  // Technical details
+  techStack: string[];
+
+  // "How I Built This" content
+  architecture?: string;    // Markdown description
+  technicalDecisions?: {
+    decision: string;
+    rationale: string;
+  }[];
+
+  // Reflection (shows growth mindset)
+  whatIdDoDifferently?: string;
+
+  // Complexity indicators
+  metrics?: {
+    linesOfCode?: string;   // "~15,000"
+    components?: number;
+    dataScale?: string;     // "500k+ entities"
+    users?: string;         // "X monthly active users"
+  };
+
+  // Performance evidence
+  performance?: {
+    lighthouseScore?: number;
+    loadTime?: string;
+    optimizations?: string[];
+  };
+
+  // Related content
+  relatedPapers?: string[];
+  relatedProjects?: string[];
+};
+```
+
+### CV Data Structures
+
+```typescript
+// src/lib/data/cv.ts
+export type Education = {
+  degree: string;
+  field: string;
+  institution: string;
+  location: string;
+  startYear: number;
+  endYear?: number;         // undefined = present
+  thesis?: string;
+  advisor?: string;
+  description?: string;
+};
+
+export type WorkExperience = {
+  title: string;
+  company: string;
+  location: string;
+  startYear: number;
+  endYear?: number;
+  description: string;
+  highlights?: string[];
+};
+
+export type TeachingExperience = {
+  course: string;
+  role: 'instructor' | 'ta' | 'guest-lecturer';
+  institution: string;
+  semesters: string[];      // ["Fall 2022", "Spring 2023"]
+  enrollment?: number;
+  evaluationScore?: string; // "4.5/5.0"
+  description?: string;
+};
+
+export type AcademicService = {
+  type: 'reviewer' | 'subreviewer' | 'committee' | 'organizer';
+  venue: string;
+  year: number;
+  note?: string;            // "As subreviewer for supervisor"
+};
+
+export type Award = {
+  title: string;
+  organization: string;
+  years: string;            // "2019-2022"
+  description?: string;
+};
+
+export type Skill = {
+  category: string;         // "Languages", "Frameworks", "Tools"
+  items: string[];
+};
+```
+
+### Academic Links
+
+```typescript
+// src/lib/data/links.ts
+export const academicLinks = {
+  orcid: '0000-0002-0152-8611',
+  semanticScholar: 'https://www.semanticscholar.org/author/Johann-Glock/2266466770',
+  googleScholar: 'https://scholar.google.com/citations?user=33UUDmcAAAAJ',
+  institution: 'https://www.aau.at/en/isys/serg/team/glock-johann/',
+  github: 'https://github.com/glockyco',
+  linkedin: '...',
+};
 ```
 
 ---
@@ -293,16 +475,20 @@ export const publications: Publication[] = [
 **Homepage:**
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│ [NAV]                                                           │
+│ [NAV]                                              [GitHub] [🌙] │
 ├─────────────────────────────────────────────────────────────────┤
 │  ┌────────┐  Hi, I'm Johann Glock                               │
 │  │ PHOTO  │  PhD Researcher finishing at [University]           │
-│  │        │  Building tools that bridge research and practice   │
-│  └────────┘  [View Research] [See Projects]                     │
+│  │        │  Hagenberg/Linz, Austria · Open to Remote           │
+│  └────────┘  [View Research] [See Projects] [Download CV]       │
 ├─────────────────────────────────────────────────────────────────┤
-│  BY THE NUMBERS (Phase 4)                                       │
+│  RESEARCH FOCUS                                                 │
+│  My research focuses on [area], exploring how [approach] can    │
+│  [outcome]. I combine empirical methods with tool-building...   │
+├─────────────────────────────────────────────────────────────────┤
+│  BY THE NUMBERS (optional, Phase 4)                             │
 │  ┌──────────────┐ ┌──────────────┐ ┌──────────────┐            │
-│  │ X Papers     │ │ Y Commits    │ │ Z Wiki Pages │            │
+│  │ X+ Papers    │ │ Y+ Commits   │ │ Z+ Wiki Pages│            │
 │  └──────────────┘ └──────────────┘ └──────────────┘            │
 ├─────────────────────────────────────────────────────────────────┤
 │  FEATURED WORK                                                  │
@@ -317,21 +503,20 @@ export const publications: Publication[] = [
 **Research page:**
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│ [NAV]                                                           │
+│ [NAV]                                              [GitHub] [🌙] │
 ├─────────────────────────────────────────────────────────────────┤
 │  Research & Publications                                        │
 │  Brief intro about research interests / areas                   │
 ├─────────────────────────────────────────────────────────────────┤
-│  Filter: [All ▾] [2024 ▾] [Topic ▾]              [Search 🔍]   │
-├─────────────────────────────────────────────────────────────────┤
+│  (No filters needed - only 4 papers)                            │
 │  ┌─────────────────────────────────────────────────────────────┐│
-│  │ Paper Title Here                                 2024 | CHI ││
-│  │ Authors: You, Coauthor A, Coauthor B                        ││
-│  │ Brief abstract or TL;DR...                       [▼ More]   ││
+│  │ Paper Title Here                    2024 | JSS | First Auth ││
+│  │ Authors: Johann Glock, Coauthor A, Coauthor B               ││
+│  │ TL;DR summary of key contribution...             [▼ More]   ││
 │  │ [PDF] [Cite] [Demo] [Code]                                  ││
 │  └─────────────────────────────────────────────────────────────┘│
 │  ┌─────────────────────────────────────────────────────────────┐│
-│  │ Another Paper Title                              2023 | ICSE││
+│  │ Another Paper Title                 2024 | ICSE | First Auth││
 │  │ ...                                                         ││
 │  └─────────────────────────────────────────────────────────────┘│
 ├─────────────────────────────────────────────────────────────────┤
@@ -344,27 +529,33 @@ export const publications: Publication[] = [
 ┌─────────────────────────────────────────────────────────────────┐
 │ [NAV]                                                           │
 ├─────────────────────────────────────────────────────────────────┤
-│  ← Back to Research                                             │
+│  Home > Research > Paper Title                                  │
 ├─────────────────────────────────────────────────────────────────┤
 │  Paper Title Here                                               │
 │  Authors: You, Coauthor A, Coauthor B                           │
 │  Published in CHI 2024 · DOI: 10.1145/...                       │
+│  🏆 Best Paper Award · 26% acceptance rate                      │
 │                                                                 │
-│  [PDF] [Cite] [Demo] [Code] [Slides] [Video]                    │
+│  [⬇ Download PDF] [Cite] [Demo] [Code] [Slides] [Video]        │
 ├─────────────────────────────────────────────────────────────────┤
 │  TL;DR                                                          │
 │  2-3 sentence summary of key contribution...                    │
 ├─────────────────────────────────────────────────────────────────┤
-│  KEY FIGURES                                                    │
-│  ┌────────┐ ┌────────┐ ┌────────┐                              │
-│  │ Fig 1  │ │ Fig 2  │ │ Fig 3  │  ← → carousel navigation     │
-│  └────────┘ └────────┘ └────────┘                              │
-│  Caption for selected figure...                                 │
+│  KEY FIGURES (grid layout - all visible)                        │
+│  ┌────────────────┐ ┌────────────────┐ ┌────────────────┐      │
+│  │                │ │                │ │                │      │
+│  │    Figure 1    │ │    Figure 2    │ │    Figure 3    │      │
+│  │                │ │                │ │                │      │
+│  └────────────────┘ └────────────────┘ └────────────────┘      │
+│  Caption 1           Caption 2           Caption 3              │
 ├─────────────────────────────────────────────────────────────────┤
 │  ABSTRACT                                                       │
 │  Full abstract text...                                          │
 ├─────────────────────────────────────────────────────────────────┤
-│  [Embedded PDF Viewer - collapsible or tab]                     │
+│  ▶ VIEW PDF INLINE (collapsed by default, lazy-loads pdf.js)   │
+│  ┌─────────────────────────────────────────────────────────────┐│
+│  │              [Embedded PDF Viewer]                          ││
+│  └─────────────────────────────────────────────────────────────┘│
 ├─────────────────────────────────────────────────────────────────┤
 │  CITATION                                                       │
 │  ┌─────────────────────────────────────────────────────────────┐│
@@ -392,8 +583,7 @@ export const publications: Publication[] = [
 │  Projects                                                       │
 │  Things I've built - from research tools to community resources │
 ├─────────────────────────────────────────────────────────────────┤
-│  Filter: [All ▾] [Active ▾] [Tech ▾]                           │
-├─────────────────────────────────────────────────────────────────┤
+│  (No filters needed - only ~5 projects)                         │
 │  ┌─────────────────────┐ ┌─────────────────────┐               │
 │  │ ┌─────────────────┐ │ │ ┌─────────────────┐ │               │
 │  │ │   Screenshot    │ │ │ │   Screenshot    │ │               │
@@ -413,7 +603,7 @@ export const publications: Publication[] = [
 ┌─────────────────────────────────────────────────────────────────┐
 │ [NAV]                                                           │
 ├─────────────────────────────────────────────────────────────────┤
-│  ← Back to Projects                                             │
+│  Home > Projects > Project Name                                 │
 ├─────────────────────────────────────────────────────────────────┤
 │  ┌─────────────────────────────────────────────────────────────┐│
 │  │                    Hero Screenshot                          ││
@@ -461,9 +651,12 @@ export const publications: Publication[] = [
 ┌─────────────────────────────────────────────────────────────────┐
 │ [NAV]                                                           │
 ├─────────────────────────────────────────────────────────────────┤
-│  Curriculum Vitae                          [Download PDF]       │
+│  Curriculum Vitae                          [⬇ Download PDF]     │
+│                                                                 │
+│  View as: [● Timeline] [○ Traditional]   ← prominent toggle     │
 ├─────────────────────────────────────────────────────────────────┤
-│  [Interactive Timeline - full width]                            │
+│                                                                 │
+│  TIMELINE VIEW (interactive, Phase 3)                           │
 │  ┌─────────────────────────────────────────────────────────────┐│
 │  │ Education ═══════════════════                               ││
 │  │ Work      ═══════════    ════════════                       ││
@@ -472,6 +665,7 @@ export const publications: Publication[] = [
 │  │ ──────────────────────────────────────────────────────────  ││
 │  │ 2018    2019    2020    2021    2022    2023    2024    Now ││
 │  └─────────────────────────────────────────────────────────────┘│
+│  ⌨ Keyboard navigable · 🔊 Screen reader accessible             │
 │  Click any item to see details                                  │
 ├─────────────────────────────────────────────────────────────────┤
 │  [Selected item details appear here]                            │
@@ -481,9 +675,30 @@ export const publications: Publication[] = [
 │  │ Research focus: ...                                         ││
 │  │ [View related publications →]                               ││
 │  └─────────────────────────────────────────────────────────────┘│
-├─────────────────────────────────────────────────────────────────┤
-│  Or view as traditional sections:                               │
-│  [Education] [Experience] [Teaching] [Skills] [Publications]   │
+│                                                                 │
+│  ─────────────────────────────────────────────────────────────  │
+│                                                                 │
+│  TRADITIONAL VIEW (always available, default for Phase 1-2)    │
+│  Sections: Education | Experience | Teaching | Service |       │
+│            Awards | Skills | Publications                       │
+│                                                                 │
+│  TEACHING                                                       │
+│  ┌─────────────────────────────────────────────────────────────┐│
+│  │ Course Name                                    TA · 2022-23 ││
+│  │ Institution · X students · 4.5/5.0 evaluation               ││
+│  └─────────────────────────────────────────────────────────────┘│
+│                                                                 │
+│  ACADEMIC SERVICE                                               │
+│  ┌─────────────────────────────────────────────────────────────┐│
+│  │ • Reviewer: TOSEM (2024)                                    ││
+│  │ • Subreviewer: ICSE, FSE, SANER, TOSEM                      ││
+│  └─────────────────────────────────────────────────────────────┘│
+│                                                                 │
+│  AWARDS                                                         │
+│  ┌─────────────────────────────────────────────────────────────┐│
+│  │ • Leistungsstipendium · University · 2019-2022              ││
+│  └─────────────────────────────────────────────────────────────┘│
+│                                                                 │
 ├─────────────────────────────────────────────────────────────────┤
 │ [FOOTER]                                                        │
 └─────────────────────────────────────────────────────────────────┘
@@ -593,6 +808,44 @@ Options:
 2. **Automated**: Use Puppeteer/Playwright to render CV page as PDF
 3. **LaTeX**: Maintain CV in LaTeX, export PDF
 
+### Image Optimization
+
+- Use **WebP** format (fallback to JPEG/PNG for older browsers)
+- Responsive images with `srcset` for different screen sizes
+- Lazy load below-fold images with `loading="lazy"`
+- Consider `@sveltejs/enhanced-img` for automatic optimization
+- Keep hero images optimized (aim for <200KB)
+
+### Font Loading
+
+- Use **@fontsource** packages for self-hosted fonts (privacy, reliability)
+- Apply `font-display: swap` to prevent invisible text during load
+- Subset fonts to Latin characters to reduce file size
+- Preload critical fonts in `<head>`
+
+### Build-time Validation
+
+- Use **Zod schemas** to validate all content data (publications, projects, CV)
+- Fail build on invalid content (catches errors before deploy)
+- Validate required fields, URL formats, date ranges
+- Type-safe content with TypeScript inference from Zod schemas
+
+### Error Handling
+
+- **Custom 404 page** with navigation back to main sections
+- **Loading states** for embedded iframes (maps, demos)
+- **Error states** with fallback links when embeds fail to load
+- Graceful degradation: core content works without JavaScript
+
+### Accessibility Baseline
+
+- Semantic HTML with proper heading hierarchy (h1 → h2 → h3)
+- Skip-to-content link for keyboard users
+- Visible focus indicators on all interactive elements
+- Color contrast ratio ≥4.5:1 for text
+- `alt` text for all images
+- ARIA labels for icon-only buttons
+
 ---
 
 ## What to Avoid
@@ -612,51 +865,50 @@ Options:
 
 ### Phase 1: Foundation
 - [ ] Set up SvelteKit project with adapter-static
-- [ ] Basic layout (nav, footer)
-- [ ] Homepage with brief intro
-- [ ] Research page with publication list
-- [ ] Projects page with project cards
-- [ ] CV page (static initially)
-- [ ] Contact info
+- [ ] Basic layout (nav with dark mode toggle, footer with social links)
+- [ ] Custom 404 page
+- [ ] Homepage with research statement, bio, featured work
+- [ ] Research page (publication list, no filters)
+- [ ] Projects page (grid, no filters)
+- [ ] CV page (traditional layout initially)
+- [ ] Contact page with all academic links (ORCID, Scholar, Semantic Scholar, institution)
+- [ ] Zod schemas for content validation
 - [ ] Deploy to Cloudflare Pages
 
-### Phase 2: Content & Structure
-- [ ] Add all publications with structured data
-- [ ] Write project case studies (Erenshor, AK, others)
-- [ ] "How I Built This" expandable sections for projects
-- [ ] Create CV content
-- [ ] Embed interactive maps (iframe)
-- [ ] Add proper meta tags / SEO
+### Phase 2: Content & Polish
+- [ ] All publications with expanded schema (type, awards, acceptance rates)
+- [ ] Project case studies with "How I Built This" sections
+- [ ] "What I'd Do Differently" reflections on projects
+- [ ] Teaching section in CV (courses, roles, evaluations)
+- [ ] Academic service section (reviewing: TOSEM, subreviewing)
+- [ ] Awards section (Leistungsstipendium)
+- [ ] Co-author links on publication pages
+- [ ] Breadcrumbs on detail pages
+- [ ] Embed interactive maps (iframe with loading/error states)
+- [ ] Image optimization (WebP, responsive)
+- [ ] Meta tags / SEO / canonical URLs
 
 ### Phase 3: Interactive Elements
-- [ ] Inline PDF viewer (pdf.js) for papers
-- [ ] Paper figure galleries
-- [ ] One-click BibTeX/citation copy
-- [ ] Interactive timeline CV (vis-timeline or d3)
-- [ ] PDF CV export from timeline data
-- [ ] Dark mode toggle
+- [ ] PDF viewer (pdf.js, collapsible, lazy-loaded) for papers and slides
+- [ ] Figure grid galleries (not carousel)
+- [ ] One-click citation copy (BibTeX, APA, MLA, Chicago)
+- [ ] Interactive timeline CV (with prominent traditional view toggle)
+- [ ] Dark mode persistence
+- [ ] Keyboard navigation for timeline and PDF viewer
 
-### Phase 4: API Integrations
-- [ ] GitHub stats integration (commits, repos, languages)
-- [ ] Contribution metrics dashboard
-- [ ] Google Scholar data (manual or automated)
+### Phase 4: Metrics & API Integrations
+- [ ] "By the Numbers" dashboard on homepage
+- [ ] GitHub stats (build-time fetch with token, cached fallback)
+- [ ] Semantic Scholar data for citations
 - [ ] Steam guide stats
-- [ ] Wiki contribution stats (if applicable)
-- [ ] Live project status indicators
+- [ ] MediaWiki contribution stats
+- [ ] Complexity indicators on projects (LOC, data scale, users)
 
-### Phase 5: Advanced Features
-- [ ] Slide deck viewer (Reveal.js/Slidev integration)
-- [ ] Paper relationship graph visualization
-- [ ] Publication filters (year, topic, venue)
-- [ ] Search functionality
-
-### Phase 6: Future Enhancements
+### Phase 5+: Future Enhancements
+- [ ] Slide deck viewer (Reveal.js/Slidev) if PDFs aren't sufficient
 - [ ] Data exploration / SQL browser (sql.js)
-  - Schema discovery UI
-  - Pre-built example queries
-  - Visual query builder
-- [ ] Now page
-- [ ] Advanced analytics
+- [ ] Now page (current focus)
+- [ ] Uses page (tools and setup)
 
 ---
 
@@ -675,7 +927,7 @@ Emphasize this throughout the site.
 
 The portfolio should demonstrate skills through *how* it presents content, not just list achievements. Prioritize inline, interactive experiences over external links and static screenshots.
 
-### Contribution Metrics Dashboard
+### Contribution Metrics Dashboard (Phase 4)
 
 Aggregate real data from multiple sources, fetched at build time:
 
@@ -690,11 +942,13 @@ Aggregate real data from multiple sources, fetched at build time:
 └──────────────────┴──────────────────┴──────────────────────┘
 ```
 
-**Data sources:**
-- **GitHub API** → commits, repos, languages, contribution calendar
-- **Google Scholar** → citations, h-index (manual or scraped)
+**Data sources (fetched at build time):**
+- **GitHub API** → commits, repos, languages, contribution calendar (use token for rate limits)
+- **Semantic Scholar API** → citations, paper metadata (free official API, unlike Google Scholar)
 - **MediaWiki API** → article count, edit count, bytes contributed
-- **Steam API** → guide views, ratings, favorites
+- **Steam API** → guide views, ratings, favorites (requires API key)
+
+**Fallback:** Cache API responses so build doesn't fail if an API is temporarily down.
 
 ### Interactive Timeline CV
 
@@ -702,8 +956,14 @@ Replace static CV list with a zoomable, interactive timeline:
 - Multiple tracks: Education, Work, Research, Projects
 - Click to expand details
 - Milestone markers for publications, major releases
-- "Export as PDF" generates clean traditional format
+- **Traditional view always available** as prominent alternative toggle
 - Libraries: vis-timeline, d3, or custom Svelte implementation
+
+**Accessibility requirements:**
+- Keyboard navigable (arrow keys, Tab, Enter)
+- Screen reader support with ARIA labels
+- Respects `prefers-reduced-motion`
+- Not the default view in Phase 1-2 (traditional view first)
 
 ### Paper/Publication Experience
 
@@ -711,20 +971,23 @@ Go beyond PDF links:
 
 | Feature | Description |
 |---------|-------------|
-| **Inline PDF viewer** | pdf.js with custom UI, stays on-site |
-| **Figure gallery** | Key figures extracted with captions, carousel view |
+| **Inline PDF viewer** | pdf.js, **collapsed by default**, lazy-loaded on expand |
+| **Download PDF** | Primary action - prominent button above viewer |
+| **Figure gallery** | Key figures in **responsive grid** (not carousel), all visible |
 | **Paper TL;DR** | 2-3 sentence summary + key contribution |
-| **One-click citation** | Copy BibTeX, formatted citations |
-| **Paper relationship graph** | Visualize connections between papers (d3/vis.js) |
+| **One-click citation** | Copy BibTeX, APA, MLA, Chicago formats |
+| **Awards/metrics** | Best Paper badges, acceptance rates displayed |
 
 ### Slide Deck Viewer
 
-Convert presentations to web-native format:
+**Phase 3:** Use pdf.js to display slide PDFs inline - same viewer as papers, works well for landscape slides. Add keyboard navigation (arrow keys for prev/next slide).
+
+**Phase 5+ (optional):** If converting to web-native format becomes valuable:
 - **Reveal.js** or **Slidev** (Markdown → slides) integration
-- Embedded viewer with keyboard navigation
-- Optional speaker notes toggle
 - Deep links to specific slides
-- Shows presentation skills, not just that slides exist
+- Optional speaker notes toggle
+
+The PDF approach is pragmatic since slides are already available as PDFs.
 
 ### Embedded Project Demos
 
@@ -773,9 +1036,11 @@ Shows engineering *thinking*, not just output.
 ### Design Philosophy
 
 - **No audience toggle**: Clean navigation lets users self-select
+- **No search or filters**: Too few items to warrant complexity (~4 papers, ~5 projects)
+- **No carousels**: Use accessible grids instead; all content visible at once
 - **Progressive disclosure**: Overview → details on demand
 - **Inline over external**: Keep visitors on-site when possible
-- **Real data**: Metrics from APIs, not static claims
+- **Real data**: Metrics from APIs at build time, with fallback caching
 - **The portfolio demonstrates the skills it claims**
 
 ---
@@ -808,6 +1073,14 @@ pnpm dlx shadcn-svelte@next init
 - [shadcn-svelte](https://www.shadcn-svelte.com/)
 - [Cloudflare Pages](https://pages.cloudflare.com/)
 
+### Build & Validation
+- [Zod](https://zod.dev/) - TypeScript-first schema validation
+- [@sveltejs/enhanced-img](https://kit.svelte.dev/docs/images) - Automatic image optimization
+
+### Fonts & Typography
+- [@fontsource](https://fontsource.org/) - Self-hosted fonts (Inter, Source Sans Pro, JetBrains Mono)
+- [@tailwindcss/typography](https://tailwindcss.com/docs/typography-plugin) - Prose styling for Markdown
+
 ### Interactive Features
 - [pdf.js](https://mozilla.github.io/pdf.js/) - PDF rendering in browser
 - [vis-timeline](https://visjs.github.io/vis-timeline/) - Interactive timelines
@@ -817,10 +1090,9 @@ pnpm dlx shadcn-svelte@next init
 
 ### Data Visualization
 - [D3.js](https://d3js.org/) - General-purpose visualization
-- [vis-network](https://visjs.github.io/vis-network/) - Network/graph visualization
 
 ### APIs
-- [GitHub REST API](https://docs.github.com/en/rest)
-- [GitHub GraphQL API](https://docs.github.com/en/graphql)
-- [MediaWiki API](https://www.mediawiki.org/wiki/API:Main_page)
-- [Steam Web API](https://developer.valvesoftware.com/wiki/Steam_Web_API)
+- [GitHub REST API](https://docs.github.com/en/rest) - Commits, repos, contribution data
+- [Semantic Scholar API](https://api.semanticscholar.org/) - Academic paper metadata and citations
+- [MediaWiki API](https://www.mediawiki.org/wiki/API:Main_page) - Wiki contribution stats
+- [Steam Web API](https://developer.valvesoftware.com/wiki/Steam_Web_API) - Guide views and ratings
