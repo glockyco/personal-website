@@ -71,6 +71,7 @@ PhD researcher with X years of software engineering experience. Published in top
 ├── /projects               # Projects grid
 │   └── /projects/[slug]    # Project detail
 ├── /cv                     # CV page
+├── /uses                   # Tools and daily workflow
 └── /404                    # Custom 404 page
 ```
 
@@ -78,7 +79,9 @@ Contact is not a separate page — social links and email appear in the footer a
 
 **Optional future routes:**
 - `/now` - Current focus / what I'm working on
-- `/uses` - Tools and setup (dev community standard)
+
+**Planned routes (promoted from optional):**
+- `/uses` - Tools and daily workflow
 
 ### Core Sections
 
@@ -88,6 +91,7 @@ Contact is not a separate page — social links and email appear in the footer a
 | **Research** | Academic credibility | Papers with full metadata, presentations (slides), demos, datasets |
 | **Projects** | Technical skills | Erenshor/AK ecosystem, other side projects, "How I Built This" |
 | **CV** | Formal credentials | Timeline view + traditional view, teaching, service, awards, PDF download |
+| **Uses** | Daily workflow | Icon grid with category filters and optional prose; tools across editor, AI, terminal, DB, etc. |
 | **Contact** | Reachability | Email, GitHub, LinkedIn, Scholar, ORCID, Semantic Scholar, Institution — in footer and nav, not a dedicated page |
 
 ### Navigation
@@ -95,7 +99,7 @@ Contact is not a separate page — social links and email appear in the footer a
 **Desktop:**
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│  [Logo/Name]   Research  Projects  CV  [GitHub] [🌙]           │
+│  [Logo/Name]   Research  Projects  CV  Uses  [GitHub] [🌙]     │
 └─────────────────────────────────────────────────────────────────┘
 ```
 - No "Contact" nav item — contact links live in footer and nav header icons
@@ -230,7 +234,8 @@ src/
 │   ├── projects/
 │   │   ├── +page.svelte          # Project grid
 │   │   └── [slug]/+page.svelte   # Project detail
-│   └── cv/+page.svelte           # CV page
+│   ├── cv/+page.svelte           # CV page
+│   └── uses/+page.svelte         # Uses / tools page
 ├── lib/
 │   ├── components/
 │   │   ├── layout/
@@ -262,6 +267,9 @@ src/
 │   │   │   ├── DetailPanel.svelte
 │   │   │   ├── TeachingSection.svelte
 │   │   │   └── SkillsSection.svelte
+│   │   ├── uses/
+│   │   │   ├── ToolGrid.svelte         # Icon grid with category filter
+│   │   │   └── ToolCard.svelte         # Individual tool icon + optional prose
 │   │   └── shared/
 │   │       ├── ActionButton.svelte
 │   │       ├── StatusBadge.svelte
@@ -271,6 +279,7 @@ src/
 │       ├── publications.ts       # Structured publication data
 │       ├── projects.ts           # Structured project data
 │       ├── cv.ts                 # CV data
+│       ├── uses.ts               # Tools inventory
 │       └── links.ts              # Social/academic links
 ```
 
@@ -452,6 +461,46 @@ export type Skill = {
   category: string;         // "Languages", "Frameworks", "Tools"
   items: string[];
 };
+```
+
+### Uses / Tool Schema
+
+```typescript
+// src/lib/data/uses.ts
+export type ToolCategory =
+  | 'editor'
+  | 'ai'
+  | 'terminal'
+  | 'version-control'
+  | 'database'
+  | 'notes'
+  | 'communication'
+  | 'wiki'
+  | 'platform';
+
+export type Tool = {
+  name: string;
+  category: ToolCategory;
+  icon: string;        // path to SVG/PNG icon, or simple-icons slug
+  url?: string;
+  usage?: string;      // optional one-liner: how/why I use this — like a paper TL;DR
+                       // shown below the icon or on hover; not every tool needs one
+};
+
+export const tools: Tool[] = [
+  { name: 'VS Code',       category: 'editor',          icon: 'vscode',      url: 'https://code.visualstudio.com' },
+  { name: 'Zed',           category: 'editor',          icon: 'zed',         url: 'https://zed.dev' },
+  { name: 'JetBrains IDEs',category: 'editor',          icon: 'jetbrains',   url: 'https://www.jetbrains.com' },
+  { name: 'Claude',        category: 'ai',              icon: 'anthropic',   url: 'https://claude.ai' },
+  { name: 'Opencode',      category: 'ai',              icon: 'opencode',    url: 'https://opencode.ai' },
+  { name: 'iTerm2',        category: 'terminal',        icon: 'iterm2',      url: 'https://iterm2.com' },
+  { name: 'Fork',          category: 'version-control', icon: 'fork',        url: 'https://git-fork.com' },
+  { name: 'PostgreSQL',    category: 'database',        icon: 'postgresql',  url: 'https://www.postgresql.org' },
+  { name: 'RemNote',       category: 'notes',           icon: 'remnote',     url: 'https://www.remnote.com' },
+  { name: 'Discord',       category: 'communication',   icon: 'discord',     url: 'https://discord.com' },
+  { name: 'wiki.gg',       category: 'wiki',            icon: 'wikigg',      url: 'https://wiki.gg' },
+  { name: 'CrossOver',     category: 'platform',        icon: 'crossover',   url: 'https://www.codeweavers.com/crossover' },
+];
 ```
 
 ### Academic Links
@@ -723,6 +772,47 @@ export const academicLinks = {
 
 *(No dedicated contact page — email and social links appear in footer and nav header icons only.)*
 
+**Uses page:**
+```
+┌─────────────────────────────────────────────────────────────────┐
+│ [NAV]                                                           │
+├─────────────────────────────────────────────────────────────────┤
+│  Uses                                                           │
+│  Tools and software I use day-to-day                            │
+├─────────────────────────────────────────────────────────────────┤
+│  [Short intro paragraph — overall setup, OS, workflow context,  │
+│   general philosophy. To be written.]                           │
+├─────────────────────────────────────────────────────────────────┤
+│  [All] [Editors] [AI] [Terminal] [Database] [Notes]             │
+│        [Communication] [Version Control] [OS / Platform]        │
+├─────────────────────────────────────────────────────────────────┤
+│  ┌──────┐ ┌──────┐ ┌──────┐ ┌──────┐ ┌──────┐ ┌──────┐        │
+│  │ icon │ │ icon │ │ icon │ │ icon │ │ icon │ │ icon │        │
+│  │VSCode│ │ Zed  │ │JBrain│ │Claude│ │iTerm │ │ Fork │        │
+│  │one-  │ │liner │ │      │ │      │ │      │ │      │        │
+│  └──────┘ └──────┘ └──────┘ └──────┘ └──────┘ └──────┘        │
+│  ...                                                            │
+├─────────────────────────────────────────────────────────────────┤
+│ [FOOTER]                                                        │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### Uses — Tool Inventory
+
+| Category | Tools |
+|----------|-------|
+| **Editors / IDEs** | VS Code, Zed, JetBrains IDEs (IntelliJ, PyCharm, etc.) |
+| **AI** | Claude, Opencode |
+| **Terminal** | iTerm2 |
+| **Version Control** | Fork (Git UI), git CLI |
+| **Database** | PostgreSQL |
+| **Knowledge / Notes** | RemNote |
+| **Communication** | Discord |
+| **Wiki** | wiki.gg (MediaWiki-based) |
+| **OS / Platform** | CrossOver (running Windows apps on macOS) |
+
+*Two levels of prose: (1) a short page-level intro about overall setup and workflow philosophy — to be written; (2) optional per-tool one-liners (`usage` field) in the style of paper TL;DRs: "here's how/why I use this." Not every tool needs one.*
+
 ### Color Scheme
 
 - **Light mode default** (academia prefers)
@@ -873,6 +963,7 @@ Development is iterative — the site goes live when Phase 1 is useful, then ext
 - [ ] Research page (publication list — schemas include filterable fields, no filter UI yet)
 - [ ] Projects page (grid — same)
 - [ ] CV page (traditional layout)
+- [ ] Uses page (icon grid with category filters, optional prose per tool)
 - [ ] Zod schemas for content validation
 - [ ] Deploy to Cloudflare Pages
 
@@ -907,7 +998,6 @@ Development is iterative — the site goes live when Phase 1 is useful, then ext
 - [ ] Slide deck viewer (Reveal.js/Slidev) if PDFs aren't sufficient
 - [ ] Data exploration / SQL browser (sql.js)
 - [ ] Now page (current focus)
-- [ ] Uses page (tools and setup)
 
 ---
 
