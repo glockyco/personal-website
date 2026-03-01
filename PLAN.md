@@ -3,24 +3,31 @@
 ## Profile Summary
 
 **Current:** PhD student/researcher (finishing soon)
-**Target audiences:** Academia + Industry (unique bridge position)
+**Primary audience:** Academia (hiring committees, postdoc supervisors, collaborators)
+**Secondary audience:** Industry (technical hiring managers, research scientist roles)
 **Location:** Hagenberg / Linz (Austria) or Remote
 **Experience:** ~X years in software engineering, Y years in research
 
+> **Note:** The research statement and professional summary below are placeholders.
+> These must be written before or alongside Phase 1 — they are the site's center of gravity.
+> Every homepage design decision depends on this content being real.
+
 ### Research Statement
 
-My research focuses on [empirical software engineering / mining software repositories / developer tools], exploring how [data-driven approaches] can [improve developer productivity and software quality]. I combine empirical methods with tool-building to bridge the gap between research insights and practical applications.
+*(To be written — this is the highest priority content task)*
 
-*(To be refined with specific focus areas)*
+My research focuses on [empirical software engineering / mining software repositories], exploring how [data mining and data engineering approaches] can [improve software quality and developer productivity]. I build tools and pipelines to extract insight from large-scale software data, combining backend engineering with empirical research methods.
 
 ### Role Targeting
 
 Open to:
-- Research Scientist / Applied Scientist positions
-- Senior Software Engineer roles (data visualization, developer tools)
 - Postdoctoral research positions
+- Research Scientist / Applied Scientist positions
+- Senior Software Engineer roles (data mining, data engineering, backend development, developer tools)
 
 ### TL;DR Professional Summary
+
+*(To be written — must be specific and differentiating, not generic SE PhD boilerplate)*
 
 PhD researcher with X years of software engineering experience. Published in top SE venues (JSS, ICSE). Ships production software used by real communities. Combines academic rigor with practical engineering.
 
@@ -36,6 +43,7 @@ PhD researcher with X years of software engineering experience. Published in top
 
 **Technical/Hobby:**
 - Erenshor + Ancient Kingdoms modding ecosystem
+  - Framing: curiosity, digging deep, helping the community, presenting results clearly for non-technical audiences
   - Data mining and reverse engineering
   - Interactive maps (SvelteKit + deck.gl)
   - Build pipelines (Python + SQLite)
@@ -57,15 +65,16 @@ PhD researcher with X years of software engineering experience. Published in top
 ### Sitemap
 
 ```
-/                           # Home / Landing (with research statement)
-├── /research               # Publications list (no filters needed)
+/                           # Home / Landing (research identity first)
+├── /research               # Publications list
 │   └── /research/[slug]    # Paper detail (includes slides/talks)
-├── /projects               # Projects grid (no filters needed)
+├── /projects               # Projects grid
 │   └── /projects/[slug]    # Project detail
-├── /cv                     # CV with timeline + traditional view
-└── /contact                # Contact info (email + academic links)
+├── /cv                     # CV page
 └── /404                    # Custom 404 page
 ```
+
+Contact is not a separate page — social links and email appear in the footer and nav header.
 
 **Optional future routes:**
 - `/now` - Current focus / what I'm working on
@@ -79,20 +88,21 @@ PhD researcher with X years of software engineering experience. Published in top
 | **Research** | Academic credibility | Papers with full metadata, presentations (slides), demos, datasets |
 | **Projects** | Technical skills | Erenshor/AK ecosystem, other side projects, "How I Built This" |
 | **CV** | Formal credentials | Timeline view + traditional view, teaching, service, awards, PDF download |
-| **Contact** | Reachability | Email, GitHub, LinkedIn, Scholar, ORCID, Semantic Scholar, Institution |
+| **Contact** | Reachability | Email, GitHub, LinkedIn, Scholar, ORCID, Semantic Scholar, Institution — in footer and nav, not a dedicated page |
 
 ### Navigation
 
 **Desktop:**
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│  [Logo/Name]   Research  Projects  CV  Contact  [GitHub] [🌙]  │
+│  [Logo/Name]   Research  Projects  CV  [GitHub] [🌙]           │
 └─────────────────────────────────────────────────────────────────┘
 ```
+- No "Contact" nav item — contact links live in footer and nav header icons
 - Dark mode toggle [🌙] always visible in header
 - Links open in same tab (browser default behavior)
 
-**Mobile:** Hamburger menu with same items + social links + dark mode toggle
+**Mobile:** Hamburger menu with same items + social icons + dark mode toggle
 
 **Footer:**
 - Name and tagline
@@ -110,17 +120,19 @@ Home > Projects > Project Name
 
 | Decision | Rationale |
 |----------|-----------|
-| **No search/filters** | Too few items (4 papers, ~5 projects) |
+| **No filters (deferred)** | Too few items now (4 papers, ~5 projects); schemas include filterable fields (tags, year, type) so UI filters can be added later without data migration |
 | **No carousels** | Poor UX, accessibility issues; use grids instead |
 | **Talks/Slides** | Part of Research detail pages |
 | **Teaching** | Part of CV page, not a separate section |
-| **Contact** | Simple email + social links, no form |
+| **No contact page** | Six links don't justify a route; email + social icons in footer and nav |
 | **No audience toggle** | Clean navigation lets users self-select |
 | **Same-tab links** | Respect browser defaults (Ctrl+Click for new tab) |
 | **Dark mode in header** | Always accessible, not buried in menu |
 | **Traditional CV as alternative** | Recruiters/committees need scannable format |
 | **Manual data entry** | Better than fragile API scrapers |
 | **Static metrics ("X+")** | Avoids API failures, clearly not real-time |
+| **No MDsveX** | Unnecessary complexity for ~5 project case studies; TypeScript data files are sufficient |
+| **Research leads homepage** | Primary audience is academia; research statement and publications come before projects |
 
 ---
 
@@ -166,7 +178,7 @@ Paper/Project Detail → [View content]
 ### Recommended Stack
 
 ```
-SvelteKit + MDsveX + Tailwind CSS + TypeScript
+SvelteKit + Tailwind CSS + TypeScript
                     ↓
              adapter-static
                     ↓
@@ -175,7 +187,6 @@ SvelteKit + MDsveX + Tailwind CSS + TypeScript
 
 **Rationale:**
 - Already proficient in SvelteKit (from Erenshor maps)
-- MDsveX for content authoring (project case studies in Markdown)
 - Tailwind + shadcn-svelte (already using)
 - Static output = fast, cheap, secure
 - Cloudflare = already using, free, fast CDN
@@ -219,27 +230,25 @@ src/
 │   ├── projects/
 │   │   ├── +page.svelte          # Project grid
 │   │   └── [slug]/+page.svelte   # Project detail
-│   ├── cv/+page.svelte           # CV page
-│   └── contact/+page.svelte
+│   └── cv/+page.svelte           # CV page
 ├── lib/
 │   ├── components/
 │   │   ├── layout/
 │   │   │   ├── Nav.svelte
 │   │   │   ├── MobileNav.svelte
 │   │   │   ├── Footer.svelte
-│   │   │   ├── PageHeader.svelte
-│   │   │   └── BackLink.svelte
+│   │   │   └── PageHeader.svelte
 │   │   ├── home/
 │   │   │   ├── HeroSection.svelte
-│   │   │   ├── StatsGrid.svelte        # Phase 4
-│   │   │   └── FeaturedGrid.svelte
+│   │   │   ├── FeaturedPublications.svelte
+│   │   │   ├── FeaturedProjects.svelte
+│   │   │   └── StatsGrid.svelte        # Phase 4 (nice-to-have)
 │   │   ├── research/
 │   │   │   ├── PublicationCard.svelte
 │   │   │   ├── PublicationList.svelte
 │   │   │   ├── PaperHeader.svelte
 │   │   │   ├── FigureGrid.svelte       # Phase 3 (grid, not carousel)
 │   │   │   ├── CitationBlock.svelte
-│   │   │   ├── SlideViewer.svelte      # Phase 5+
 │   │   │   └── PdfViewer.svelte        # Phase 3 (lazy-loaded, collapsible)
 │   │   ├── projects/
 │   │   │   ├── ProjectCard.svelte
@@ -253,28 +262,29 @@ src/
 │   │   │   ├── DetailPanel.svelte
 │   │   │   ├── TeachingSection.svelte
 │   │   │   └── SkillsSection.svelte
-│   │   ├── contact/
-│   │   │   ├── EmailBlock.svelte
-│   │   │   └── SocialLinks.svelte
 │   │   └── shared/
 │   │       ├── ActionButton.svelte
 │   │       ├── StatusBadge.svelte
 │   │       ├── TagList.svelte
-│   │       ├── DarkModeToggle.svelte
-│   │       └── RelatedContent.svelte
+│   │       └── DarkModeToggle.svelte
 │   └── data/
 │       ├── publications.ts       # Structured publication data
 │       ├── projects.ts           # Structured project data
-│       └── cv.ts                 # CV data
-└── content/                      # Markdown content (if using MDsveX)
-    └── projects/                 # Project case studies
+│       ├── cv.ts                 # CV data
+│       └── links.ts              # Social/academic links
 ```
+
+> This is a reference, not a contract — components emerge during implementation.
+> No `content/` directory; MDsveX is not used. Project case studies live in
+> structured TypeScript data or directly in Svelte components.
 
 ---
 
 ## Content Management
 
-All content managed via TypeScript files with Zod validation at build time.
+All content managed via TypeScript files with Zod validation at build time. No MDsveX — project case studies are structured data, not Markdown files.
+
+Schemas include filterable fields (tags, year, type, venue) even though no filter UI is exposed yet. This allows filter UI to be added in future without data migration.
 
 ### Publication Schema
 
@@ -312,7 +322,7 @@ export type Publication = {
   scholarUrl?: string;      // Google Scholar link for this paper
   dataset?: string;
 
-  tags: string[];
+  tags: string[];           // filterable when UI supports it
   links?: {
     demo?: string;
     code?: string;
@@ -475,28 +485,35 @@ export const academicLinks = {
 **Homepage:**
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│ [NAV]                                              [GitHub] [🌙] │
+│ [NAV]                                         [GitHub] [Scholar] [🌙] │
 ├─────────────────────────────────────────────────────────────────┤
-│  ┌────────┐  Hi, I'm Johann Glock                               │
-│  │ PHOTO  │  PhD Researcher finishing at [University]           │
-│  │        │  Hagenberg/Linz, Austria · Open to Remote           │
-│  └────────┘  [View Research] [See Projects] [Download CV]       │
+│  ┌────────┐  Johann Glock                                        │
+│  │ PHOTO  │  [Specific research identity — to be written]        │
+│  │        │  Hagenberg/Linz, Austria · Open to Remote            │
+│  └────────┘  [View Research] [Download CV] [See Projects]        │
 ├─────────────────────────────────────────────────────────────────┤
-│  RESEARCH FOCUS                                                 │
-│  My research focuses on [area], exploring how [approach] can    │
-│  [outcome]. I combine empirical methods with tool-building...   │
+│  RESEARCH FOCUS                                                  │
+│  [Specific, differentiated research statement — to be written]   │
 ├─────────────────────────────────────────────────────────────────┤
-│  BY THE NUMBERS (optional, Phase 4)                             │
-│  ┌──────────────┐ ┌──────────────┐ ┌──────────────┐            │
-│  │ X+ Papers    │ │ Y+ Commits   │ │ Z+ Wiki Pages│            │
-│  └──────────────┘ └──────────────┘ └──────────────┘            │
+│  SELECTED PUBLICATIONS                                           │
+│  ┌─────────────────────────────────────────────────────────────┐│
+│  │ Paper Title                         2024 | JSS | First Auth ││
+│  │ TL;DR...                                        [PDF] [Cite] ││
+│  └─────────────────────────────────────────────────────────────┘│
+│  [→ All Publications]                                            │
 ├─────────────────────────────────────────────────────────────────┤
-│  FEATURED WORK                                                  │
-│  ┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐   │
-│  │ Recent paper    │ │ Erenshor Maps   │ │ AK Compendium   │   │
-│  └─────────────────┘ └─────────────────┘ └─────────────────┘   │
+│  FEATURED PROJECTS                                               │
+│  ┌─────────────────┐ ┌─────────────────┐                        │
+│  │ Erenshor Maps   │ │ AK Compendium   │                        │
+│  └─────────────────┘ └─────────────────┘                        │
+│  [→ All Projects]                                                │
 ├─────────────────────────────────────────────────────────────────┤
-│ [FOOTER]                                                        │
+│  BY THE NUMBERS (nice-to-have, future)                           │
+│  ┌──────────────┐ ┌──────────────┐ ┌──────────────┐             │
+│  │ X+ Papers    │ │ Y Citations  │ │ Z+ Wiki Pages│             │
+│  └──────────────┘ └──────────────┘ └──────────────┘             │
+├─────────────────────────────────────────────────────────────────┤
+│ [FOOTER: social links, nav, copyright]                           │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -704,29 +721,7 @@ export const academicLinks = {
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-**Contact page:**
-```
-┌─────────────────────────────────────────────────────────────────┐
-│ [NAV]                                                           │
-├─────────────────────────────────────────────────────────────────┤
-│  Get in Touch                                                   │
-├─────────────────────────────────────────────────────────────────┤
-│  The best way to reach me is via email:                         │
-│                                                                 │
-│  ┌─────────────────────────────────────────────────────────────┐│
-│  │  📧  email@example.com                         [Copy]       ││
-│  └─────────────────────────────────────────────────────────────┘│
-├─────────────────────────────────────────────────────────────────┤
-│  You can also find me on:                                       │
-│                                                                 │
-│  ┌────────────┐ ┌────────────┐ ┌────────────┐ ┌────────────┐   │
-│  │  GitHub    │ │  LinkedIn  │ │  Scholar   │ │  Twitter   │   │
-│  │  @handle   │ │  /in/name  │ │  profile   │ │  @handle   │   │
-│  └────────────┘ └────────────┘ └────────────┘ └────────────┘   │
-├─────────────────────────────────────────────────────────────────┤
-│ [FOOTER]                                                        │
-└─────────────────────────────────────────────────────────────────┘
-```
+*(No dedicated contact page — email and social links appear in footer and nav header icons only.)*
 
 ### Color Scheme
 
@@ -863,30 +858,34 @@ Options:
 
 ## Implementation Phases
 
+Development is iterative — the site goes live when Phase 1 is useful, then extended incrementally. No big-bang launch.
+
+### Pre-Phase: Content First
+- [ ] Write the research statement (specific, differentiated — not generic SE PhD boilerplate)
+- [ ] Write the professional tagline / TL;DR
+- [ ] Ensure PDF CV is excellent before the site goes live
+
 ### Phase 1: Foundation
 - [ ] Set up SvelteKit project with adapter-static
-- [ ] Basic layout (nav with dark mode toggle, footer with social links)
+- [ ] Basic layout (nav: Research, Projects, CV + social icons + dark mode toggle; footer with all social/academic links)
 - [ ] Custom 404 page
-- [ ] Homepage with research statement, bio, featured work
-- [ ] Research page (publication list, no filters)
-- [ ] Projects page (grid, no filters)
-- [ ] CV page (traditional layout initially)
-- [ ] Contact page with all academic links (ORCID, Scholar, Semantic Scholar, institution)
+- [ ] Homepage: research statement leads, selected publications, featured projects
+- [ ] Research page (publication list — schemas include filterable fields, no filter UI yet)
+- [ ] Projects page (grid — same)
+- [ ] CV page (traditional layout)
 - [ ] Zod schemas for content validation
 - [ ] Deploy to Cloudflare Pages
 
 ### Phase 2: Content & Polish
-- [ ] All publications with expanded schema (type, awards, acceptance rates)
-- [ ] Project case studies with "How I Built This" sections
-- [ ] "What I'd Do Differently" reflections on projects
+- [ ] All publications with full schema (type, awards, acceptance rates, co-author links)
+- [ ] Project case studies with "How I Built This" and "What I'd Do Differently" sections
 - [ ] Teaching section in CV (courses, roles, evaluations)
 - [ ] Academic service section (reviewing: TOSEM, subreviewing)
 - [ ] Awards section (Leistungsstipendium)
-- [ ] Co-author links on publication pages
 - [ ] Breadcrumbs on detail pages
 - [ ] Embed interactive maps (iframe with loading/error states)
 - [ ] Image optimization (WebP, responsive)
-- [ ] Meta tags / SEO / canonical URLs
+- [ ] Meta tags / SEO / canonical URLs / JSON-LD structured data (Person, ScholarlyArticle)
 
 ### Phase 3: Interactive Elements
 - [ ] PDF viewer (pdf.js, collapsible, lazy-loaded) for papers and slides
@@ -894,17 +893,17 @@ Options:
 - [ ] One-click citation copy (BibTeX, APA, MLA, Chicago)
 - [ ] Interactive timeline CV (with prominent traditional view toggle)
 - [ ] Dark mode persistence
-- [ ] Keyboard navigation for timeline and PDF viewer
 
-### Phase 4: Metrics & API Integrations
-- [ ] "By the Numbers" dashboard on homepage
+### Phase 4 (Nice-to-Have): Metrics Dashboard
+- [ ] "By the Numbers" section on homepage
+- [ ] Semantic Scholar citations (build-time fetch, cached fallback)
 - [ ] GitHub stats (build-time fetch with token, cached fallback)
-- [ ] Semantic Scholar data for citations
-- [ ] Steam guide stats
 - [ ] MediaWiki contribution stats
+- [ ] Steam guide stats
 - [ ] Complexity indicators on projects (LOC, data scale, users)
 
 ### Phase 5+: Future Enhancements
+- [ ] Filter UI for publications/projects (data schemas already support it)
 - [ ] Slide deck viewer (Reveal.js/Slidev) if PDFs aren't sufficient
 - [ ] Data exploration / SQL browser (sql.js)
 - [ ] Now page (current focus)
@@ -927,7 +926,7 @@ Emphasize this throughout the site.
 
 The portfolio should demonstrate skills through *how* it presents content, not just list achievements. Prioritize inline, interactive experiences over external links and static screenshots.
 
-### Contribution Metrics Dashboard (Phase 4)
+### Contribution Metrics Dashboard (Phase 4 — Nice-to-Have)
 
 Aggregate real data from multiple sources, fetched at build time:
 
@@ -1055,12 +1054,14 @@ pnpm create svelte@latest . # Choose: Skeleton, TypeScript, ESLint, Prettier
 # Add dependencies
 pnpm add -D tailwindcss postcss autoprefixer
 pnpm add -D @tailwindcss/typography
-pnpm add -D mdsvex
 pnpm add -D @sveltejs/adapter-static
+pnpm add zod
 
 # shadcn-svelte (optional, for components)
 pnpm dlx shadcn-svelte@next init
 ```
+
+> No MDsveX — not needed without Markdown-based content authoring.
 
 ---
 
@@ -1068,7 +1069,6 @@ pnpm dlx shadcn-svelte@next init
 
 ### Core Stack
 - [SvelteKit Docs](https://kit.svelte.dev/docs)
-- [MDsveX](https://mdsvex.pngwn.io/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [shadcn-svelte](https://www.shadcn-svelte.com/)
 - [Cloudflare Pages](https://pages.cloudflare.com/)
