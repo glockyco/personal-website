@@ -135,7 +135,6 @@ Home > Projects > Project Name
 | **Traditional CV as alternative** | Recruiters/committees need scannable format |
 | **Manual data entry** | Better than fragile API scrapers |
 | **Static metrics ("X+")** | Avoids API failures, clearly not real-time |
-| **No MDsveX** | Unnecessary complexity for ~5 project case studies; TypeScript data files are sufficient |
 | **Research leads homepage** | Primary audience is academia; research statement and publications come before projects |
 
 ---
@@ -284,14 +283,14 @@ src/
 ```
 
 > This is a reference, not a contract — components emerge during implementation.
-> No `content/` directory; MDsveX is not used. Project case studies live in
-> structured TypeScript data or directly in Svelte components.
+> No `content/` directory. Project case studies live in structured TypeScript
+> data or directly in Svelte components.
 
 ---
 
 ## Content Management
 
-All content managed via TypeScript files with Zod validation at build time. No MDsveX — project case studies are structured data, not Markdown files.
+All content managed via TypeScript files with Zod validation at build time. Project case studies are structured data, not Markdown files.
 
 Schemas include filterable fields (tags, year, type, venue) even though no filter UI is exposed yet. This allows filter UI to be added in future without data migration.
 
@@ -1150,8 +1149,6 @@ pnpm add zod
 # shadcn-svelte (optional, for components)
 pnpm dlx shadcn-svelte@next init
 ```
-
-> No MDsveX — not needed without Markdown-based content authoring.
 
 ---
 

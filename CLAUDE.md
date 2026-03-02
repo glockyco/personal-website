@@ -9,7 +9,6 @@ Personal portfolio website for a PhD researcher transitioning to industry/contin
 ## Tech Stack (Planned)
 
 - SvelteKit + adapter-static
-- MDsveX for Markdown content
 - Tailwind CSS + shadcn-svelte
 - TypeScript
 - Cloudflare Pages hosting
