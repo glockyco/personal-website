@@ -2,10 +2,6 @@
 
 Personal portfolio website for a PhD researcher transitioning to industry/continuing in academia.
 
-## Project Status
-
-**Not yet started.** See PLAN.md for comprehensive planning notes.
-
 ## Tech Stack (Planned)
 
 - SvelteKit + adapter-static
@@ -25,6 +21,13 @@ Target audiences: both academia and industry.
 ## Getting Started
 
 See PLAN.md "Quick Start Commands" section for project initialization.
+
+## Git Conventions
+
+Use conventional commits: `type(scope): description`
+
+Common types: `feat`, `fix`, `docs`, `style`, `refactor`, `chore`
+Scope is optional but encouraged (e.g. `theme-demo`, `layout`, `data`).
 
 ## Related Projects
 
