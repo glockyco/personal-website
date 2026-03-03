@@ -14,6 +14,14 @@ export const FigureSchema = z.object({
   caption: z.string().optional()
 });
 
+export const PaperPresentationSchema = z.object({
+  event: z.string(),
+  location: z.string().optional(),
+  year: z.number().int(),
+  type: z.enum(['talk', 'poster', 'invited', 'outreach']),
+  slides: z.string().optional()
+});
+
 export const PublicationSchema = z.object({
   slug: z.string(),
   title: z.string(),
@@ -39,16 +47,11 @@ export const PublicationSchema = z.object({
   scholarUrl: z.string().url().optional(),
   zenodo: z.string().url().optional(),
   github: z.string().url().optional(),
+  overleaf: z.string().url().optional(),
 
   tags: z.array(z.string()),
 
-  links: z
-    .object({
-      slides: z.string().url().optional(),
-      video: z.string().url().optional(),
-      demo: z.string().url().optional()
-    })
-    .optional(),
+  presentations: z.array(PaperPresentationSchema).optional(),
 
   relatedPapers: z.array(z.string()).optional(),
   relatedProjects: z.array(z.string()).optional(),
@@ -68,6 +71,7 @@ export const AistProjectSchema = z.object({
 
 export type Author = z.infer<typeof AuthorSchema>;
 export type Figure = z.infer<typeof FigureSchema>;
+export type PaperPresentation = z.infer<typeof PaperPresentationSchema>;
 export type Publication = z.infer<typeof PublicationSchema>;
 export type AistProject = z.infer<typeof AistProjectSchema>;
 
@@ -159,9 +163,17 @@ const rawPublications = [
       'According to a recent observational study, developers spend an average of 48% of their development time on debugging tasks. Approaches such as equivalence checking and fault localization support developers during debugging tasks by providing information that enables developers to more quickly identify and deal with unintended changes in program behavior. The accuracy and runtime performance of these approaches have seen continuous improvements throughout the years. However, the outputs of existing tools are often difficult to understand for developers due to a lack of context information and result explanations. Our goal is to improve upon this issue by developing a new equivalence checking approach that (i) is at least as accurate as existing approaches but (ii) provides more detailed descriptions of identified behavioral / semantic differences and (iii) presents these results in a way that is useful for developers, thus aiding developer understanding of equivalence checking results and corresponding software changes.',
     tldr: 'Doctoral symposium paper proposing a new equivalence checking approach that goes beyond accuracy — providing richer, developer-oriented descriptions of behavioral differences to better support debugging and program comprehension.',
     pdf: '/pdfs/glock_2024_docsym.pdf',
-    acceptanceRate: '7 of 35 accepted for oral presentation',
+    acceptanceRate: '35 of 55 accepted; 7 of 35 selected for oral presentation',
     doi: '10.1145/3639478.3639783',
-    tags: ['semantic differencing', 'symbolic execution', 'program comprehension']
+    tags: ['semantic differencing', 'symbolic execution', 'program comprehension'],
+    presentations: [
+      {
+        event: 'ICSE 2024 Doctoral Symposium',
+        location: 'Lisbon, Portugal',
+        year: 2024,
+        type: 'talk' as const
+      }
+    ]
   },
   {
     slug: 'msc-thesis-2020',
@@ -173,12 +185,13 @@ const rawPublications = [
     type: 'thesis' as const,
     status: 'published' as const,
     authorPosition: 'first' as const,
-    abstract: '',
+    abstract:
+      'Design patterns are reusable solutions for commonly occurring problems in software design. First described in 1994 by the Gang of Four, they have gained widespread adoption in many areas of software development throughout the years. Furthermore, design patterns have also garnered an active research community around them, which investigates the effects that design patterns have on different software quality attributes. However, a common shortcoming of existing studies is that they only analyze the quality effects of design patterns on a relatively small scale, covering no more than a few hundred projects per case study. This calls into question how generalizable the results of these small-scale case studies are.\nPursuing more generalizable results, this thesis conducts a much larger-scale analysis of the quality effects of design patterns. To accomplish this, software metric and design pattern data for 90,000 projects from the Maven Central repository is collected using the metrics calculation tool CKJM extended and the design pattern detection tool SSA. Correlations between design patterns and software quality attributes are then analyzed using software metrics as proxies for software quality by following the methodology described by the QMOOD quality model. The results of the analysis suggest that design patterns are positively correlated with functionality and reusability, but negatively correlated with understandability, which is consistent with the results of existing smaller-scale case studies.',
+    tldr: 'A large-scale mining study of 90,000 Maven Central projects finds that design patterns are positively correlated with software functionality and reusability but negatively correlated with understandability — consistent with smaller prior studies, but on a far larger and more generalizable scale.',
+    pdf: '/pdfs/aichberger_2020_msc_thesis.pdf',
     zenodo: 'https://zenodo.org/records/4048275',
     github: 'https://github.com/jaichberg/qualisign',
-    links: {
-      demo: 'https://www.overleaf.com/read/vnfhydqxmpvx'
-    },
+    overleaf: 'https://www.overleaf.com/read/vnfhydqxmpvx',
     tags: ['mining software repositories', 'design patterns', 'software quality', 'empirical study']
   }
 ];
