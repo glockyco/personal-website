@@ -636,6 +636,15 @@ code {
   line-height: 1.35;
 }
 
+.pub-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.pub-title a:hover {
+  color: var(--color-accent);
+}
+
 .pub-meta {
   display: flex;
   gap: 8px;
@@ -762,6 +771,15 @@ code {
   font-size: 1.05rem;
   font-weight: 700;
   color: var(--color-heading);
+}
+
+.project-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.project-title a:hover {
+  color: var(--color-accent);
 }
 
 .project-status {
@@ -990,7 +1008,7 @@ code {
     <div class="pub-card">
       <div class="pub-header">
         <div class="pub-title">
-          On the Use of Commit-Relevant Mutants
+          <a href="/research/commit-relevant-mutants">On the Use of Commit-Relevant Mutants</a>
           <span class="pub-award">&#9733; Best Paper</span>
         </div>
         <div class="pub-meta">
@@ -1010,7 +1028,7 @@ code {
 
     <div class="pub-card">
       <div class="pub-header">
-        <div class="pub-title">Exploring Mutation Testing at Commit Level</div>
+        <div class="pub-title"><a href="/research/commit-level-mutation-testing">Exploring Mutation Testing at Commit Level</a></div>
         <div class="pub-meta">
           <span class="badge badge-accent">ICSE-DS</span>
           <span class="badge badge-year">2024</span>
@@ -1027,7 +1045,7 @@ code {
 
     <div class="pub-card">
       <div class="pub-header">
-        <div class="pub-title">Mutation Testing in Evolving Systems: Studying the Relevance of Mutants to Code Evolution</div>
+        <div class="pub-title"><a href="/research/mutation-testing-evolving-systems">Mutation Testing in Evolving Systems: Studying the Relevance of Mutants to Code Evolution</a></div>
         <div class="pub-meta">
           <span class="badge badge-accent">Preprint</span>
           <span class="badge badge-year">2025</span>
@@ -1054,7 +1072,7 @@ code {
       <div class="project-card">
         <div class="project-screenshot">screenshot placeholder</div>
         <div class="project-top">
-          <span class="project-title">Erenshor Maps</span>
+          <span class="project-title"><a href="/projects/erenshor-maps">Erenshor Maps</a></span>
           <span class="project-status"><span class="project-status-dot"></span> Active</span>
         </div>
         <p class="project-desc">Interactive maps for a game world. Data mined from game files, processed through a Python pipeline, and visualized with deck.gl on a SvelteKit frontend.</p>
@@ -1070,7 +1088,7 @@ code {
       <div class="project-card">
         <div class="project-screenshot">screenshot placeholder</div>
         <div class="project-top">
-          <span class="project-title">AK Compendium</span>
+          <span class="project-title"><a href="/projects/ak-compendium">AK Compendium</a></span>
           <span class="project-status"><span class="project-status-dot"></span> Active</span>
         </div>
         <p class="project-desc">Community wiki and modding ecosystem. Primary maintainer of the wiki with 500+ articles, plus data extraction pipelines and Steam guides.</p>
