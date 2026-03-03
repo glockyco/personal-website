@@ -5,9 +5,9 @@
   import { projects } from '$lib/data/projects';
   import { sectionNav } from '$lib/state/sections.svelte';
 
-  // Exclude thesis; show under-review first, then published by year desc
+  // Show featured publications; under-review first, then reverse-chronological
   const featuredPubs = publications
-    .filter((p) => p.type !== 'thesis')
+    .filter((p) => p.featured)
     .sort((a, b) => {
       if (a.status === 'under-review' && b.status !== 'under-review') return -1;
       if (a.status !== 'under-review' && b.status === 'under-review') return 1;

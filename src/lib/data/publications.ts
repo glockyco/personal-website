@@ -33,6 +33,7 @@ export const PublicationSchema = z.object({
   type: z.enum(['journal', 'conference', 'doctoral-symposium', 'thesis', 'preprint']),
   status: z.enum(['published', 'under-review']),
   authorPosition: z.enum(['first', 'contributing']),
+  featured: z.boolean().optional(),
 
   abstract: z.string(),
   tldr: z.string().optional(),
@@ -93,6 +94,7 @@ const rawPublications = [
     type: 'journal' as const,
     status: 'published' as const,
     authorPosition: 'first' as const,
+    featured: true,
     abstract:
       "Equivalence checking is used to verify whether two programs produce equivalent outputs when given equivalent inputs. Research in this field mainly focused on improving equivalence checking accuracy and runtime performance. However, for program pairs that cannot be proven to be either equivalent or non-equivalent, existing approaches only report a classification result of unknown, which provides no information regarding the programs' non-/equivalence.\nIn this paper, we introduce PASDA, our partition-based semantic differencing approach with best effort classification of undecided cases. While PASDA aims to formally prove non-/equivalence of analyzed program pairs using a variant of differential symbolic execution, its main novelty lies in its handling of cases for which no formal non-/equivalence proof can be found. For such cases, PASDA provides a best effort equivalence classification based on a set of classification heuristics.\nWe evaluated PASDA with an existing benchmark consisting of 141 non-/equivalent program pairs. PASDA correctly classified 61%–74% of these cases at timeouts from 10 s to 3600 s. Thus, PASDA achieved equivalence checking accuracies that are 3%–7% higher than the best results achieved by three existing tools. Furthermore, PASDA's best effort classifications were correct for 70%–75% of equivalent and 55%–85% of non-equivalent cases across the different timeouts.",
     tldr: 'PASDA uses differential symbolic execution to classify behavioral equivalence between program versions, and introduces best-effort heuristics for cases where no formal proof can be found — outperforming three existing tools by 3–7% on a standard benchmark.',
@@ -117,6 +119,7 @@ const rawPublications = [
     type: 'journal' as const,
     status: 'under-review' as const,
     authorPosition: 'first' as const,
+    featured: true,
     abstract:
       'Conventional unit tests validate single input-output pairs, leaving most inputs of an execution path untested. Property-based testing addresses this shortcoming by generating multiple inputs satisfying properties but requires significant manual effort to define properties and their constraints. We propose a semantics-based approach that automatically transforms unit tests into property-based tests by extracting specifications from implementations via single-path symbolic analysis. We demonstrate this approach through Teralizer, a prototype for Java that transforms JUnit tests into property-based jqwik tests. Unlike prior work that generalizes from input-output examples, Teralizer derives specifications from program semantics.\nWe evaluated Teralizer on three progressively challenging datasets. On EvoSuite-generated tests for EqBench and Apache Commons utilities, Teralizer improved mutation scores by 1-4 percentage points. Generalization of mature developer-written tests from Apache Commons utilities showed only 0.05-0.07 percentage points improvement. Analysis of 632 real-world Java projects from RepoReapers highlights applicability barriers: only 1.7% of projects completed the generalization pipeline, with failures primarily due to type support limitations in symbolic analysis and static analysis limitations in our prototype. Based on the results, we provide a roadmap for future work, identifying research and engineering challenges that need to be tackled to advance the field of test generalization.',
     tldr: 'Teralizer automatically transforms JUnit unit tests into property-based jqwik tests by deriving input specifications from program semantics via symbolic analysis, improving mutation scores on generated tests while surfacing practical barriers to wider applicability.',
