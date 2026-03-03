@@ -1,5 +1,6 @@
 <script lang="ts">
   import { profile } from '$lib/data/links';
+  import profilePhoto from '$lib/assets/profile.png';
   import { publications } from '$lib/data/publications';
   import { projects } from '$lib/data/projects';
   import { sectionNav } from '$lib/state/sections.svelte';
@@ -16,7 +17,8 @@
 
   $effect(() => {
     sectionNav.set([
-      { id: 'hero', label: 'About' },
+      { id: 'hero', label: 'Top' },
+      { id: 'about', label: 'About' },
       { id: 'research', label: 'Research' },
       { id: 'projects', label: 'Projects' }
     ]);
@@ -30,19 +32,31 @@
 
 <!-- ── Hero ──────────────────────────────────────────────────────────── -->
 <section class="hero" id="hero">
-  <h1 class="name">{profile.name}</h1>
-  <p class="tagline">{profile.tagline}</p>
-  <p class="meta">
-    {profile.location} &middot;
-    <a href={profile.affiliationUrl}>{profile.affiliation}</a>
-  </p>
+  <div class="hero-intro">
+    <img class="avatar" src={profilePhoto} alt="Johann Glock" />
+    <div class="hero-text">
+      <h1 class="name">{profile.name}</h1>
+      <p class="tagline">{profile.tagline}</p>
+      <p class="meta">
+        {profile.location} &middot;
+        <a href={profile.affiliationUrl}>{profile.affiliation}</a>
+      </p>
+      <div class="actions">
+        <a class="btn btn-primary" href="/research/">View Research</a>
+        <a class="btn btn-secondary" href="/projects/">View Projects</a>
+        <a class="btn btn-secondary" href="/cv/">View CV</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── About ─────────────────────────────────────────────────────────── -->
+<section class="section" id="about">
+  <div class="section-head">
+    <span class="section-label">About</span>
+  </div>
   <!-- eslint-disable-next-line svelte/no-at-html-tags -- bioHtml is authored in links.ts, not user input -->
   <p class="bio">{@html profile.bioHtml}</p>
-  <div class="actions">
-    <a class="btn btn-primary" href="/research/">View Research</a>
-    <a class="btn btn-secondary" href="/projects/">View Projects</a>
-    <a class="btn btn-secondary" href="/cv/">View CV</a>
-  </div>
 </section>
 
 <!-- ── Selected Publications ─────────────────────────────────────────── -->
@@ -128,6 +142,28 @@
     padding: 80px 0 40px;
   }
 
+  .hero-intro {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+  }
+
+  .hero-text {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .avatar {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center top;
+    flex-shrink: 0;
+    border: 3px solid var(--color-border);
+    transition: border-color var(--transition-base);
+  }
+
   .name {
     font-size: var(--text-3xl);
     font-weight: 800;
@@ -139,13 +175,13 @@
   .tagline {
     font-size: var(--text-lg);
     color: var(--color-muted);
-    margin-bottom: 12px;
+    margin-bottom: 8px;
   }
 
   .meta {
     font-size: var(--text-sm);
     color: var(--color-muted);
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 
     a {
       color: var(--color-muted);
@@ -163,7 +199,6 @@
     font-size: var(--text-base);
     line-height: 1.7;
     color: var(--color-text);
-    margin-bottom: 28px;
   }
 
   .actions {
@@ -421,6 +456,22 @@
   @media (max-width: 768px) {
     .hero {
       padding: 40px 0 32px;
+    }
+
+    .hero-intro {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 20px;
+    }
+
+    .actions {
+      justify-content: center;
+    }
+
+    .avatar {
+      width: 88px;
+      height: 88px;
     }
 
     .name {
