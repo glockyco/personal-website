@@ -36,7 +36,8 @@
     {profile.location} &middot;
     <a href={profile.affiliationUrl}>{profile.affiliation}</a>
   </p>
-  <p class="bio">{profile.bio}</p>
+  <!-- eslint-disable-next-line svelte/no-at-html-tags -- bioHtml is authored in links.ts, not user input -->
+  <p class="bio">{@html profile.bioHtml}</p>
   <div class="actions">
     <a class="btn btn-primary" href="/research/">View Research</a>
     <a class="btn btn-secondary" href="/projects/">View Projects</a>
