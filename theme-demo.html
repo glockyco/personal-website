@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="indigo-dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Theme Demo — Personal Website</title>
+<style>
+/* ============================================================
+   CSS CUSTOM PROPERTIES — all themes defined here
+   ============================================================ */
+
+[data-theme="indigo-dark"] {
+  --color-bg:          #0e0e16;
+  --color-surface:     #16161f;
+  --color-surface-hover: #1c1c28;
+  --color-border:      #1e1e2e;
+  --color-text:        #f0f0f5;
+  --color-heading:     #ffffff;
+  --color-muted:       #a0a0b5;
+  --color-accent:      hsl(248, 60%, 65%);
+  --color-accent-hover: hsl(248, 65%, 72%);
+  --color-accent-dim:  hsl(248, 60%, 65%, 0.12);
+  --color-top-bar:     hsl(248, 60%, 65%);
+  --color-badge-bg:    hsl(248, 60%, 65%, 0.15);
+  --color-badge-text:  hsl(248, 65%, 78%);
+  --color-tag-bg:      hsl(220, 20%, 16%);
+  --color-tag-text:    #b0b0c5;
+  --color-status-active: hsl(145, 60%, 50%);
+  --color-link-underline: hsl(248, 60%, 65%, 0.4);
+  --color-strip-bg:    rgba(14, 14, 22, 0.85);
+  --theme-icon-left:   #0e0e16;
+  --theme-icon-right:  hsl(248, 60%, 65%);
+  color-scheme: dark;
+}
+
+[data-theme="indigo-light"] {
+  --color-bg:          #f5f5fa;
+  --color-surface:     #ffffff;
+  --color-surface-hover: #f0f0f8;
+  --color-border:      #dddde8;
+  --color-text:        #1a1a2e;
+  --color-heading:     #0e0e16;
+  --color-muted:       #5a5a7a;
+  --color-accent:      hsl(248, 55%, 52%);
+  --color-accent-hover: hsl(248, 60%, 45%);
+  --color-accent-dim:  hsl(248, 55%, 52%, 0.08);
+  --color-top-bar:     hsl(248, 55%, 52%);
+  --color-badge-bg:    hsl(248, 55%, 52%, 0.1);
+  --color-badge-text:  hsl(248, 55%, 42%);
+  --color-tag-bg:      hsl(225, 20%, 93%);
+  --color-tag-text:    #4a4a6a;
+  --color-status-active: hsl(145, 55%, 38%);
+  --color-link-underline: hsl(248, 55%, 52%, 0.3);
+  --color-strip-bg:    rgba(245, 245, 250, 0.85);
+  --theme-icon-left:   #f5f5fa;
+  --theme-icon-right:  hsl(248, 55%, 52%);
+  color-scheme: light;
+}
+
+[data-theme="navy-dark"] {
+  --color-bg:          #0a192f;
+  --color-surface:     #112240;
+  --color-surface-hover: #1a2d50;
+  --color-border:      #1d3461;
+  --color-text:        #ccd6f6;
+  --color-heading:     #e6f1ff;
+  --color-muted:       #8892b0;
+  --color-accent:      hsl(166, 72%, 56%);
+  --color-accent-hover: hsl(166, 78%, 64%);
+  --color-accent-dim:  hsl(166, 72%, 56%, 0.1);
+  --color-top-bar:     hsl(166, 72%, 56%);
+  --color-badge-bg:    hsl(166, 72%, 56%, 0.12);
+  --color-badge-text:  hsl(166, 72%, 66%);
+  --color-tag-bg:      hsl(216, 40%, 16%);
+  --color-tag-text:    #8892b0;
+  --color-status-active: hsl(166, 72%, 56%);
+  --color-link-underline: hsl(166, 72%, 56%, 0.35);
+  --color-strip-bg:    rgba(10, 25, 47, 0.85);
+  --theme-icon-left:   #0a192f;
+  --theme-icon-right:  hsl(166, 72%, 56%);
+  color-scheme: dark;
+}
+
+[data-theme="navy-light"] {
+  --color-bg:          #f0f4f8;
+  --color-surface:     #ffffff;
+  --color-surface-hover: #eaf0f6;
+  --color-border:      #d0dae6;
+  --color-text:        #1a2d50;
+  --color-heading:     #0a192f;
+  --color-muted:       #4a6080;
+  --color-accent:      hsl(166, 65%, 35%);
+  --color-accent-hover: hsl(166, 70%, 28%);
+  --color-accent-dim:  hsl(166, 65%, 35%, 0.08);
+  --color-top-bar:     hsl(166, 65%, 35%);
+  --color-badge-bg:    hsl(166, 65%, 35%, 0.1);
+  --color-badge-text:  hsl(166, 65%, 28%);
+  --color-tag-bg:      hsl(210, 25%, 92%);
+  --color-tag-text:    #3a5070;
+  --color-status-active: hsl(166, 60%, 35%);
+  --color-link-underline: hsl(166, 65%, 35%, 0.3);
+  --color-strip-bg:    rgba(240, 244, 248, 0.85);
+  --theme-icon-left:   #f0f4f8;
+  --theme-icon-right:  hsl(166, 65%, 35%);
+  color-scheme: light;
+}
+
+[data-theme="warm-dark"] {
+  --color-bg:          #120f0d;
+  --color-surface:     #1a1614;
+  --color-surface-hover: #221e1a;
+  --color-border:      #2a2420;
+  --color-text:        #e8e2dc;
+  --color-heading:     #faf4ee;
+  --color-muted:       #a8a098;
+  --color-accent:      hsl(25, 75%, 58%);
+  --color-accent-hover: hsl(25, 80%, 65%);
+  --color-accent-dim:  hsl(25, 75%, 58%, 0.12);
+  --color-top-bar:     hsl(25, 75%, 58%);
+  --color-badge-bg:    hsl(25, 75%, 58%, 0.15);
+  --color-badge-text:  hsl(25, 75%, 72%);
+  --color-tag-bg:      hsl(20, 15%, 14%);
+  --color-tag-text:    #b0a898;
+  --color-status-active: hsl(145, 55%, 48%);
+  --color-link-underline: hsl(25, 75%, 58%, 0.35);
+  --color-strip-bg:    rgba(18, 15, 13, 0.85);
+  --theme-icon-left:   #120f0d;
+  --theme-icon-right:  hsl(25, 75%, 58%);
+  color-scheme: dark;
+}
+
+[data-theme="warm-light"] {
+  --color-bg:          #faf6f2;
+  --color-surface:     #ffffff;
+  --color-surface-hover: #f6f0ea;
+  --color-border:      #e2dcd6;
+  --color-text:        #2a2420;
+  --color-heading:     #120f0d;
+  --color-muted:       #6a6058;
+  --color-accent:      hsl(25, 70%, 42%);
+  --color-accent-hover: hsl(25, 75%, 35%);
+  --color-accent-dim:  hsl(25, 70%, 42%, 0.08);
+  --color-top-bar:     hsl(25, 70%, 42%);
+  --color-badge-bg:    hsl(25, 70%, 42%, 0.1);
+  --color-badge-text:  hsl(25, 70%, 35%);
+  --color-tag-bg:      hsl(20, 20%, 92%);
+  --color-tag-text:    #5a5048;
+  --color-status-active: hsl(145, 50%, 38%);
+  --color-link-underline: hsl(25, 70%, 42%, 0.3);
+  --color-strip-bg:    rgba(250, 246, 242, 0.85);
+  --theme-icon-left:   #faf6f2;
+  --theme-icon-right:  hsl(25, 70%, 42%);
+  color-scheme: light;
+}
+
+
+/* ============================================================
+   BASE STYLES
+   ============================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Top accent bar */
+body::before {
+  content: '';
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--color-top-bar);
+  z-index: 100;
+  transition: background 0.2s ease;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+a:hover {
+  color: var(--color-accent-hover);
+}
+
+code {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.85em;
+  background: var(--color-accent-dim);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+}
+
+
+/* ============================================================
+   FLOATING ICON STRIP
+   ============================================================ */
+
+.icon-strip {
+  position: fixed;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 6px;
+  background: var(--color-strip-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.icon-strip a,
+.icon-strip button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  color: var(--color-muted);
+  cursor: pointer;
+  transition: all 0.12s ease;
+  padding: 0;
+}
+
+.icon-strip a:hover,
+.icon-strip button:hover {
+  color: var(--color-accent);
+  background: var(--color-accent-dim);
+}
+
+.icon-strip svg {
+  width: 18px;
+  height: 18px;
+}
+
+.icon-strip .strip-divider {
+  width: 20px;
+  height: 1px;
+  background: var(--color-border);
+  margin: 4px 0;
+  transition: background 0.2s ease;
+}
+
+/* Theme toggle: diagonal split circle */
+.theme-toggle-icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid var(--color-muted);
+  transition: border-color 0.12s ease;
+  flex-shrink: 0;
+}
+
+.icon-strip button:hover .theme-toggle-icon {
+  border-color: var(--color-accent);
+}
+
+.theme-toggle-icon::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--theme-icon-left);
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+  transition: background 0.2s ease;
+}
+
+.theme-toggle-icon::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--theme-icon-right);
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+  transition: background 0.2s ease;
+}
+
+
+/* ============================================================
+   THEME PICKER POPOVER
+   ============================================================ */
+
+.theme-popover {
+  position: fixed;
+  left: 64px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 201;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 12px;
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 160px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.theme-popover.open {
+  display: flex;
+}
+
+.theme-popover-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+  padding: 2px 8px;
+}
+
+.theme-popover button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--color-heading);
+  font-family: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.12s ease;
+  width: 100%;
+  text-align: left;
+}
+
+.theme-popover button:hover {
+  background: var(--color-surface-hover);
+}
+
+.theme-popover button.active {
+  background: var(--color-accent-dim);
+  color: var(--color-heading);
+  font-weight: 600;
+}
+
+.theme-swatch {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-swatch::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+.theme-swatch::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+}
+
+/* Swatches for each theme: background + accent */
+.swatch-indigo-dark::before  { background: #0e0e16; }
+.swatch-indigo-dark::after   { background: hsl(248, 60%, 65%); }
+.swatch-indigo-light::before { background: #f5f5fa; }
+.swatch-indigo-light::after  { background: hsl(248, 55%, 52%); }
+.swatch-navy-dark::before    { background: #0a192f; }
+.swatch-navy-dark::after     { background: hsl(166, 72%, 56%); }
+.swatch-navy-light::before   { background: #f0f4f8; }
+.swatch-navy-light::after    { background: hsl(166, 65%, 35%); }
+.swatch-warm-dark::before    { background: #120f0d; }
+.swatch-warm-dark::after     { background: hsl(25, 75%, 58%); }
+.swatch-warm-light::before   { background: #faf6f2; }
+.swatch-warm-light::after    { background: hsl(25, 70%, 42%); }
+
+
+
+/* ============================================================
+   PAGE LAYOUT
+   ============================================================ */
+
+.page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px 0 60px; /* left padding to avoid icon strip overlap */
+}
+
+.section {
+  padding: 48px 0;
+  border-bottom: 1px solid var(--color-border);
+  transition: border-color 0.2s ease;
+}
+.section:last-child {
+  border-bottom: none;
+}
+
+
+/* ============================================================
+   NAV
+   ============================================================ */
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 0;
+  margin-top: 3px;
+}
+
+.nav-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-heading);
+  letter-spacing: -0.02em;
+}
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+  align-items: center;
+}
+
+.nav-links a {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.15s ease;
+  position: relative;
+}
+
+.nav-links a:hover { color: var(--color-text); }
+.nav-links a.active { color: var(--color-accent); }
+
+.nav-links a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0; right: 0;
+  height: 2px;
+  background: var(--color-accent);
+  border-radius: 1px;
+}
+
+
+/* ============================================================
+   HERO
+   ============================================================ */
+
+.hero {
+  padding: 80px 0 60px;
+}
+
+.hero-intro {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+.hero-photo {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-muted);
+  font-size: 0.7rem;
+  transition: border-color 0.15s ease, background 0.2s ease;
+}
+
+.hero-text { flex: 1; }
+
+.hero-name {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: var(--color-heading);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-bottom: 8px;
+}
+
+.hero-tagline {
+  font-size: 1.15rem;
+  color: var(--color-muted);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.hero-meta {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  margin-bottom: 24px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: inherit;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-primary {
+  background: var(--color-accent);
+  color: #ffffff;
+}
+.btn-primary:hover {
+  background: var(--color-accent-hover);
+  color: #ffffff;
+}
+
+.btn-secondary {
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+.btn-secondary:hover {
+  border-color: var(--color-accent);
+  background: var(--color-accent-dim);
+}
+
+
+/* ============================================================
+   SECTION HEADINGS
+   ============================================================ */
+
+.section-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 20px;
+}
+
+
+/* ============================================================
+   RESEARCH STATEMENT
+   ============================================================ */
+
+.research-statement {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--color-text);
+  max-width: 680px;
+}
+
+
+/* ============================================================
+   PUBLICATION CARD
+   ============================================================ */
+
+.pub-card {
+  padding: 20px 24px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  margin-bottom: 16px;
+  transition: all 0.15s ease;
+}
+.pub-card:hover {
+  border-color: var(--color-accent);
+  background: var(--color-surface-hover);
+  transform: translateY(-1px);
+}
+
+.pub-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.pub-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-heading);
+  line-height: 1.35;
+}
+
+.pub-meta {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+  align-items: center;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.badge-accent {
+  background: var(--color-badge-bg);
+  color: var(--color-badge-text);
+}
+
+.badge-year {
+  background: var(--color-tag-bg);
+  color: var(--color-tag-text);
+}
+
+.pub-authors {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  margin-bottom: 8px;
+}
+
+.pub-authors .me {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.pub-tldr {
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  line-height: 1.55;
+  margin-bottom: 12px;
+}
+
+.pub-links {
+  display: flex;
+  gap: 16px;
+}
+
+.pub-link {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.pub-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--color-link-underline);
+}
+
+.pub-award {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: hsl(45, 90%, 55%);
+  margin-left: 8px;
+}
+
+
+/* ============================================================
+   PROJECT CARD
+   ============================================================ */
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.project-card {
+  padding: 24px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  transition: all 0.15s ease;
+  display: flex;
+  flex-direction: column;
+}
+.project-card:hover {
+  border-color: var(--color-accent);
+  background: var(--color-surface-hover);
+  transform: translateY(-1px);
+}
+
+.project-screenshot {
+  width: 100%;
+  height: 140px;
+  background: var(--color-bg);
+  border-radius: 6px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-muted);
+  font-size: 0.75rem;
+  border: 1px solid var(--color-border);
+}
+
+.project-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.project-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-heading);
+}
+
+.project-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--color-status-active);
+}
+
+.project-status-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--color-status-active);
+  border-radius: 50%;
+}
+
+.project-desc {
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  line-height: 1.5;
+  margin-bottom: 16px;
+  flex: 1;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag {
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  background: var(--color-tag-bg);
+  color: var(--color-tag-text);
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
+.footer {
+  padding: 40px 0;
+  text-align: center;
+}
+
+.footer-links {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  margin-bottom: 16px;
+  list-style: none;
+}
+
+.footer-links a {
+  color: var(--color-muted);
+  font-size: 0.85rem;
+}
+.footer-links a:hover {
+  color: var(--color-accent);
+}
+
+.footer-copy {
+  font-size: 0.8rem;
+  color: var(--color-muted);
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 640px) {
+  .icon-strip {
+    left: auto;
+    right: 8px;
+    top: auto;
+    bottom: 16px;
+    transform: none;
+    flex-direction: row;
+    padding: 6px 10px;
+  }
+  .icon-strip .strip-divider {
+    width: 1px;
+    height: 20px;
+    margin: 0 4px;
+  }
+  .theme-popover {
+    left: auto;
+    right: 8px;
+    top: auto;
+    bottom: 72px;
+    transform: none;
+  }
+  .page {
+    padding-left: 24px;
+  }
+  .hero-intro {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .hero-actions {
+    justify-content: center;
+  }
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+  .pub-header {
+    flex-direction: column;
+  }
+  .pub-meta {
+    order: -1;
+  }
+
+}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- ========== FLOATING ICON STRIP ========== -->
+<div class="icon-strip">
+  <!-- GitHub -->
+  <a href="#" title="GitHub">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+  </a>
+  <!-- Scholar -->
+  <a href="#" title="Google Scholar">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 4 3 6 3s6-1 6-3v-5"/></svg>
+  </a>
+  <!-- LinkedIn -->
+  <a href="#" title="LinkedIn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+  </a>
+  <!-- Email -->
+  <a href="#" title="Email">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+  </a>
+
+  <div class="strip-divider"></div>
+
+  <!-- Theme toggle -->
+  <button id="theme-toggle-btn" title="Change theme">
+    <div class="theme-toggle-icon"></div>
+  </button>
+</div>
+
+<!-- ========== THEME PICKER POPOVER ========== -->
+<div class="theme-popover" id="theme-popover">
+  <span class="theme-popover-label">Theme</span>
+  <button data-pick-theme="indigo-dark" class="active">
+    <span class="theme-swatch swatch-indigo-dark"></span>
+    Indigo Dark
+  </button>
+  <button data-pick-theme="indigo-light">
+    <span class="theme-swatch swatch-indigo-light"></span>
+    Indigo Light
+  </button>
+  <button data-pick-theme="navy-dark">
+    <span class="theme-swatch swatch-navy-dark"></span>
+    Navy Dark
+  </button>
+  <button data-pick-theme="navy-light">
+    <span class="theme-swatch swatch-navy-light"></span>
+    Navy Light
+  </button>
+  <button data-pick-theme="warm-dark">
+    <span class="theme-swatch swatch-warm-dark"></span>
+    Warm Dark
+  </button>
+  <button data-pick-theme="warm-light">
+    <span class="theme-swatch swatch-warm-light"></span>
+    Warm Light
+  </button>
+</div>
+
+
+<!-- ========== PAGE CONTENT ========== -->
+<div class="page">
+
+  <nav class="nav">
+    <div class="nav-name">Johann Glock</div>
+    <ul class="nav-links">
+      <li><a href="#" class="active">Research</a></li>
+      <li><a href="#">Projects</a></li>
+      <li><a href="#">CV</a></li>
+      <li><a href="#">Uses</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-intro">
+      <div class="hero-photo">96x96</div>
+      <div class="hero-text">
+        <h1 class="hero-name">Johann Glock</h1>
+        <p class="hero-tagline">PhD Researcher in Empirical Software Engineering.<br>Building tools and pipelines to extract insight from large-scale software data.</p>
+        <p class="hero-meta">Hagenberg / Linz, Austria &middot; Open to Remote</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#">View Research</a>
+          <a class="btn btn-secondary" href="#">Download CV</a>
+          <a class="btn btn-secondary" href="#">See Projects</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-label">Research Focus</div>
+    <p class="research-statement">
+      My research explores how data mining and data engineering approaches can improve software quality and developer productivity. I combine empirical research methods with backend engineering to build tools and pipelines that extract actionable insight from large-scale software repositories.
+    </p>
+  </section>
+
+  <section class="section">
+    <div class="section-label">Selected Publications</div>
+
+    <div class="pub-card">
+      <div class="pub-header">
+        <div class="pub-title">
+          On the Use of Commit-Relevant Mutants
+          <span class="pub-award">&#9733; Best Paper</span>
+        </div>
+        <div class="pub-meta">
+          <span class="badge badge-accent">JSS</span>
+          <span class="badge badge-year">2024</span>
+        </div>
+      </div>
+      <div class="pub-authors"><span class="me">Johann Glock</span>, Coauthor A, Coauthor B</div>
+      <p class="pub-tldr">We investigate how commit-relevant mutants can reduce mutation testing costs while maintaining fault-detection effectiveness, finding that focusing on changed code is both practical and sufficient.</p>
+      <div class="pub-links">
+        <a class="pub-link" href="#">PDF</a>
+        <a class="pub-link" href="#">DOI</a>
+        <a class="pub-link" href="#">Cite</a>
+        <a class="pub-link" href="#">Code</a>
+      </div>
+    </div>
+
+    <div class="pub-card">
+      <div class="pub-header">
+        <div class="pub-title">Exploring Mutation Testing at Commit Level</div>
+        <div class="pub-meta">
+          <span class="badge badge-accent">ICSE-DS</span>
+          <span class="badge badge-year">2024</span>
+        </div>
+      </div>
+      <div class="pub-authors"><span class="me">Johann Glock</span></div>
+      <p class="pub-tldr">Doctoral symposium paper presenting the research agenda for commit-level mutation testing, outlining challenges and proposed solutions for integrating mutation analysis into CI/CD pipelines.</p>
+      <div class="pub-links">
+        <a class="pub-link" href="#">PDF</a>
+        <a class="pub-link" href="#">DOI</a>
+        <a class="pub-link" href="#">Cite</a>
+      </div>
+    </div>
+
+    <div class="pub-card">
+      <div class="pub-header">
+        <div class="pub-title">Mutation Testing in Evolving Systems: Studying the Relevance of Mutants to Code Evolution</div>
+        <div class="pub-meta">
+          <span class="badge badge-accent">Preprint</span>
+          <span class="badge badge-year">2025</span>
+        </div>
+      </div>
+      <div class="pub-authors"><span class="me">Johann Glock</span>, Coauthor C, Coauthor D</div>
+      <p class="pub-tldr">A large-scale empirical study examining how the relevance of mutants changes as software evolves, with implications for incremental and continuous mutation testing strategies.</p>
+      <div class="pub-links">
+        <a class="pub-link" href="#">Preprint</a>
+        <a class="pub-link" href="#">Cite</a>
+        <a class="pub-link" href="#">Dataset</a>
+      </div>
+    </div>
+
+    <div style="margin-top: 20px;">
+      <a href="#" style="font-size: 0.9rem; font-weight: 600;">All Publications &rarr;</a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-label">Featured Projects</div>
+
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-screenshot">screenshot placeholder</div>
+        <div class="project-top">
+          <span class="project-title">Erenshor Maps</span>
+          <span class="project-status"><span class="project-status-dot"></span> Active</span>
+        </div>
+        <p class="project-desc">Interactive maps for a game world. Data mined from game files, processed through a Python pipeline, and visualized with deck.gl on a SvelteKit frontend.</p>
+        <div class="project-tags">
+          <span class="tag">SvelteKit</span>
+          <span class="tag">deck.gl</span>
+          <span class="tag">Python</span>
+          <span class="tag">SQLite</span>
+          <span class="tag">C#</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-screenshot">screenshot placeholder</div>
+        <div class="project-top">
+          <span class="project-title">AK Compendium</span>
+          <span class="project-status"><span class="project-status-dot"></span> Active</span>
+        </div>
+        <p class="project-desc">Community wiki and modding ecosystem. Primary maintainer of the wiki with 500+ articles, plus data extraction pipelines and Steam guides.</p>
+        <div class="project-tags">
+          <span class="tag">MediaWiki</span>
+          <span class="tag">Python</span>
+          <span class="tag">Lua</span>
+          <span class="tag">Steam</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 20px;">
+      <a href="#" style="font-size: 0.9rem; font-weight: 600;">All Projects &rarr;</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <ul class="footer-links">
+      <li><a href="#">GitHub</a></li>
+      <li><a href="#">Scholar</a></li>
+      <li><a href="#">ORCID</a></li>
+      <li><a href="#">LinkedIn</a></li>
+      <li><a href="#">Email</a></li>
+    </ul>
+    <p class="footer-copy">Johann Glock &middot; 2025</p>
+  </footer>
+
+</div>
+
+
+<script>
+// Theme popover toggle
+const toggleBtn = document.getElementById('theme-toggle-btn');
+const popover = document.getElementById('theme-popover');
+
+toggleBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  popover.classList.toggle('open');
+});
+
+// Close popover when clicking outside
+document.addEventListener('click', (e) => {
+  if (!popover.contains(e.target) && e.target !== toggleBtn) {
+    popover.classList.remove('open');
+  }
+});
+
+// Theme selection
+popover.querySelectorAll('button[data-pick-theme]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const theme = btn.dataset.pickTheme;
+    document.documentElement.setAttribute('data-theme', theme);
+    popover.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    popover.classList.remove('open');
+  });
+});
+</script>
+
+</body>
+</html>
