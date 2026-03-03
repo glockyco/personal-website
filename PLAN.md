@@ -635,87 +635,87 @@ export const academicLinks = {
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│ [NAV]                                                           │
+│ [NAV]                                                    [dots] │
 ├─────────────────────────────────────────────────────────────────┤
-│  Research & Publications                                        │
-│  Brief intro about research interests / areas                   │
-├─────────────────────────────────────────────────────────────────┤
-│  PEER-REVIEWED PUBLICATIONS  (No filters needed — only 4)       │
+│  Research                               (h1, no intro text yet) │
+├──────────────────────────── id="publications" ─────────────────┤
+│  PUBLICATIONS                                                   │
+│                                                                 │
 │  ┌─────────────────────────────────────────────────────────────┐│
-│  │ Paper Title Here                    2024 | JSS | First Auth ││
-│  │ Authors: Johann Glock, Coauthor A, Coauthor B               ││
-│  │ TL;DR summary of key contribution...                        ││
-│  │ [PDF] [DOI] [Dataset] [Code]                                ││
+│  │ [Under Review]  Teralizer: Semantics-Based...               ││
+│  │ J. Glock, C. Bauer, M. Pinzger · arXiv:2512.14475 · 2025   ││
+│  │ TL;DR...                                                    ││
+│  │ [PDF ↓] [Preprint] [Code] [Dataset]                         ││
 │  └─────────────────────────────────────────────────────────────┘│
 │  ┌─────────────────────────────────────────────────────────────┐│
-│  │ Another Paper Title                 2024 | ICSE | First Auth││
-│  │ ...                                                         ││
+│  │ [JSS] [2024]  PASDA: A Partition-based...                   ││
+│  │ J. Glock, J. Pichler, M. Pinzger · JSS · 2024              ││
+│  │ TL;DR...                                                    ││
+│  │ [PDF ↓] [DOI] [Code] [Dataset]                              ││
 │  └─────────────────────────────────────────────────────────────┘│
-│  (× 4 total)                                                    │
-├─────────────────────────────────────────────────────────────────┤
-│  APPLIED RESEARCH  (AIST — FFG-funded projects)                 │
-│  ┌───────────────┐ ┌───────────────┐ ┌───────────────┐          │
-│  │ Project A     │ │ Project B     │ │ Project C     │          │
-│  │ Short desc    │ │ Short desc    │ │ Short desc    │          │
-│  │ [→ AIST]      │ │ [→ AIST]      │ │ [→ AIST]      │          │
-│  └───────────────┘ └───────────────┘ └───────────────┘          │
-│  Compact card grid, links out to AIST website. No detail pages. │
+│  ... (api-evolution · icse-ds · msc-thesis)                     │
+│  All publications incl. thesis; under-review first, then        │
+│  reverse-chronological. Same card style as homepage.            │
+├──────────────────────────── id="applied" ──────────────────────┤
+│  APPLIED RESEARCH                                               │
+│  Applied research conducted at FH Hagenberg as part of          │
+│  FFG-funded projects (2018–2021).                               │
+│                                                                 │
+│  ┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐   │
+│  │ [data-eng]      │ │ [security]      │ │ [ar]            │   │
+│  │ KIMIKU          │ │ SOC-Toolkit     │ │ Rudy Games      │   │
+│  │ Short desc      │ │ Short desc      │ │ Short desc      │   │
+│  │ [→ AIST]        │ │ [→ AIST]        │ │ [→ AIST]        │   │
+│  └─────────────────┘ └─────────────────┘ └─────────────────┘   │
+│  5 cards total; compact grid; links out — no detail pages.      │
 ├─────────────────────────────────────────────────────────────────┤
 │ [FOOTER]                                                        │
 └─────────────────────────────────────────────────────────────────┘
 ```
+
+Section dots: Publications · Applied Research
 
 **Paper detail page:**
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│ [NAV]                                                           │
+│ [NAV]                                                    [dots] │
 ├─────────────────────────────────────────────────────────────────┤
-│  Home > Research > Paper Title                                  │
+│  ← Research                                                     │
 ├─────────────────────────────────────────────────────────────────┤
-│  Paper Title Here                                               │
-│  Authors: You, Coauthor A, Coauthor B                           │
-│  Published in CHI 2024 · DOI: 10.1145/...                       │
-│  🏆 Best Paper Award · 26% acceptance rate                      │
+│  [Under Review] / [JSS] [2024]                   (badges)       │
+│  Paper Title Here                                (h1)           │
+│  J. Glock (bold), Coauthor A (linked), Coauthor B (linked)      │
+│  Venue · Year  ·  acceptance rate (muted, if set)               │
 │                                                                 │
-│  [⬇ Download PDF] [Cite] [Demo] [Code] [Slides] [Video]        │
-├─────────────────────────────────────────────────────────────────┤
-│  TL;DR                                                          │
-│  2-3 sentence summary of key contribution...                    │
-├─────────────────────────────────────────────────────────────────┤
-│  KEY FIGURES (grid layout - all visible)                        │
-│  ┌────────────────┐ ┌────────────────┐ ┌────────────────┐      │
-│  │                │ │                │ │                │      │
-│  │    Figure 1    │ │    Figure 2    │ │    Figure 3    │      │
-│  │                │ │                │ │                │      │
-│  └────────────────┘ └────────────────┘ └────────────────┘      │
-│  Caption 1           Caption 2           Caption 3              │
-├─────────────────────────────────────────────────────────────────┤
-│  ABSTRACT                                                       │
+│  [PDF ↓] [DOI] [Preprint] [Code] [Dataset] [Overleaf]          │
+│  (each button shown only if the data field is set)              │
+├──────────────────────────── id="tldr" ─────────────────────────┤
+│  TL;DR  (section only rendered if pub.tldr is set)              │
+│  2–3 sentence summary...                                        │
+├──────────────────────────── id="abstract" ─────────────────────┤
+│  Abstract                                                       │
 │  Full abstract text...                                          │
-├─────────────────────────────────────────────────────────────────┤
-│  ▶ VIEW PDF INLINE (collapsed by default, lazy-loads pdf.js)   │
-│  ┌─────────────────────────────────────────────────────────────┐│
-│  │              [Embedded PDF Viewer]                          ││
-│  └─────────────────────────────────────────────────────────────┘│
-├─────────────────────────────────────────────────────────────────┤
-│  CITATION                                                       │
-│  ┌─────────────────────────────────────────────────────────────┐│
-│  │ @inproceedings{glock2024paper,                              ││
-│  │   title = {...},                                            ││
-│  │   ...                                                       ││
-│  │ }                                          [Copy BibTeX]    ││
-│  └─────────────────────────────────────────────────────────────┘│
-│  [APA] [MLA] [Chicago] - format toggles                         │
-├─────────────────────────────────────────────────────────────────┤
-│  RELATED                                                        │
-│  ┌─────────────────┐ ┌─────────────────┐                       │
-│  │ Related Paper   │ │ Related Project │                       │
-│  └─────────────────┘ └─────────────────┘                       │
+├──────────────────────────── id="presentations" ────────────────┤
+│  Presentations  (section only rendered if presentations set)    │
+│  · Talk @ ICSE 2024 Doctoral Symposium, Lisbon · [Slides ↓]    │
+│  · Privatissima, Klagenfurt · [Slides ↓]                       │
+├──────────────────────────── id="tags" ─────────────────────────┤
+│  Tags                                                           │
+│  [semantic differencing] [symbolic execution] [program analysis]│
 ├─────────────────────────────────────────────────────────────────┤
 │ [FOOTER]                                                        │
 └─────────────────────────────────────────────────────────────────┘
 ```
+
+Section dots: TL;DR (if set) · Abstract · Presentations (if set) · Tags
+
+Deferred to later:
+
+- Inline PDF / slides viewer (lazy-loads pdf.js, collapsed by default)
+- BibTeX / citation copy block
+- Key figures grid
+- Related papers / related projects section
 
 **Projects page:**
 
