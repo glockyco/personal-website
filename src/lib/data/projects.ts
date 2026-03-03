@@ -54,7 +54,7 @@ const rawProjects = [
   {
     slug: 'erenshor',
     title: 'Erenshor',
-    tagline: 'Maps, mods, wiki, and tools for the Erenshor community',
+    tagline: 'Maps, mods, and wiki bot for the Erenshor community',
     status: 'active' as const,
     featured: true,
     liveUrl: 'https://erenshor-maps.wowmuch1.workers.dev/map',
@@ -65,7 +65,7 @@ const rawProjects = [
   {
     slug: 'ancient-kingdoms',
     title: 'Ancient Kingdoms',
-    tagline: 'Compendium and modding tools for Ancient Kingdoms',
+    tagline: 'Maps, mods, and wiki for the Ancient Kingdoms community',
     status: 'active' as const,
     featured: true,
     liveUrl: 'https://ancient-kingdoms-compendium.wowmuch1.workers.dev',

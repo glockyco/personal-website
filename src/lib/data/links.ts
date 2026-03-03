@@ -1,8 +1,7 @@
 export const profile = {
   name: 'Johann Glock',
-  // TODO: write a specific, differentiated tagline
-  tagline: 'PhD Candidate in Empirical Software Engineering',
-  location: 'Hagenberg, Austria',
+  tagline: 'PhD Candidate in Software Engineering',
+  location: 'Hagenberg / Linz / Klagenfurt, Austria',
   affiliation: 'University of Klagenfurt',
   affiliationUrl: 'https://www.aau.at/en/isys/serg/team/glock-johann/',
   orcid: '0000-0002-0152-8611',
@@ -11,7 +10,5 @@ export const profile = {
   semanticScholar: 'https://www.semanticscholar.org/author/Johann-Glock/2266466770',
   linkedin: 'https://www.linkedin.com/in/johann-glock-486a9b221/',
 
-  // TODO: write a specific, differentiated research statement
-  researchStatement:
-    'I study how empirical methods and automated analysis can help developers understand, test, and evolve software more reliably.'
+  bio: 'Johann Glock is a PhD candidate at the University of Klagenfurt working on how formal program analysis can support practical regression detection. He developed PASDA, a semantic differencing tool that classifies behavioral equivalence between program versions — including approximate classifications where formal proofs are out of reach — and Teralizer, which automatically generalizes existing unit tests into property-based tests that cover entire input partitions rather than single input-output examples. Outside research, he data-mines games, builds interactive maps and mods, and contributes tools back to the communities around them.'
 } as const;

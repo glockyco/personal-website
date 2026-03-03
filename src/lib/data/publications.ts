@@ -80,8 +80,8 @@ const rawPublications = [
       'PASDA: A Partition-based Semantic Differencing Approach with Best Effort Classification of Undecided Cases',
     authors: [
       { name: 'Johann Glock', isMe: true },
-      { name: 'Josef Pichler' },
-      { name: 'Martin Pinzger', url: 'https://www.aau.at/en/isys/serg/team/pinzger-martin/' }
+      { name: 'Josef Pichler', url: 'https://pure.fh-ooe.at/de/persons/josef-pichler/' },
+      { name: 'Martin Pinzger', url: 'https://pinzger.github.io/' }
     ],
     venue: 'Journal of Systems and Software',
     venueShort: 'JSS',
@@ -102,12 +102,12 @@ const rawPublications = [
       'Teralizer: Semantics-Based Test Generalization from Conventional Unit Tests to Property-Based Tests',
     authors: [
       { name: 'Johann Glock', isMe: true },
-      { name: 'Clemens Bauer' },
-      { name: 'Martin Pinzger', url: 'https://www.aau.at/en/isys/serg/team/pinzger-martin/' }
+      { name: 'Clemens Bauer', url: 'https://www.aau.at/en/team/bauer-clemens/' },
+      { name: 'Martin Pinzger', url: 'https://pinzger.github.io/' }
     ],
     venue: 'ACM Transactions on Software Engineering and Methodology',
     venueShort: 'TOSEM',
-    year: 2024,
+    year: 2025,
     type: 'journal' as const,
     status: 'under-review' as const,
     authorPosition: 'first' as const,
@@ -121,10 +121,10 @@ const rawPublications = [
     slug: 'microservice-api-jss-2024',
     title: 'Microservice API Evolution in Practice: A Study on Strategies and Challenges',
     authors: [
-      { name: 'Alexander Lercher' },
+      { name: 'Alexander Lercher', url: 'https://alexx882.github.io/' },
       { name: 'Johann Glock', isMe: true },
-      { name: 'Christian Macho' },
-      { name: 'Martin Pinzger', url: 'https://www.aau.at/en/isys/serg/team/pinzger-martin/' }
+      { name: 'Christian Macho', url: 'https://mitschi.github.io/' },
+      { name: 'Martin Pinzger', url: 'https://pinzger.github.io/' }
     ],
     venue: 'Journal of Systems and Software',
     venueShort: 'JSS',
