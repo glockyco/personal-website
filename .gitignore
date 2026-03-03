@@ -1,33 +1,26 @@
+node_modules
+
 # Private working notes — not part of the project
 notes/
 
-# SvelteKit
-.svelte-kit/
-build/
+# Output
+.output
+.vercel
+.netlify
+.wrangler
+/.svelte-kit
+/build
 
-# Dependencies
-node_modules/
+# OS
+.DS_Store
+Thumbs.db
 
-# Vite
-.vite/
-vite.config.ts.timestamp-*
-
-# Environment variables
+# Env
 .env
 .env.*
 !.env.example
+!.env.test
 
-# pnpm
-.pnpm-store
-
-# TypeScript
-*.tsbuildinfo
-
-# Logs
-*.log
-
-# macOS
-.DS_Store
-
-# Wrangler (Cloudflare Workers)
-.wrangler/
+# Vite
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
