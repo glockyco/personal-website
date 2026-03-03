@@ -16,11 +16,7 @@
   <ul class="social">
     {#each links as { href, label } (label)}
       <li>
-        <a
-          {href}
-          target={href.startsWith('mailto') ? undefined : '_blank'}
-          rel="noopener noreferrer">{label}</a
-        >
+        <a {href}>{label}</a>
       </li>
     {/each}
   </ul>

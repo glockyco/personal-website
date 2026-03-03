@@ -7,7 +7,7 @@
 </script>
 
 <div class="strip">
-  <a href={profile.github} aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+  <a href={profile.github} aria-label="GitHub">
     <!-- GitHub icon -->
     <svg
       viewBox="0 0 24 24"
@@ -24,7 +24,7 @@
     </svg>
   </a>
 
-  <a href={profile.scholar} aria-label="Google Scholar" target="_blank" rel="noopener noreferrer">
+  <a href={profile.scholar} aria-label="Google Scholar">
     <!-- Graduation cap icon -->
     <svg
       viewBox="0 0 24 24"
@@ -40,7 +40,7 @@
     </svg>
   </a>
 
-  <a href={profile.linkedin} aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+  <a href={profile.linkedin} aria-label="LinkedIn">
     <!-- LinkedIn icon -->
     <svg
       viewBox="0 0 24 24"
