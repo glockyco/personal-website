@@ -21,6 +21,10 @@ export default ts.config(
       parserOptions: {
         parser: ts.parser
       }
+    },
+    rules: {
+      // External links and mailto: don't need SvelteKit resolve()
+      'svelte/no-navigation-without-resolve': 'off'
     }
   },
   {
