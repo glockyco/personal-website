@@ -30,6 +30,10 @@
 
 <div class="page-header">
   <h1>Research</h1>
+  <nav class="page-nav">
+    <a class="page-nav-pill" href="#publications">Publications</a>
+    <a class="page-nav-pill" href="#applied">Applied Research</a>
+  </nav>
 </div>
 
 <!-- ── Publications ────────────────────────────────────────────── -->
@@ -109,8 +113,8 @@
     <span class="section-label">Applied Research</span>
   </div>
   <p class="applied-intro">
-    Applied research conducted at FH Hagenberg as part of funded industry-partnered projects
-    (2018–2021).
+    Applied research conducted at the University of Applied Sciences Upper Austria as part of funded
+    industry-partnered projects (2018–2021).
   </p>
 
   <div class="aist-grid">
@@ -145,6 +149,32 @@
     font-size: var(--text-3xl);
     font-weight: 800;
     letter-spacing: -0.03em;
+  }
+
+  .page-nav {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .page-nav-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: var(--text-xs);
+    font-weight: 600;
+    background: var(--color-tag-bg);
+    color: var(--color-tag-text);
+    text-decoration: none;
+    transition:
+      background var(--transition-fast),
+      color var(--transition-fast);
+
+    &:hover {
+      background: var(--color-accent-dim);
+      color: var(--color-accent);
+    }
   }
 
   /* ── Sections ── */
@@ -327,6 +357,7 @@
     font-size: var(--text-base);
     font-weight: 700;
     color: var(--color-accent);
+    align-self: flex-start;
 
     &:hover {
       text-decoration: underline;
