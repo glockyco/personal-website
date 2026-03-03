@@ -438,6 +438,10 @@ code {
   border-bottom: none;
 }
 
+.section[id] {
+  scroll-margin-top: 80px;
+}
+
 
 /* ============================================================
    NAV
@@ -879,6 +883,51 @@ code {
 
 
 /* ============================================================
+   SECTION DOTS (right-side scroll nav)
+   ============================================================ */
+
+.section-dots {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.section-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-border);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+  display: block;
+}
+
+.section-dot:hover {
+  background: var(--color-muted);
+  transform: scale(1.3);
+}
+
+.section-dot.active {
+  background: var(--color-accent);
+  transform: scale(1.25);
+}
+
+@media (max-width: 768px) {
+  .section-dots {
+    display: none;
+  }
+}
+
+
+/* ============================================================
    HAMBURGER + MOBILE MENU
    ============================================================ */
 
@@ -1029,6 +1078,13 @@ code {
 <!-- ========== SCROLL PROGRESS BAR ========== -->
 <div id="progress-bar"></div>
 
+<!-- ========== SECTION DOTS ========== -->
+<div class="section-dots" id="section-dots">
+  <button class="section-dot active" data-section="section-research" title="Research Focus"></button>
+  <button class="section-dot" data-section="section-publications" title="Publications"></button>
+  <button class="section-dot" data-section="section-projects" title="Projects"></button>
+</div>
+
 <!-- ========== FLOATING ICON STRIP ========== -->
 <div class="icon-strip">
   <!-- GitHub -->
@@ -1130,14 +1186,14 @@ code {
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" id="section-research">
     <div class="section-label">Research Focus</div>
     <p class="research-statement">
       My research explores how data mining and data engineering approaches can improve software quality and developer productivity. I combine empirical research methods with backend engineering to build tools and pipelines that extract actionable insight from large-scale software repositories.
     </p>
   </section>
 
-  <section class="section">
+  <section class="section" id="section-publications">
     <div class="section-label">Selected Publications</div>
 
     <div class="pub-card">
@@ -1200,7 +1256,7 @@ code {
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" id="section-projects">
     <div class="section-label">Featured Projects</div>
 
     <div class="projects-grid">
@@ -1256,17 +1312,83 @@ code {
 
 
 <script>
-// Sticky nav + scroll progress bar
+// Sticky nav + scroll progress bar + section dot scroll spy
 const nav = document.querySelector('.nav');
 const progressBar = document.getElementById('progress-bar');
+const dots = document.querySelectorAll('.section-dot[data-section]');
+const sections = document.querySelectorAll('.section[id]');
+
+let isScrollingToTarget = false;
+let scrollTimer = null;
+
+function setActiveDot(sectionId) {
+  dots.forEach(d => d.classList.remove('active'));
+  const active = document.querySelector(`.section-dot[data-section="${sectionId}"]`);
+  if (active) active.classList.add('active');
+}
+
+function getActiveSection() {
+  const threshold = nav.getBoundingClientRect().height + 3 + 20;
+  let active = null;
+
+  sections.forEach(section => {
+    if (section.getBoundingClientRect().top <= threshold) {
+      active = section.id;
+    }
+  });
+
+  // Bottom-of-page: last section wins
+  const atBottom = (window.innerHeight + window.scrollY) >=
+                   document.documentElement.scrollHeight - 5;
+  if (atBottom) active = sections[sections.length - 1].id;
+
+  // Before first section: first dot stays active
+  if (!active && sections.length) active = sections[0].id;
+
+  return active;
+}
 
 window.addEventListener('scroll', () => {
+  // Nav background
   nav.classList.toggle('nav--scrolled', window.scrollY > 50);
 
+  // Progress bar
   const scrollable = document.documentElement.scrollHeight - window.innerHeight;
   const progress = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
   progressBar.style.setProperty('--scroll-progress', progress + '%');
+
+  // Section dot spy (suppressed during click-driven smooth scroll)
+  if (!isScrollingToTarget) {
+    const active = getActiveSection();
+    if (active) setActiveDot(active);
+  }
 }, { passive: true });
+
+// Click to jump — manual scrollTo with nav offset, suppress spy during animation
+dots.forEach(dot => {
+  dot.addEventListener('click', () => {
+    const target = document.getElementById(dot.dataset.section);
+    if (!target) return;
+
+    // Immediately set this dot active
+    setActiveDot(dot.dataset.section);
+
+    // Suppress scroll spy during smooth scroll
+    isScrollingToTarget = true;
+    clearTimeout(scrollTimer);
+
+    const navHeight = nav.getBoundingClientRect().height;
+    const y = target.getBoundingClientRect().top + window.scrollY - navHeight - 3 - 10;
+    window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+
+    // Re-enable spy after scroll settles
+    scrollTimer = setTimeout(() => {
+      isScrollingToTarget = false;
+      const active = getActiveSection();
+      if (active) setActiveDot(active);
+    }, 800);
+  });
+});
 
 // Hamburger menu
 const hamburger = document.getElementById('nav-hamburger');
