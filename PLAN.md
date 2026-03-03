@@ -1003,22 +1003,72 @@ Development is iterative — the site goes live when Phase 1 is useful, then ext
 ### Phase 0: Design Prototype (Complete)
 - [x] `theme-demo.html` — self-contained HTML prototype with 6 themes, floating icon strip, section dots, sticky nav, hamburger menu, card styles, layout chrome
 
-### Phase 1: Foundation
-- [ ] Set up SvelteKit project with adapter-static
+### Phase 1: Scaffold
+
+Scaffold the SvelteKit project, wire up all tooling, and get a working
+deployment pipeline before writing any real content.
+
+**Scaffold command:**
+```bash
+npx sv create . --template minimal --types ts --no-add-ons
+```
+Then manually add:
+```bash
+pnpm add -D @sveltejs/adapter-static wrangler
+pnpm add zod
+```
+
+**After scaffolding, complete in this order:**
+
+- [ ] Configure `svelte.config.js`:
+  - `adapter-static` with `pages: 'build'`, `assets: 'build'`
+  - `prerender.handleHttpError: 'fail'`, `handleMissingId: 'fail'`
+- [ ] Create `wrangler.toml` (Cloudflare Workers static assets):
+  ```toml
+  name = "personal-website"
+  compatibility_date = "<today>"
+  [assets]
+  directory = "./build"
+  ```
+- [ ] Set `export const prerender = true` and `trailingSlash = 'always'`
+  in `src/routes/+layout.ts`
+- [ ] Wire up ESLint (flat config, `eslint-plugin-svelte`,
+  `typescript-eslint`) and Prettier (`prettier-plugin-svelte`)
+- [ ] Wire up Lefthook pre-commit hooks:
+  - Install: `brew install lefthook` (or `pnpm add -D lefthook`)
+  - Run `lefthook install` after creating `lefthook.yml`
+  - Hooks: prettier check, eslint, svelte-check (parallel)
+  - commit-msg hook: commitlint with `@commitlint/config-conventional`
+  - Install commitlint: `pnpm add -D @commitlint/cli
+    @commitlint/config-conventional`
+- [ ] Wire up GitHub Actions CI (`.github/workflows/ci.yml`):
+  - Trigger: push to main + pull_request
+  - Jobs: `pnpm install`, `pnpm check`, `pnpm lint`, `pnpm build`
+  - Use `pnpm/action-setup`, `actions/setup-node` with
+    `node-version: lts/*` and `cache: pnpm`
+- [ ] Confirm `pnpm build` produces a valid `build/` directory
+- [ ] Confirm `wrangler deploy` succeeds to Cloudflare Workers
+
+**Then continue with layout and pages:**
+
+- [ ] Global CSS: `src/app.css` with `@layer base, theme`, theme tokens
+  for all 6 themes, resets, typography scale, layout utilities
+- [ ] Theme flash prevention: inline script in `app.html`
 - [ ] Basic layout:
   - Sticky nav (Research, Projects, CV, Uses; frosted glass on scroll)
   - Floating icon strip (left: GitHub, Scholar, LinkedIn, Email, theme toggle)
   - Section dots (right: one per section, scroll spy, back-to-top chevron)
   - Mobile: hamburger menu + bottom-right icon bar + hidden section dots
   - Footer (name, tagline, social links, nav, copyright)
-- [ ] Custom 404 page
-- [ ] Homepage: hero (name, tagline, affiliation, ORCID), stats row, research focus, selected publications, featured projects (Erenshor + AK)
+- [ ] Custom 404 page (`src/routes/+error.svelte`)
+- [ ] Zod schemas for all content types in `src/lib/data/`
+- [ ] Homepage: hero (name, tagline, affiliation, ORCID), stats row,
+  research focus, selected publications, featured projects (Erenshor + AK)
 - [ ] Research page (publications list + AIST compact card grid)
 - [ ] Projects page (Erenshor, AK, 10-Man Idle — one card per ecosystem)
-- [ ] CV page (traditional layout: education, experience, teaching, supervision, service, awards)
-- [ ] Uses page (icon grid with category filters, optional prose per tool)
-- [ ] Zod schemas for content validation
-- [ ] Deploy to Cloudflare Pages
+- [ ] CV page (education, experience, teaching, supervision, service, awards)
+- [ ] Uses page (icon grid with category filters)
+- [ ] Deploy to Cloudflare Workers
 
 ### Phase 2: Content & Polish
 - [ ] All publications with full schema (type, awards, acceptance rates, co-author links)
