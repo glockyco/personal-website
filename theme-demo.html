@@ -439,7 +439,7 @@ code {
 }
 
 .section[id] {
-  scroll-margin-top: 80px;
+  scroll-margin-top: 60px;
 }
 
 
@@ -1378,7 +1378,7 @@ dots.forEach(dot => {
     clearTimeout(scrollTimer);
 
     const navHeight = nav.getBoundingClientRect().height;
-    const y = target.getBoundingClientRect().top + window.scrollY - navHeight - 3 - 10;
+    const y = target.getBoundingClientRect().top + window.scrollY - navHeight - 3;
     window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
 
     // Re-enable spy after scroll settles
