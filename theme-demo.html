@@ -414,10 +414,17 @@ code {
    PAGE LAYOUT
    ============================================================ */
 
+/* Layout: [16px] [strip 48px] [16px] [content] [16px] [dots 24px] [16px]
+   .layout-shell reserves the gutter space via padding.
+   .page centres within the remaining space via max-width + margin: auto. */
+.layout-shell {
+  padding-left: 80px;   /* 16 + strip(48) + 16 */
+  padding-right: 56px;  /* 16 + dots(24)  + 16 */
+}
+
 .page {
   max-width: 900px;
   margin: 0 auto;
-  padding: 0 24px 0 60px; /* left padding to avoid icon strip overlap */
 }
 
 .section {
@@ -879,7 +886,7 @@ code {
 
 .section-dots {
   position: fixed;
-  right: 20px;
+  right: 16px;
   top: 50%;
   transform: translateY(-50%);
   z-index: 200;
@@ -1059,8 +1066,12 @@ code {
     bottom: 72px;
     transform: none;
   }
+  .layout-shell {
+    padding-left: 0;
+    padding-right: 0;
+  }
   .page {
-    padding-left: 24px;
+    margin: 0 16px;
   }
   .hero-intro {
     flex-direction: column;
@@ -1176,6 +1187,7 @@ code {
 </div>
 
 <!-- ========== PAGE CONTENT ========== -->
+<div class="layout-shell">
 <div class="page">
 
   <nav class="nav">
@@ -1330,6 +1342,7 @@ code {
     <p class="footer-copy">Johann Glock &middot; 2025</p>
   </footer>
 
+</div>
 </div>
 
 
