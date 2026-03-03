@@ -65,7 +65,8 @@ export const AistProjectSchema = z.object({
   description: z.string(),
   url: z.string().url(),
   years: z.string().optional(),
-  area: z.enum(['data-engineering', 'security', 'augmented-reality']).optional()
+  area: z.enum(['data-engineering', 'security', 'augmented-reality']).optional(),
+  funding: z.string().optional()
 });
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -202,38 +203,47 @@ const rawPublications = [
 const rawAistProjects = [
   {
     title: 'KIMIKU',
-    description: 'Data engineering research project in collaboration with industry partners.',
+    description:
+      'AI-supported customer loyalty optimization, personalizing vouchers and offers using anonymized cross-company user data.',
     url: 'https://aist.fh-hagenberg.at/index.php/en/projects/project-kimiku',
-    years: '2018–2021',
-    area: 'data-engineering' as const
+    years: '2019–2021',
+    area: 'data-engineering' as const,
+    funding: 'FFG General Programme'
   },
   {
     title: 'Cooperation Weigl',
-    description: 'Applied data engineering research project.',
+    description:
+      'Emotion and stress prediction from sensor data on a wellness couch using ML time-series forecasting.',
     url: 'https://aist.fh-hagenberg.at/index.php/en/projects/projectcooperation-weigl',
-    years: '2018–2021',
-    area: 'data-engineering' as const
+    years: '2020',
+    area: 'data-engineering' as const,
+    funding: 'FFG Innovation Voucher'
   },
   {
     title: 'SOC-Toolkit',
-    description: 'Security intelligence tooling for security operations center workflows.',
+    description:
+      'Automated enrichment and correlation of security data from multiple sources to reduce incident response times for security analysts.',
     url: 'https://aist.fh-hagenberg.at/index.php/en/projects/soc-toolkit',
-    years: '2018–2021',
-    area: 'security' as const
+    years: '2020–2022',
+    area: 'security' as const,
+    funding: 'FFG General Programme'
   },
   {
-    title: 'Rudy Games',
-    description: 'Augmented reality application development in collaboration with Rudy Games.',
+    title: 'i2f',
+    description:
+      'Mixed reality boardgame extending classical boardgames with AR, communication sensors, and software for up to 4 players.',
     url: 'https://aist.fh-hagenberg.at/index.php/en/projects/project-rudy-games',
-    years: '2018–2021',
-    area: 'augmented-reality' as const
+    years: '2017–2020',
+    area: 'augmented-reality' as const,
+    funding: 'FFG General Programme'
   },
   {
-    title: 'Formel Racing',
-    description: 'Augmented reality experience for Formula Racing events.',
+    title: 'D4K',
+    description:
+      'AR driving safety training for civil service personnel using AR glasses and sensors to capture reaction times and vital signs.',
     url: 'https://aist.fh-hagenberg.at/index.php/en/projects/project-formelracing',
-    years: '2018–2021',
-    area: 'augmented-reality' as const
+    area: 'augmented-reality' as const,
+    funding: 'FFG Innovation Voucher'
   }
 ];
 
