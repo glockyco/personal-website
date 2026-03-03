@@ -918,12 +918,14 @@ code {
 
 .nav-mobile-menu {
   display: none;
-  position: sticky;
-  top: 75px; /* below nav */
-  z-index: 49;
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 48;
   background: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
-  padding: 8px 0 16px;
+  padding: 8px 24px 16px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
   transition: background 0.2s ease, border-color 0.2s ease;
 }
 
@@ -1074,6 +1076,17 @@ code {
 </div>
 
 
+<!-- ========== MOBILE NAV MENU (outside .page, full-width, fixed) ========== -->
+<div class="nav-mobile-menu" id="nav-mobile-menu">
+  <ul>
+    <li><a href="#" class="active">Research</a></li>
+    <li><a href="#">Teaching</a></li>
+    <li><a href="#">Projects</a></li>
+    <li><a href="#">CV</a></li>
+    <li><a href="#">Uses</a></li>
+  </ul>
+</div>
+
 <!-- ========== PAGE CONTENT ========== -->
 <div class="page">
 
@@ -1090,17 +1103,6 @@ code {
       <span></span><span></span><span></span>
     </button>
   </nav>
-
-  <!-- Mobile nav dropdown -->
-  <div class="nav-mobile-menu" id="nav-mobile-menu">
-    <ul>
-      <li><a href="#" class="active">Research</a></li>
-      <li><a href="#">Teaching</a></li>
-      <li><a href="#">Projects</a></li>
-      <li><a href="#">CV</a></li>
-      <li><a href="#">Uses</a></li>
-    </ul>
-  </div>
 
   <section class="hero">
     <div class="hero-intro">
@@ -1254,11 +1256,21 @@ window.addEventListener('scroll', () => {
 const hamburger = document.getElementById('nav-hamburger');
 const mobileMenu = document.getElementById('nav-mobile-menu');
 
+function positionMobileMenu() {
+  const navRect = nav.getBoundingClientRect();
+  mobileMenu.style.top = navRect.bottom + 'px';
+}
+
 hamburger.addEventListener('click', (e) => {
   e.stopPropagation();
   const isOpen = mobileMenu.classList.toggle('open');
   hamburger.setAttribute('aria-expanded', isOpen);
+  if (isOpen) positionMobileMenu();
 });
+
+window.addEventListener('scroll', () => {
+  if (mobileMenu.classList.contains('open')) positionMobileMenu();
+}, { passive: true });
 
 document.addEventListener('click', (e) => {
   if (!mobileMenu.contains(e.target) && e.target !== hamburger) {
