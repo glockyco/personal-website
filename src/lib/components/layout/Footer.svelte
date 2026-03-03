@@ -1,5 +1,6 @@
 <script lang="ts">
   import { profile } from '$lib/data/links';
+  import CopyEmail from './CopyEmail.svelte';
 
   const currentYear = new Date().getFullYear();
 
@@ -7,18 +8,16 @@
     { href: profile.github, label: 'GitHub' },
     { href: profile.scholar, label: 'Scholar' },
     { href: `https://orcid.org/${profile.orcid}`, label: 'ORCID' },
-    { href: profile.linkedin, label: 'LinkedIn' },
-    { href: `mailto:${profile.email}`, label: 'Email' }
+    { href: profile.linkedin, label: 'LinkedIn' }
   ];
 </script>
 
 <footer class="footer">
   <ul class="social">
     {#each links as { href, label } (label)}
-      <li>
-        <a {href}>{label}</a>
-      </li>
+      <li><a {href}>{label}</a></li>
     {/each}
+    <li><CopyEmail variant="text" /></li>
   </ul>
   <p class="copy">{profile.name} &middot; {currentYear}</p>
 </footer>

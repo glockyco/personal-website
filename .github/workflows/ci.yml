@@ -24,7 +24,11 @@ jobs:
       - run: pnpm install --frozen-lockfile
 
       - run: pnpm check
+        env:
+          PUBLIC_CONTACT_EMAIL_B64: ${{ secrets.CONTACT_EMAIL_B64 }}
 
       - run: pnpm lint
 
       - run: pnpm build
+        env:
+          PUBLIC_CONTACT_EMAIL_B64: ${{ secrets.CONTACT_EMAIL_B64 }}

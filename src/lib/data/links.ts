@@ -2,7 +2,6 @@ export const profile = {
   name: 'Johann Glock',
   // TODO: write a specific, differentiated tagline
   tagline: 'PhD Candidate in Empirical Software Engineering',
-  email: 'REDACTED',
   location: 'Hagenberg, Austria',
   affiliation: 'University of Klagenfurt',
   affiliationUrl: 'https://www.aau.at/en/isys/serg/team/glock-johann/',
