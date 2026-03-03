@@ -178,17 +178,24 @@ body {
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-/* Top accent bar */
-body::before {
-  content: '';
-  display: block;
+/* Scroll progress bar */
+#progress-bar {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   height: 3px;
-  background: var(--color-top-bar);
   z-index: 100;
+  background: var(--color-border);
+  transition: background 0.2s ease;
+}
+
+#progress-bar::after {
+  content: '';
+  display: block;
+  height: 100%;
+  width: var(--scroll-progress, 0%);
+  background: var(--color-top-bar);
   transition: background 0.2s ease;
 }
 
@@ -1019,6 +1026,9 @@ code {
 </head>
 <body>
 
+<!-- ========== SCROLL PROGRESS BAR ========== -->
+<div id="progress-bar"></div>
+
 <!-- ========== FLOATING ICON STRIP ========== -->
 <div class="icon-strip">
   <!-- GitHub -->
@@ -1246,10 +1256,16 @@ code {
 
 
 <script>
-// Sticky nav shrink-on-scroll
+// Sticky nav + scroll progress bar
 const nav = document.querySelector('.nav');
+const progressBar = document.getElementById('progress-bar');
+
 window.addEventListener('scroll', () => {
   nav.classList.toggle('nav--scrolled', window.scrollY > 50);
+
+  const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
+  progressBar.style.setProperty('--scroll-progress', progress + '%');
 }, { passive: true });
 
 // Hamburger menu
