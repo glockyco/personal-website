@@ -202,30 +202,21 @@ const rawPublications = [
 
 const rawAistProjects = [
   {
-    title: 'KIMIKU',
-    description:
-      'AI-supported customer loyalty optimization, personalizing vouchers and offers using anonymized cross-company user data.',
-    url: 'https://aist.fh-hagenberg.at/index.php/en/projects/project-kimiku',
-    years: '2019–2021',
-    area: 'data-engineering' as const,
-    funding: 'FFG General Programme'
-  },
-  {
-    title: 'Cooperation Weigl',
-    description:
-      'Emotion and stress prediction from sensor data on a wellness couch using ML time-series forecasting.',
-    url: 'https://aist.fh-hagenberg.at/index.php/en/projects/projectcooperation-weigl',
-    years: '2020',
-    area: 'data-engineering' as const,
-    funding: 'FFG Innovation Voucher'
-  },
-  {
     title: 'SOC-Toolkit',
     description:
       'Automated enrichment and correlation of security data from multiple sources to reduce incident response times for security analysts.',
     url: 'https://aist.fh-hagenberg.at/index.php/en/projects/soc-toolkit',
     years: '2020–2022',
     area: 'security' as const,
+    funding: 'FFG General Programme'
+  },
+  {
+    title: 'KIMIKU',
+    description:
+      'AI-supported customer loyalty optimization, personalizing vouchers and offers using anonymized cross-company user data.',
+    url: 'https://aist.fh-hagenberg.at/index.php/en/projects/project-kimiku',
+    years: '2019–2021',
+    area: 'data-engineering' as const,
     funding: 'FFG General Programme'
   },
   {
@@ -236,6 +227,15 @@ const rawAistProjects = [
     years: '2017–2020',
     area: 'augmented-reality' as const,
     funding: 'FFG General Programme'
+  },
+  {
+    title: 'Cooperation Weigl',
+    description:
+      'Emotion and stress prediction from sensor data on a wellness couch using ML time-series forecasting.',
+    url: 'https://aist.fh-hagenberg.at/index.php/en/projects/projectcooperation-weigl',
+    years: '2020',
+    area: 'data-engineering' as const,
+    funding: 'FFG Innovation Voucher'
   },
   {
     title: 'D4K',
