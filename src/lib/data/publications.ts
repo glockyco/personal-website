@@ -75,7 +75,7 @@ export type AistProject = z.infer<typeof AistProjectSchema>;
 
 const rawPublications = [
   {
-    slug: 'pasda-jss-2024',
+    slug: 'pasda',
     title:
       'PASDA: A Partition-based Semantic Differencing Approach with Best Effort Classification of Undecided Cases',
     authors: [
@@ -97,7 +97,7 @@ const rawPublications = [
     tags: ['semantic differencing', 'symbolic execution', 'program analysis', 'regression testing']
   },
   {
-    slug: 'teralizer-tosem',
+    slug: 'teralizer',
     title:
       'Teralizer: Semantics-Based Test Generalization from Conventional Unit Tests to Property-Based Tests',
     authors: [
@@ -118,7 +118,7 @@ const rawPublications = [
     tags: ['property-based testing', 'test generalization', 'symbolic execution', 'jqwik']
   },
   {
-    slug: 'microservice-api-jss-2024',
+    slug: 'api-evolution',
     title: 'Microservice API Evolution in Practice: A Study on Strategies and Challenges',
     authors: [
       { name: 'Alexander Lercher', url: 'https://alexx882.github.io/' },
