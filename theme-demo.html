@@ -178,7 +178,7 @@ body {
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-/* Scroll progress bar */
+/* Top accent bar */
 #progress-bar {
   position: fixed;
   top: 0;
@@ -186,15 +186,6 @@ body {
   right: 0;
   height: 3px;
   z-index: 100;
-  background: var(--color-border);
-  transition: background 0.2s ease;
-}
-
-#progress-bar::after {
-  content: '';
-  display: block;
-  height: 100%;
-  width: var(--scroll-progress, 0%);
   background: var(--color-top-bar);
   transition: background 0.2s ease;
 }
@@ -1314,7 +1305,6 @@ code {
 <script>
 // Sticky nav + scroll progress bar + section dot scroll spy
 const nav = document.querySelector('.nav');
-const progressBar = document.getElementById('progress-bar');
 const dots = document.querySelectorAll('.section-dot[data-section]');
 const sections = document.querySelectorAll('.section[id]');
 
@@ -1351,11 +1341,6 @@ function getActiveSection() {
 window.addEventListener('scroll', () => {
   // Nav background
   nav.classList.toggle('nav--scrolled', window.scrollY > 50);
-
-  // Progress bar
-  const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-  const progress = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
-  progressBar.style.setProperty('--scroll-progress', progress + '%');
 
   // Section dot spy (suppressed during click-driven smooth scroll)
   if (!isScrollingToTarget) {
