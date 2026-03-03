@@ -14,26 +14,28 @@
 
 ### Research Statement
 
-*(To be written — this is the highest priority content task)*
+_(To be written — this is the highest priority content task)_
 
 My research focuses on [empirical software engineering / mining software repositories], exploring how [data mining and data engineering approaches] can [improve software quality and developer productivity]. I build tools and pipelines to extract insight from large-scale software data, combining backend engineering with empirical research methods.
 
 ### Role Targeting
 
 Open to:
+
 - Postdoctoral research positions
 - Research Scientist / Applied Scientist positions
 - Senior Software Engineer roles (data mining, data engineering, backend development, developer tools)
 
 ### TL;DR Professional Summary
 
-*(To be written — must be specific and differentiating, not generic SE PhD boilerplate)*
+_(To be written — must be specific and differentiating, not generic SE PhD boilerplate)_
 
 PhD researcher with X years of software engineering experience. Published in top SE venues (JSS, ICSE). Ships production software used by real communities. Combines academic rigor with practical engineering.
 
 ### What to Showcase
 
 **Academic:**
+
 - 4 peer-reviewed publications (2 first-author JSS, 1 second-author JSS, 1 ICSE DS oral)
   - Note: MSc thesis exists on Zenodo/Scholar but is NOT counted as a peer-reviewed publication
 - Presentations and talks (slides integrated with paper detail pages)
@@ -44,6 +46,7 @@ PhD researcher with X years of software engineering experience. Published in top
 - AIST applied research projects (FFG grants) — compact card grid on /research, linking to AIST website
 
 **Technical/Hobby (on /projects):**
+
 - Erenshor ecosystem: interactive maps (SvelteKit + deck.gl), spreadsheet tool, wiki bot, mods (C# / MelonLoader)
 - Ancient Kingdoms ecosystem: compendium website, modding
 - 10-Man Idle: wiki-like website
@@ -51,6 +54,7 @@ PhD researcher with X years of software engineering experience. Published in top
 - Framing: curiosity, digging deep, helping the community, presenting results clearly for non-technical audiences
 
 **Professional Background (on /cv):**
+
 - 6 years web development at MICROLAB (PHP, jQuery)
 - 3.5 years applied research at AIST (data engineering, security intelligence, AR)
 - 7 semesters main instructor (Teaching Assistant roles in background only — grading/feedback, no direct student contact; on CV but not featured)
@@ -82,31 +86,35 @@ PhD researcher with X years of software engineering experience. Published in top
 Contact is not a separate page — social links and email appear in the footer and floating icon strip.
 
 **Optional future routes:**
+
 - `/now` - Current focus / what I'm working on
 
 **Planned routes (promoted from optional):**
+
 - `/uses` - Tools and daily workflow
 
 ### Core Sections
 
-| Section | Purpose | Content |
-|---------|---------|---------|
-| **Home** | First impression | Hero (name, tagline, affiliation, ORCID), stats row, research focus, selected publications, featured projects (Erenshor + AK only) |
-| **Research** | Academic credibility | 4 peer-reviewed papers with full metadata; AIST projects compact card grid (links out) |
-| **Teaching** | — | Not a separate page. Folded into /cv. |
-| **Projects** | Technical/hobby skills | Erenshor, Ancient Kingdoms, 10-Man Idle — one card per ecosystem, detail pages |
-| **CV** | Formal credentials | Traditional view (Phase 1); interactive timeline (Phase 3); teaching, supervision, service, awards, PDF download |
-| **Uses** | Daily workflow | Icon grid with category filters and optional prose; tools across editor, AI, terminal, DB, etc. |
-| **Contact** | Reachability | Email, GitHub, LinkedIn, Scholar, ORCID, Semantic Scholar, Institution — in footer and floating icon strip only |
+| Section      | Purpose                | Content                                                                                                                            |
+| ------------ | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| **Home**     | First impression       | Hero (name, tagline, affiliation, ORCID), stats row, research focus, selected publications, featured projects (Erenshor + AK only) |
+| **Research** | Academic credibility   | 4 peer-reviewed papers with full metadata; AIST projects compact card grid (links out)                                             |
+| **Teaching** | —                      | Not a separate page. Folded into /cv.                                                                                              |
+| **Projects** | Technical/hobby skills | Erenshor, Ancient Kingdoms, 10-Man Idle — one card per ecosystem, detail pages                                                     |
+| **CV**       | Formal credentials     | Traditional view (Phase 1); interactive timeline (Phase 3); teaching, supervision, service, awards, PDF download                   |
+| **Uses**     | Daily workflow         | Icon grid with category filters and optional prose; tools across editor, AI, terminal, DB, etc.                                    |
+| **Contact**  | Reachability           | Email, GitHub, LinkedIn, Scholar, ORCID, Semantic Scholar, Institution — in footer and floating icon strip only                    |
 
 ### Navigation
 
 **Desktop:**
+
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │  [Name]   Research  Projects  CV  Uses                          │
 └─────────────────────────────────────────────────────────────────┘
 ```
+
 - Nav items: Research, Projects, CV, Uses (Teaching folded into CV, not a nav item)
 - No "Contact" nav item — contact links live in footer and floating icon strip
 - Floating icon strip (left side, vertically centred): GitHub, Scholar, LinkedIn, Email, divider, theme toggle
@@ -117,17 +125,20 @@ Contact is not a separate page — social links and email appear in the footer a
 - Links open in same tab (browser default behavior)
 
 **Mobile (≤768px):**
+
 - Hamburger menu (animated → X) opens a dropdown with nav links
 - Floating icon strip moves to bottom-right horizontal bar
 - Section dots hidden on mobile
 
 **Footer:**
+
 - Name and tagline
 - Social links (GitHub, LinkedIn, Scholar, ORCID, Email)
 - Site navigation links
 - Copyright and last updated date
 
 **Breadcrumbs (on detail pages):**
+
 ```
 Home > Research > Paper Title
 Home > Projects > Project Name
@@ -135,32 +146,33 @@ Home > Projects > Project Name
 
 ### Design Decisions
 
-| Decision | Rationale |
-|----------|-----------|
-| **No filters (deferred)** | Too few items now (4 papers, 3 projects); schemas include filterable fields so UI can be added later without data migration |
-| **No carousels** | Poor UX, accessibility issues; use grids instead |
-| **Talks/Slides** | Part of Research detail pages, not a separate page |
-| **Teaching** | Part of CV page, not a separate page |
-| **No contact page** | Six links don't justify a route; email + social icons in footer and floating icon strip |
-| **No audience toggle** | Clean navigation lets users self-select |
-| **Same-tab links** | Respect browser defaults (Ctrl+Click for new tab) |
-| **Theme toggle in floating strip** | Always accessible without cluttering the nav |
-| **Traditional CV as alternative** | Recruiters/committees need scannable format |
-| **Manual data entry** | Better than fragile API scrapers |
-| **Static metrics ("X+")** | Avoids API failures, clearly not real-time |
-| **Research leads homepage** | Primary audience is academia; research statement and publications come before projects |
-| **PASDA/Teralizer under /research only** | They are research outputs tied to papers, not standalone hobby projects; explained on paper detail pages |
-| **AIST projects as compact card grid on /research** | External projects, link to AIST website; no detail pages needed |
-| **Featured projects = Erenshor + AK only** | 10-Man Idle on /projects but not homepage; two cards is cleaner |
-| **MSc thesis not counted as publication** | Not peer-reviewed in same sense; listed on Scholar/Zenodo but excluded from publication count |
-| **Default theme: indigo-light** | More inviting as default; dark/other themes available via theme picker |
-| **Stats row on homepage** | Safe stats: 4 publications, 7 semesters teaching, research tools, supervised students — values TBD |
+| Decision                                            | Rationale                                                                                                                   |
+| --------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| **No filters (deferred)**                           | Too few items now (4 papers, 3 projects); schemas include filterable fields so UI can be added later without data migration |
+| **No carousels**                                    | Poor UX, accessibility issues; use grids instead                                                                            |
+| **Talks/Slides**                                    | Part of Research detail pages, not a separate page                                                                          |
+| **Teaching**                                        | Part of CV page, not a separate page                                                                                        |
+| **No contact page**                                 | Six links don't justify a route; email + social icons in footer and floating icon strip                                     |
+| **No audience toggle**                              | Clean navigation lets users self-select                                                                                     |
+| **Same-tab links**                                  | Respect browser defaults (Ctrl+Click for new tab)                                                                           |
+| **Theme toggle in floating strip**                  | Always accessible without cluttering the nav                                                                                |
+| **Traditional CV as alternative**                   | Recruiters/committees need scannable format                                                                                 |
+| **Manual data entry**                               | Better than fragile API scrapers                                                                                            |
+| **Static metrics ("X+")**                           | Avoids API failures, clearly not real-time                                                                                  |
+| **Research leads homepage**                         | Primary audience is academia; research statement and publications come before projects                                      |
+| **PASDA/Teralizer under /research only**            | They are research outputs tied to papers, not standalone hobby projects; explained on paper detail pages                    |
+| **AIST projects as compact card grid on /research** | External projects, link to AIST website; no detail pages needed                                                             |
+| **Featured projects = Erenshor + AK only**          | 10-Man Idle on /projects but not homepage; two cards is cleaner                                                             |
+| **MSc thesis not counted as publication**           | Not peer-reviewed in same sense; listed on Scholar/Zenodo but excluded from publication count                               |
+| **Default theme: indigo-light**                     | More inviting as default; dark/other themes available via theme picker                                                      |
+| **Stats row on homepage**                           | Safe stats: 4 publications, 7 semesters teaching, research tools, supervised students — values TBD                          |
 
 ---
 
 ## User Journeys
 
 ### Academic Visitor
+
 Professor, postdoc, hiring committee member evaluating research credentials.
 
 ```
@@ -169,6 +181,7 @@ Home → Research → Paper Detail → [Read PDF / Copy Citation]
 ```
 
 ### Industry Recruiter
+
 Technical recruiter, hiring manager assessing technical skills.
 
 ```
@@ -178,6 +191,7 @@ Home → Projects → Project Detail → [View Live Demo]
 ```
 
 ### Developer / Community Member
+
 Erenshor player, modder, open source contributor.
 
 ```
@@ -186,6 +200,7 @@ Home → Projects → Erenshor Maps → [Embedded Demo]
 ```
 
 ### Direct Link Visitor
+
 Someone who received a link to a specific paper/project.
 
 ```
@@ -208,6 +223,7 @@ SvelteKit + Tailwind CSS + TypeScript
 ```
 
 **Rationale:**
+
 - Already proficient in SvelteKit (from Erenshor maps)
 - Tailwind + shadcn-svelte (already using)
 - Static output = fast, cheap, secure
@@ -215,16 +231,17 @@ SvelteKit + Tailwind CSS + TypeScript
 
 ### Alternatives Considered
 
-| Option | Pros | Cons |
-|--------|------|------|
-| **Astro** | Content-focused, island architecture | Learning curve, less familiar |
-| **Hugo** | Blazing fast builds, academic themes | Go templating, less flexible |
-| **Quarto** | Popular in academia, Jupyter integration | Less control, academic-only feel |
-| **Next.js** | Industry standard | Overkill, React ecosystem |
+| Option      | Pros                                     | Cons                             |
+| ----------- | ---------------------------------------- | -------------------------------- |
+| **Astro**   | Content-focused, island architecture     | Learning curve, less familiar    |
+| **Hugo**    | Blazing fast builds, academic themes     | Go templating, less flexible     |
+| **Quarto**  | Popular in academia, Jupyter integration | Less control, academic-only feel |
+| **Next.js** | Industry standard                        | Overkill, React ecosystem        |
 
 ### Hosting
 
 **Cloudflare Pages (Recommended)**
+
 - Already using for Erenshor maps
 - Free tier is generous
 - Global CDN
@@ -319,8 +336,8 @@ Schemas include filterable fields (tags, year, type, venue) even though no filte
 // src/lib/data/publications.ts
 export type Author = {
   name: string;
-  url?: string;        // Link to their website/profile
-  isMe?: boolean;      // Highlight own name
+  url?: string; // Link to their website/profile
+  isMe?: boolean; // Highlight own name
 };
 
 export type Publication = {
@@ -330,7 +347,7 @@ export type Publication = {
   venue: string;
   year: number;
   abstract: string;
-  tldr: string;        // 2-3 sentence summary
+  tldr: string; // 2-3 sentence summary
 
   // Classification
   type: 'journal' | 'conference' | 'workshop' | 'doctoral-symposium' | 'thesis' | 'preprint';
@@ -338,18 +355,18 @@ export type Publication = {
   authorPosition: 'first' | 'co-first' | 'contributing' | 'senior';
 
   // Academic metadata
-  award?: string;           // "Best Paper", "Honorable Mention"
-  acceptanceRate?: string;  // "26%"
-  citationCount?: number;   // Manual update
+  award?: string; // "Best Paper", "Honorable Mention"
+  acceptanceRate?: string; // "26%"
+  citationCount?: number; // Manual update
 
   // Links
   pdf?: string;
   doi?: string;
   arxiv?: string;
-  scholarUrl?: string;      // Google Scholar link for this paper
+  scholarUrl?: string; // Google Scholar link for this paper
   dataset?: string;
 
-  tags: string[];           // filterable when UI supports it
+  tags: string[]; // filterable when UI supports it
   links?: {
     demo?: string;
     code?: string;
@@ -378,8 +395,8 @@ export type Project = {
   slug: string;
   title: string;
   tagline: string;
-  description: string;      // The challenge
-  solution: string;         // The solution
+  description: string; // The challenge
+  solution: string; // The solution
   status: 'active' | 'maintained' | 'archived';
 
   // Media
@@ -395,7 +412,7 @@ export type Project = {
   techStack: string[];
 
   // "How I Built This" content
-  architecture?: string;    // Markdown description
+  architecture?: string; // Markdown description
   technicalDecisions?: {
     decision: string;
     rationale: string;
@@ -406,10 +423,10 @@ export type Project = {
 
   // Complexity indicators
   metrics?: {
-    linesOfCode?: string;   // "~15,000"
+    linesOfCode?: string; // "~15,000"
     components?: number;
-    dataScale?: string;     // "500k+ entities"
-    users?: string;         // "X monthly active users"
+    dataScale?: string; // "500k+ entities"
+    users?: string; // "X monthly active users"
   };
 
   // Performance evidence
@@ -435,7 +452,7 @@ export type Education = {
   institution: string;
   location: string;
   startYear: number;
-  endYear?: number;         // undefined = present
+  endYear?: number; // undefined = present
   thesis?: string;
   advisor?: string;
   description?: string;
@@ -455,7 +472,7 @@ export type TeachingExperience = {
   course: string;
   role: 'instructor' | 'ta' | 'guest-lecturer';
   institution: string;
-  semesters: string[];      // ["Fall 2022", "Spring 2023"]
+  semesters: string[]; // ["Fall 2022", "Spring 2023"]
   enrollment?: number;
   evaluationScore?: string; // "4.5/5.0"
   description?: string;
@@ -465,27 +482,27 @@ export type Supervision = {
   name: string;
   type: 'bsc-thesis' | 'msc-thesis' | 'msc-project' | 'bsc-intern' | 'highschool-intern';
   status: 'completed' | 'ongoing';
-  year?: number;            // completion year (if completed)
+  year?: number; // completion year (if completed)
   topic?: string;
-  note?: string;            // e.g. "AIST summer internship", "FFG Schüler:innenpraktikum"
+  note?: string; // e.g. "AIST summer internship", "FFG Schüler:innenpraktikum"
 };
 
 export type AcademicService = {
   type: 'reviewer' | 'subreviewer' | 'committee' | 'organizer';
   venue: string;
   year: number;
-  note?: string;            // "As subreviewer for supervisor"
+  note?: string; // "As subreviewer for supervisor"
 };
 
 export type Award = {
   title: string;
   organization: string;
-  years: string;            // "2019-2022"
+  years: string; // "2019-2022"
   description?: string;
 };
 
 export type Skill = {
-  category: string;         // "Languages", "Frameworks", "Tools"
+  category: string; // "Languages", "Frameworks", "Tools"
   items: string[];
 };
 ```
@@ -508,25 +525,40 @@ export type ToolCategory =
 export type Tool = {
   name: string;
   category: ToolCategory;
-  icon: string;        // path to SVG/PNG icon, or simple-icons slug
+  icon: string; // path to SVG/PNG icon, or simple-icons slug
   url?: string;
-  usage?: string;      // optional one-liner: how/why I use this — like a paper TL;DR
-                       // shown below the icon or on hover; not every tool needs one
+  usage?: string; // optional one-liner: how/why I use this — like a paper TL;DR
+  // shown below the icon or on hover; not every tool needs one
 };
 
 export const tools: Tool[] = [
-  { name: 'VS Code',       category: 'editor',          icon: 'vscode',      url: 'https://code.visualstudio.com' },
-  { name: 'Zed',           category: 'editor',          icon: 'zed',         url: 'https://zed.dev' },
-  { name: 'JetBrains IDEs',category: 'editor',          icon: 'jetbrains',   url: 'https://www.jetbrains.com' },
-  { name: 'Claude',        category: 'ai',              icon: 'anthropic',   url: 'https://claude.ai' },
-  { name: 'Opencode',      category: 'ai',              icon: 'opencode',    url: 'https://opencode.ai' },
-  { name: 'iTerm2',        category: 'terminal',        icon: 'iterm2',      url: 'https://iterm2.com' },
-  { name: 'Fork',          category: 'version-control', icon: 'fork',        url: 'https://git-fork.com' },
-  { name: 'PostgreSQL',    category: 'database',        icon: 'postgresql',  url: 'https://www.postgresql.org' },
-  { name: 'RemNote',       category: 'notes',           icon: 'remnote',     url: 'https://www.remnote.com' },
-  { name: 'Discord',       category: 'communication',   icon: 'discord',     url: 'https://discord.com' },
-  { name: 'wiki.gg',       category: 'wiki',            icon: 'wikigg',      url: 'https://wiki.gg' },
-  { name: 'CrossOver',     category: 'platform',        icon: 'crossover',   url: 'https://www.codeweavers.com/crossover' },
+  { name: 'VS Code', category: 'editor', icon: 'vscode', url: 'https://code.visualstudio.com' },
+  { name: 'Zed', category: 'editor', icon: 'zed', url: 'https://zed.dev' },
+  {
+    name: 'JetBrains IDEs',
+    category: 'editor',
+    icon: 'jetbrains',
+    url: 'https://www.jetbrains.com'
+  },
+  { name: 'Claude', category: 'ai', icon: 'anthropic', url: 'https://claude.ai' },
+  { name: 'Opencode', category: 'ai', icon: 'opencode', url: 'https://opencode.ai' },
+  { name: 'iTerm2', category: 'terminal', icon: 'iterm2', url: 'https://iterm2.com' },
+  { name: 'Fork', category: 'version-control', icon: 'fork', url: 'https://git-fork.com' },
+  {
+    name: 'PostgreSQL',
+    category: 'database',
+    icon: 'postgresql',
+    url: 'https://www.postgresql.org'
+  },
+  { name: 'RemNote', category: 'notes', icon: 'remnote', url: 'https://www.remnote.com' },
+  { name: 'Discord', category: 'communication', icon: 'discord', url: 'https://discord.com' },
+  { name: 'wiki.gg', category: 'wiki', icon: 'wikigg', url: 'https://wiki.gg' },
+  {
+    name: 'CrossOver',
+    category: 'platform',
+    icon: 'crossover',
+    url: 'https://www.codeweavers.com/crossover'
+  }
 ];
 ```
 
@@ -540,7 +572,7 @@ export const academicLinks = {
   googleScholar: 'https://scholar.google.com/citations?user=33UUDmcAAAAJ',
   institution: 'https://www.aau.at/en/isys/serg/team/glock-johann/',
   github: 'https://github.com/glockyco',
-  linkedin: '...',
+  linkedin: '...'
 };
 ```
 
@@ -559,6 +591,7 @@ export const academicLinks = {
 ### Page Layouts
 
 **Homepage:**
+
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │ [NAV: Johann Glock · Research · Projects · CV · Uses]           │
@@ -599,6 +632,7 @@ export const academicLinks = {
 ```
 
 **Research page:**
+
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │ [NAV]                                                           │
@@ -632,6 +666,7 @@ export const academicLinks = {
 ```
 
 **Paper detail page:**
+
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │ [NAV]                                                           │
@@ -683,6 +718,7 @@ export const academicLinks = {
 ```
 
 **Projects page:**
+
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │ [NAV]                                                           │
@@ -708,6 +744,7 @@ export const academicLinks = {
 ```
 
 **Project detail page:**
+
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │ [NAV]                                                           │
@@ -756,6 +793,7 @@ export const academicLinks = {
 ```
 
 **CV page:**
+
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │ [NAV]                                                           │
@@ -813,9 +851,10 @@ export const academicLinks = {
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-*(No dedicated contact page — email and social links appear in footer and nav header icons only.)*
+_(No dedicated contact page — email and social links appear in footer and nav header icons only.)_
 
 **Uses page:**
+
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │ [NAV]                                                           │
@@ -842,19 +881,19 @@ export const academicLinks = {
 
 ### Uses — Tool Inventory
 
-| Category | Tools |
-|----------|-------|
-| **Editors / IDEs** | VS Code, Zed, JetBrains IDEs (IntelliJ, PyCharm, etc.) |
-| **AI** | Claude, Opencode |
-| **Terminal** | iTerm2 |
-| **Version Control** | Fork (Git UI), git CLI |
-| **Database** | PostgreSQL |
-| **Knowledge / Notes** | RemNote |
-| **Communication** | Discord |
-| **Wiki** | wiki.gg (MediaWiki-based) |
-| **OS / Platform** | CrossOver (running Windows apps on macOS) |
+| Category              | Tools                                                  |
+| --------------------- | ------------------------------------------------------ |
+| **Editors / IDEs**    | VS Code, Zed, JetBrains IDEs (IntelliJ, PyCharm, etc.) |
+| **AI**                | Claude, Opencode                                       |
+| **Terminal**          | iTerm2                                                 |
+| **Version Control**   | Fork (Git UI), git CLI                                 |
+| **Database**          | PostgreSQL                                             |
+| **Knowledge / Notes** | RemNote                                                |
+| **Communication**     | Discord                                                |
+| **Wiki**              | wiki.gg (MediaWiki-based)                              |
+| **OS / Platform**     | CrossOver (running Windows apps on macOS)              |
 
-*Two levels of prose: (1) a short page-level intro about overall setup and workflow philosophy — to be written; (2) optional per-tool one-liners (`usage` field) in the style of paper TL;DRs: "here's how/why I use this." Not every tool needs one.*
+_Two levels of prose: (1) a short page-level intro about overall setup and workflow philosophy — to be written; (2) optional per-tool one-liners (`usage` field) in the style of paper TL;DRs: "here's how/why I use this." Not every tool needs one._
 
 ### Color Scheme
 
@@ -875,6 +914,7 @@ export const academicLinks = {
 ## Erenshor/AK Case Study
 
 This is a **significant portfolio piece** demonstrating:
+
 - Reverse engineering / data mining
 - Database design (SQLite pipeline)
 - Full-stack web development (SvelteKit)
@@ -934,6 +974,7 @@ This is a **significant portfolio piece** demonstrating:
 ### PDF Generation for CV
 
 Options:
+
 1. **Manual** (Recommended initially): Maintain separate PDF, link to it
 2. **Automated**: Use Puppeteer/Playwright to render CV page as PDF
 3. **LaTeX**: Maintain CV in LaTeX, export PDF
@@ -980,14 +1021,14 @@ Options:
 
 ## What to Avoid
 
-| Pitfall | Solution |
-|---------|----------|
-| Stale content | Use dates, status badges, "last updated" |
-| Broken links | Regular audits, archive.org fallbacks |
-| Over-designed | Substance over flashy animations |
-| Hard to contact | Clear email, maybe contact form |
-| No live demos | Host demos on Cloudflare, link prominently |
-| Wall of text | Cards, progressive disclosure, clear hierarchy |
+| Pitfall         | Solution                                       |
+| --------------- | ---------------------------------------------- |
+| Stale content   | Use dates, status badges, "last updated"       |
+| Broken links    | Regular audits, archive.org fallbacks          |
+| Over-designed   | Substance over flashy animations               |
+| Hard to contact | Clear email, maybe contact form                |
+| No live demos   | Host demos on Cloudflare, link prominently     |
+| Wall of text    | Cards, progressive disclosure, clear hierarchy |
 
 ---
 
@@ -996,11 +1037,13 @@ Options:
 Development is iterative — the site goes live when Phase 1 is useful, then extended incrementally. No big-bang launch.
 
 ### Pre-Phase: Content First
+
 - [ ] Write the research statement (specific, differentiated — not generic SE PhD boilerplate)
 - [ ] Write the professional tagline / TL;DR
 - [ ] Ensure PDF CV is excellent before the site goes live
 
 ### Phase 0: Design Prototype (Complete)
+
 - [x] `theme-demo.html` — self-contained HTML prototype with 6 themes, floating icon strip, section dots, sticky nav, hamburger menu, card styles, layout chrome
 
 ### Phase 1: Scaffold
@@ -1009,10 +1052,13 @@ Scaffold the SvelteKit project, wire up all tooling, and get a working
 deployment pipeline before writing any real content.
 
 **Scaffold command:**
+
 ```bash
 npx sv create . --template minimal --types ts --no-add-ons
 ```
+
 Then manually add:
+
 ```bash
 pnpm add -D @sveltejs/adapter-static wrangler
 pnpm add zod
@@ -1031,16 +1077,16 @@ pnpm add zod
   directory = "./build"
   ```
 - [ ] Set `export const prerender = true` and `trailingSlash = 'always'`
-  in `src/routes/+layout.ts`
+      in `src/routes/+layout.ts`
 - [ ] Wire up ESLint (flat config, `eslint-plugin-svelte`,
-  `typescript-eslint`) and Prettier (`prettier-plugin-svelte`)
+      `typescript-eslint`) and Prettier (`prettier-plugin-svelte`)
 - [ ] Wire up Lefthook pre-commit hooks:
   - Install: `brew install lefthook` (or `pnpm add -D lefthook`)
   - Run `lefthook install` after creating `lefthook.yml`
   - Hooks: prettier check, eslint, svelte-check (parallel)
   - commit-msg hook: commitlint with `@commitlint/config-conventional`
   - Install commitlint: `pnpm add -D @commitlint/cli
-    @commitlint/config-conventional`
+@commitlint/config-conventional`
 - [ ] Wire up GitHub Actions CI (`.github/workflows/ci.yml`):
   - Trigger: push to main + pull_request
   - Jobs: `pnpm install`, `pnpm check`, `pnpm lint`, `pnpm build`
@@ -1052,7 +1098,7 @@ pnpm add zod
 **Then continue with layout and pages:**
 
 - [ ] Global CSS: `src/app.css` with `@layer base, theme`, theme tokens
-  for all 6 themes, resets, typography scale, layout utilities
+      for all 6 themes, resets, typography scale, layout utilities
 - [ ] Theme flash prevention: inline script in `app.html`
 - [ ] Basic layout:
   - Sticky nav (Research, Projects, CV, Uses; frosted glass on scroll)
@@ -1063,7 +1109,7 @@ pnpm add zod
 - [ ] Custom 404 page (`src/routes/+error.svelte`)
 - [ ] Zod schemas for all content types in `src/lib/data/`
 - [ ] Homepage: hero (name, tagline, affiliation, ORCID), stats row,
-  research focus, selected publications, featured projects (Erenshor + AK)
+      research focus, selected publications, featured projects (Erenshor + AK)
 - [ ] Research page (publications list + AIST compact card grid)
 - [ ] Projects page (Erenshor, AK, 10-Man Idle — one card per ecosystem)
 - [ ] CV page (education, experience, teaching, supervision, service, awards)
@@ -1071,6 +1117,7 @@ pnpm add zod
 - [ ] Deploy to Cloudflare Workers
 
 ### Phase 2: Content & Polish
+
 - [ ] All publications with full schema (type, awards, acceptance rates, co-author links)
 - [ ] Project case studies with "How I Built This" and "What I'd Do Differently" sections
 - [ ] Teaching section in CV (courses, roles, evaluations)
@@ -1082,6 +1129,7 @@ pnpm add zod
 - [ ] Meta tags / SEO / canonical URLs / JSON-LD structured data (Person, ScholarlyArticle)
 
 ### Phase 3: Interactive Elements
+
 - [ ] PDF viewer (pdf.js, collapsible, lazy-loaded) for papers and slides
 - [ ] Figure grid galleries (not carousel)
 - [ ] One-click citation copy (BibTeX, APA, MLA, Chicago)
@@ -1089,6 +1137,7 @@ pnpm add zod
 - [ ] Dark mode persistence
 
 ### Phase 4 (Nice-to-Have): Metrics Dashboard
+
 - [ ] "By the Numbers" section on homepage — safe static stats confirmed:
   - 4 publications (peer-reviewed)
   - 7 semesters teaching (as main instructor)
@@ -1102,6 +1151,7 @@ pnpm add zod
 - [ ] Complexity indicators on projects (LOC, data scale, users)
 
 ### Phase 5+: Future Enhancements
+
 - [ ] Filter UI for publications/projects (data schemas already support it)
 - [ ] Slide deck viewer (Reveal.js/Slidev) if PDFs aren't sufficient
 - [ ] Data exploration / SQL browser (sql.js)
@@ -1112,6 +1162,7 @@ pnpm add zod
 ## Key Differentiator
 
 **You bridge academia and practical engineering:**
+
 - Research rigor + shipping real products
 - Academic publications + community tools with real users
 - This combination is rare and valuable for both audiences
@@ -1122,7 +1173,7 @@ Emphasize this throughout the site.
 
 ## Interactive Features
 
-The portfolio should demonstrate skills through *how* it presents content, not just list achievements. Prioritize inline, interactive experiences over external links and static screenshots.
+The portfolio should demonstrate skills through _how_ it presents content, not just list achievements. Prioritize inline, interactive experiences over external links and static screenshots.
 
 ### Contribution Metrics Dashboard (Phase 4 — Nice-to-Have)
 
@@ -1140,6 +1191,7 @@ Aggregate real data from multiple sources, fetched at build time:
 ```
 
 **Data sources (fetched at build time):**
+
 - **GitHub API** → commits, repos, languages, contribution calendar (use token for rate limits)
 - **Semantic Scholar API** → citations, paper metadata (free official API, unlike Google Scholar)
 - **MediaWiki API** → article count, edit count, bytes contributed
@@ -1150,6 +1202,7 @@ Aggregate real data from multiple sources, fetched at build time:
 ### Interactive Timeline CV
 
 Replace static CV list with a zoomable, interactive timeline:
+
 - Multiple tracks: Education, Work, Research, Projects
 - Click to expand details
 - Milestone markers for publications, major releases
@@ -1157,6 +1210,7 @@ Replace static CV list with a zoomable, interactive timeline:
 - Libraries: vis-timeline, d3, or custom Svelte implementation
 
 **Accessibility requirements:**
+
 - Keyboard navigable (arrow keys, Tab, Enter)
 - Screen reader support with ARIA labels
 - Respects `prefers-reduced-motion`
@@ -1166,20 +1220,21 @@ Replace static CV list with a zoomable, interactive timeline:
 
 Go beyond PDF links:
 
-| Feature | Description |
-|---------|-------------|
-| **Inline PDF viewer** | pdf.js, **collapsed by default**, lazy-loaded on expand |
-| **Download PDF** | Primary action - prominent button above viewer |
-| **Figure gallery** | Key figures in **responsive grid** (not carousel), all visible |
-| **Paper TL;DR** | 2-3 sentence summary + key contribution |
-| **One-click citation** | Copy BibTeX, APA, MLA, Chicago formats |
-| **Awards/metrics** | Best Paper badges, acceptance rates displayed |
+| Feature                | Description                                                    |
+| ---------------------- | -------------------------------------------------------------- |
+| **Inline PDF viewer**  | pdf.js, **collapsed by default**, lazy-loaded on expand        |
+| **Download PDF**       | Primary action - prominent button above viewer                 |
+| **Figure gallery**     | Key figures in **responsive grid** (not carousel), all visible |
+| **Paper TL;DR**        | 2-3 sentence summary + key contribution                        |
+| **One-click citation** | Copy BibTeX, APA, MLA, Chicago formats                         |
+| **Awards/metrics**     | Best Paper badges, acceptance rates displayed                  |
 
 ### Slide Deck Viewer
 
 **Phase 3:** Use pdf.js to display slide PDFs inline - same viewer as papers, works well for landscape slides. Add keyboard navigation (arrow keys for prev/next slide).
 
 **Phase 5+ (optional):** If converting to web-native format becomes valuable:
+
 - **Reveal.js** or **Slidev** (Markdown → slides) integration
 - Deep links to specific slides
 - Optional speaker notes toggle
@@ -1189,11 +1244,13 @@ The PDF approach is pragmatic since slides are already available as PDFs.
 ### Embedded Project Demos
 
 **Maps (Erenshor/Ancient Kingdoms):**
+
 - Embed full interactive maps via iframe
 - Show the actual production site—don't hide functionality
 - Demonstrates real shipped work
 
 **Live project indicators:**
+
 - Status badges (online/offline)
 - Last updated timestamps
 - Usage stats where available
@@ -1201,10 +1258,12 @@ The PDF approach is pragmatic since slides are already available as PDFs.
 ### Data Exploration (Future)
 
 Interactive SQL explorer for project databases:
+
 - Uses sql.js (SQLite → WebAssembly, already used in Erenshor/AK)
 - Ship database files, query in-browser
 
 **UX challenge:** Raw SQL input isn't accessible. Solutions:
+
 - Pre-built "questions" (e.g., "Find all items in Heartlands")
 - Schema browser with table/column discovery
 - Visual query builder for common operations
@@ -1228,7 +1287,7 @@ Expandable technical deep-dives for each project:
   └─────────────────────────────────────────────────────────┘
 ```
 
-Shows engineering *thinking*, not just output.
+Shows engineering _thinking_, not just output.
 
 ### Design Philosophy
 
@@ -1264,20 +1323,24 @@ pnpm dlx shadcn-svelte@next init
 ## Resources
 
 ### Core Stack
+
 - [SvelteKit Docs](https://kit.svelte.dev/docs)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [shadcn-svelte](https://www.shadcn-svelte.com/)
 - [Cloudflare Pages](https://pages.cloudflare.com/)
 
 ### Build & Validation
+
 - [Zod](https://zod.dev/) - TypeScript-first schema validation
 - [@sveltejs/enhanced-img](https://kit.svelte.dev/docs/images) - Automatic image optimization
 
 ### Fonts & Typography
+
 - [@fontsource](https://fontsource.org/) - Self-hosted fonts (Inter, Source Sans Pro, JetBrains Mono)
 - [@tailwindcss/typography](https://tailwindcss.com/docs/typography-plugin) - Prose styling for Markdown
 
 ### Interactive Features
+
 - [pdf.js](https://mozilla.github.io/pdf.js/) - PDF rendering in browser
 - [vis-timeline](https://visjs.github.io/vis-timeline/) - Interactive timelines
 - [Reveal.js](https://revealjs.com/) - HTML presentation framework
@@ -1285,10 +1348,57 @@ pnpm dlx shadcn-svelte@next init
 - [sql.js](https://sql.js.org/) - SQLite compiled to WebAssembly
 
 ### Data Visualization
+
 - [D3.js](https://d3js.org/) - General-purpose visualization
 
 ### APIs
+
 - [GitHub REST API](https://docs.github.com/en/rest) - Commits, repos, contribution data
 - [Semantic Scholar API](https://api.semanticscholar.org/) - Academic paper metadata and citations
 - [MediaWiki API](https://www.mediawiki.org/wiki/API:Main_page) - Wiki contribution stats
 - [Steam Web API](https://developer.valvesoftware.com/wiki/Steam_Web_API) - Guide views and ratings
+
+---
+
+## Email Handling & History Cleanup
+
+### Problem
+
+`feat(data): add Zod-validated content data files` (371d875) committed
+`REDACTED` in plain text inside `src/lib/data/links.ts`.
+The repo has not been pushed yet, so history can be rewritten locally.
+
+### Constraints
+
+- Email must never appear in the repo or DOM in any form (plain, encoded, or as an href attribute value)
+- No `mailto:` links — user does not use the native mail client
+- Solution: copy-to-clipboard button; address decoded from env var only at click time in the browser
+
+### Steps
+
+1. **Install git-filter-repo** via `brew install git-filter-repo`
+2. **Scrub history**: `git filter-repo --replace-text <(printf 'REDACTED==>REDACTED\n')`
+   - Rewrites all blobs across all commits that contain the address
+   - Leaves the remote ref intact (remote not yet pushed to)
+3. **Verify**: `git log --all -S 'REDACTED'` must return nothing
+4. **Remove leftover email infrastructure**:
+   - Remove `emailEncoded` / `PUBLIC_CONTACT_EMAIL_B64` entirely from `links.ts`
+   - Delete `EmailLink.svelte`
+   - Delete `.env.example` (no env var approach anymore)
+   - Keep `.env.local` gitignored but change approach (see below)
+5. **Implement `CopyEmail` component** (`src/lib/components/layout/CopyEmail.svelte`):
+   - Props: `variant: 'icon' | 'text'`
+   - `'icon'`: 36×36 button with envelope SVG, matching icon strip button style
+   - `'text'`: inline button styled like footer links
+   - On click: reads `PUBLIC_CONTACT_EMAIL_B64` from `$env/static/public`, calls
+     `navigator.clipboard.writeText(atob(...))` — address is decoded only at click
+     time, never written to the DOM
+   - Toast: a small `"Email copied!"` message that appears for 2 s then fades,
+     positioned near the button, no library needed
+   - Graceful fallback if env var is missing: button is hidden
+6. **Wire into `IconStrip` and `Footer`** replacing the old email links
+7. **Commit**: `fix(layout): replace email link with copy-to-clipboard button`
+8. **Set env var for local dev and CI**:
+   - `.env.local` (gitignored): `PUBLIC_CONTACT_EMAIL_B64=<base64>`
+   - GitHub Actions secret: `PUBLIC_CONTACT_EMAIL_B64` added to repo secrets,
+     referenced in `ci.yml` as `env: PUBLIC_CONTACT_EMAIL_B64: ${{ secrets.PUBLIC_CONTACT_EMAIL_B64 }}`

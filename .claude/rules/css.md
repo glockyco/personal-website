@@ -1,7 +1,7 @@
 ---
 paths:
-  - "src/**/*.svelte"
-  - "src/**/*.css"
+  - 'src/**/*.svelte'
+  - 'src/**/*.css'
 ---
 
 # CSS Architecture
@@ -19,13 +19,13 @@ All colour values live in `[data-theme]` blocks as CSS custom properties.
 Use semantic names only — never encode the colour value in the name:
 
 ```css
-[data-theme="indigo-light"] {
-  --color-surface:      oklch(97% 0.02 245);
-  --color-surface-alt:  oklch(93% 0.03 245);
-  --color-text:         oklch(20% 0.05 245);
-  --color-text-muted:   oklch(45% 0.05 245);
-  --color-accent:       oklch(55% 0.18 245);
-  --color-border:       oklch(85% 0.04 245);
+[data-theme='indigo-light'] {
+  --color-surface: oklch(97% 0.02 245);
+  --color-surface-alt: oklch(93% 0.03 245);
+  --color-text: oklch(20% 0.05 245);
+  --color-text-muted: oklch(45% 0.05 245);
+  --color-accent: oklch(55% 0.18 245);
+  --color-border: oklch(85% 0.04 245);
 }
 ```
 

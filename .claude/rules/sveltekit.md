@@ -1,8 +1,8 @@
 ---
 paths:
-  - "src/routes/**"
-  - "svelte.config.*"
-  - "vite.config.*"
+  - 'src/routes/**'
+  - 'svelte.config.*'
+  - 'vite.config.*'
 ---
 
 # SvelteKit / adapter-static
@@ -47,7 +47,9 @@ All routes run in Node during prerender. Guard every browser API:
 
 ```ts
 import { browser } from '$app/environment';
-if (browser) { /* localStorage, window, document, etc. */ }
+if (browser) {
+  /* localStorage, window, document, etc. */
+}
 ```
 
 ## Loud Prerender Failures

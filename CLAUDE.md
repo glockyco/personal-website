@@ -37,6 +37,7 @@ pnpm format     # prettier --write
 Follow https://cbea.ms/git-commit/ plus conventional commits.
 
 **Subject line** (`type(scope): imperative summary`):
+
 - 50 characters or less (72 hard limit)
 - Lowercase after the colon; no trailing period
 - Imperative mood: "add feature" not "added feature"
@@ -44,6 +45,7 @@ Follow https://cbea.ms/git-commit/ plus conventional commits.
 - Scope encouraged: `nav`, `cv`, `research`, `data`, `config`, `layout`
 
 **Body** (when needed):
+
 - Blank line between subject and body
 - Wrap at 72 characters
 - Explain what and why, not how

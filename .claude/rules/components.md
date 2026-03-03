@@ -1,7 +1,7 @@
 ---
 paths:
-  - "src/lib/components/**"
-  - "src/routes/**/*.svelte"
+  - 'src/lib/components/**'
+  - 'src/routes/**/*.svelte'
 ---
 
 # Component Architecture
@@ -21,7 +21,10 @@ area — list and featured contexts differ.
 Use `$props()` with an inline type annotation:
 
 ```ts
-let { publication, compact = false }: {
+let {
+  publication,
+  compact = false
+}: {
   publication: Publication;
   compact?: boolean;
 } = $props();
@@ -55,8 +58,12 @@ use a `.svelte.ts` module:
 // src/lib/state/nav.svelte.ts
 let open = $state(false);
 export const nav = {
-  get open() { return open; },
-  toggle() { open = !open; },
+  get open() {
+    return open;
+  },
+  toggle() {
+    open = !open;
+  }
 };
 ```
 
