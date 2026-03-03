@@ -92,9 +92,9 @@
             <span>{author.name}</span>
           {/if}
         {/each}
-        {#if pub.status === 'under-review' && pub.arxiv}
+        {#if pub.status === 'under-review' && pub.arxivId}
           <span class="venue-inline"
-            >&nbsp;&middot;&nbsp;{pub.arxiv}&nbsp;&middot;&nbsp;{pub.year}</span
+            >&nbsp;&middot;&nbsp;arXiv:{pub.arxivId}&nbsp;&middot;&nbsp;{pub.year}</span
           >
         {:else}
           <span class="venue-inline"
@@ -102,6 +102,28 @@
           >
         {/if}
       </div>
+      {#if pub.tldr}
+        <p class="pub-tldr">{pub.tldr}</p>
+      {/if}
+      {#if pub.pdf || pub.doi || pub.arxivId || pub.github || pub.zenodo}
+        <div class="pub-links">
+          {#if pub.pdf}
+            <a class="pub-link" href={pub.pdf} download>PDF</a>
+          {/if}
+          {#if pub.doi}
+            <a class="pub-link" href="https://doi.org/{pub.doi}">DOI</a>
+          {/if}
+          {#if pub.arxivId}
+            <a class="pub-link" href="https://arxiv.org/abs/{pub.arxivId}">Preprint</a>
+          {/if}
+          {#if pub.github}
+            <a class="pub-link" href={pub.github}>Code</a>
+          {/if}
+          {#if pub.zenodo}
+            <a class="pub-link" href={pub.zenodo}>Dataset</a>
+          {/if}
+        </div>
+      {/if}
     </article>
   {/each}
 </section>
@@ -371,6 +393,20 @@
 
   .venue-inline {
     color: var(--color-muted);
+  }
+
+  .pub-tldr {
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+    line-height: 1.6;
+    margin-top: 10px;
+  }
+
+  .pub-links {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 12px;
   }
 
   /* ── Project cards ── */
