@@ -2,11 +2,11 @@
 
 ## Profile Summary
 
-**Current:** PhD student/researcher (finishing soon)
+**Current:** PhD student/researcher (finishing soon, expected Q4 2026)
 **Primary audience:** Academia (hiring committees, postdoc supervisors, collaborators)
 **Secondary audience:** Industry (technical hiring managers, research scientist roles)
 **Location:** Hagenberg / Linz (Austria) or Remote
-**Experience:** ~X years in software engineering, Y years in research
+**Experience:** 6 years industry web development (MICROLAB), 3.5 years applied research (AIST), PhD since 2021
 
 > **Note:** The research statement and professional summary below are placeholders.
 > These must be written before or alongside Phase 1 — they are the site's center of gravity.
@@ -34,29 +34,32 @@ PhD researcher with X years of software engineering experience. Published in top
 ### What to Showcase
 
 **Academic:**
-- Papers and publications (with full metadata: type, awards, citations)
-- Presentations and talks (slides integrated with papers)
-- Research prototypes and demos
-- Datasets released
-- Teaching experience
-- Academic service (reviewing)
+- 4 peer-reviewed publications (2 first-author JSS, 1 second-author JSS, 1 ICSE DS oral)
+  - Note: MSc thesis exists on Zenodo/Scholar but is NOT counted as a peer-reviewed publication
+- Presentations and talks (slides integrated with paper detail pages)
+- Research tools: PASDA (semantic differencing), Teralizer (test generalization) — explained on paper detail pages, not listed separately under /projects
+- Datasets / replication packages released (all first-authored works)
+- Teaching: 7 semesters as main instructor (SE I: 3×, SE II: 4×) — on /cv, not a separate page
+- Academic service (reviewing: TOSEM; subreview: FSE, ICSE, SANER)
+- AIST applied research projects (FFG grants) — compact card grid on /research, linking to AIST website
 
-**Technical/Hobby:**
-- Erenshor + Ancient Kingdoms modding ecosystem
-  - Framing: curiosity, digging deep, helping the community, presenting results clearly for non-technical audiences
-  - Data mining and reverse engineering
-  - Interactive maps (SvelteKit + deck.gl)
-  - Build pipelines (Python + SQLite)
-  - Wiki contributions (primary maintainer)
-  - Bot writing
-  - Steam guide writing
-- Other side projects
+**Technical/Hobby (on /projects):**
+- Erenshor ecosystem: interactive maps (SvelteKit + deck.gl), spreadsheet tool, wiki bot, mods (C# / MelonLoader)
+- Ancient Kingdoms ecosystem: compendium website, modding
+- 10-Man Idle: wiki-like website
+- One detail page per ecosystem (/projects/[slug])
+- Framing: curiosity, digging deep, helping the community, presenting results clearly for non-technical audiences
 
-**Professional Background:**
-- Prior web development experience
-- Research experience before PhD
-- Teaching (TA and during PhD)
-- Student supervision (Bachelor's, Master's, interns)
+**Professional Background (on /cv):**
+- 6 years web development at MICROLAB (PHP, jQuery)
+- 3.5 years applied research at AIST (data engineering, security intelligence, AR)
+- 7 semesters main instructor (Teaching Assistant roles in background only — grading/feedback, no direct student contact; on CV but not featured)
+- Student supervision:
+  - 4 completed BSc theses
+  - 2 completed MSc projects (course, not thesis)
+  - 3 ongoing MSc theses
+  - 3 BSc-level summer interns (AIST)
+  - 3 high-school interns (AAU IT-Ferialpraktikum / FFG Schüler:innenpraktika)
 
 ---
 
@@ -66,16 +69,17 @@ PhD researcher with X years of software engineering experience. Published in top
 
 ```
 /                           # Home / Landing (research identity first)
-├── /research               # Publications list
-│   └── /research/[slug]    # Paper detail (includes slides/talks)
-├── /projects               # Projects grid
-│   └── /projects/[slug]    # Project detail
-├── /cv                     # CV page
+├── /research               # Publications list + AIST projects card grid
+│   └── /research/[slug]    # Paper detail (includes slides/talks, tool links)
+├── /teaching               # NOT a separate page — folded into /cv
+├── /projects               # Hobby project grid (Erenshor, AK, 10-Man Idle)
+│   └── /projects/[slug]    # Project detail (one per ecosystem)
+├── /cv                     # CV page (education, experience, teaching, supervision, service)
 ├── /uses                   # Tools and daily workflow
 └── /404                    # Custom 404 page
 ```
 
-Contact is not a separate page — social links and email appear in the footer and nav header.
+Contact is not a separate page — social links and email appear in the footer and floating icon strip.
 
 **Optional future routes:**
 - `/now` - Current focus / what I'm working on
@@ -87,26 +91,35 @@ Contact is not a separate page — social links and email appear in the footer a
 
 | Section | Purpose | Content |
 |---------|---------|---------|
-| **Home** | First impression | Research statement, bio, photo, tagline, featured work, optional stats |
-| **Research** | Academic credibility | Papers with full metadata, presentations (slides), demos, datasets |
-| **Projects** | Technical skills | Erenshor/AK ecosystem, other side projects, "How I Built This" |
-| **CV** | Formal credentials | Timeline view + traditional view, teaching, service, awards, PDF download |
+| **Home** | First impression | Hero (name, tagline, affiliation, ORCID), stats row, research focus, selected publications, featured projects (Erenshor + AK only) |
+| **Research** | Academic credibility | 4 peer-reviewed papers with full metadata; AIST projects compact card grid (links out) |
+| **Teaching** | — | Not a separate page. Folded into /cv. |
+| **Projects** | Technical/hobby skills | Erenshor, Ancient Kingdoms, 10-Man Idle — one card per ecosystem, detail pages |
+| **CV** | Formal credentials | Traditional view (Phase 1); interactive timeline (Phase 3); teaching, supervision, service, awards, PDF download |
 | **Uses** | Daily workflow | Icon grid with category filters and optional prose; tools across editor, AI, terminal, DB, etc. |
-| **Contact** | Reachability | Email, GitHub, LinkedIn, Scholar, ORCID, Semantic Scholar, Institution — in footer and nav, not a dedicated page |
+| **Contact** | Reachability | Email, GitHub, LinkedIn, Scholar, ORCID, Semantic Scholar, Institution — in footer and floating icon strip only |
 
 ### Navigation
 
 **Desktop:**
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│  [Logo/Name]   Research  Projects  CV  Uses  [GitHub] [🌙]     │
+│  [Name]   Research  Projects  CV  Uses                          │
 └─────────────────────────────────────────────────────────────────┘
 ```
-- No "Contact" nav item — contact links live in footer and nav header icons
-- Dark mode toggle [🌙] always visible in header
+- Nav items: Research, Projects, CV, Uses (Teaching folded into CV, not a nav item)
+- No "Contact" nav item — contact links live in footer and floating icon strip
+- Floating icon strip (left side, vertically centred): GitHub, Scholar, LinkedIn, Email, divider, theme toggle
+- Theme toggle opens a popover with 6 theme swatches (indigo dark/light, navy dark/light, warm dark/light)
+- Section dots (right side, vertically centred): one dot per page section, click to jump, scroll spy
+- Back-to-top chevron above section dots, appears after scrolling 200px
+- Sticky nav: transparent at top, frosted glass background materialises on scroll
 - Links open in same tab (browser default behavior)
 
-**Mobile:** Hamburger menu with same items + social icons + dark mode toggle
+**Mobile (≤768px):**
+- Hamburger menu (animated → X) opens a dropdown with nav links
+- Floating icon strip moves to bottom-right horizontal bar
+- Section dots hidden on mobile
 
 **Footer:**
 - Name and tagline
@@ -124,18 +137,24 @@ Home > Projects > Project Name
 
 | Decision | Rationale |
 |----------|-----------|
-| **No filters (deferred)** | Too few items now (4 papers, ~5 projects); schemas include filterable fields (tags, year, type) so UI filters can be added later without data migration |
+| **No filters (deferred)** | Too few items now (4 papers, 3 projects); schemas include filterable fields so UI can be added later without data migration |
 | **No carousels** | Poor UX, accessibility issues; use grids instead |
-| **Talks/Slides** | Part of Research detail pages |
-| **Teaching** | Part of CV page, not a separate section |
-| **No contact page** | Six links don't justify a route; email + social icons in footer and nav |
+| **Talks/Slides** | Part of Research detail pages, not a separate page |
+| **Teaching** | Part of CV page, not a separate page |
+| **No contact page** | Six links don't justify a route; email + social icons in footer and floating icon strip |
 | **No audience toggle** | Clean navigation lets users self-select |
 | **Same-tab links** | Respect browser defaults (Ctrl+Click for new tab) |
-| **Dark mode in header** | Always accessible, not buried in menu |
+| **Theme toggle in floating strip** | Always accessible without cluttering the nav |
 | **Traditional CV as alternative** | Recruiters/committees need scannable format |
 | **Manual data entry** | Better than fragile API scrapers |
 | **Static metrics ("X+")** | Avoids API failures, clearly not real-time |
 | **Research leads homepage** | Primary audience is academia; research statement and publications come before projects |
+| **PASDA/Teralizer under /research only** | They are research outputs tied to papers, not standalone hobby projects; explained on paper detail pages |
+| **AIST projects as compact card grid on /research** | External projects, link to AIST website; no detail pages needed |
+| **Featured projects = Erenshor + AK only** | 10-Man Idle on /projects but not homepage; two cards is cleaner |
+| **MSc thesis not counted as publication** | Not peer-reviewed in same sense; listed on Scholar/Zenodo but excluded from publication count |
+| **Default theme: indigo-light** | More inviting as default; dark/other themes available via theme picker |
+| **Stats row on homepage** | Safe stats: 4 publications, 7 semesters teaching, research tools, supervised students — values TBD |
 
 ---
 
@@ -442,6 +461,15 @@ export type TeachingExperience = {
   description?: string;
 };
 
+export type Supervision = {
+  name: string;
+  type: 'bsc-thesis' | 'msc-thesis' | 'msc-project' | 'bsc-intern' | 'highschool-intern';
+  status: 'completed' | 'ongoing';
+  year?: number;            // completion year (if completed)
+  topic?: string;
+  note?: string;            // e.g. "AIST summer internship", "FFG Schüler:innenpraktikum"
+};
+
 export type AcademicService = {
   type: 'reviewer' | 'subreviewer' | 'committee' | 'organizer';
   venue: string;
@@ -533,12 +561,21 @@ export const academicLinks = {
 **Homepage:**
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│ [NAV]                                         [GitHub] [Scholar] [🌙] │
+│ [NAV: Johann Glock · Research · Projects · CV · Uses]           │
+│ [floating icon strip: GitHub · Scholar · LinkedIn · Email · ☀]  │
 ├─────────────────────────────────────────────────────────────────┤
 │  ┌────────┐  Johann Glock                                        │
 │  │ PHOTO  │  [Specific research identity — to be written]        │
-│  │        │  Hagenberg/Linz, Austria · Open to Remote            │
-│  └────────┘  [View Research] [Download CV] [See Projects]        │
+│  │        │  PhD Researcher · University of Klagenfurt           │
+│  └────────┘  ORCID: 0000-0002-0152-8611 · Hagenberg, Austria    │
+│              [View Research] [Download CV] [See Projects]        │
+├─────────────────────────────────────────────────────────────────┤
+│  STATS ROW                                                       │
+│  ┌──────────────┐ ┌──────────────┐ ┌──────────────┐             │
+│  │ 4            │ │ 7            │ │ 2            │             │
+│  │ Publications │ │ Semesters    │ │ Research     │             │
+│  │              │ │ Teaching     │ │ Tools        │             │
+│  └──────────────┘ └──────────────┘ └──────────────┘             │
 ├─────────────────────────────────────────────────────────────────┤
 │  RESEARCH FOCUS                                                  │
 │  [Specific, differentiated research statement — to be written]   │
@@ -552,38 +589,43 @@ export const academicLinks = {
 ├─────────────────────────────────────────────────────────────────┤
 │  FEATURED PROJECTS                                               │
 │  ┌─────────────────┐ ┌─────────────────┐                        │
-│  │ Erenshor Maps   │ │ AK Compendium   │                        │
+│  │ Erenshor        │ │ Ancient Kingdoms│                        │
+│  │ (ecosystem)     │ │ (ecosystem)     │                        │
 │  └─────────────────┘ └─────────────────┘                        │
 │  [→ All Projects]                                                │
 ├─────────────────────────────────────────────────────────────────┤
-│  BY THE NUMBERS (nice-to-have, future)                           │
-│  ┌──────────────┐ ┌──────────────┐ ┌──────────────┐             │
-│  │ X+ Papers    │ │ Y Citations  │ │ Z+ Wiki Pages│             │
-│  └──────────────┘ └──────────────┘ └──────────────┘             │
-├─────────────────────────────────────────────────────────────────┤
-│ [FOOTER: social links, nav, copyright]                           │
+│ [FOOTER: name · tagline · social links · nav · copyright]        │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
 **Research page:**
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│ [NAV]                                              [GitHub] [🌙] │
+│ [NAV]                                                           │
 ├─────────────────────────────────────────────────────────────────┤
 │  Research & Publications                                        │
 │  Brief intro about research interests / areas                   │
 ├─────────────────────────────────────────────────────────────────┤
-│  (No filters needed - only 4 papers)                            │
+│  PEER-REVIEWED PUBLICATIONS  (No filters needed — only 4)       │
 │  ┌─────────────────────────────────────────────────────────────┐│
 │  │ Paper Title Here                    2024 | JSS | First Auth ││
 │  │ Authors: Johann Glock, Coauthor A, Coauthor B               ││
-│  │ TL;DR summary of key contribution...             [▼ More]   ││
-│  │ [PDF] [Cite] [Demo] [Code]                                  ││
+│  │ TL;DR summary of key contribution...                        ││
+│  │ [PDF] [DOI] [Dataset] [Code]                                ││
 │  └─────────────────────────────────────────────────────────────┘│
 │  ┌─────────────────────────────────────────────────────────────┐│
 │  │ Another Paper Title                 2024 | ICSE | First Auth││
 │  │ ...                                                         ││
 │  └─────────────────────────────────────────────────────────────┘│
+│  (× 4 total)                                                    │
+├─────────────────────────────────────────────────────────────────┤
+│  APPLIED RESEARCH  (AIST — FFG-funded projects)                 │
+│  ┌───────────────┐ ┌───────────────┐ ┌───────────────┐          │
+│  │ Project A     │ │ Project B     │ │ Project C     │          │
+│  │ Short desc    │ │ Short desc    │ │ Short desc    │          │
+│  │ [→ AIST]      │ │ [→ AIST]      │ │ [→ AIST]      │          │
+│  └───────────────┘ └───────────────┘ └───────────────┘          │
+│  Compact card grid, links out to AIST website. No detail pages. │
 ├─────────────────────────────────────────────────────────────────┤
 │ [FOOTER]                                                        │
 └─────────────────────────────────────────────────────────────────┘
@@ -646,18 +688,20 @@ export const academicLinks = {
 │ [NAV]                                                           │
 ├─────────────────────────────────────────────────────────────────┤
 │  Projects                                                       │
-│  Things I've built - from research tools to community resources │
+│  Things I've built outside of research — community tools,       │
+│  game modding ecosystems, and hobby sites                       │
 ├─────────────────────────────────────────────────────────────────┤
-│  (No filters needed - only ~5 projects)                         │
-│  ┌─────────────────────┐ ┌─────────────────────┐               │
-│  │ ┌─────────────────┐ │ │ ┌─────────────────┐ │               │
-│  │ │   Screenshot    │ │ │ │   Screenshot    │ │               │
-│  │ └─────────────────┘ │ │ └─────────────────┘ │               │
-│  │ Erenshor Maps       │ │ AK Compendium       │               │
-│  │ Interactive game... │ │ Community wiki...   │               │
-│  │ [SvelteKit][deck.gl]│ │ [MediaWiki][Python] │               │
-│  │ ● Active            │ │ ● Active            │               │
-│  └─────────────────────┘ └─────────────────────┘               │
+│  (No filters needed — 3 cards, one per ecosystem)               │
+│  ┌───────────────────┐ ┌───────────────────┐ ┌───────────────┐ │
+│  │ ┌───────────────┐ │ │ ┌───────────────┐ │ │ ┌───────────┐ │ │
+│  │ │  Screenshot   │ │ │ │  Screenshot   │ │ │ │Screenshot │ │ │
+│  │ └───────────────┘ │ │ └───────────────┘ │ │ └───────────┘ │ │
+│  │ Erenshor          │ │ Ancient Kingdoms  │ │ 10-Man Idle  │ │
+│  │ Maps, mods, wiki, │ │ Compendium, mods  │ │ Wiki-like    │ │
+│  │ bots, guides      │ │ Python pipelines  │ │ site         │ │
+│  │ [SvelteKit][C#]   │ │ [SvelteKit][Py]   │ │ [SvelteKit]  │ │
+│  │ ● Active          │ │ ● Active          │ │ ● Active     │ │
+│  └───────────────────┘ └───────────────────┘ └───────────────┘ │
 ├─────────────────────────────────────────────────────────────────┤
 │ [FOOTER]                                                        │
 └─────────────────────────────────────────────────────────────────┘
@@ -814,9 +858,11 @@ export const academicLinks = {
 
 ### Color Scheme
 
-- **Light mode default** (academia prefers)
-- **Dark mode toggle** (developers appreciate)
-- Accent color: Consider purple/blue for brand consistency with Erenshor maps
+- **Default: indigo-light** — more inviting as landing experience; dark/other themes available via picker
+- **6 themes total:** indigo-dark, indigo-light, navy-dark, navy-light, warm-dark, warm-light
+- Theme picker: popover with 6 swatches, opened from floating icon strip
+- CSS custom properties on `[data-theme]` attribute on `<html>`
+- Accent: indigo tones (brand consistency with Erenshor maps)
 
 ### Typography
 
@@ -954,14 +1000,22 @@ Development is iterative — the site goes live when Phase 1 is useful, then ext
 - [ ] Write the professional tagline / TL;DR
 - [ ] Ensure PDF CV is excellent before the site goes live
 
+### Phase 0: Design Prototype (Complete)
+- [x] `theme-demo.html` — self-contained HTML prototype with 6 themes, floating icon strip, section dots, sticky nav, hamburger menu, card styles, layout chrome
+
 ### Phase 1: Foundation
 - [ ] Set up SvelteKit project with adapter-static
-- [ ] Basic layout (nav: Research, Projects, CV + social icons + dark mode toggle; footer with all social/academic links)
+- [ ] Basic layout:
+  - Sticky nav (Research, Projects, CV, Uses; frosted glass on scroll)
+  - Floating icon strip (left: GitHub, Scholar, LinkedIn, Email, theme toggle)
+  - Section dots (right: one per section, scroll spy, back-to-top chevron)
+  - Mobile: hamburger menu + bottom-right icon bar + hidden section dots
+  - Footer (name, tagline, social links, nav, copyright)
 - [ ] Custom 404 page
-- [ ] Homepage: research statement leads, selected publications, featured projects
-- [ ] Research page (publication list — schemas include filterable fields, no filter UI yet)
-- [ ] Projects page (grid — same)
-- [ ] CV page (traditional layout)
+- [ ] Homepage: hero (name, tagline, affiliation, ORCID), stats row, research focus, selected publications, featured projects (Erenshor + AK)
+- [ ] Research page (publications list + AIST compact card grid)
+- [ ] Projects page (Erenshor, AK, 10-Man Idle — one card per ecosystem)
+- [ ] CV page (traditional layout: education, experience, teaching, supervision, service, awards)
 - [ ] Uses page (icon grid with category filters, optional prose per tool)
 - [ ] Zod schemas for content validation
 - [ ] Deploy to Cloudflare Pages
@@ -985,7 +1039,12 @@ Development is iterative — the site goes live when Phase 1 is useful, then ext
 - [ ] Dark mode persistence
 
 ### Phase 4 (Nice-to-Have): Metrics Dashboard
-- [ ] "By the Numbers" section on homepage
+- [ ] "By the Numbers" section on homepage — safe static stats confirmed:
+  - 4 publications (peer-reviewed)
+  - 7 semesters teaching (as main instructor)
+  - 2 research tools (PASDA, Teralizer)
+  - Student supervision count (framing TBD — mix of BSc/MSc/interns)
+  - DO NOT include: citation counts, GitHub star counts (fragile/misleading)
 - [ ] Semantic Scholar citations (build-time fetch, cached fallback)
 - [ ] GitHub stats (build-time fetch with token, cached fallback)
 - [ ] MediaWiki contribution stats
