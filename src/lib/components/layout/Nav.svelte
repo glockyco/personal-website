@@ -5,8 +5,7 @@
   const navLinks = [
     { href: '/research/', label: 'Research' },
     { href: '/projects/', label: 'Projects' },
-    { href: '/cv/', label: 'CV' },
-    { href: '/uses/', label: 'Uses' }
+    { href: '/cv/', label: 'CV' }
   ];
 
   let atTop = $state(true);
