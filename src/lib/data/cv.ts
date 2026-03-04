@@ -422,7 +422,7 @@ export const continuingEducation: ContinuingEducation[] = [
     providers: ['IEEE', 'Wiley']
   },
   {
-    category: 'Organizational & Leadership',
+    category: 'Leadership & Organization',
     units: 8,
     providers: ['AAU']
   },
