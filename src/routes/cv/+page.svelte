@@ -186,17 +186,14 @@
     <span class="section-label">Continuing Education</span>
   </div>
 
-  <p class="cont-ed-summary">
-    {continuingEducation.reduce((sum, c) => sum + c.units, 0)} units across {continuingEducation.length}
-    areas (AAU, IEEE, Wiley, iMoox)
-  </p>
+  <p class="cont-ed-summary">Doctoral training and self-study courses.</p>
 
   <div class="cont-ed-grid">
     {#each continuingEducation as entry (entry.category)}
       <div class="cont-ed-row">
         <span class="cont-ed-category">{entry.category}</span>
         <span class="cont-ed-providers">{entry.providers.join(', ')}</span>
-        <span class="cont-ed-units">{entry.units} units</span>
+        <span class="cont-ed-units">{entry.hours} hours</span>
       </div>
     {/each}
   </div>

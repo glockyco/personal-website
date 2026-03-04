@@ -74,7 +74,7 @@ export const SkillSchema = z.object({
 
 export const ContinuingEducationSchema = z.object({
   category: z.string(),
-  units: z.number().int(),
+  hours: z.number().int(),
   providers: z.array(z.string())
 });
 
@@ -418,22 +418,22 @@ export const skills: Skill[] = [
 export const continuingEducation: ContinuingEducation[] = [
   {
     category: 'Research Methods',
-    units: 9,
+    hours: 9,
     providers: ['IEEE', 'Wiley']
   },
   {
     category: 'Leadership & Organization',
-    units: 8,
+    hours: 8,
     providers: ['AAU']
   },
   {
     category: 'Diversity & Inclusion',
-    units: 58,
+    hours: 58,
     providers: ['AAU', 'iMoox']
   },
   {
     category: 'Higher Education Didactics',
-    units: 16,
+    hours: 16,
     providers: ['AAU']
   }
 ].map((c) => ContinuingEducationSchema.parse(c));
