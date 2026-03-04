@@ -351,7 +351,7 @@
   /* ── Mobile ── */
   @media (max-width: 768px) {
     .page-header {
-      padding: 24px 0 0;
+      padding: 24px 0 32px;
     }
 
     h1 {
