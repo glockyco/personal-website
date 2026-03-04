@@ -991,7 +991,7 @@
   .cont-ed-units {
     font-size: var(--text-sm);
     font-weight: 600;
-    color: var(--color-accent);
+    color: var(--color-heading);
     white-space: nowrap;
     text-align: right;
   }
