@@ -5,7 +5,7 @@
   const pub = $derived(data.pub);
 
   $effect(() => {
-    const sections: { id: string; label: string }[] = [];
+    const sections: { id: string; label: string }[] = [{ id: 'top', label: 'Top' }];
     if (pub.tldr) sections.push({ id: 'tldr', label: 'TL;DR' });
     sections.push({ id: 'abstract', label: 'Abstract' });
     if (pub.presentations?.length) sections.push({ id: 'presentations', label: 'Presentations' });
@@ -19,7 +19,7 @@
   <title>{pub.title} — Johann Glock</title>
 </svelte:head>
 
-<div class="page-header">
+<div class="page-header" id="top">
   <a class="back-link" href="/research/">&larr; Research</a>
 
   <div class="pub-badges">

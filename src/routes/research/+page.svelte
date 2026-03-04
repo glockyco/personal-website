@@ -17,6 +17,7 @@
 
   $effect(() => {
     sectionNav.set([
+      { id: 'top', label: 'Top' },
       { id: 'publications', label: 'Publications' },
       { id: 'applied', label: 'Applied Research' }
     ]);
@@ -28,7 +29,7 @@
   <title>Research — Johann Glock</title>
 </svelte:head>
 
-<div class="page-header">
+<div class="page-header" id="top">
   <h1>Research</h1>
   <nav class="page-nav">
     <a class="page-nav-pill" href="#publications">Publications</a>
