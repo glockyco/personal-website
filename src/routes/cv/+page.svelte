@@ -97,7 +97,7 @@
       <a class="page-nav-pill" href="#service">Service</a>
       <a class="page-nav-pill" href="#skills">Skills</a>
     </nav>
-    <a class="pdf-link" href="/cv.pdf">PDF version &darr;</a>
+    <a class="pdf-link" href="/cv.pdf">Open PDF &darr;</a>
   </div>
 </div>
 
@@ -488,15 +488,24 @@
   }
 
   .pdf-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1.5px solid var(--color-accent);
     font-size: var(--text-sm);
     font-weight: 600;
     color: var(--color-accent);
     white-space: nowrap;
     flex-shrink: 0;
+    transition:
+      background var(--transition-fast),
+      color var(--transition-fast);
 
     &:hover {
-      text-decoration: underline;
-      text-underline-offset: 3px;
+      background: var(--color-accent);
+      color: #fff;
     }
   }
 
