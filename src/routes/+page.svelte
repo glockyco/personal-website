@@ -93,13 +93,9 @@
           {/if}
         {/each}
         {#if pub.status === 'under-review' && pub.arxivId}
-          <span class="venue-inline"
-            >&nbsp;&middot;&nbsp;arXiv:{pub.arxivId}&nbsp;&middot;&nbsp;{pub.year}</span
-          >
+          <span class="venue-inline">&nbsp;&middot;&nbsp;arXiv:{pub.arxivId}</span>
         {:else}
-          <span class="venue-inline"
-            >&nbsp;&middot;&nbsp;{pub.venue}&nbsp;&middot;&nbsp;{pub.year}</span
-          >
+          <span class="venue-inline">&nbsp;&middot;&nbsp;{pub.venue}</span>
         {/if}
       </div>
       {#if pub.tldr}
