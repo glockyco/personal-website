@@ -167,7 +167,7 @@ const rawPublications = [
     title:
       'Aiding Developer Understanding of Software Changes via Symbolic Execution-based Semantic Differencing',
     authors: [{ name: 'Johann Glock', isMe: true }],
-    venue: 'ICSE 2024 Doctoral Symposium',
+    venue: 'ICSE Doctoral Symposium',
     venueShort: 'ICSE DS',
     year: 2024,
     type: 'doctoral-symposium' as const,
@@ -187,7 +187,7 @@ const rawPublications = [
     ],
     presentations: [
       {
-        event: 'ICSE 2024 Doctoral Symposium',
+        event: 'ICSE Doctoral Symposium',
         location: 'Lisbon, Portugal',
         year: 2024,
         type: 'talk' as const
