@@ -13,6 +13,7 @@ export function load({ params }: { params: { slug: string } }) {
   const sections: Section[] = [{ id: 'top', label: 'Top' }];
   if (pub.tldr) sections.push({ id: 'tldr', label: 'TL;DR' });
   sections.push({ id: 'abstract', label: 'Abstract' });
+  if (pub.pdf) sections.push({ id: 'paper', label: 'Paper' });
   if (pub.presentations?.length) sections.push({ id: 'presentations', label: 'Presentations' });
   sections.push({ id: 'tags', label: 'Tags' });
 

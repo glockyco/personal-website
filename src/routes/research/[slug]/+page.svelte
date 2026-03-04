@@ -91,6 +91,23 @@
   {/each}
 </section>
 
+<!-- ── Paper (inline PDF) ───────────────────────────────────────── -->
+{#if pub.pdf}
+  <section class="section" id="paper">
+    <div class="section-head">
+      <span class="section-label">Paper</span>
+    </div>
+    <div class="pdf-viewer">
+      <object data={pub.pdf} type="application/pdf" title={pub.title}>
+        <p class="pdf-fallback">
+          Your browser does not support inline PDF viewing.
+          <a href={pub.pdf} download>Download the PDF</a> instead.
+        </p>
+      </object>
+    </div>
+  </section>
+{/if}
+
 <!-- ── Presentations ───────────────────────────────────────────── -->
 {#if pub.presentations?.length}
   <section class="section" id="presentations">
@@ -286,6 +303,38 @@
 
     &:last-child {
       margin-bottom: 0;
+    }
+  }
+
+  /* ── PDF viewer ── */
+  .pdf-viewer {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-base);
+    overflow: hidden;
+    transition: border-color var(--transition-base);
+  }
+
+  .pdf-viewer object {
+    display: block;
+    width: 100%;
+    height: 80vh;
+    min-height: 600px;
+  }
+
+  .pdf-fallback {
+    padding: 40px 20px;
+    text-align: center;
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+
+    a {
+      color: var(--color-accent);
+      font-weight: 600;
+
+      &:hover {
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
     }
   }
 
