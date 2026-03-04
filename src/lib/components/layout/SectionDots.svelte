@@ -1,6 +1,8 @@
 <script lang="ts">
   import { browser } from '$app/environment';
-  import { sectionNav } from '$lib/state/sections.svelte';
+  import type { Section } from '$lib/state/sections.svelte';
+
+  let { sections }: { sections: Section[] } = $props();
 
   let activeSectionId = $state<string | null>(null);
   let showTopBtn = $state(false);
@@ -8,7 +10,6 @@
   let spyTimer: ReturnType<typeof setTimeout>;
 
   function getActiveSection(navHeight: number): string | null {
-    const sections = sectionNav.sections;
     if (!sections.length) return null;
     const threshold = navHeight + 20;
     let active: string | null = null;
@@ -37,6 +38,7 @@
         activeSectionId = getActiveSection(getNavHeight());
       }
     }
+    onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   });
@@ -60,7 +62,7 @@
   }
 </script>
 
-{#if sectionNav.sections.length > 0}
+{#if sections.length > 0}
   <nav class="dots" aria-label="Page sections">
     <button
       class="top-btn"
@@ -84,7 +86,7 @@
       </svg>
     </button>
 
-    {#each sectionNav.sections as { id, label } (id)}
+    {#each sections as { id, label } (id)}
       <button
         class="dot"
         class:active={activeSectionId === id}

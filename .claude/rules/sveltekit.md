@@ -65,6 +65,40 @@ kit: {
 },
 ```
 
+## SSR-First Rendering
+
+All content determinable at build/SSR time must be rendered during SSR —
+never deferred to `$effect`. `$effect` runs only on the client after
+hydration; anything gated behind it will flash or pop in.
+
+Pass static page metadata (section navigation, page titles, structured
+data) through `load()` so it is available during SSR. The root layout can
+access child page data via `page.data` from `$app/state`:
+
+```svelte
+<!-- +layout.svelte -->
+<script lang="ts">
+  import { page } from '$app/state';
+  const sections = $derived(page.data.sections ?? []);
+</script>
+
+<SectionDots {sections} />
+```
+
+```ts
+// +page.ts
+export function load() {
+  return { sections: [{ id: 'hero', label: 'Top' }, ...] };
+}
+```
+
+Reserve `$effect` for genuinely client-only concerns: scroll listeners,
+`localStorage`, `IntersectionObserver`, `window`, `document`. For
+components with both SSR structure and client behaviour (e.g. a nav that
+shows a backdrop when scrolled), choose the CSS default that is correct
+for the majority of page loads and adjust on the client — never start
+invisible or unstyled.
+
 ## Type Generation
 
 Run `pnpm check` (which runs `svelte-kit sync`) after adding new routes.

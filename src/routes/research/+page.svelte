@@ -1,6 +1,5 @@
 <script lang="ts">
   import { publications, aistProjects } from '$lib/data/publications';
-  import { sectionNav } from '$lib/state/sections.svelte';
 
   // All publications: under-review first, then reverse-chronological
   const allPubs = [...publications].sort((a, b) => {
@@ -14,15 +13,6 @@
     security: 'Security',
     'augmented-reality': 'Augmented Reality'
   };
-
-  $effect(() => {
-    sectionNav.set([
-      { id: 'top', label: 'Top' },
-      { id: 'publications', label: 'Publications' },
-      { id: 'applied', label: 'Applied Research' }
-    ]);
-    return () => sectionNav.set([]);
-  });
 </script>
 
 <svelte:head>

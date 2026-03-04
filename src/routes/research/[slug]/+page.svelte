@@ -1,18 +1,6 @@
 <script lang="ts">
-  import { sectionNav } from '$lib/state/sections.svelte';
-
   const { data } = $props();
   const pub = $derived(data.pub);
-
-  $effect(() => {
-    const sections: { id: string; label: string }[] = [{ id: 'top', label: 'Top' }];
-    if (pub.tldr) sections.push({ id: 'tldr', label: 'TL;DR' });
-    sections.push({ id: 'abstract', label: 'Abstract' });
-    if (pub.presentations?.length) sections.push({ id: 'presentations', label: 'Presentations' });
-    sections.push({ id: 'tags', label: 'Tags' });
-    sectionNav.set(sections);
-    return () => sectionNav.set([]);
-  });
 </script>
 
 <svelte:head>

@@ -3,7 +3,6 @@
   import profilePhoto from '$lib/assets/profile.png';
   import { publications } from '$lib/data/publications';
   import { projects } from '$lib/data/projects';
-  import { sectionNav } from '$lib/state/sections.svelte';
 
   // Show featured publications; under-review first, then reverse-chronological
   const featuredPubs = publications
@@ -14,16 +13,6 @@
       return b.year - a.year;
     });
   const featuredProjects = projects.filter((p) => p.featured);
-
-  $effect(() => {
-    sectionNav.set([
-      { id: 'hero', label: 'Top' },
-      { id: 'about', label: 'About' },
-      { id: 'research', label: 'Research' },
-      { id: 'projects', label: 'Projects' }
-    ]);
-    return () => sectionNav.set([]);
-  });
 </script>
 
 <svelte:head>

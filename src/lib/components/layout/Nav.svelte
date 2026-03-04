@@ -9,13 +9,14 @@
     { href: '/uses/', label: 'Uses' }
   ];
 
-  let scrolled = $state(false);
+  let atTop = $state(true);
   let mobileOpen = $state(false);
 
   $effect(() => {
     function onScroll() {
-      scrolled = window.scrollY > 50;
+      atTop = window.scrollY <= 50;
     }
+    onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   });
@@ -30,7 +31,7 @@
 </script>
 
 <header class="nav-wrap">
-  <nav class="nav" class:scrolled>
+  <nav class="nav" class:at-top={atTop}>
     <a class="name" href="/">{profile.name}</a>
 
     <ul class="links">
@@ -78,18 +79,21 @@
     align-items: center;
     justify-content: space-between;
     padding: 20px 0;
-    border-bottom: 1px solid transparent;
+    background: var(--color-strip-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-border);
     transition:
       background var(--transition-base),
       border-color var(--transition-base),
       backdrop-filter var(--transition-base);
   }
 
-  .nav.scrolled {
-    background: var(--color-strip-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom-color: var(--color-border);
+  .nav.at-top {
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-bottom-color: transparent;
   }
 
   .name {
