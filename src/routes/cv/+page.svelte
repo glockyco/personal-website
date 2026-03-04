@@ -255,6 +255,7 @@
           </span>
         </div>
         <div class="project-tagline">{project.tagline}</div>
+        <div class="project-tech">{project.techStack.join(', ')}</div>
       </div>
     {/each}
   </div>
@@ -862,6 +863,14 @@
     font-size: var(--text-sm);
     color: var(--color-muted);
     line-height: 1.5;
+  }
+
+  .project-tech {
+    font-size: var(--text-xs);
+    font-style: italic;
+    color: var(--color-muted);
+    line-height: 1.5;
+    margin-top: 2px;
   }
 
   /* ── Teaching & Supervision ── */
