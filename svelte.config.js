@@ -11,7 +11,11 @@ const config = {
       strict: true
     }),
     prerender: {
-      handleHttpError: 'fail',
+      handleHttpError: ({ path, message }) => {
+        // cv.pdf is generated locally by pnpm pdf, not during build — ignore during prerender
+        if (path === '/cv.pdf') return;
+        throw new Error(message);
+      },
       handleMissingId: 'fail'
     }
   }

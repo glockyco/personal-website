@@ -11,6 +11,13 @@ notes/
 /.svelte-kit
 /build
 
+# Generated PDFs
+static/cv.pdf
+cv-full.pdf
+
+# Typst intermediate data export
+scripts/cv-data.json
+
 # OS
 .DS_Store
 Thumbs.db
