@@ -86,16 +86,19 @@
       <p class="header-summary">{researchSummary}</p>
     </div>
   </div>
-  <nav class="page-nav">
-    <a class="page-nav-pill" href="#experience">Experience</a>
-    <a class="page-nav-pill" href="#education">Education</a>
-    <a class="page-nav-pill" href="#continuing-education">Continuing Education</a>
-    <a class="page-nav-pill" href="#publications">Publications</a>
-    <a class="page-nav-pill" href="#projects">Projects</a>
-    <a class="page-nav-pill" href="#teaching">Teaching</a>
-    <a class="page-nav-pill" href="#service">Service</a>
-    <a class="page-nav-pill" href="#skills">Skills</a>
-  </nav>
+  <div class="page-nav-row">
+    <nav class="page-nav">
+      <a class="page-nav-pill" href="#experience">Experience</a>
+      <a class="page-nav-pill" href="#education">Education</a>
+      <a class="page-nav-pill" href="#continuing-education">Continuing Education</a>
+      <a class="page-nav-pill" href="#publications">Publications</a>
+      <a class="page-nav-pill" href="#projects">Projects</a>
+      <a class="page-nav-pill" href="#teaching">Teaching</a>
+      <a class="page-nav-pill" href="#service">Service</a>
+      <a class="page-nav-pill" href="#skills">Skills</a>
+    </nav>
+    <a class="pdf-link" href="/cv.pdf">PDF version &darr;</a>
+  </div>
 </div>
 
 <!-- ── Experience ───────────────────────────────────────────────── -->
@@ -276,6 +279,9 @@
             {course.institution} &middot; {course.semesters.length}
             {course.semesters.length === 1 ? 'semester' : 'semesters'}
           </span>
+          {#if course.topics}
+            <span class="compact-meta compact-meta--topics">{course.topics}</span>
+          {/if}
         </div>
       {/each}
     {/if}
@@ -464,14 +470,34 @@
     max-width: 680px;
   }
 
-  .page-nav {
+  .page-nav-row {
     display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 16px;
     margin-top: 20px;
     padding-top: 20px;
     border-top: 1px solid var(--color-border);
     transition: border-color var(--transition-base);
+  }
+
+  .page-nav {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    flex: 1;
+  }
+
+  .pdf-link {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-accent);
+    white-space: nowrap;
+    flex-shrink: 0;
+
+    &:hover {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
   }
 
   .page-nav-pill {
@@ -626,6 +652,10 @@
     font-size: var(--text-sm);
     color: var(--color-muted);
     display: block;
+  }
+
+  .compact-meta--topics {
+    font-style: italic;
   }
 
   .sub-label {
