@@ -197,7 +197,7 @@ const rawPublications = [
   {
     slug: 'msc-thesis-2020',
     title: 'Mining Software Repositories for the Effects of Design Patterns on Software Quality',
-    authors: [{ name: 'Johann Glock', isMe: true }],
+    authors: [{ name: 'Johann Aichberger', isMe: true }],
     venue: 'University of Applied Sciences Upper Austria',
     venueShort: 'MSc Thesis',
     year: 2020,
