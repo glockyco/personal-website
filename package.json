@@ -13,7 +13,8 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "pdf": "vite build && node --experimental-strip-types scripts/generate-pdf.ts",
-    "pdf:full": "vite build && node --experimental-strip-types scripts/generate-pdf.ts --full"
+    "pdf:full": "vite build && node --experimental-strip-types scripts/generate-pdf.ts --full",
+    "cf-deploy": "pnpm pdf && wrangler deploy"
   },
   "devDependencies": {
     "@commitlint/cli": "^20.4.2",
