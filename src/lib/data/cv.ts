@@ -378,7 +378,7 @@ export const presentations: Presentation[] = [
 
 export const skills: Skill[] = [
   {
-    category: 'Research Areas',
+    category: 'Research Interests',
     items: [
       'Test Generalization',
       'Test Generation',
