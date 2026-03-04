@@ -47,15 +47,16 @@ PhD researcher with X years of software engineering experience. Published in top
 
 **Technical/Hobby (on /projects):**
 
-- Erenshor ecosystem: interactive maps (SvelteKit + deck.gl), spreadsheet tool, wiki bot, mods (C# / MelonLoader)
-- Ancient Kingdoms ecosystem: compendium website, modding
-- 10-Man Idle: wiki-like website
-- One detail page per ecosystem (/projects/[slug])
+- Erenshor Community Tools: Interactive maps, mods, and wiki bot for the Erenshor community
+- Ancient Kingdoms Compendium: Data-mined compendium and interactive world map for Ancient Kingdoms
+- 10-Man Codex: Data-mined game codex for the 10-Man Idle community (inactive)
+- Personal Website: Portfolio and CV presenting my research and engineering work
+- One detail page per project (/projects/[slug])
 - Framing: curiosity, digging deep, helping the community, presenting results clearly for non-technical audiences
 
 **Professional Background (on /cv):**
 
-- 6 years web development at MICROLAB (PHP, jQuery)
+- 6 years web development at MICROLAB, Ried im Innkreis (PHP, jQuery)
 - 3.5 years applied research at AIST (data engineering, security intelligence, AR)
 - 7 semesters main instructor (Teaching Assistant roles in background only — grading/feedback, no direct student contact; on CV but not featured)
 - Student supervision:
@@ -76,7 +77,7 @@ PhD researcher with X years of software engineering experience. Published in top
 ├── /research               # Publications list + AIST projects card grid
 │   └── /research/[slug]    # Paper detail (includes slides/talks, tool links)
 ├── /teaching               # NOT a separate page — folded into /cv
-├── /projects               # Hobby project grid (Erenshor, AK, 10-Man Idle)
+├── /projects               # Hobby project grid (Erenshor Community Tools, AK Compendium, 10-Man Codex, Personal Website)
 │   └── /projects/[slug]    # Project detail (one per ecosystem)
 ├── /cv                     # CV page (education, experience, teaching, supervision, service)
 ├── /uses                   # Tools and daily workflow
@@ -95,15 +96,15 @@ Contact is not a separate page — social links and email appear in the footer a
 
 ### Core Sections
 
-| Section      | Purpose                | Content                                                                                                                            |
-| ------------ | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| **Home**     | First impression       | Hero (name, tagline, affiliation, ORCID), stats row, research focus, selected publications, featured projects (Erenshor + AK only) |
-| **Research** | Academic credibility   | 4 peer-reviewed papers with full metadata; AIST projects compact card grid (links out)                                             |
-| **Teaching** | —                      | Not a separate page. Folded into /cv.                                                                                              |
-| **Projects** | Technical/hobby skills | Erenshor, Ancient Kingdoms, 10-Man Idle — one card per ecosystem, detail pages                                                     |
-| **CV**       | Formal credentials     | Traditional view (Phase 1); interactive timeline (Phase 3); teaching, supervision, service, awards, PDF download                   |
-| **Uses**     | Daily workflow         | Icon grid with category filters and optional prose; tools across editor, AI, terminal, DB, etc.                                    |
-| **Contact**  | Reachability           | Email, GitHub, LinkedIn, Scholar, ORCID, Semantic Scholar, Institution — in footer and floating icon strip only                    |
+| Section      | Purpose                | Content                                                                                                                                                       |
+| ------------ | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Home**     | First impression       | Hero (name, tagline, affiliation, ORCID), stats row, research focus, selected publications, featured projects (Erenshor Community Tools + AK Compendium only) |
+| **Research** | Academic credibility   | 4 peer-reviewed papers with full metadata; AIST projects compact card grid (links out)                                                                        |
+| **Teaching** | —                      | Not a separate page. Folded into /cv.                                                                                                                         |
+| **Projects** | Technical/hobby skills | Erenshor Community Tools, Ancient Kingdoms Compendium, 10-Man Codex, Personal Website — one card per project, detail pages                                    |
+| **CV**       | Formal credentials     | Traditional view (Phase 1); interactive timeline (Phase 3); teaching, supervision, service, awards, PDF download                                              |
+| **Uses**     | Daily workflow         | Icon grid with category filters and optional prose; tools across editor, AI, terminal, DB, etc.                                                               |
+| **Contact**  | Reachability           | Email, GitHub, LinkedIn, Scholar, ORCID, Semantic Scholar, Institution — in footer and floating icon strip only                                               |
 
 ### Navigation
 
@@ -148,7 +149,7 @@ Home > Projects > Project Name
 
 | Decision                                            | Rationale                                                                                                                   |
 | --------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| **No filters (deferred)**                           | Too few items now (4 papers, 3 projects); schemas include filterable fields so UI can be added later without data migration |
+| **No filters (deferred)**                           | Too few items now (4 papers, 4 projects); schemas include filterable fields so UI can be added later without data migration |
 | **No carousels**                                    | Poor UX, accessibility issues; use grids instead                                                                            |
 | **Talks/Slides**                                    | Part of Research detail pages, not a separate page                                                                          |
 | **Teaching**                                        | Part of CV page, not a separate page                                                                                        |
@@ -195,7 +196,7 @@ Home → Projects → Project Detail → [View Live Demo]
 Erenshor player, modder, open source contributor.
 
 ```
-Home → Projects → Erenshor Maps → [Embedded Demo]
+Home → Projects → Erenshor Community Tools → [Embedded Demo]
                                ↘ GitHub
 ```
 
@@ -215,19 +216,20 @@ Paper/Project Detail → [View content]
 ### Recommended Stack
 
 ```
-SvelteKit + Tailwind CSS + TypeScript
+SvelteKit + Plain CSS + TypeScript
                     ↓
              adapter-static
                     ↓
-           Cloudflare Pages
+          Cloudflare Workers
 ```
 
 **Rationale:**
 
 - Already proficient in SvelteKit (from Erenshor maps)
-- Tailwind + shadcn-svelte (already using)
+- Plain CSS with custom properties — no Tailwind, no shadcn-svelte, no preprocessor
+- 6 themes via `[data-theme]` on `<html>`, oklch color tokens, CSS `@layer`, native nesting
 - Static output = fast, cheap, secure
-- Cloudflare = already using, free, fast CDN
+- Cloudflare Workers = already using, free, fast CDN
 
 ### Alternatives Considered
 
@@ -240,9 +242,9 @@ SvelteKit + Tailwind CSS + TypeScript
 
 ### Hosting
 
-**Cloudflare Pages (Recommended)**
+**Cloudflare Workers (static asset hosting via wrangler)**
 
-- Already using for Erenshor maps
+- Already using for Erenshor maps and other projects
 - Free tier is generous
 - Global CDN
 - Easy custom domain
@@ -395,24 +397,28 @@ export type Project = {
   slug: string;
   title: string;
   tagline: string;
-  description: string; // The challenge
-  solution: string; // The solution
-  status: 'active' | 'maintained' | 'archived';
+  status: 'active' | 'maintained' | 'inactive' | 'archived';
+  featured: boolean; // Show on homepage
+
+  challenge?: string;
+  solution?: string;
 
   // Media
-  heroImage: string;
+  heroImage?: string;
   screenshots?: string[];
 
   // Links
   liveUrl?: string;
   githubUrl?: string;
   steamGuideUrl?: string;
+  thunderstoreUrl?: string;
+  wikiUrl?: string;
 
   // Technical details
   techStack: string[];
 
   // "How I Built This" content
-  architecture?: string; // Markdown description
+  architecture?: string;
   technicalDecisions?: {
     decision: string;
     rationale: string;
@@ -423,22 +429,12 @@ export type Project = {
 
   // Complexity indicators
   metrics?: {
-    linesOfCode?: string; // "~15,000"
-    components?: number;
     dataScale?: string; // "500k+ entities"
     users?: string; // "X monthly active users"
   };
 
-  // Performance evidence
-  performance?: {
-    lighthouseScore?: number;
-    loadTime?: string;
-    optimizations?: string[];
-  };
-
   // Related content
   relatedPapers?: string[];
-  relatedProjects?: string[];
 };
 ```
 
@@ -453,8 +449,13 @@ export type Education = {
   location: string;
   startYear: number;
   endYear?: number; // undefined = present
+  expectedEnd?: string; // e.g. "2026" — for display in header, not date column
   thesis?: string;
+  theses?: { label: string; title: string }[]; // BSc had two theses
   advisor?: string;
+  gpa?: string;
+  distinction?: string; // "With Distinction"
+  scholarship?: string; // "Merit Scholarship"
   description?: string;
 };
 
@@ -463,46 +464,50 @@ export type WorkExperience = {
   company: string;
   location: string;
   startYear: number;
+  startMonth?: number;
   endYear?: number;
-  description: string;
+  endMonth?: number;
   highlights?: string[];
+  projectUrls?: { label: string; url: string }[];
 };
 
 export type TeachingExperience = {
   course: string;
-  role: 'instructor' | 'ta' | 'guest-lecturer';
+  role: 'instructor' | 'ta'; // "Lab Instructor" or "Tutor"
   institution: string;
-  semesters: string[]; // ["Fall 2022", "Spring 2023"]
-  enrollment?: number;
-  evaluationScore?: string; // "4.5/5.0"
+  semesters: string[]; // ["Winter 2022/23", "Summer 2023"]
   description?: string;
 };
 
 export type Supervision = {
-  name: string;
+  name?: string; // omitted for anonymous intern entries
   type: 'bsc-thesis' | 'msc-thesis' | 'msc-project' | 'bsc-intern' | 'highschool-intern';
   status: 'completed' | 'ongoing';
-  year?: number; // completion year (if completed)
   topic?: string;
-  note?: string; // e.g. "AIST summer internship", "FFG Schüler:innenpraktikum"
+  note?: string; // e.g. "AIST summer internship (i2f project)"
 };
 
 export type AcademicService = {
-  type: 'reviewer' | 'subreviewer' | 'committee' | 'organizer';
+  type: 'reviewer' | 'subreviewer' | 'committee' | 'outreach';
   venue: string;
-  year: number;
-  note?: string; // "As subreviewer for supervisor"
+  year?: number;
+  count?: number; // for sub-reviewer (e.g. ×2 for FSE)
+  note?: string;
 };
 
-export type Award = {
+export type Presentation = {
   title: string;
-  organization: string;
-  years: string; // "2019-2022"
-  description?: string;
+  event: string;
+  location?: string;
+  year: number;
+  type: 'talk' | 'poster' | 'invited' | 'outreach';
+  note?: string;
 };
+
+// No AwardSchema — scholarships/distinctions merged as chips on Education entries
 
 export type Skill = {
-  category: string; // "Languages", "Frameworks", "Tools"
+  category: string; // "Research", "Languages & Tools"
   items: string[];
 };
 ```
@@ -618,14 +623,14 @@ export const academicLinks = {
 │  │ Paper Title                         2024 | JSS | First Auth ││
 │  │ TL;DR...                                        [PDF] [Cite] ││
 │  └─────────────────────────────────────────────────────────────┘│
-│  [→ All Publications]                                            │
+│  [Publication details →]                                         │
 ├─────────────────────────────────────────────────────────────────┤
 │  FEATURED PROJECTS                                               │
-│  ┌─────────────────┐ ┌─────────────────┐                        │
-│  │ Erenshor        │ │ Ancient Kingdoms│                        │
-│  │ (ecosystem)     │ │ (ecosystem)     │                        │
-│  └─────────────────┘ └─────────────────┘                        │
-│  [→ All Projects]                                                │
+│  ┌───────────────────────┐ ┌───────────────────────┐             │
+│  │ Erenshor Community    │ │ Ancient Kingdoms      │             │
+│  │ Tools                 │ │ Compendium            │             │
+│  └───────────────────────┘ └───────────────────────┘             │
+│  [Project details →]                                             │
 ├─────────────────────────────────────────────────────────────────┤
 │ [FOOTER: name · tagline · social links · nav · copyright]        │
 └─────────────────────────────────────────────────────────────────┘
@@ -699,7 +704,6 @@ Section dots: Publications · Applied Research
 ├──────────────────────────── id="presentations" ────────────────┤
 │  Presentations  (section only rendered if presentations set)    │
 │  · Talk @ ICSE 2024 Doctoral Symposium, Lisbon · [Slides ↓]    │
-│  · Privatissima, Klagenfurt · [Slides ↓]                       │
 ├──────────────────────────── id="tags" ─────────────────────────┤
 │  Tags                                                           │
 │  [semantic differencing] [symbolic execution] [program analysis]│
@@ -727,17 +731,23 @@ Deferred to later:
 │  Things I've built outside of research — community tools,       │
 │  game modding ecosystems, and hobby sites                       │
 ├─────────────────────────────────────────────────────────────────┤
-│  (No filters needed — 3 cards, one per ecosystem)               │
+│  (No filters needed — 4 cards)                                  │
 │  ┌───────────────────┐ ┌───────────────────┐ ┌───────────────┐ │
 │  │ ┌───────────────┐ │ │ ┌───────────────┐ │ │ ┌───────────┐ │ │
 │  │ │  Screenshot   │ │ │ │  Screenshot   │ │ │ │Screenshot │ │ │
 │  │ └───────────────┘ │ │ └───────────────┘ │ │ └───────────┘ │ │
-│  │ Erenshor          │ │ Ancient Kingdoms  │ │ 10-Man Idle  │ │
-│  │ Maps, mods, wiki, │ │ Compendium, mods  │ │ Wiki-like    │ │
-│  │ bots, guides      │ │ Python pipelines  │ │ site         │ │
-│  │ [SvelteKit][C#]   │ │ [SvelteKit][Py]   │ │ [SvelteKit]  │ │
-│  │ ● Active          │ │ ● Active          │ │ ● Active     │ │
+│  │ Erenshor Community│ │ Ancient Kingdoms  │ │ 10-Man Codex │ │
+│  │ Tools             │ │ Compendium        │ │ Data-mined   │ │
+│  │                   │ │                   │ │ game codex   │ │
+│  │ [SvelteKit][C#]   │ │ [SvelteKit][Py]   │ │ [Astro]      │ │
+│  │ ● Active          │ │ ● Active          │ │ ● Inactive   │ │
 │  └───────────────────┘ └───────────────────┘ └───────────────┘ │
+│  ┌───────────────────┐                                          │
+│  │ Personal Website  │                                          │
+│  │ Portfolio and CV  │                                          │
+│  │ [SvelteKit][Zod]  │                                          │
+│  │ ● Active          │                                          │
+│  └───────────────────┘                                          │
 ├─────────────────────────────────────────────────────────────────┤
 │ [FOOTER]                                                        │
 └─────────────────────────────────────────────────────────────────┘
@@ -754,8 +764,8 @@ Deferred to later:
 │  ┌─────────────────────────────────────────────────────────────┐│
 │  │                    Hero Screenshot                          ││
 │  └─────────────────────────────────────────────────────────────┘│
-│  Erenshor Interactive Maps                         ● Active     │
-│  Community tools for game exploration                           │
+│  Erenshor Community Tools                          ● Active     │
+│  Interactive maps, mods, and wiki bot for Erenshor              │
 │                                                                 │
 │  [Live Demo] [GitHub] [Steam Guide]                             │
 ├─────────────────────────────────────────────────────────────────┤
@@ -774,7 +784,7 @@ Deferred to later:
 │  ▶ HOW I BUILT THIS (expandable)                                │
 │  ┌─────────────────────────────────────────────────────────────┐│
 │  │ ARCHITECTURE                                                ││
-│  │ [Diagram: MelonMod → Python → SQLite → SvelteKit → deck.gl]││
+│  │ [Diagram: BepInEx mod → Python → SQLite → SvelteKit → deck.gl]│
 │  │                                                             ││
 │  │ TECHNICAL DECISIONS                                         ││
 │  │ • deck.gl over Leaflet: 500k+ entities needed WebGL        ││
@@ -796,60 +806,76 @@ Deferred to later:
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│ [NAV]                                                           │
+│ [NAV]                                                    [dots] │
 ├─────────────────────────────────────────────────────────────────┤
-│  Curriculum Vitae                          [⬇ Download PDF]     │
-│                                                                 │
-│  View as: [● Timeline] [○ Traditional]   ← prominent toggle     │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                 │
-│  TIMELINE VIEW (interactive, Phase 3)                           │
-│  ┌─────────────────────────────────────────────────────────────┐│
-│  │ Education ═══════════════════                               ││
-│  │ Work      ═══════════    ════════════                       ││
-│  │ Research      ══════════════════════                        ││
-│  │ Projects          ════  ════  ══════                        ││
-│  │ ──────────────────────────────────────────────────────────  ││
-│  │ 2018    2019    2020    2021    2022    2023    2024    Now ││
-│  └─────────────────────────────────────────────────────────────┘│
-│  ⌨ Keyboard navigable · 🔊 Screen reader accessible             │
-│  Click any item to see details                                  │
-├─────────────────────────────────────────────────────────────────┤
-│  [Selected item details appear here]                            │
-│  ┌─────────────────────────────────────────────────────────────┐│
-│  │ PhD in Computer Science                      2020 - Present ││
-│  │ University Name                                             ││
-│  │ Research focus: ...                                         ││
-│  │ [View related publications →]                               ││
-│  └─────────────────────────────────────────────────────────────┘│
-│                                                                 │
+│  ┌────────┐  Johann Glock                                       │
+│  │ PHOTO  │  PhD Researcher · Software Engineer                 │
+│  │        │  University of Klagenfurt · Advisor: Prof. Pinzger  │
+│  └────────┘  Expected graduation: Q4 2026                       │
+│              Research summary paragraph...                      │
 │  ─────────────────────────────────────────────────────────────  │
-│                                                                 │
-│  TRADITIONAL VIEW (always available, default for Phase 1-2)    │
-│  Sections: Education | Experience | Teaching | Service |       │
-│            Awards | Skills | Publications                       │
-│                                                                 │
-│  TEACHING                                                       │
-│  ┌─────────────────────────────────────────────────────────────┐│
-│  │ Course Name                                    TA · 2022-23 ││
-│  │ Institution · X students · 4.5/5.0 evaluation               ││
-│  └─────────────────────────────────────────────────────────────┘│
-│                                                                 │
-│  ACADEMIC SERVICE                                               │
-│  ┌─────────────────────────────────────────────────────────────┐│
-│  │ • Reviewer: TOSEM (2024)                                    ││
-│  │ • Subreviewer: ICSE, FSE, SANER, TOSEM                      ││
-│  └─────────────────────────────────────────────────────────────┘│
-│                                                                 │
-│  AWARDS                                                         │
-│  ┌─────────────────────────────────────────────────────────────┐│
-│  │ • Leistungsstipendium · University · 2019-2022              ││
-│  └─────────────────────────────────────────────────────────────┘│
-│                                                                 │
+│  [Experience] [Education] [Publications] [Projects]             │
+│  [Teaching] [Presentations] [Service & Outreach] [Skills]       │
+├──────────────────────────── id="experience" ────────────────────┤
+│  EXPERIENCE                                                     │
+│  2021–present  University Assistant (PhD Candidate)             │
+│                University of Klagenfurt – SERG                  │
+│                • Research on semantic differencing...            │
+│  2018–2021     Research Associate                               │
+│                FH Upper Austria – AIST Research Group            │
+│  2012–2018     Web Developer                                    │
+│                MICROLAB GmbH · Ried im Innkreis                 │
+├──────────────────────────── id="education" ─────────────────────┤
+│  EDUCATION                                                      │
+│  2021–present  Dr. techn. (PhD) in Computer Science             │
+│                Thesis: ... · Advisor: Prof. Martin Pinzger      │
+│  2018–2020     MSc in Software Engineering                      │
+│                [With Distinction] [Merit Scholarship] [GPA 1.07]│
+│  2015–2018     BSc in Software Engineering                      │
+│  2007–2012     Matura · HTL Braunau [With Distinction]          │
+├──────────────────────────── id="publications" ──────────────────┤
+│  PUBLICATIONS                        [Publication details →]    │
+│  Teralizer: ...                        [Under Review]           │
+│  PASDA: ...                            [JSS] [2024]             │
+│  ...                                                            │
+├──────────────────────────── id="projects" ──────────────────────┤
+│  SOFTWARE PROJECTS                   [Project details →]        │
+│  Erenshor Community Tools  ● Active                             │
+│  Ancient Kingdoms Compendium  ● Active                          │
+│  Personal Website  ● Active                                     │
+│  10-Man Codex  ● Inactive                                       │
+├──────────────────────────── id="teaching" ──────────────────────┤
+│  TEACHING & SUPERVISION                                         │
+│  Lab Instructor: SE I (3 sem), SE II (4 sem)                    │
+│  Tutor: Advanced Image Processing, Basic Web Technology         │
+│  Supervision: 3 MSc theses, 2 MSc projects, 4 BSc theses...    │
+├──────────────────────────── id="presentations" ─────────────────┤
+│  PRESENTATIONS                                                  │
+│  2024  ICSE Doctoral Symposium · Lisbon                         │
+│  2024  2nd SCCH Research Day                                    │
+│  2023  3rd Intl SE Summer School · Lugano                       │
+├──────────────────────────── id="service" ───────────────────────┤
+│  SERVICE & OUTREACH                                             │
+│  Reviewer: TOSEM                                                │
+│  Sub-reviewer: [FSE 2025] [FSE 2026] [ICSE 2024] [SANER 2024] │
+│  Outreach: TechTalents, Long Night of Research                  │
+├──────────────────────────── id="skills" ────────────────────────┤
+│  SKILLS                                                         │
+│  Research:     [Test Generalization] [Symbolic Execution] ...   │
+│  Languages     [Java] [C#/.NET] [Python] [PHP] [TypeScript] ...│
+│  & Tools:      [Git] [Docker] [GitHub Actions]                  │
 ├─────────────────────────────────────────────────────────────────┤
 │ [FOOTER]                                                        │
 └─────────────────────────────────────────────────────────────────┘
 ```
+
+Section dots: Top · Experience · Education · Publications · Projects ·
+Teaching · Presentations · Service & Outreach · Skills
+
+No cards — flat document with border separators. 3 visual patterns:
+A (timeline grid 120px | 1fr), B (compact list rows), C (inline chip flow).
+No standalone Awards section — scholarships/distinctions merged as chips on
+education entries. Interactive timeline deferred to Phase 4.
 
 _(No dedicated contact page — email and social links appear in footer and nav header icons only.)_
 
@@ -911,7 +937,7 @@ _Two levels of prose: (1) a short page-level intro about overall setup and workf
 
 ---
 
-## Erenshor/AK Case Study
+## Erenshor Community Tools / AK Compendium Case Study
 
 This is a **significant portfolio piece** demonstrating:
 
@@ -926,8 +952,8 @@ This is a **significant portfolio piece** demonstrating:
 
 ```
 ┌─────────────────────────────────────────────────┐
-│ Erenshor Interactive Maps                       │
-│ A community tool for game exploration           │
+│ Erenshor Community Tools                        │
+│ Interactive maps, mods, and wiki bot            │
 ├─────────────────────────────────────────────────┤
 │ [Screenshot of world map]                       │
 ├─────────────────────────────────────────────────┤
@@ -940,7 +966,7 @@ This is a **significant portfolio piece** demonstrating:
 │ and presents it as interactive maps...          │
 │                                                 │
 │ TECHNICAL DETAILS                               │
-│ • MelonLoader mods (C#) for data extraction    │
+│ • BepInEx mods (C#) for data extraction         │
 │ • Python build pipeline → SQLite               │
 │ • SvelteKit + deck.gl for visualization        │
 │ • Cloudflare Workers for hosting               │
@@ -1066,11 +1092,12 @@ Development is iterative — the site goes live when Phase 1 is useful, then ext
 
 Order: CV → Projects → Uses
 
-- [ ] **CV page** (education, experience, teaching, supervision,
-      presentations, service, awards, skills) — traditional view;
-      timeline deferred to Phase 3
-- [ ] **Projects list page** (3-col card grid; screenshots provided
-      by user; collaborative text writing for challenge/solution/tech)
+- [x] **CV page** (experience, education, publications, projects,
+      teaching & supervision, presentations, service & outreach,
+      skills) — flat document view with profile photo; no awards
+      section (merged as chips on education); timeline deferred
+- [ ] **Projects list page** (card grid for 4 projects; screenshots
+      provided by user; collaborative text writing for challenge/solution/tech)
 - [ ] **Projects detail pages** (challenge, solution, demo embed,
       "How I Built This", tech stack, metrics; content written
       collaboratively with user)
@@ -1207,7 +1234,7 @@ The PDF approach is pragmatic since slides are already available as PDFs.
 
 ### Embedded Project Demos
 
-**Maps (Erenshor/Ancient Kingdoms):**
+**Maps (Erenshor Community Tools / AK Compendium):**
 
 - Embed full interactive maps via iframe
 - Show the actual production site—don't hide functionality
@@ -1256,7 +1283,7 @@ Shows engineering _thinking_, not just output.
 ### Design Philosophy
 
 - **No audience toggle**: Clean navigation lets users self-select
-- **No search or filters**: Too few items to warrant complexity (~4 papers, ~5 projects)
+- **No search or filters**: Too few items to warrant complexity (~4 papers, ~4 projects)
 - **No carousels**: Use accessible grids instead; all content visible at once
 - **Progressive disclosure**: Overview → details on demand
 - **Inline over external**: Keep visitors on-site when possible
@@ -1273,13 +1300,8 @@ cd ~/Projects/personal-website
 pnpm create svelte@latest . # Choose: Skeleton, TypeScript, ESLint, Prettier
 
 # Add dependencies
-pnpm add -D tailwindcss postcss autoprefixer
-pnpm add -D @tailwindcss/typography
 pnpm add -D @sveltejs/adapter-static
 pnpm add zod
-
-# shadcn-svelte (optional, for components)
-pnpm dlx shadcn-svelte@next init
 ```
 
 ---
@@ -1289,9 +1311,7 @@ pnpm dlx shadcn-svelte@next init
 ### Core Stack
 
 - [SvelteKit Docs](https://kit.svelte.dev/docs)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [shadcn-svelte](https://www.shadcn-svelte.com/)
-- [Cloudflare Pages](https://pages.cloudflare.com/)
+- [Cloudflare Workers](https://developers.cloudflare.com/workers/)
 
 ### Build & Validation
 
@@ -1301,7 +1321,6 @@ pnpm dlx shadcn-svelte@next init
 ### Fonts & Typography
 
 - [@fontsource](https://fontsource.org/) - Self-hosted fonts (Inter, Source Sans Pro, JetBrains Mono)
-- [@tailwindcss/typography](https://tailwindcss.com/docs/typography-plugin) - Prose styling for Markdown
 
 ### Interactive Features
 
