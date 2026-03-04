@@ -103,7 +103,7 @@ const rawPublications = [
     doi: '10.1016/j.jss.2024.112037',
     zenodo: 'https://zenodo.org/records/10033132',
     github: 'https://github.com/glockyco/PASDA',
-    tags: ['semantic differencing', 'symbolic execution', 'program analysis', 'regression testing']
+    tags: ['equivalence checking', 'program analysis', 'symbolic execution']
   },
   {
     slug: 'teralizer',
@@ -128,7 +128,12 @@ const rawPublications = [
     arxivId: '2512.14475',
     zenodo: 'https://zenodo.org/records/18242626',
     github: 'https://github.com/glockyco/Teralizer',
-    tags: ['property-based testing', 'test generalization', 'symbolic execution', 'jqwik']
+    tags: [
+      'test amplification',
+      'test generalization',
+      'property-based testing',
+      'symbolic execution'
+    ]
   },
   {
     slug: 'api-evolution',
@@ -150,7 +155,12 @@ const rawPublications = [
     tldr: 'Through 17 interviews across 11 companies, we identify six REST and event-driven API evolution strategies and six challenges, revealing tight organizational coupling and consumer lock-in as the two core problems — and proposing automated change impact analysis and better change communication as research directions.',
     pdf: '/pdfs/lercher_2024_apis.pdf',
     doi: '10.1016/j.jss.2024.112110',
-    tags: ['microservices', 'API evolution', 'empirical study', 'mining software repositories']
+    tags: [
+      'API evolution',
+      'backward compatibility',
+      'API design degradation',
+      'development team collaboration'
+    ]
   },
   {
     slug: 'icse-2024-doctoral-symposium',
@@ -169,7 +179,12 @@ const rawPublications = [
     pdf: '/pdfs/glock_2024_docsym.pdf',
     acceptanceRate: '35 of 55 accepted; 7 of 35 selected for oral presentation',
     doi: '10.1145/3639478.3639783',
-    tags: ['semantic differencing', 'symbolic execution', 'program comprehension'],
+    tags: [
+      'program comprehension',
+      'semantic differencing',
+      'equivalence checking',
+      'symbolic execution'
+    ],
     presentations: [
       {
         event: 'ICSE 2024 Doctoral Symposium',
