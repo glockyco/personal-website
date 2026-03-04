@@ -1046,97 +1046,61 @@ Development is iterative — the site goes live when Phase 1 is useful, then ext
 
 - [x] `theme-demo.html` — self-contained HTML prototype with 6 themes, floating icon strip, section dots, sticky nav, hamburger menu, card styles, layout chrome
 
-### Phase 1: Scaffold
+### Phase 1: Scaffold (Complete)
 
-Scaffold the SvelteKit project, wire up all tooling, and get a working
-deployment pipeline before writing any real content.
+- [x] SvelteKit project scaffold with adapter-static, wrangler, Zod
+- [x] ESLint + Prettier + Lefthook pre-commit hooks + commitlint
+- [x] 6-theme CSS system (`app.css`) with oklch tokens
+- [x] Theme flash prevention inline script in `app.html`
+- [x] Layout chrome: sticky nav (SSR-safe scroll state), floating icon
+      strip, section dots (SSR'd via `load()` + `page.data`), footer
+- [x] Mobile: hamburger menu, bottom-right icon strip, dots hidden
+- [x] CopyEmail component (env-var-based, clipboard only, never in DOM)
+- [x] Custom 404 page
+- [x] Zod schemas for all content types in `src/lib/data/`
+- [x] Homepage: hero, about, featured publications, featured projects
+- [x] Research list: publications + AIST compact card grid
+- [x] Research detail: full paper page (TL;DR, abstract, presentations, tags)
 
-**Scaffold command:**
+### Phase 2: Remaining Pages (In Progress)
 
-```bash
-npx sv create . --template minimal --types ts --no-add-ons
-```
+Order: CV → Projects → Uses
 
-Then manually add:
-
-```bash
-pnpm add -D @sveltejs/adapter-static wrangler
-pnpm add zod
-```
-
-**After scaffolding, complete in this order:**
-
-- [ ] Configure `svelte.config.js`:
-  - `adapter-static` with `pages: 'build'`, `assets: 'build'`
-  - `prerender.handleHttpError: 'fail'`, `handleMissingId: 'fail'`
-- [ ] Create `wrangler.toml` (Cloudflare Workers static assets):
-  ```toml
-  name = "personal-website"
-  compatibility_date = "<today>"
-  [assets]
-  directory = "./build"
-  ```
-- [ ] Set `export const prerender = true` and `trailingSlash = 'always'`
-      in `src/routes/+layout.ts`
-- [ ] Wire up ESLint (flat config, `eslint-plugin-svelte`,
-      `typescript-eslint`) and Prettier (`prettier-plugin-svelte`)
-- [ ] Wire up Lefthook pre-commit hooks:
-  - Install: `brew install lefthook` (or `pnpm add -D lefthook`)
-  - Run `lefthook install` after creating `lefthook.yml`
-  - Hooks: prettier check, eslint, svelte-check (parallel)
-  - commit-msg hook: commitlint with `@commitlint/config-conventional`
-  - Install commitlint: `pnpm add -D @commitlint/cli
-@commitlint/config-conventional`
-- [ ] Wire up GitHub Actions CI (`.github/workflows/ci.yml`):
-  - Trigger: push to main + pull_request
-  - Jobs: `pnpm install`, `pnpm check`, `pnpm lint`, `pnpm build`
-  - Use `pnpm/action-setup`, `actions/setup-node` with
-    `node-version: lts/*` and `cache: pnpm`
-- [ ] Confirm `pnpm build` produces a valid `build/` directory
-- [ ] Confirm `wrangler deploy` succeeds to Cloudflare Workers
-
-**Then continue with layout and pages:**
-
-- [ ] Global CSS: `src/app.css` with `@layer base, theme`, theme tokens
-      for all 6 themes, resets, typography scale, layout utilities
-- [ ] Theme flash prevention: inline script in `app.html`
-- [ ] Basic layout:
-  - Sticky nav (Research, Projects, CV, Uses; frosted glass on scroll)
-  - Floating icon strip (left: GitHub, Scholar, LinkedIn, Email, theme toggle)
-  - Section dots (right: one per section, scroll spy, back-to-top chevron)
-  - Mobile: hamburger menu + bottom-right icon bar + hidden section dots
-  - Footer (name, tagline, social links, nav, copyright)
-- [ ] Custom 404 page (`src/routes/+error.svelte`)
-- [ ] Zod schemas for all content types in `src/lib/data/`
-- [ ] Homepage: hero (name, tagline, affiliation, ORCID), stats row,
-      research focus, selected publications, featured projects (Erenshor + AK)
-- [ ] Research page (publications list + AIST compact card grid)
-- [ ] Projects page (Erenshor, AK, 10-Man Idle — one card per ecosystem)
-- [ ] CV page (education, experience, teaching, supervision, service, awards)
-- [ ] Uses page (icon grid with category filters)
+- [ ] **CV page** (education, experience, teaching, supervision,
+      presentations, service, awards, skills) — traditional view;
+      timeline deferred to Phase 3
+- [ ] **Projects list page** (3-col card grid; screenshots provided
+      by user; collaborative text writing for challenge/solution/tech)
+- [ ] **Projects detail pages** (challenge, solution, demo embed,
+      "How I Built This", tech stack, metrics; content written
+      collaboratively with user)
+- [ ] **Uses page** (icon grid with category headings; icons TBD;
+      short intro + optional per-tool one-liners)
+- [ ] **Presentations/slides** — add slides PDFs to `static/pdfs/`,
+      link from CV presentations section and from research detail pages
+      (already in data schema; need actual slide files)
 - [ ] Deploy to Cloudflare Workers
 
-### Phase 2: Content & Polish
+### Phase 3: Content & Polish
 
-- [ ] All publications with full schema (type, awards, acceptance rates, co-author links)
-- [ ] Project case studies with "How I Built This" and "What I'd Do Differently" sections
-- [ ] Teaching section in CV (courses, roles, evaluations)
-- [ ] Academic service section (reviewing: TOSEM, subreviewing)
-- [ ] Awards section (Leistungsstipendium)
+- [ ] Project screenshots (provided by user) + hero images
 - [ ] Breadcrumbs on detail pages
-- [ ] Embed interactive maps (iframe with loading/error states)
+- [ ] Embed interactive maps on project detail pages (iframe with
+      loading/error states)
 - [ ] Image optimization (WebP, responsive)
-- [ ] Meta tags / SEO / canonical URLs / JSON-LD structured data (Person, ScholarlyArticle)
+- [ ] Meta tags / SEO / canonical URLs / JSON-LD structured data
+      (Person, ScholarlyArticle)
+- [ ] PDF CV download link on CV page
 
-### Phase 3: Interactive Elements
+### Phase 4: Interactive Elements
 
-- [ ] PDF viewer (pdf.js, collapsible, lazy-loaded) for papers and slides
-- [ ] Figure grid galleries (not carousel)
 - [ ] One-click citation copy (BibTeX, APA, MLA, Chicago)
+- [ ] Inline PDF viewer (pdf.js, collapsible, lazy-loaded) for papers
+      and slides
+- [ ] Figure grid galleries (not carousel)
 - [ ] Interactive timeline CV (with prominent traditional view toggle)
-- [ ] Dark mode persistence
 
-### Phase 4 (Nice-to-Have): Metrics Dashboard
+### Phase 5 (Nice-to-Have): Metrics Dashboard
 
 - [ ] "By the Numbers" section on homepage — safe static stats confirmed:
   - 4 publications (peer-reviewed)
