@@ -1,6 +1,5 @@
 <script lang="ts">
   import '../app.css';
-  import favicon from '$lib/assets/favicon.svg';
   import { page } from '$app/state';
   import { Nav, IconStrip, SectionDots, Footer } from '$lib/components/layout';
 
@@ -10,7 +9,6 @@
 </script>
 
 <svelte:head>
-  <link rel="icon" href={favicon} />
   <title>Johann Glock</title>
 </svelte:head>
 
