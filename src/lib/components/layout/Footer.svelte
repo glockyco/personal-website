@@ -7,8 +7,8 @@
   const links = [
     { href: profile.github, label: 'GitHub' },
     { href: profile.scholar, label: 'Scholar' },
-    { href: `https://orcid.org/${profile.orcid}`, label: 'ORCID' },
-    { href: profile.linkedin, label: 'LinkedIn' }
+    { href: profile.linkedin, label: 'LinkedIn' },
+    { href: `https://orcid.org/${profile.orcid}`, label: 'ORCID' }
   ];
 </script>
 
