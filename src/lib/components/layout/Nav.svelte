@@ -1,6 +1,7 @@
 <script lang="ts">
   import { page } from '$app/state';
   import { profile } from '$lib/data/links';
+  import monogram from '$lib/assets/monogram.png';
 
   const navLinks = [
     { href: '/research/', label: 'Research' },
@@ -31,7 +32,10 @@
 
 <header class="nav-wrap">
   <nav class="nav" class:at-top={atTop}>
-    <a class="name" href="/">{profile.name}</a>
+    <a class="name" href="/">
+      <img class="monogram" src={monogram} alt="" width="28" height="28" />
+      {profile.name}
+    </a>
 
     <ul class="links">
       {#each navLinks as { href, label } (href)}
@@ -96,6 +100,9 @@
   }
 
   .name {
+    display: flex;
+    align-items: center;
+    gap: 8px;
     font-size: var(--text-lg);
     font-weight: 700;
     color: var(--color-heading);
@@ -104,6 +111,12 @@
     &:hover {
       color: var(--color-heading);
     }
+  }
+
+  .monogram {
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
   }
 
   .links {
