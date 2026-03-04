@@ -60,7 +60,18 @@ const rawProjects = [
     liveUrl: 'https://erenshor-maps.wowmuch1.workers.dev/map',
     thunderstoreUrl: 'https://thunderstore.io/c/erenshor/p/WoW_Much/',
     wikiUrl: 'https://erenshor.wiki.gg/wiki/User:WoWMuch',
-    techStack: ['SvelteKit', 'TypeScript', 'deck.gl', 'Python', 'C#', 'Cloudflare Workers']
+    techStack: [
+      'SvelteKit',
+      'TypeScript',
+      'deck.gl',
+      'Leaflet',
+      'SQLite',
+      'Tailwind CSS',
+      'Python',
+      'C#',
+      'MediaWiki',
+      'Cloudflare Workers'
+    ]
   },
   {
     slug: 'ancient-kingdoms',
@@ -69,7 +80,16 @@ const rawProjects = [
     status: 'active' as const,
     featured: true,
     liveUrl: 'https://ancient-kingdoms-compendium.wowmuch1.workers.dev',
-    techStack: ['SvelteKit', 'TypeScript', 'deck.gl', 'Python', 'C#', 'Cloudflare Workers']
+    techStack: [
+      'SvelteKit',
+      'TypeScript',
+      'deck.gl',
+      'SQLite',
+      'Tailwind CSS',
+      'Python',
+      'C#',
+      'Cloudflare Workers'
+    ]
   },
   {
     slug: 'personal-website',
@@ -78,14 +98,7 @@ const rawProjects = [
     status: 'active' as const,
     featured: false,
     githubUrl: 'https://github.com/glockyco/personal-website',
-    techStack: [
-      'SvelteKit',
-      'Svelte 5',
-      'TypeScript',
-      'Zod',
-      'GitHub Actions',
-      'Cloudflare Workers'
-    ]
+    techStack: ['SvelteKit', 'TypeScript', 'Typst', 'Zod', 'Cloudflare Workers']
   },
   {
     slug: '10-man-idle',

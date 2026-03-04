@@ -37,7 +37,8 @@ export const TeachingExperienceSchema = z.object({
   role: z.enum(['instructor', 'ta']),
   institution: z.string(),
   semesters: z.array(z.string()),
-  description: z.string().optional()
+  description: z.string().optional(),
+  topics: z.string().optional()
 });
 
 export const SupervisionSchema = z.object({
@@ -91,7 +92,7 @@ export type ContinuingEducation = z.infer<typeof ContinuingEducationSchema>;
 // ── Data ──────────────────────────────────────────────────────────────────────
 
 export const researchSummary =
-  'My research focuses on automated program analysis for regression detection and software test generalization. I develop tools that apply symbolic execution to practical software engineering problems \u2014 bridging formal verification techniques and real-world developer workflows.';
+  'My research focuses on automated program analysis for regression detection and software test generalization. I develop tools that apply symbolic execution to practical software engineering problems, bridging formal verification techniques and real-world developer workflows.';
 
 export const education: Education[] = [
   {
@@ -114,7 +115,7 @@ export const education: Education[] = [
     endYear: 2020,
     thesis: 'Mining Software Repositories for the Effects of Design Patterns on Software Quality',
     advisor: 'Prof. Josef Pichler',
-    gpa: '1.07 (weighted)',
+    gpa: '1.07',
     distinction: 'With Distinction',
     scholarship: 'Merit Scholarship'
   },
@@ -158,7 +159,7 @@ export const workExperience: WorkExperience[] = [
     startYear: 2021,
     highlights: [
       'Research on semantic differencing and software test generalization under Prof. Martin Pinzger.',
-      'Lab instructor for Software Engineering I and II (7 semesters total). Independently planned and ran lab sections.',
+      'Lab instructor for Software Engineering I & II (7 semesters). Ran lab sections independently.',
       'Supervised BSc and MSc theses and projects in software testing, analysis, and engineering.'
     ]
   },
@@ -169,9 +170,9 @@ export const workExperience: WorkExperience[] = [
     startYear: 2018,
     endYear: 2021,
     highlights: [
-      'Technical lead for applied research prototypes in FFG-funded collaborative projects with industry partners.',
+      'Technical lead for applied research prototypes in FFG-funded projects with industry partners.',
       'Designed and built prototypes in security intelligence, data engineering, and augmented reality.',
-      'Collaborated directly with industry partners and other research groups at FH Hagenberg across 5 projects.'
+      'Collaborated with industry partners and other research groups across 5 projects.'
     ],
     projectUrls: [
       {
@@ -191,8 +192,9 @@ export const workExperience: WorkExperience[] = [
     startYear: 2012,
     endYear: 2018,
     highlights: [
-      'Full-stack web development across the complete project lifecycle for clients across various industries.',
-      "Built and maintained the company's proprietary CMS. Delivered projects using PHP, JavaScript, HTML/CSS."
+      'Full-stack web development for clients in insurance, agriculture, tourism, and other industries.',
+      'Managed client relationships from requirements gathering through delivery and support.',
+      "Built and maintained the company's proprietary CMS using PHP, JavaScript, and HTML/CSS."
     ]
   }
 ].map((w) => WorkExperienceSchema.parse(w));
@@ -204,7 +206,9 @@ export const teaching: TeachingExperience[] = [
     institution: 'University of Klagenfurt',
     semesters: ['Winter 2022/23', 'Winter 2023/24', 'Winter 2024/25'],
     description:
-      'Lab instructor for BSc-level exercise course. Independently planned and ran lab sections, designed exercises, and graded.'
+      'Lab instructor for BSc-level exercise course. Independently planned and ran lab sections, designed exercises, and graded.',
+    topics:
+      'Program analysis, software testing (unit, integration, mutation, TDD), refactoring, and code metrics'
   },
   {
     course: 'Software Engineering II',
@@ -212,7 +216,8 @@ export const teaching: TeachingExperience[] = [
     institution: 'University of Klagenfurt',
     semesters: ['Summer 2022', 'Summer 2023', 'Summer 2024', 'Summer 2025'],
     description:
-      'Lab instructor for BSc-level exercise course. Independently planned and ran lab sections, designed exercises, and graded.'
+      'Lab instructor for BSc-level exercise course. Independently planned and ran lab sections, designed exercises, and graded.',
+    topics: 'Agile development (Scrum), multiplayer board/card game Android apps in teams of 4–7'
   },
   {
     course: 'Advanced Image Processing and Analysis',
@@ -373,7 +378,7 @@ export const presentations: Presentation[] = [
 
 export const skills: Skill[] = [
   {
-    category: 'Research',
+    category: 'Research Areas',
     items: [
       'Test Generalization',
       'Test Generation',
