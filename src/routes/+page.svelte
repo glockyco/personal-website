@@ -105,7 +105,7 @@
       {#if pub.tldr}
         <p class="pub-tldr">{pub.tldr}</p>
       {/if}
-      {#if pub.pdf || pub.doi || pub.arxivId || pub.github || pub.zenodo}
+      {#if pub.pdf || pub.doi || pub.arxivId || pub.github || pub.zenodo || pub.overleaf}
         <div class="pub-links">
           {#if pub.pdf}
             <a class="pub-link" href={pub.pdf} download>PDF</a>
@@ -121,6 +121,9 @@
           {/if}
           {#if pub.zenodo}
             <a class="pub-link" href={pub.zenodo}>Dataset</a>
+          {/if}
+          {#if pub.overleaf}
+            <a class="pub-link" href={pub.overleaf}>Overleaf</a>
           {/if}
         </div>
       {/if}
