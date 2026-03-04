@@ -142,7 +142,7 @@
 <style>
   /* ── Page header ── */
   .page-header {
-    padding: 60px 0 20px;
+    padding: 40px 0 20px;
   }
 
   .page-header h1 {

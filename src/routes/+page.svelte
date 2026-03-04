@@ -164,7 +164,7 @@
 <style>
   /* ── Hero ── */
   .hero {
-    padding: 80px 0 40px;
+    padding: 48px 0 40px;
   }
 
   .hero-intro {
@@ -494,7 +494,7 @@
   /* ── Mobile ── */
   @media (max-width: 768px) {
     .hero {
-      padding: 40px 0 32px;
+      padding: 32px 0 32px;
     }
 
     .hero-intro {
