@@ -30,7 +30,38 @@ pnpm preview    # preview production build locally
 pnpm check      # svelte-kit sync + svelte-check + tsc
 pnpm lint       # eslint
 pnpm format     # prettier --write
+pnpm pdf        # build site + generate public CV PDF (no contact) → static/cv.pdf
+pnpm pdf:full   # build site + generate application CV PDF (with contact) → cv-full.pdf
 ```
+
+`pnpm build` and `pnpm pdf` are intentionally separate. `pnpm build` is used
+by Cloudflare Workers deployments, which don't have Typst installed. The PDF
+is generated locally with `pnpm pdf` into `static/cv.pdf` (gitignored), then
+`pnpm build` picks it up from `static/` and includes it in the `build/` output
+for deployment.
+
+### PDF Generation
+
+The CV PDF is generated from a Typst template (`scripts/cv.typ`) using data
+exported from the TypeScript data files. No separate content — single source
+of truth.
+
+**Prerequisite:** `brew install typst` (one-time local setup).
+
+- `pnpm pdf` outputs `static/cv.pdf` (deployed with the site, linked from /cv).
+- `pnpm pdf:full` outputs `cv-full.pdf` (local only, for job applications).
+  Set `CV_EMAIL` and `CV_PHONE` env vars — passed as Typst inputs at compile
+  time. These never touch git or the deployed site.
+  ```bash
+  CV_EMAIL="you@example.com" CV_PHONE="+43 ..." pnpm pdf:full
+  ```
+
+**Pipeline:** `scripts/export-cv-data.ts` → `scripts/cv-data.json` (gitignored)
+→ `typst compile --font-path scripts/fonts --root . scripts/cv.typ <output>`
+→ JSON cleaned up.
+
+**Fonts:** Inter static weights in `scripts/fonts/` (committed). Typst picks
+them up via `--font-path`.
 
 ## Git Conventions
 
