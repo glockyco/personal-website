@@ -211,7 +211,7 @@ const rawPublications = [
     zenodo: 'https://zenodo.org/records/4048275',
     github: 'https://github.com/jaichberg/qualisign',
     overleaf: 'https://www.overleaf.com/read/vnfhydqxmpvx',
-    tags: ['mining software repositories', 'design patterns', 'software quality', 'empirical study']
+    tags: ['mining software repositories', 'design patterns', 'software quality']
   }
 ];
 
