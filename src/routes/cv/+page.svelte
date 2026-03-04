@@ -478,6 +478,17 @@
     padding-top: 20px;
     border-top: 1px solid var(--color-border);
     transition: border-color var(--transition-base);
+
+    @media (max-width: 768px) {
+      flex-wrap: wrap;
+      gap: 12px;
+
+      .pdf-link {
+        order: -1;
+        width: 100%;
+        justify-content: center;
+      }
+    }
   }
 
   .page-nav {
@@ -1039,21 +1050,6 @@
 
     h1 {
       font-size: 2rem;
-    }
-
-    .page-nav {
-      overflow-x: auto;
-      flex-wrap: nowrap;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-
-      &::-webkit-scrollbar {
-        display: none;
-      }
-    }
-
-    .page-nav-pill {
-      flex-shrink: 0;
     }
 
     .entry {
