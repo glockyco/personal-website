@@ -138,7 +138,7 @@
         <p class="project-tagline">{project.tagline}</p>
         {#if project.liveUrl}
           <div class="project-links">
-            <a class="pub-link" href={project.liveUrl}>Live &rarr;</a>
+            <a class="pub-link" href={project.liveUrl}>Website &rarr;</a>
           </div>
         {/if}
       </article>
