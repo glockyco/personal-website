@@ -71,6 +71,9 @@ const rawProjects = [
       'Tailwind CSS',
       'Python',
       'C#',
+      'Unity',
+      'AssetRipper',
+      'Google Sheets API',
       'MediaWiki',
       'Cloudflare Workers'
     ]
@@ -92,6 +95,8 @@ const rawProjects = [
       'Tailwind CSS',
       'Python',
       'C#',
+      'Unity',
+      'AssetRipper',
       'Cloudflare Workers'
     ]
   },
@@ -113,7 +118,16 @@ const rawProjects = [
     featured: false,
     liveUrl: 'https://10-man-codex.wowmuch1.workers.dev/',
     githubUrl: 'https://github.com/glockyco/10-man-idle-mods',
-    techStack: ['Astro', 'TypeScript', 'Cloudflare Workers']
+    techStack: [
+      'Astro',
+      'TypeScript',
+      'Tailwind CSS',
+      'SQLite',
+      'Pagefind',
+      'C#',
+      'Harmony',
+      'Cloudflare Workers'
+    ]
   }
 ];
 
