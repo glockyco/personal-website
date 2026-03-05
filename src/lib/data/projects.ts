@@ -57,7 +57,7 @@ const rawProjects = [
     tagline: 'Interactive maps, mods, and wiki bot for the Erenshor community',
     status: 'active' as const,
     featured: true,
-    liveUrl: 'https://erenshor-maps.wowmuch1.workers.dev/map',
+    liveUrl: 'https://erenshor-maps.wowmuch1.workers.dev/',
     githubUrl: 'https://github.com/glockyco/erenshor-data-mining',
     steamUrl: 'https://steamcommunity.com/sharedfiles/filedetails/?id=3500398991',
     thunderstoreUrl: 'https://thunderstore.io/c/erenshor/p/WoW_Much/',
