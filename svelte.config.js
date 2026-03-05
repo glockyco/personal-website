@@ -12,8 +12,8 @@ const config = {
     }),
     prerender: {
       handleHttpError: ({ path, message }) => {
-        // cv.pdf is generated locally by pnpm pdf, not during build — ignore during prerender
-        if (path === '/cv.pdf') return;
+        // johann-glock-cv-web.pdf is generated locally by pnpm pdf, not during build — ignore during prerender
+        if (path === '/johann-glock-cv-web.pdf') return;
         throw new Error(message);
       },
       handleMissingId: 'fail'

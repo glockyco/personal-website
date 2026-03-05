@@ -21,8 +21,8 @@ const ROOT_DIR = resolve(SCRIPTS_DIR, '..');
 const DATA_FILE = resolve(SCRIPTS_DIR, 'cv-data.json');
 const TEMPLATE = resolve(SCRIPTS_DIR, 'cv.typ');
 const FONTS_DIR = resolve(SCRIPTS_DIR, 'fonts');
-const OUTPUT_PUBLIC = resolve(ROOT_DIR, 'static', 'cv.pdf');
-const OUTPUT_FULL = resolve(ROOT_DIR, 'cv-full.pdf');
+const OUTPUT_PUBLIC = resolve(ROOT_DIR, 'static', 'johann-glock-cv-web.pdf');
+const OUTPUT_FULL = resolve(ROOT_DIR, 'johann-glock-cv.pdf');
 
 // ── Check prerequisites ───────────────────────────────────────────────────────
 

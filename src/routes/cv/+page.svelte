@@ -97,7 +97,7 @@
       <a class="page-nav-pill" href="#service">Service</a>
       <a class="page-nav-pill" href="#skills">Skills</a>
     </nav>
-    <a class="pdf-link" href="/cv.pdf">Open PDF &darr;</a>
+    <a class="pdf-link" href="/johann-glock-cv-web.pdf">Open PDF &darr;</a>
   </div>
 </div>
 

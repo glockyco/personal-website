@@ -12,8 +12,8 @@ notes/
 /build
 
 # Generated PDFs
-static/cv.pdf
-cv-full.pdf
+static/johann-glock-cv-web.pdf
+johann-glock-cv.pdf
 
 # Typst intermediate data export
 scripts/cv-data.json
