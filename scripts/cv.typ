@@ -137,13 +137,6 @@
     ]
     v(2pt)
     text(size: 8.5pt, fill: c-muted)[
-      #if cv-email != "" or cv-phone != "" {
-        let parts = ()
-        if cv-email != "" { parts.push(cv-email) }
-        if cv-phone != "" { parts.push(cv-phone) }
-        parts.join([#h(3pt)·#h(3pt)])
-        [#h(3pt)·#h(3pt)]
-      }
       #link("https://glockyco.com")[glockyco.com]
       #h(3pt)·#h(3pt)
       #link(data.profile.github)[github.com/glockyco]
@@ -152,6 +145,13 @@
       #h(3pt)·#h(3pt)
       #link("https://orcid.org/" + data.profile.orcid)[ORCID]
     ]
+    if cv-email != "" or cv-phone != "" {
+      v(1pt)
+      let parts = ()
+      if cv-email != "" { parts.push(cv-email) }
+      if cv-phone != "" { parts.push(cv-phone) }
+      text(size: 8.5pt, fill: c-muted, parts.join([#h(3pt)·#h(3pt)]))
+    }
   }
 )
 
