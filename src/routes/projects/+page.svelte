@@ -9,9 +9,6 @@
 
 <div class="page-header" id="top">
   <h1>Projects</h1>
-  <p class="page-intro">
-    Things I've built outside of research — community tools, game mods, and this site.
-  </p>
 </div>
 
 <div class="project-grid">
@@ -83,13 +80,6 @@
     font-size: var(--text-3xl);
     font-weight: 800;
     letter-spacing: -0.03em;
-  }
-
-  .page-intro {
-    font-size: var(--text-sm);
-    color: var(--color-muted);
-    line-height: 1.6;
-    margin-top: 8px;
   }
 
   /* ── Project grid ── */
