@@ -148,9 +148,14 @@
             </span>
           </div>
           <p class="project-tagline">{project.tagline}</p>
-          {#if project.liveUrl}
+          {#if project.liveUrl || project.githubUrl}
             <div class="project-links">
-              <a class="pub-link" href={project.liveUrl}>Website &rarr;</a>
+              {#if project.liveUrl}
+                <a class="pub-link" href={project.liveUrl}>Website</a>
+              {/if}
+              {#if project.githubUrl}
+                <a class="pub-link" href={project.githubUrl}>GitHub</a>
+              {/if}
             </div>
           {/if}
         </div>
@@ -491,6 +496,9 @@
   }
 
   .project-links {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
     margin-top: 4px;
   }
 
