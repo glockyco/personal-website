@@ -33,7 +33,7 @@
 
   <p class="project-tagline">{project.tagline}</p>
 
-  {#if project.liveUrl || project.githubUrl || project.steamGuideUrl || project.thunderstoreUrl || project.wikiUrl}
+  {#if project.liveUrl || project.githubUrl || project.steamUrl || project.thunderstoreUrl || project.wikiUrl}
     <div class="project-links">
       {#if project.liveUrl}
         <a class="link-btn" href={project.liveUrl}>Website</a>
@@ -41,8 +41,8 @@
       {#if project.githubUrl}
         <a class="link-btn" href={project.githubUrl}>GitHub</a>
       {/if}
-      {#if project.steamGuideUrl}
-        <a class="link-btn" href={project.steamGuideUrl}>Steam Guide</a>
+      {#if project.steamUrl}
+        <a class="link-btn" href={project.steamUrl}>Steam</a>
       {/if}
       {#if project.thunderstoreUrl}
         <a class="link-btn" href={project.thunderstoreUrl}>Thunderstore</a>

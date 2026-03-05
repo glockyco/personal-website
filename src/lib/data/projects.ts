@@ -27,7 +27,7 @@ export const ProjectSchema = z.object({
 
   liveUrl: z.string().url().optional(),
   githubUrl: z.string().url().optional(),
-  steamGuideUrl: z.string().url().optional(),
+  steamUrl: z.string().url().optional(),
   thunderstoreUrl: z.string().url().optional(),
   wikiUrl: z.string().url().optional(),
 
@@ -58,6 +58,8 @@ const rawProjects = [
     status: 'active' as const,
     featured: true,
     liveUrl: 'https://erenshor-maps.wowmuch1.workers.dev/map',
+    githubUrl: 'https://github.com/glockyco/erenshor-data-mining',
+    steamUrl: 'https://steamcommunity.com/sharedfiles/filedetails/?id=3500398991',
     thunderstoreUrl: 'https://thunderstore.io/c/erenshor/p/WoW_Much/',
     wikiUrl: 'https://erenshor.wiki.gg/wiki/User:WoWMuch',
     techStack: [
@@ -80,6 +82,8 @@ const rawProjects = [
     status: 'active' as const,
     featured: true,
     liveUrl: 'https://ancient-kingdoms-compendium.wowmuch1.workers.dev',
+    githubUrl: 'https://github.com/glockyco/ancient-kingdoms-mods',
+    steamUrl: 'https://steamcommunity.com/sharedfiles/filedetails/?id=3616580411',
     techStack: [
       'SvelteKit',
       'TypeScript',
@@ -97,6 +101,7 @@ const rawProjects = [
     tagline: 'Portfolio and CV presenting my research and engineering work',
     status: 'active' as const,
     featured: false,
+    liveUrl: 'https://glockyco.com/',
     githubUrl: 'https://github.com/glockyco/personal-website',
     techStack: ['SvelteKit', 'TypeScript', 'Typst', 'Zod', 'Cloudflare Workers']
   },
@@ -107,6 +112,7 @@ const rawProjects = [
     status: 'inactive' as const,
     featured: false,
     liveUrl: 'https://10-man-codex.wowmuch1.workers.dev/',
+    githubUrl: 'https://github.com/glockyco/10-man-idle-mods',
     techStack: ['Astro', 'TypeScript', 'Cloudflare Workers']
   }
 ];

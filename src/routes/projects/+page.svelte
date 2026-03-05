@@ -37,13 +37,16 @@
         {/each}
       </div>
 
-      {#if project.liveUrl || project.githubUrl || project.thunderstoreUrl || project.wikiUrl}
+      {#if project.liveUrl || project.githubUrl || project.steamUrl || project.thunderstoreUrl || project.wikiUrl}
         <div class="card-links">
           {#if project.liveUrl}
             <a class="card-link" href={project.liveUrl}>Website</a>
           {/if}
           {#if project.githubUrl}
             <a class="card-link" href={project.githubUrl}>GitHub</a>
+          {/if}
+          {#if project.steamUrl}
+            <a class="card-link" href={project.steamUrl}>Steam</a>
           {/if}
           {#if project.thunderstoreUrl}
             <a class="card-link" href={project.thunderstoreUrl}>Thunderstore</a>
