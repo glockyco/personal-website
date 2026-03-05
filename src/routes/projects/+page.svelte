@@ -1,5 +1,6 @@
 <script lang="ts">
   import { projects } from '$lib/data/projects';
+  import { thumbnails } from '$lib/assets/screenshots/index';
 </script>
 
 <svelte:head>
@@ -16,46 +17,58 @@
 <div class="project-grid">
   {#each projects as project (project.slug)}
     <article class="project-card">
-      <div class="card-top">
-        <span class="card-title">
-          <a href="/projects/{project.slug}/">{project.title}</a>
-        </span>
-        <span
-          class="card-status"
-          class:status-inactive={project.status === 'inactive' || project.status === 'archived'}
-        >
-          <span class="status-dot"></span>
-          {project.status.charAt(0).toUpperCase() + project.status.slice(1)}
-        </span>
-      </div>
-
-      <p class="card-tagline">{project.tagline}</p>
-
-      <div class="card-tech">
-        {#each project.techStack as tech (tech)}
-          <span class="tech-pill">{tech}</span>
-        {/each}
-      </div>
-
-      {#if project.liveUrl || project.githubUrl || project.steamUrl || project.thunderstoreUrl || project.wikiUrl}
-        <div class="card-links">
-          {#if project.liveUrl}
-            <a class="card-link" href={project.liveUrl}>Website</a>
-          {/if}
-          {#if project.githubUrl}
-            <a class="card-link" href={project.githubUrl}>GitHub</a>
-          {/if}
-          {#if project.steamUrl}
-            <a class="card-link" href={project.steamUrl}>Steam</a>
-          {/if}
-          {#if project.thunderstoreUrl}
-            <a class="card-link" href={project.thunderstoreUrl}>Thunderstore</a>
-          {/if}
-          {#if project.wikiUrl}
-            <a class="card-link" href={project.wikiUrl}>Wiki</a>
-          {/if}
-        </div>
+      {#if thumbnails[project.slug]}
+        <a href="/projects/{project.slug}/" tabindex="-1" aria-hidden="true">
+          <img
+            class="card-thumb"
+            src={thumbnails[project.slug]}
+            alt="{project.title} screenshot"
+            loading="lazy"
+          />
+        </a>
       {/if}
+      <div class="card-body">
+        <div class="card-top">
+          <span class="card-title">
+            <a href="/projects/{project.slug}/">{project.title}</a>
+          </span>
+          <span
+            class="card-status"
+            class:status-inactive={project.status === 'inactive' || project.status === 'archived'}
+          >
+            <span class="status-dot"></span>
+            {project.status.charAt(0).toUpperCase() + project.status.slice(1)}
+          </span>
+        </div>
+
+        <p class="card-tagline">{project.tagline}</p>
+
+        <div class="card-tech">
+          {#each project.techStack as tech (tech)}
+            <span class="tech-pill">{tech}</span>
+          {/each}
+        </div>
+
+        {#if project.liveUrl || project.githubUrl || project.steamUrl || project.thunderstoreUrl || project.wikiUrl}
+          <div class="card-links">
+            {#if project.liveUrl}
+              <a class="card-link" href={project.liveUrl}>Website</a>
+            {/if}
+            {#if project.githubUrl}
+              <a class="card-link" href={project.githubUrl}>GitHub</a>
+            {/if}
+            {#if project.steamUrl}
+              <a class="card-link" href={project.steamUrl}>Steam</a>
+            {/if}
+            {#if project.thunderstoreUrl}
+              <a class="card-link" href={project.thunderstoreUrl}>Thunderstore</a>
+            {/if}
+            {#if project.wikiUrl}
+              <a class="card-link" href={project.wikiUrl}>Wiki</a>
+            {/if}
+          </div>
+        {/if}
+      </div>
     </article>
   {/each}
 </div>
@@ -91,12 +104,28 @@
   .project-card {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    padding: 20px 24px;
     background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     transition: border-color var(--transition-base);
+  }
+
+  .card-thumb {
+    display: block;
+    width: calc(100% - 24px);
+    margin: 12px 12px 0;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    object-position: top;
+    border-radius: calc(var(--radius-lg) - 4px);
+  }
+
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 16px 24px 20px;
+    flex: 1;
   }
 
   .card-top {

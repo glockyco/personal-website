@@ -3,6 +3,7 @@
   import profilePhoto from '$lib/assets/profile.png';
   import { publications } from '$lib/data/publications';
   import { projects } from '$lib/data/projects';
+  import { thumbnails } from '$lib/assets/screenshots/index';
 
   // Show featured publications; under-review first, then reverse-chronological
   const featuredPubs = publications
@@ -126,21 +127,33 @@
   <div class="projects-grid">
     {#each featuredProjects as project (project.slug)}
       <article class="project-card">
-        <div class="project-top">
-          <span class="project-title">
-            <a href="/projects/{project.slug}/">{project.title}</a>
-          </span>
-          <span class="project-status">
-            <span class="status-dot"></span>
-            {project.status.charAt(0).toUpperCase() + project.status.slice(1)}
-          </span>
-        </div>
-        <p class="project-tagline">{project.tagline}</p>
-        {#if project.liveUrl}
-          <div class="project-links">
-            <a class="pub-link" href={project.liveUrl}>Website &rarr;</a>
-          </div>
+        {#if thumbnails[project.slug]}
+          <a href="/projects/{project.slug}/" tabindex="-1" aria-hidden="true">
+            <img
+              class="project-thumb"
+              src={thumbnails[project.slug]}
+              alt="{project.title} screenshot"
+              loading="lazy"
+            />
+          </a>
         {/if}
+        <div class="project-body">
+          <div class="project-top">
+            <span class="project-title">
+              <a href="/projects/{project.slug}/">{project.title}</a>
+            </span>
+            <span class="project-status">
+              <span class="status-dot"></span>
+              {project.status.charAt(0).toUpperCase() + project.status.slice(1)}
+            </span>
+          </div>
+          <p class="project-tagline">{project.tagline}</p>
+          {#if project.liveUrl}
+            <div class="project-links">
+              <a class="pub-link" href={project.liveUrl}>Website &rarr;</a>
+            </div>
+          {/if}
+        </div>
       </article>
     {/each}
   </div>
@@ -405,13 +418,29 @@
   }
 
   .project-card {
-    padding: 24px;
     background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     display: flex;
     flex-direction: column;
+  }
+
+  .project-thumb {
+    display: block;
+    width: calc(100% - 24px);
+    margin: 12px 12px 0;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    object-position: top;
+    border-radius: calc(var(--radius-lg) - 4px);
+  }
+
+  .project-body {
+    display: flex;
+    flex-direction: column;
     gap: 10px;
+    padding: 16px 24px 24px;
+    flex: 1;
   }
 
   .project-top {

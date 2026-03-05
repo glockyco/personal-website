@@ -1,5 +1,6 @@
 <script lang="ts">
   import { page } from '$app/state';
+  import { heroes } from '$lib/assets/screenshots/index';
 
   const { project } = $derived(page.data as { project: import('$lib/data/projects').Project });
 
@@ -53,6 +54,18 @@
     </div>
   {/if}
 </div>
+
+<!-- ── Hero image (shown only when there's no live demo) ───────── -->
+{#if !project.liveUrl && heroes[project.slug]}
+  <div class="hero-image-wrap wide">
+    <img
+      class="hero-image"
+      src={heroes[project.slug]}
+      alt="{project.title} screenshot"
+      loading="lazy"
+    />
+  </div>
+{/if}
 
 <!-- ── Challenge ───────────────────────────────────────────────── -->
 {#if project.challenge}
@@ -285,6 +298,21 @@
     font-size: var(--text-base);
     color: var(--color-text);
     line-height: 1.7;
+  }
+
+  /* ── Hero image (no-demo fallback) ── */
+  .hero-image-wrap {
+    margin-bottom: 40px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-base);
+    overflow: hidden;
+    transition: border-color var(--transition-base);
+  }
+
+  .hero-image {
+    display: block;
+    width: 100%;
+    height: auto;
   }
 
   /* ── Demo embed ── */
