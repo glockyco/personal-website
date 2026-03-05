@@ -30,8 +30,8 @@
   }
 </script>
 
-<header class="nav-wrap">
-  <nav class="nav" class:at-top={atTop}>
+<header class="nav-wrap" class:at-top={atTop}>
+  <nav class="nav">
     <a class="name" href="/">
       <img class="monogram" src={monogram} alt="" width="28" height="28" />
       {profile.name}
@@ -75,13 +75,6 @@
     position: sticky;
     top: 0;
     z-index: 50;
-  }
-
-  .nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 0;
     background: var(--color-strip-bg);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
@@ -92,11 +85,20 @@
       backdrop-filter var(--transition-base);
   }
 
-  .nav.at-top {
+  .nav-wrap.at-top {
     background: transparent;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
     border-bottom-color: transparent;
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px 0;
   }
 
   .name {

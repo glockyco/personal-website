@@ -81,10 +81,10 @@
       <span class="section-label">Demo</span>
       <a class="section-more" href={project.liveUrl}>Open website &rarr;</a>
     </div>
-    <div class="demo-frame">
-      <iframe src={demoUrl()} title="{project.title} demo" loading="lazy"></iframe>
-    </div>
   </section>
+  <div class="demo-frame wide">
+    <iframe src={demoUrl()} title="{project.title} demo" loading="lazy"></iframe>
+  </div>
 {/if}
 
 <!-- ── How I Built This ────────────────────────────────────────── -->
@@ -288,11 +288,16 @@
   }
 
   /* ── Demo embed ── */
+  #demo {
+    padding-bottom: 0;
+  }
+
   .demo-frame {
     border: 1px solid var(--color-border);
     border-radius: var(--radius-base);
     overflow: hidden;
     transition: border-color var(--transition-base);
+    margin-bottom: 40px;
   }
 
   .demo-frame iframe {

@@ -24,10 +24,11 @@
 
 <style>
   .footer {
+    max-width: 900px;
+    margin: 0 auto;
     padding: 48px 0 40px;
     text-align: center;
     border-top: 1px solid var(--color-border);
-    margin-top: 0;
     transition: border-color var(--transition-base);
   }
 

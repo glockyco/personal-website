@@ -246,8 +246,34 @@
   }
 
   .page {
-    max-width: 900px;
     margin: 0 auto;
+  }
+
+  /* CSS Grid breakout layout on <main>.
+     Named columns allow children to opt into wider tracks:
+       content = 900px (default for all children)
+       wide    = up to 1200px (for demo embeds, etc.)
+       full    = all available space                          */
+  .page > main {
+    display: grid;
+    grid-template-columns:
+      [full-start] 1fr
+      [wide-start] minmax(0, 150px)
+      [content-start] min(900px, 100%) [content-end]
+      minmax(0, 150px) [wide-end]
+      1fr [full-end];
+  }
+
+  .page > main > * {
+    grid-column: content;
+  }
+
+  .page > main > .wide {
+    grid-column: wide;
+  }
+
+  .page > main > .full {
+    grid-column: full;
   }
 
   @media (max-width: 768px) {

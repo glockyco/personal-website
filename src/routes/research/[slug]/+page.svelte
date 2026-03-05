@@ -93,19 +93,19 @@
 
 <!-- ── Paper (inline PDF) ───────────────────────────────────────── -->
 {#if pub.pdf}
-  <section class="section" id="paper">
+  <section class="section section-no-bottom" id="paper">
     <div class="section-head">
       <span class="section-label">Paper</span>
     </div>
-    <div class="pdf-viewer">
-      <object data={pub.pdf} type="application/pdf" title={pub.title}>
-        <p class="pdf-fallback">
-          Your browser does not support inline PDF viewing.
-          <a href={pub.pdf} download>Download the PDF</a> instead.
-        </p>
-      </object>
-    </div>
   </section>
+  <div class="pdf-viewer wide">
+    <object data={pub.pdf} type="application/pdf" title={pub.title}>
+      <p class="pdf-fallback">
+        Your browser does not support inline PDF viewing.
+        <a href={pub.pdf} download>Download the PDF</a> instead.
+      </p>
+    </object>
+  </div>
 {/if}
 
 <!-- ── Presentations ───────────────────────────────────────────── -->
@@ -307,11 +307,16 @@
   }
 
   /* ── PDF viewer ── */
+  .section-no-bottom {
+    padding-bottom: 0;
+  }
+
   .pdf-viewer {
     border: 1px solid var(--color-border);
     border-radius: var(--radius-base);
     overflow: hidden;
     transition: border-color var(--transition-base);
+    margin-bottom: 40px;
   }
 
   .pdf-viewer object {
