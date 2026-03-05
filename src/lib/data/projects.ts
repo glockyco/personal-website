@@ -103,7 +103,7 @@ const rawProjects = [
     featured: false,
     liveUrl: 'https://glockyco.com/',
     githubUrl: 'https://github.com/glockyco/personal-website',
-    techStack: ['SvelteKit', 'TypeScript', 'Typst', 'Zod', 'Cloudflare Workers']
+    techStack: ['SvelteKit', 'TypeScript', 'Typst', 'Zod', 'Playwright', 'Cloudflare Workers']
   },
   {
     slug: '10-man-idle',
