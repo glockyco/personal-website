@@ -13,7 +13,7 @@ notes/
 
 # Generated PDFs
 static/johann-glock-cv-web.pdf
-johann-glock-cv.pdf
+outputs/
 
 # Typst intermediate data export
 scripts/cv-data.json

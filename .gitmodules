@@ -1,0 +1,3 @@
+[submodule "applications"]
+	path = applications
+	url = git@github.com:glockyco/job-applications.git

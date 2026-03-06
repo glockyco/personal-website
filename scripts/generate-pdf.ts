@@ -13,8 +13,8 @@
  */
 
 import { execFileSync, spawnSync } from 'child_process';
-import { unlinkSync, existsSync } from 'fs';
-import { resolve } from 'path';
+import { unlinkSync, existsSync, mkdirSync } from 'fs';
+import { dirname, resolve } from 'path';
 
 const SCRIPTS_DIR = resolve(import.meta.dirname ?? '.');
 const ROOT_DIR = resolve(SCRIPTS_DIR, '..');
@@ -22,7 +22,7 @@ const DATA_FILE = resolve(SCRIPTS_DIR, 'cv-data.json');
 const TEMPLATE = resolve(SCRIPTS_DIR, 'cv.typ');
 const FONTS_DIR = resolve(SCRIPTS_DIR, 'fonts');
 const OUTPUT_PUBLIC = resolve(ROOT_DIR, 'static', 'johann-glock-cv-web.pdf');
-const OUTPUT_FULL = resolve(ROOT_DIR, 'johann-glock-cv.pdf');
+const OUTPUT_FULL = resolve(ROOT_DIR, 'outputs', 'johann-glock-cv.pdf');
 
 // ── Check prerequisites ───────────────────────────────────────────────────────
 
@@ -56,6 +56,8 @@ execFileSync(
 // ── Step 2: Compile Typst template ───────────────────────────────────────────
 
 console.log('Compiling Typst template...');
+
+mkdirSync(dirname(outputPath), { recursive: true });
 
 const typstArgs = ['compile', '--font-path', FONTS_DIR, '--root', ROOT_DIR];
 
