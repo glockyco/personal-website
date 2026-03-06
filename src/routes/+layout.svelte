@@ -10,6 +10,7 @@
 
 <svelte:head>
   <title>Johann Glock</title>
+  <link rel="canonical" href="https://glockyco.com{page.url.pathname}" />
 </svelte:head>
 
 <!-- 3px accent bar at the very top -->
