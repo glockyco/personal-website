@@ -120,7 +120,7 @@ const data = {
       venueDisplay: pub.type === 'doctoral-symposium' ? pub.venue : pub.venueShort
     })),
   projects: projects
-    .filter((p) => p.status !== 'inactive' && p.status !== 'archived')
+    .filter((p) => p.inPdfCv)
     .map((p) => ({ slug: p.slug, title: p.title, tagline: p.tagline, techStack: p.techStack })),
   teaching: { labInstructors, tutors },
   supervision: {

@@ -18,6 +18,7 @@ export const ProjectSchema = z.object({
   tagline: z.string(),
   status: z.enum(['active', 'maintained', 'inactive', 'archived']),
   featured: z.boolean(),
+  inPdfCv: z.boolean(),
 
   challenge: z.string().optional(),
   solution: z.string().optional(),
@@ -57,6 +58,7 @@ const rawProjects = [
     tagline: 'Interactive maps, mods, and wiki bot for the Erenshor community',
     status: 'active' as const,
     featured: true,
+    inPdfCv: true,
     liveUrl: 'https://erenshor-maps.wowmuch1.workers.dev/',
     githubUrl: 'https://github.com/glockyco/erenshor-data-mining',
     steamUrl: 'https://steamcommunity.com/sharedfiles/filedetails/?id=3500398991',
@@ -84,6 +86,7 @@ const rawProjects = [
     tagline: 'Data-mined compendium and interactive world map for Ancient Kingdoms',
     status: 'active' as const,
     featured: true,
+    inPdfCv: true,
     liveUrl: 'https://ancient-kingdoms-compendium.wowmuch1.workers.dev',
     githubUrl: 'https://github.com/glockyco/ancient-kingdoms-mods',
     steamUrl: 'https://steamcommunity.com/sharedfiles/filedetails/?id=3616580411',
@@ -106,6 +109,7 @@ const rawProjects = [
     tagline: 'Portfolio and CV presenting my research and engineering work',
     status: 'active' as const,
     featured: false,
+    inPdfCv: true,
     liveUrl: 'https://glockyco.com/',
     githubUrl: 'https://github.com/glockyco/personal-website',
     techStack: ['SvelteKit', 'TypeScript', 'Typst', 'Zod', 'Playwright', 'Cloudflare Workers']
@@ -116,6 +120,7 @@ const rawProjects = [
     tagline: 'Data-mined game codex for the 10-Man Idle community',
     status: 'inactive' as const,
     featured: false,
+    inPdfCv: false,
     liveUrl: 'https://10-man-codex.wowmuch1.workers.dev/',
     githubUrl: 'https://github.com/glockyco/10-man-idle-mods',
     techStack: [
