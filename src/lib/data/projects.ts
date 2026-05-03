@@ -16,7 +16,7 @@ export const ProjectSchema = z.object({
   slug: z.string(),
   title: z.string(),
   tagline: z.string(),
-  status: z.enum(['active', 'maintained', 'inactive', 'archived']),
+  status: z.enum(['active', 'maintained', 'completed', 'inactive', 'archived']),
   featured: z.boolean(),
   inPdfCv: z.boolean(),
 
@@ -104,12 +104,24 @@ const rawProjects = [
     ]
   },
   {
+    slug: 'u27-gazette',
+    title: 'The U27 Gazette',
+    tagline:
+      'Newspaper-style archive of webpages built by visitors at the Long Night of Research 2026',
+    status: 'completed' as const,
+    featured: false,
+    inPdfCv: true,
+    liveUrl: 'https://lnf26.glockyco.com',
+    githubUrl: 'https://github.com/glockyco/aau-long-night-of-research-26',
+    techStack: ['SvelteKit', 'TypeScript', 'Zod', 'Cloudflare Workers']
+  },
+  {
     slug: 'personal-website',
     title: 'Personal Website',
     tagline: 'Portfolio and CV presenting my research and engineering work',
     status: 'active' as const,
     featured: false,
-    inPdfCv: true,
+    inPdfCv: false,
     liveUrl: 'https://glockyco.com/',
     githubUrl: 'https://github.com/glockyco/personal-website',
     techStack: ['SvelteKit', 'TypeScript', 'Typst', 'Zod', 'Playwright', 'Cloudflare Workers']
