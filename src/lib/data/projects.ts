@@ -111,7 +111,7 @@ const rawProjects = [
     status: 'completed' as const,
     featured: false,
     inPdfCv: true,
-    liveUrl: 'https://lnf26.glockyco.com',
+    liveUrl: 'https://lnf26.glockyco.com/en',
     githubUrl: 'https://github.com/glockyco/aau-long-night-of-research-26',
     techStack: ['SvelteKit', 'TypeScript', 'Zod', 'Cloudflare Workers']
   },
