@@ -346,8 +346,7 @@ export const academicService: AcademicService[] = [
   {
     type: 'outreach',
     venue: 'Long Night of Research',
-    year: 2025,
-    note: 'Hands-on demos of software engineering research for the public'
+    note: '2 editions (2024 and 2026), hands-on demos of software engineering research'
   }
 ].map((s) => AcademicServiceSchema.parse(s));
 
