@@ -17,7 +17,7 @@ export const SITE_AUTHOR = profile.name;
 export const DEFAULT_TITLE = `${profile.name} — ${profile.tagline}`;
 
 export const DEFAULT_DESCRIPTION =
-  'Johann Glock is a PhD candidate in software engineering at the University of Klagenfurt, working on program analysis, equivalence checking, and test generalization. Personal website with research, projects, and CV.';
+  'Personal website of Johann Glock — PhD candidate in software engineering at the University of Klagenfurt. Research, projects, and CV.';
 
 export const OG_LOCALE = 'en_US';
 

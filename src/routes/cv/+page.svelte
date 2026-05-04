@@ -73,7 +73,7 @@
 <Seo
   path="/cv/"
   title="CV — Johann Glock"
-  description="Curriculum vitae of Johann Glock — PhD candidate in software engineering at the University of Klagenfurt. Experience, education, publications, teaching, and service."
+  description="Curriculum vitae of Johann Glock — PhD candidate in software engineering at the University of Klagenfurt. Experience, publications, teaching, and service."
   jsonLd={breadcrumbJsonLd([
     { name: 'Home', path: '/' },
     { name: 'CV', path: '/cv/' }
