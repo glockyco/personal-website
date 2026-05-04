@@ -1,10 +1,14 @@
 <script lang="ts">
   import { page } from '$app/state';
+  import Seo from '$lib/components/Seo.svelte';
 </script>
 
-<svelte:head>
-  <title>{page.status} — Johann Glock</title>
-</svelte:head>
+<Seo
+  path={page.url.pathname}
+  title={`${page.status} — Johann Glock`}
+  description="An error occurred while loading this page."
+  noindex
+/>
 
 <div class="error">
   <h1>{page.status}</h1>
