@@ -6,7 +6,8 @@
   const pub = $derived(data.pub);
 
   const description = $derived(
-    pub.tldr ??
+    pub.metaDescription ??
+      pub.tldr ??
       `${pub.title} — ${pub.venue} (${pub.year}). Author${pub.authors.length > 1 ? 's' : ''}: ${pub.authors.map((a) => a.name).join(', ')}.`
   );
 </script>
