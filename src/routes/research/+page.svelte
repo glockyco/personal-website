@@ -1,5 +1,7 @@
 <script lang="ts">
   import { publications, aistProjects } from '$lib/data/publications';
+  import Seo from '$lib/components/Seo.svelte';
+  import { breadcrumbJsonLd } from '$lib/seo/jsonld';
 
   // All publications: under-review first, then reverse-chronological
   const allPubs = [...publications].sort((a, b) => {
@@ -15,9 +17,15 @@
   };
 </script>
 
-<svelte:head>
-  <title>Research — Johann Glock</title>
-</svelte:head>
+<Seo
+  path="/research/"
+  title="Research — Johann Glock"
+  description="Publications and applied research projects in software engineering, program analysis, equivalence checking, and property-based testing."
+  jsonLd={breadcrumbJsonLd([
+    { name: 'Home', path: '/' },
+    { name: 'Research', path: '/research/' }
+  ])}
+/>
 
 <div class="page-header" id="top">
   <h1>Research</h1>
