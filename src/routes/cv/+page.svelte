@@ -13,6 +13,8 @@
     skills,
     continuingEducation
   } from '$lib/data/cv';
+  import Seo from '$lib/components/Seo.svelte';
+  import { breadcrumbJsonLd } from '$lib/seo/jsonld';
 
   // All publications sorted: under-review first, then reverse-chronological
   const allPubs = [...publications].sort((a, b) => {
@@ -68,9 +70,15 @@
   ].filter(Boolean);
 </script>
 
-<svelte:head>
-  <title>CV &mdash; Johann Glock</title>
-</svelte:head>
+<Seo
+  path="/cv/"
+  title="CV — Johann Glock"
+  description="Curriculum vitae of Johann Glock — PhD candidate in software engineering at the University of Klagenfurt. Experience, education, publications, teaching, and service."
+  jsonLd={breadcrumbJsonLd([
+    { name: 'Home', path: '/' },
+    { name: 'CV', path: '/cv/' }
+  ])}
+/>
 
 <!-- ── Page header ───────────────────────────────────────────────── -->
 <div class="page-header" id="top">
