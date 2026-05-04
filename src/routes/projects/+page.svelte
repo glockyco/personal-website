@@ -1,11 +1,19 @@
 <script lang="ts">
   import { projects } from '$lib/data/projects';
   import { thumbnails } from '$lib/assets/screenshots/index';
+  import Seo from '$lib/components/Seo.svelte';
+  import { breadcrumbJsonLd } from '$lib/seo/jsonld';
 </script>
 
-<svelte:head>
-  <title>Projects — Johann Glock</title>
-</svelte:head>
+<Seo
+  path="/projects/"
+  title="Projects — Johann Glock"
+  description="Software projects and tools — interactive maps, mods, data-mining pipelines, and community sites built around games and research artifacts."
+  jsonLd={breadcrumbJsonLd([
+    { name: 'Home', path: '/' },
+    { name: 'Projects', path: '/projects/' }
+  ])}
+/>
 
 <div class="page-header" id="top">
   <h1>Projects</h1>
