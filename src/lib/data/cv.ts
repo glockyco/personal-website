@@ -153,7 +153,7 @@ export const education: Education[] = [
 
 export const workExperience: WorkExperience[] = [
   {
-    title: 'University Assistant (PhD Candidate)',
+    title: 'Research Software Engineer (University Assistant)',
     company: 'University of Klagenfurt \u2013 Software Engineering Research Group',
     location: 'Klagenfurt, Austria',
     startYear: 2021,
@@ -164,7 +164,7 @@ export const workExperience: WorkExperience[] = [
     ]
   },
   {
-    title: 'Research Associate',
+    title: 'Research Software Engineer (Research Associate)',
     company: 'University of Applied Sciences Upper Austria \u2013 AIST Research Group',
     location: 'Hagenberg, Austria',
     startYear: 2018,
