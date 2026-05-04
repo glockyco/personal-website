@@ -4,6 +4,8 @@
   import { publications } from '$lib/data/publications';
   import { projects } from '$lib/data/projects';
   import { thumbnails } from '$lib/assets/screenshots/index';
+  import Seo from '$lib/components/Seo.svelte';
+  import { personJsonLd, websiteJsonLd } from '$lib/seo/jsonld';
 
   // Show featured publications; under-review first, then reverse-chronological
   const featuredPubs = publications
@@ -16,9 +18,12 @@
   const featuredProjects = projects.filter((p) => p.featured);
 </script>
 
-<svelte:head>
-  <title>Johann Glock</title>
-</svelte:head>
+<Seo
+  path="/"
+  title="Johann Glock — PhD Candidate in Software Engineering"
+  description="Johann Glock is a PhD candidate in software engineering at the University of Klagenfurt working on program analysis, equivalence checking, and test generalization. Research, projects, and CV."
+  jsonLd={[websiteJsonLd(), personJsonLd()]}
+/>
 
 <!-- ── Hero ──────────────────────────────────────────────────────────── -->
 <section class="hero" id="hero">
