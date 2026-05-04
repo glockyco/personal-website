@@ -1,6 +1,8 @@
 <script lang="ts">
   import { page } from '$app/state';
   import { heroes } from '$lib/assets/screenshots/index';
+  import Seo from '$lib/components/Seo.svelte';
+  import { breadcrumbJsonLd, projectJsonLd } from '$lib/seo/jsonld';
 
   const { project } = $derived(page.data as { project: import('$lib/data/projects').Project });
 
@@ -13,9 +15,19 @@
   });
 </script>
 
-<svelte:head>
-  <title>{project.title} — Johann Glock</title>
-</svelte:head>
+<Seo
+  path={`/projects/${project.slug}/`}
+  title={`${project.title} — Johann Glock`}
+  description={project.tagline}
+  jsonLd={[
+    breadcrumbJsonLd([
+      { name: 'Home', path: '/' },
+      { name: 'Projects', path: '/projects/' },
+      { name: project.title, path: `/projects/${project.slug}/` }
+    ]),
+    projectJsonLd(project)
+  ]}
+/>
 
 <!-- ── Header ──────────────────────────────────────────────────── -->
 <div class="page-header" id="top">
