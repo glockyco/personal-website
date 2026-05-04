@@ -1,11 +1,30 @@
 <script lang="ts">
+  import Seo from '$lib/components/Seo.svelte';
+  import { breadcrumbJsonLd, scholarlyArticleJsonLd } from '$lib/seo/jsonld';
+
   const { data } = $props();
   const pub = $derived(data.pub);
+
+  const description = $derived(
+    pub.tldr ??
+      `${pub.title} — ${pub.venue} (${pub.year}). Author${pub.authors.length > 1 ? 's' : ''}: ${pub.authors.map((a) => a.name).join(', ')}.`
+  );
 </script>
 
-<svelte:head>
-  <title>{pub.title} — Johann Glock</title>
-</svelte:head>
+<Seo
+  path={`/research/${pub.slug}/`}
+  title={`${pub.title} — Johann Glock`}
+  {description}
+  type="article"
+  jsonLd={[
+    breadcrumbJsonLd([
+      { name: 'Home', path: '/' },
+      { name: 'Research', path: '/research/' },
+      { name: pub.title, path: `/research/${pub.slug}/` }
+    ]),
+    scholarlyArticleJsonLd(pub)
+  ]}
+/>
 
 <div class="page-header" id="top">
   <a class="back-link" href="/research/">&larr; Research</a>
