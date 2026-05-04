@@ -1,6 +1,5 @@
 import { publications, projects } from '$lib/data';
-
-const BASE = 'https://glockyco.com';
+import { SITE_URL } from '$lib/seo/site';
 
 const staticRoutes = ['/', '/research/', '/projects/', '/cv/'];
 
@@ -15,7 +14,7 @@ export function GET() {
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls.map((url) => `  <url><loc>${BASE}${url}</loc></url>`).join('\n')}
+${urls.map((url) => `  <url><loc>${SITE_URL}${url}</loc></url>`).join('\n')}
 </urlset>`;
 
   return new Response(xml, {
