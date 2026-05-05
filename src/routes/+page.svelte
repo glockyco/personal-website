@@ -20,7 +20,6 @@
 
 <Seo
   path="/"
-  title="Johann Glock — PhD Candidate in Software Engineering"
   description="PhD candidate in software engineering at the University of Klagenfurt. Research on program analysis, equivalence checking, and test generalization."
   jsonLd={[websiteJsonLd(), personJsonLd()]}
 />

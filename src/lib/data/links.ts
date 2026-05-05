@@ -1,6 +1,6 @@
 export const profile = {
   name: 'Johann Glock',
-  tagline: 'PhD Candidate in Software Engineering',
+  tagline: 'Researcher, Senior Software Engineer, PhD Candidate',
   location: 'Hagenberg / Linz / Klagenfurt, Austria',
   affiliation: 'University of Klagenfurt',
   affiliationUrl: 'https://www.aau.at/en/isys/serg/team/glock-johann/',
