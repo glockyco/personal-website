@@ -398,6 +398,7 @@ export const skills: Skill[] = [
     items: [
       'Java',
       'C#/.NET',
+      'Unity',
       'Python',
       'PHP',
       'TypeScript',
@@ -406,10 +407,10 @@ export const skills: Skill[] = [
       'SQL',
       'Git',
       'Docker + Compose',
+      'Cloudflare Workers',
       'GitHub Actions',
-      'Agentic Coding',
-      'Claude Code',
-      'OpenCode'
+      'GitLab CI/CD',
+      'Agentic Coding'
     ]
   }
 ].map((s) => SkillSchema.parse(s));
