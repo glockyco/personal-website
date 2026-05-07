@@ -410,7 +410,7 @@ export const skills: Skill[] = [
       'Cloudflare Workers',
       'GitHub Actions',
       'GitLab CI/CD',
-      'Agentic Coding'
+      'Agentic Engineering'
     ]
   }
 ].map((s) => SkillSchema.parse(s));
