@@ -87,7 +87,7 @@ const rawProjects = [
     status: 'active' as const,
     featured: true,
     inPdfCv: true,
-    liveUrl: 'https://ancient-kingdoms-compendium.wowmuch1.workers.dev',
+    liveUrl: 'https://ancient-kingdoms.compendiums.org',
     githubUrl: 'https://github.com/glockyco/ancient-kingdoms-mods',
     steamUrl: 'https://steamcommunity.com/sharedfiles/filedetails/?id=3616580411',
     techStack: [
