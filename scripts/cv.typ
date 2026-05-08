@@ -286,16 +286,6 @@
   })
 }
 
-#sub-heading("Tutor")
-#for course in data.teaching.tutors {
-  compact-line({
-    text(weight: 600, fill: c-head)[#course.course]
-    text(fill: c-muted)[
-      #h(4pt)·#h(4pt)#course.institution#h(4pt)·#h(4pt)#course.semesterCount #if course.semesterCount == 1 { "semester" } else { "semesters" }
-    ]
-  })
-}
-
 #sub-heading("Supervision")
 #let s = data.supervision
 #text(fill: c-muted)[
