@@ -19,16 +19,12 @@ import {
   academicService,
   skills
 } from '../src/lib/data/cv.ts';
-import { publications } from '../src/lib/data/publications.ts';
+import { sortedPublications } from '../src/lib/data/publications.ts';
 import { projects } from '../src/lib/data/projects.ts';
 
-// ── Publications: under-review first, then reverse-chronological ──────────────
+// ── Publications (uses default order from data module) ────────────────────────
 
-const sortedPubs = [...publications].sort((a, b) => {
-  if (a.status === 'under-review' && b.status !== 'under-review') return -1;
-  if (a.status !== 'under-review' && b.status === 'under-review') return 1;
-  return b.year - a.year;
-});
+const sortedPubs = sortedPublications;
 
 // ── Teaching split ────────────────────────────────────────────────────────────
 

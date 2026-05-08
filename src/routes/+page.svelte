@@ -1,20 +1,14 @@
 <script lang="ts">
   import { profile } from '$lib/data/links';
   import profilePhoto from '$lib/assets/profile.png';
-  import { publications } from '$lib/data/publications';
+  import { sortedPublications } from '$lib/data/publications';
   import { projects } from '$lib/data/projects';
   import { thumbnails } from '$lib/assets/screenshots/index';
   import Seo from '$lib/components/Seo.svelte';
   import { personJsonLd, websiteJsonLd } from '$lib/seo/jsonld';
 
-  // Show featured publications; under-review first, then reverse-chronological
-  const featuredPubs = publications
-    .filter((p) => p.featured)
-    .sort((a, b) => {
-      if (a.status === 'under-review' && b.status !== 'under-review') return -1;
-      if (a.status !== 'under-review' && b.status === 'under-review') return 1;
-      return b.year - a.year;
-    });
+  // Featured publications (uses default order: under-review first, then reverse-chronological)
+  const featuredPubs = sortedPublications.filter((p) => p.featured);
   const featuredProjects = projects.filter((p) => p.featured);
 </script>
 

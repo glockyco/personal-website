@@ -1,7 +1,7 @@
 <script lang="ts">
   import { profile } from '$lib/data/links';
   import profilePhoto from '$lib/assets/profile.png';
-  import { publications } from '$lib/data/publications';
+  import { sortedPublications } from '$lib/data/publications';
   import { projects } from '$lib/data/projects';
   import {
     researchSummary,
@@ -16,12 +16,7 @@
   import Seo from '$lib/components/Seo.svelte';
   import { breadcrumbJsonLd } from '$lib/seo/jsonld';
 
-  // All publications sorted: under-review first, then reverse-chronological
-  const allPubs = [...publications].sort((a, b) => {
-    if (a.status === 'under-review' && b.status !== 'under-review') return -1;
-    if (a.status !== 'under-review' && b.status === 'under-review') return 1;
-    return b.year - a.year;
-  });
+  const allPubs = sortedPublications;
 
   // Teaching split by role
   const labInstructors = teaching.filter((t) => t.role === 'instructor');

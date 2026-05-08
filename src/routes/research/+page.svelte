@@ -1,14 +1,9 @@
 <script lang="ts">
-  import { publications, aistProjects } from '$lib/data/publications';
+  import { sortedPublications, aistProjects } from '$lib/data/publications';
   import Seo from '$lib/components/Seo.svelte';
   import { breadcrumbJsonLd } from '$lib/seo/jsonld';
 
-  // All publications: under-review first, then reverse-chronological
-  const allPubs = [...publications].sort((a, b) => {
-    if (a.status === 'under-review' && b.status !== 'under-review') return -1;
-    if (a.status !== 'under-review' && b.status === 'under-review') return 1;
-    return b.year - a.year;
-  });
+  const allPubs = sortedPublications;
 
   const areaLabels: Record<string, string> = {
     'data-engineering': 'Data Engineering',
