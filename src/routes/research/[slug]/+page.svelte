@@ -54,16 +54,18 @@
     {/each}
   </div>
 
-  <p class="pub-venue">
-    {#if pub.status === 'under-review' && pub.arxivId}
-      arXiv:{pub.arxivId}
-    {:else}
-      {pub.venue}
-    {/if}
-    {#if pub.acceptanceRate}
-      <span class="acceptance-rate">&middot; {pub.acceptanceRate}</span>
-    {/if}
-  </p>
+  {#if pub.status !== 'under-review' || pub.arxivId || pub.acceptanceRate}
+    <p class="pub-venue">
+      {#if pub.status === 'under-review'}
+        {#if pub.arxivId}arXiv:{pub.arxivId}{/if}
+      {:else}
+        {pub.venue}
+      {/if}
+      {#if pub.acceptanceRate}
+        <span class="acceptance-rate">&middot; {pub.acceptanceRate}</span>
+      {/if}
+    </p>
+  {/if}
 
   {#if pub.pdf || pub.doi || pub.arxivId || pub.github || pub.zenodo || pub.overleaf}
     <div class="pub-links">

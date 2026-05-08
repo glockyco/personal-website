@@ -239,7 +239,7 @@
       emph(pub.title)
       [. ]
       if pub.status == "under-review" {
-        [Under review at #pub.venueShort.]
+        [Under review.]
       } else {
         [#pub.venueDisplay, #pub.year.]
       }

@@ -80,8 +80,10 @@
             <span>{author.name}</span>
           {/if}
         {/each}
-        {#if pub.status === 'under-review' && pub.arxivId}
-          <span class="venue-inline">&nbsp;&middot;&nbsp;arXiv:{pub.arxivId}</span>
+        {#if pub.status === 'under-review'}
+          {#if pub.arxivId}
+            <span class="venue-inline">&nbsp;&middot;&nbsp;arXiv:{pub.arxivId}</span>
+          {/if}
         {:else}
           <span class="venue-inline">&nbsp;&middot;&nbsp;{pub.venue}</span>
         {/if}
