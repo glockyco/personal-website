@@ -225,6 +225,40 @@ const rawPublications = [
     github: 'https://github.com/jaichberg/qualisign',
     overleaf: 'https://www.overleaf.com/read/vnfhydqxmpvx',
     tags: ['mining software repositories', 'design patterns', 'software quality']
+  },
+  {
+    slug: 'security-incentivization',
+    title: 'Security Incentivization: An Empirical Study of how Micropayments Impact Code Security',
+    authors: [
+      { name: 'Stefan Rass' },
+      { name: 'Martin Pinzger', url: 'https://pinzger.github.io/' },
+      { name: 'Rainer W. Alexandrowicz' },
+      { name: 'Georg Sengstbratl' },
+      { name: 'Johann Glock', isMe: true },
+      { name: 'Alexander Lercher', url: 'https://alexx882.github.io/' },
+      { name: 'Fabian Oraze' },
+      { name: 'Christoph Wedenig' }
+    ],
+    venue: 'Journal of Systems and Software',
+    venueShort: 'JSS',
+    year: 2026,
+    type: 'journal' as const,
+    status: 'under-review' as const,
+    authorPosition: 'contributing' as const,
+    abstract:
+      'Security often receives insufficient developer attention because it does not directly generate visible value, leading to underinvestment in practice. We evaluate a countermeasure by team-level incentives tied to measurable security improvements over time. Our semi-automated mechanism aggregates static analysis findings from Bearer, Detekt, and mobsfscan, computes security issue density, and rewards teams based on the relative improvement ratio across sprints, enabling repeatable, scriptable reporting at scale.\nIn a controlled course experiment with 84 students across 14 teams, we compared a security-incentivized condition, in which bonus points were linked to security scanner results, against a control condition with an otherwise identical grading scheme. The treatment group achieved significantly lower security issue density overall (beta regression: β = −0.396, p = 0.0342), indicating improved measurable security under incentivization. After controlling for platform, we observed a marked front-end/back-end disparity, with back-ends showing fewer issues and higher improvement ratios under incentives, highlighting heterogeneous effects across stack layers. Notably, these gains were not the byproduct of inflated code volume, as lines of code increased similarly across groups over time. The measurement pipeline and toolchain proved feasible for scripting and automation, supporting scalable adoption in practice.\nOur results suggest that aligning rewards with automated security metrics can measurably improve code security and merit follow-up in professional contexts and longer development lifecycles.',
+    tldr: 'A controlled course experiment with 84 students across 14 teams shows that tying small per-sprint bonuses to automated SAST results (Bearer, Detekt, mobsfscan) significantly lowers security issue density (β = −0.396, p = 0.0342).',
+    metaDescription:
+      'Controlled experiment with 84 students: tying bonuses to automated SAST results significantly reduces security issue density, especially in back-ends.',
+    pdf: '/pdfs/rass_2026_security_incentivization.pdf',
+    github: 'https://github.com/jku-lit-scsl/SecurityIncentivization_AnEmpiricalStudy',
+    tags: [
+      'security',
+      'incentivization',
+      'static application security testing',
+      'empirical software engineering',
+      'software engineering education'
+    ]
   }
 ];
 
