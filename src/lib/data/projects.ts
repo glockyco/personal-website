@@ -127,6 +127,28 @@ const rawProjects = [
     techStack: ['SvelteKit', 'TypeScript', 'Typst', 'Zod', 'Playwright', 'Cloudflare Workers']
   },
   {
+    slug: 'hotrepl',
+    title: 'HotRepl',
+    tagline: 'Runtime C# REPL and typed command bridge for Unity games',
+    status: 'active' as const,
+    featured: false,
+    inPdfCv: false,
+    liveUrl: 'https://hotrepl.glockyco.com/',
+    githubUrl: 'https://github.com/glockyco/HotRepl',
+    techStack: [
+      'C#',
+      '.NET',
+      'TypeScript',
+      'Bun',
+      'Unity',
+      'BepInEx',
+      'MelonLoader',
+      'WebSocket',
+      'SvelteKit',
+      'Cloudflare Workers'
+    ]
+  },
+  {
     slug: '10-man-idle',
     title: '10-Man Codex',
     tagline: 'Data-mined game codex for the 10-Man Idle community',
