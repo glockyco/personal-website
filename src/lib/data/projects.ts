@@ -137,13 +137,12 @@ const rawProjects = [
     githubUrl: 'https://github.com/glockyco/HotRepl',
     techStack: [
       'C#',
-      '.NET',
       'TypeScript',
-      'Bun',
       'Unity',
       'BepInEx',
       'MelonLoader',
-      'WebSocket',
+      'WebSockets',
+      'MCP',
       'SvelteKit',
       'Cloudflare Workers'
     ]
