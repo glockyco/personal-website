@@ -239,7 +239,7 @@ export const supervision: Supervision[] = [
   // Ongoing MSc theses
   {
     type: 'msc-thesis',
-    status: 'ongoing',
+    status: 'completed',
     name: 'Clemens Bauer',
     topic: 'Generating Property-based Tests for Java Methods'
   },
@@ -251,7 +251,7 @@ export const supervision: Supervision[] = [
   },
   {
     type: 'msc-thesis',
-    status: 'ongoing',
+    status: 'completed',
     name: 'Olivier Aartsen',
     topic: 'Evaluation of Optimization Methods that Improve the Performance of Videogames on PC'
   },
