@@ -236,18 +236,18 @@ export const teaching: TeachingExperience[] = [
 ].map((t) => TeachingExperienceSchema.parse(t));
 
 export const supervision: Supervision[] = [
-  // Ongoing MSc theses
-  {
-    type: 'msc-thesis',
-    status: 'completed',
-    name: 'Clemens Bauer',
-    topic: 'Generating Property-based Tests for Java Methods'
-  },
+  // MSc theses
   {
     type: 'msc-thesis',
     status: 'ongoing',
     name: 'Merlin Volkmer',
     topic: 'Automated Detection and Refactoring of Test Smells in Java Test Suites'
+  },
+  {
+    type: 'msc-thesis',
+    status: 'completed',
+    name: 'Clemens Bauer',
+    topic: 'Generating Property-based Tests for Java Methods'
   },
   {
     type: 'msc-thesis',
