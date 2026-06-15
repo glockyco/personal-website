@@ -137,6 +137,17 @@ const rawProjects = [
     ]
   },
   {
+    slug: 'compendiums',
+    title: 'Compendiums Landing Page',
+    tagline: 'Minimal landing page for my public game compendium projects',
+    status: 'active' as const,
+    featured: false,
+    inPdfCv: false,
+    liveUrl: 'https://compendiums.org/',
+    githubUrl: 'https://github.com/glockyco/compendiums.org',
+    techStack: ['HTML', 'CSS', 'Cloudflare Workers']
+  },
+  {
     slug: 'personal-website',
     title: 'Personal Website',
     tagline: 'Portfolio and CV presenting my research and engineering work',

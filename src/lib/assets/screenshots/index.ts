@@ -10,6 +10,8 @@ import tenManIdleThumb from './10-man-idle-thumb.webp';
 import tenManIdleHero from './10-man-idle-hero.webp';
 import hotreplThumb from './hotrepl-thumb.webp';
 import hotreplHero from './hotrepl-hero.webp';
+import compendiumsThumb from './compendiums-thumb.webp';
+import compendiumsHero from './compendiums-hero.webp';
 
 export const thumbnails: Record<string, string> = {
   erenshor: erenshorThumb,
@@ -17,6 +19,7 @@ export const thumbnails: Record<string, string> = {
   'u27-gazette': u27GazetteThumb,
   'personal-website': personalWebsiteThumb,
   hotrepl: hotreplThumb,
+  compendiums: compendiumsThumb,
   '10-man-idle': tenManIdleThumb
 };
 
@@ -26,5 +29,6 @@ export const heroes: Record<string, string> = {
   'u27-gazette': u27GazetteHero,
   'personal-website': personalWebsiteHero,
   hotrepl: hotreplHero,
+  compendiums: compendiumsHero,
   '10-man-idle': tenManIdleHero
 };
