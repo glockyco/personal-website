@@ -116,17 +116,6 @@ const rawProjects = [
     techStack: ['SvelteKit', 'TypeScript', 'Zod', 'Cloudflare Workers']
   },
   {
-    slug: 'personal-website',
-    title: 'Personal Website',
-    tagline: 'Portfolio and CV presenting my research and engineering work',
-    status: 'active' as const,
-    featured: false,
-    inPdfCv: false,
-    liveUrl: 'https://glockyco.com/',
-    githubUrl: 'https://github.com/glockyco/personal-website',
-    techStack: ['SvelteKit', 'TypeScript', 'Typst', 'Zod', 'Playwright', 'Cloudflare Workers']
-  },
-  {
     slug: 'hotrepl',
     title: 'HotRepl',
     tagline: 'Runtime C# REPL and typed command bridge for Unity games',
@@ -146,6 +135,17 @@ const rawProjects = [
       'SvelteKit',
       'Cloudflare Workers'
     ]
+  },
+  {
+    slug: 'personal-website',
+    title: 'Personal Website',
+    tagline: 'Portfolio and CV presenting my research and engineering work',
+    status: 'active' as const,
+    featured: false,
+    inPdfCv: false,
+    liveUrl: 'https://glockyco.com/',
+    githubUrl: 'https://github.com/glockyco/personal-website',
+    techStack: ['SvelteKit', 'TypeScript', 'Typst', 'Zod', 'Playwright', 'Cloudflare Workers']
   },
   {
     slug: '10-man-idle',

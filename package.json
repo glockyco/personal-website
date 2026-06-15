@@ -11,6 +11,7 @@
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "lint": "eslint .",
+    "test": "node --experimental-strip-types --test tests/*.test.ts",
     "format": "prettier --write .",
     "pdf": "node --experimental-strip-types scripts/generate-pdf.ts && vite build",
     "pdf:full": "vite build && node --env-file=.env.local --experimental-strip-types scripts/generate-pdf.ts --full",
