@@ -1,3 +1,13 @@
+---
+title: 'Personal Website Plan'
+type: plan
+status: active
+created: 2026-01-01
+parent:
+superseded_by:
+archived:
+---
+
 # Personal Website Plan
 
 ## Profile Summary

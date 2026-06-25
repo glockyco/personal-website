@@ -9,6 +9,12 @@ pre-commit:
       run: pnpm eslint {staged_files}
     svelte-check:
       run: pnpm check
+    plans-docs:
+      glob: 'docs/plans/**/*.md'
+      run: omp-plans index && omp-plans check
+      stage_fixed: true
+      skip:
+        - run: '! command -v omp-plans'
 
 commit-msg:
   commands:
