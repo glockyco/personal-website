@@ -2,7 +2,8 @@
  * Capture project screenshots and export WebP assets.
  *
  * Usage:
- *   pnpm screenshots
+ *   pnpm screenshots                       (all projects with a liveUrl)
+ *   pnpm screenshots erenshor ancient-kingdoms  (only the given slugs)
  *
  * Prerequisites:
  *   pnpm add -D playwright sharp          (one-time)
@@ -57,7 +58,19 @@ const SETTLE_MS = 2000;
 
 // ── Main ──────────────────────────────────────────────────────────────────────
 
-const toCapture = projects.filter((p) => p.liveUrl);
+const slugFilter = process.argv.slice(2);
+const toCapture = projects.filter(
+  (p) => p.liveUrl && (slugFilter.length === 0 || slugFilter.includes(p.slug))
+);
+
+if (slugFilter.length > 0) {
+  const matched = new Set(toCapture.map((p) => p.slug));
+  const unknown = slugFilter.filter((s) => !matched.has(s));
+  if (unknown.length > 0) {
+    console.error(`Unknown or non-live project slug(s): ${unknown.join(', ')}`);
+    process.exit(1);
+  }
+}
 console.log(`Capturing ${toCapture.length} project screenshot(s)...\n`);
 
 const browser = await chromium.launch();
