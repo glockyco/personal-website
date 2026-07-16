@@ -10,8 +10,7 @@
     teaching,
     supervision,
     academicService,
-    skills,
-    continuingEducation
+    skills
   } from '$lib/data/cv';
   import Seo from '$lib/components/Seo.svelte';
   import { breadcrumbJsonLd } from '$lib/seo/jsonld';
@@ -93,7 +92,6 @@
     <nav class="page-nav">
       <a class="page-nav-pill" href="#experience">Experience</a>
       <a class="page-nav-pill" href="#education">Education</a>
-      <a class="page-nav-pill" href="#continuing-education">Continuing Education</a>
       <a class="page-nav-pill" href="#publications">Publications</a>
       <a class="page-nav-pill" href="#projects">Projects</a>
       <a class="page-nav-pill" href="#teaching">Teaching</a>
@@ -178,25 +176,6 @@
             </div>
           {/if}
         </div>
-      </div>
-    {/each}
-  </div>
-</section>
-
-<!-- ── Continuing Education ──────────────────────────────────────── -->
-<section class="section" id="continuing-education">
-  <div class="section-head">
-    <span class="section-label">Continuing Education</span>
-  </div>
-
-  <p class="cont-ed-summary">Doctoral training and self-study courses.</p>
-
-  <div class="cont-ed-grid">
-    {#each continuingEducation as entry (entry.category)}
-      <div class="cont-ed-row">
-        <span class="cont-ed-category">{entry.category}</span>
-        <span class="cont-ed-providers">{entry.providers.join(', ')}</span>
-        <span class="cont-ed-units">{entry.hours} hours</span>
       </div>
     {/each}
   </div>
@@ -952,53 +931,6 @@
     padding-top: 4px;
   }
 
-  /* ── Continuing Education ── */
-  .cont-ed-summary {
-    font-size: var(--text-sm);
-    color: var(--color-muted);
-    margin-bottom: 16px;
-  }
-
-  .cont-ed-grid {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .cont-ed-row {
-    display: grid;
-    grid-template-columns: 1fr 120px 70px;
-    gap: 0 24px;
-    align-items: baseline;
-    padding: 6px 0;
-    border-bottom: 1px solid var(--color-border);
-    transition: border-color var(--transition-base);
-
-    &:last-child {
-      border-bottom: none;
-    }
-  }
-
-  .cont-ed-category {
-    font-size: var(--text-base);
-    font-weight: 600;
-    color: var(--color-heading);
-  }
-
-  .cont-ed-providers {
-    font-size: var(--text-sm);
-    color: var(--color-muted);
-    white-space: nowrap;
-    text-align: right;
-  }
-
-  .cont-ed-units {
-    font-size: var(--text-sm);
-    font-weight: 600;
-    color: var(--color-heading);
-    white-space: nowrap;
-    text-align: right;
-  }
-
   /* ── Service & Outreach ── */
   .service-grid {
     display: flex;
@@ -1073,19 +1005,6 @@
     .skill-group {
       grid-template-columns: 1fr;
       gap: 8px;
-    }
-
-    .cont-ed-row {
-      grid-template-columns: 1fr;
-      gap: 2px;
-    }
-
-    .cont-ed-providers {
-      text-align: left;
-    }
-
-    .cont-ed-units {
-      text-align: left;
     }
 
     .service-row {
