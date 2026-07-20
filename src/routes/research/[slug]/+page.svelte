@@ -31,7 +31,10 @@
   <a class="back-link" href="/research/">&larr; Research</a>
 
   <div class="pub-badges">
-    {#if pub.status === 'under-review'}
+    {#if pub.status === 'under-review' && pub.arxivId}
+      <span class="badge badge-review">arXiv</span>
+      <span class="badge badge-year">{pub.year}</span>
+    {:else if pub.status === 'under-review'}
       <span class="badge badge-review">Under Review</span>
     {:else}
       <span class="badge badge-accent">{pub.venueShort}</span>

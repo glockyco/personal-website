@@ -238,7 +238,9 @@
       [. ]
       emph(pub.title)
       [. ]
-      if pub.status == "under-review" {
+      if pub.status == "under-review" and pub.arxivId != none {
+        [arXiv, #pub.year.]
+      } else if pub.status == "under-review" {
         [Under review.]
       } else {
         [#pub.venueDisplay, #pub.year.]
