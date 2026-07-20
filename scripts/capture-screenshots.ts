@@ -10,7 +10,8 @@
  *   pnpm exec playwright install chromium  (one-time)
  *
  * For each project with a liveUrl, this script:
- *   - Launches headless Chromium at 1200x675 (16:9) with 2x device scale
+ *   - Launches headless Chromium at a 1200x675 base viewport with 2x device scale
+ *   - Applies a project-specific zoom override by enlarging that logical viewport
  *   - Navigates to the liveUrl with ?theme=dark appended
  *   - Takes a viewport screenshot (no scrolling — captures the initial view)
  *
@@ -59,6 +60,11 @@ const QUALITY = 85;
 const THUMB_W = 900;
 const HERO_W = 1200;
 
+/** Per-project browser zoom. Values below 1 capture more of the page. */
+const SCREENSHOT_ZOOM_OVERRIDES: Record<string, number> = {
+  erenshor: 0.85
+};
+
 /** GitHub README captures use a taller square content slice inside the final 16:9 frame. */
 const GITHUB_CONTENT_HEIGHT_RATIO = 1;
 
@@ -98,10 +104,15 @@ for (const project of toCapture) {
       })();
   const isGitHubCapture = !project.liveUrl;
 
-  console.log(`  ${project.slug}: ${captureUrl}`);
+  const zoom = SCREENSHOT_ZOOM_OVERRIDES[project.slug] ?? 1;
+  const captureWidth = Math.round(VIEWPORT_W / zoom);
+  const captureHeight = Math.round(VIEWPORT_H / zoom);
+  const zoomLabel = zoom === 1 ? '' : ` (zoom ${Math.round(zoom * 100)}%)`;
+
+  console.log(`  ${project.slug}: ${captureUrl}${zoomLabel}`);
 
   const context = await browser.newContext({
-    viewport: { width: VIEWPORT_W, height: VIEWPORT_H },
+    viewport: { width: captureWidth, height: captureHeight },
     deviceScaleFactor: DEVICE_SCALE
   });
 
@@ -135,9 +146,7 @@ for (const project of toCapture) {
     });
   } else {
     await page.waitForTimeout(SETTLE_MS);
-    pngBuffer = await page.screenshot({
-      clip: { x: 0, y: 0, width: VIEWPORT_W * DEVICE_SCALE, height: VIEWPORT_H * DEVICE_SCALE }
-    });
+    pngBuffer = await page.screenshot();
   }
 
   await context.close();
