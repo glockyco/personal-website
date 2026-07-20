@@ -116,6 +116,16 @@ const rawProjects = [
     techStack: ['SvelteKit', 'TypeScript', 'Zod', 'Cloudflare Workers']
   },
   {
+    slug: 'fractured-realms-companion',
+    title: 'Fractured Realms Companion',
+    tagline: 'In-game item wiki and action planner for Fractured Realms',
+    status: 'active' as const,
+    featured: false,
+    inPdfCv: false,
+    githubUrl: 'https://github.com/glockyco/fractured-realms-companion',
+    techStack: ['TypeScript', 'Node.js', 'Electron', 'Steam', 'ASAR']
+  },
+  {
     slug: 'hotrepl',
     title: 'HotRepl',
     tagline: 'Runtime C# REPL and typed command bridge for Unity games',

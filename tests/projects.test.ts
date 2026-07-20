@@ -11,6 +11,7 @@ test('projects are ordered for the website project list', () => {
       'erenshor',
       'ancient-kingdoms',
       'u27-gazette',
+      'fractured-realms-companion',
       'hotrepl',
       'compendiums',
       'personal-website',
@@ -19,6 +20,15 @@ test('projects are ordered for the website project list', () => {
   );
 });
 
+test('Fractured Realms Companion is GitHub-only and active', () => {
+  const project = projects.find((candidate) => candidate.slug === 'fractured-realms-companion');
+
+  assert.ok(project);
+  assert.equal(project.status, 'active');
+  assert.equal(project.liveUrl, undefined);
+  assert.equal(project.githubUrl, 'https://github.com/glockyco/fractured-realms-companion');
+  assert.equal(project.inPdfCv, false);
+});
 test('compendiums landing page is listed on the website but not the PDF CV', () => {
   const project = projects.find((candidate) => candidate.slug === 'compendiums');
 
@@ -29,6 +39,12 @@ test('compendiums landing page is listed on the website but not the PDF CV', () 
   assert.equal(project.inPdfCv, false);
 });
 
+test('GitHub-only projects use the README anchor for screenshots', () => {
+  const screenshotScript = readFileSync('scripts/capture-screenshots.ts', 'utf8');
+
+  assert.match(screenshotScript, /project\.githubUrl}#readme/);
+  assert.match(screenshotScript, /article\.markdown-body/);
+});
 test('compendiums landing page has generated screenshot assets wired for display', () => {
   const screenshotIndex = readFileSync('src/lib/assets/screenshots/index.ts', 'utf8');
 
