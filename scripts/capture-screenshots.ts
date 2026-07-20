@@ -91,7 +91,11 @@ for (const project of toCapture) {
         url.searchParams.set('theme', 'dark');
         return url.toString();
       })()
-    : `${project.githubUrl}#readme`;
+    : (() => {
+        const url = new URL(project.githubUrl!);
+        url.hash = 'readme';
+        return url.toString();
+      })();
   const isGitHubCapture = !project.liveUrl;
 
   console.log(`  ${project.slug}: ${captureUrl}`);

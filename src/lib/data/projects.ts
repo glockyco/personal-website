@@ -122,7 +122,7 @@ const rawProjects = [
     status: 'active' as const,
     featured: false,
     inPdfCv: false,
-    githubUrl: 'https://github.com/glockyco/fractured-realms-companion',
+    githubUrl: 'https://github.com/glockyco/fractured-realms-companion#readme',
     techStack: ['TypeScript', 'Node.js', 'Electron', 'Steam', 'ASAR']
   },
   {
