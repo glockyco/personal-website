@@ -79,7 +79,7 @@
         <a class="link-btn" href="https://doi.org/{pub.doi}">DOI</a>
       {/if}
       {#if pub.arxivId}
-        <a class="link-btn" href="https://arxiv.org/abs/{pub.arxivId}">Preprint</a>
+        <a class="link-btn" href="https://arxiv.org/abs/{pub.arxivId}">arXiv</a>
       {/if}
       {#if pub.github}
         <a class="link-btn" href={pub.github}>Code</a>
