@@ -313,20 +313,7 @@ const rawAistProjects = [
 // Validate at build time
 export const publications: Publication[] = rawPublications.map((p) => PublicationSchema.parse(p));
 
-/**
- * Default display order: under-review papers first (in source-array order so
- * editorial position is preserved — `year` is not meaningful before publication),
- * then published papers in reverse-chronological order.
- *
- * Relies on Array.prototype.sort being stable (ES2019+).
- */
-export const sortedPublications: Publication[] = [...publications].sort((a, b) => {
-  const aReview = a.status === 'under-review';
-  const bReview = b.status === 'under-review';
-  if (aReview && !bReview) return -1;
-  if (!aReview && bReview) return 1;
-  if (aReview && bReview) return 0;
-  return b.year - a.year;
-});
+/** Default display order: reverse-chronological by publication year. */
+export const sortedPublications: Publication[] = [...publications].sort((a, b) => b.year - a.year);
 
 export const aistProjects: AistProject[] = rawAistProjects.map((p) => AistProjectSchema.parse(p));

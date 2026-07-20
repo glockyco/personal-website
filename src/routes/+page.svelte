@@ -7,7 +7,7 @@
   import Seo from '$lib/components/Seo.svelte';
   import { personJsonLd, websiteJsonLd } from '$lib/seo/jsonld';
 
-  // Featured publications (uses default order: under-review first, then reverse-chronological)
+  // Featured publications use the default reverse-chronological order.
   const featuredPubs = sortedPublications.filter((p) => p.featured);
   const featuredProjects = projects.filter((p) => p.featured);
 </script>
