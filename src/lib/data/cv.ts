@@ -137,6 +137,7 @@ export const education: Education[] = [
         title: 'Design and Implementation of the System Architecture for a Mixed Reality Board Game'
       }
     ],
+    gpa: '1.23',
     distinction: 'With Distinction',
     scholarship: 'Merit Scholarship'
   },
