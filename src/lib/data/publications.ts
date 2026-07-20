@@ -251,6 +251,7 @@ const rawPublications = [
     metaDescription:
       'Controlled experiment with 84 students: tying bonuses to automated SAST results significantly reduces security issue density, especially in back-ends.',
     pdf: '/pdfs/rass_2026_security_incentivization.pdf',
+    arxivId: '2605.13100',
     github: 'https://github.com/jku-lit-scsl/SecurityIncentivization_AnEmpiricalStudy',
     tags: [
       'security',
