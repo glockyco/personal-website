@@ -2,7 +2,7 @@
  * Capture project screenshots and export WebP assets.
  *
  * Usage:
- *   pnpm screenshots                       (all projects with a liveUrl)
+ *   pnpm screenshots                       (all projects with a liveUrl or githubUrl)
  *   pnpm screenshots erenshor ancient-kingdoms  (only the given slugs)
  *
  * Prerequisites:
@@ -13,11 +13,17 @@
  *   - Launches headless Chromium at 1200x675 (16:9) with 2x device scale
  *   - Navigates to the liveUrl with ?theme=dark appended
  *   - Takes a viewport screenshot (no scrolling — captures the initial view)
- *   - Exports two WebP variants via sharp:
+ *
+ * For projects without a liveUrl but with a githubUrl, this script:
+ *   - Navigates to the GitHub repository page
+ *   - Scrolls to the rendered README
+ *   - Takes a viewport screenshot from the start of the README
+ *
+ * Both capture paths export two WebP variants via sharp:
  *       <slug>-thumb.webp  900px wide  (used on project cards)
  *       <slug>-hero.webp  1200px wide  (used on detail pages without a live demo)
  *
- * Projects without a liveUrl are skipped; any manually placed screenshots
+ * Projects without a liveUrl or githubUrl are skipped; any manually placed screenshots
  * in src/lib/assets/screenshots/ are preserved.
  */
 
@@ -60,14 +66,14 @@ const SETTLE_MS = 2000;
 
 const slugFilter = process.argv.slice(2);
 const toCapture = projects.filter(
-  (p) => p.liveUrl && (slugFilter.length === 0 || slugFilter.includes(p.slug))
+  (p) => (p.liveUrl || p.githubUrl) && (slugFilter.length === 0 || slugFilter.includes(p.slug))
 );
 
 if (slugFilter.length > 0) {
   const matched = new Set(toCapture.map((p) => p.slug));
   const unknown = slugFilter.filter((s) => !matched.has(s));
   if (unknown.length > 0) {
-    console.error(`Unknown or non-live project slug(s): ${unknown.join(', ')}`);
+    console.error(`Unknown or non-screenshot project slug(s): ${slugFilter.join(', ')}`);
     process.exit(1);
   }
 }
@@ -76,9 +82,14 @@ console.log(`Capturing ${toCapture.length} project screenshot(s)...\n`);
 const browser = await chromium.launch();
 
 for (const project of toCapture) {
-  const url = new URL(project.liveUrl!);
-  url.searchParams.set('theme', 'dark');
-  const captureUrl = url.toString();
+  const captureUrl = project.liveUrl
+    ? (() => {
+        const url = new URL(project.liveUrl);
+        url.searchParams.set('theme', 'dark');
+        return url.toString();
+      })()
+    : `${project.githubUrl}#readme`;
+  const isGitHubCapture = !project.liveUrl;
 
   console.log(`  ${project.slug}: ${captureUrl}`);
 
@@ -90,12 +101,20 @@ for (const project of toCapture) {
   const page = await context.newPage();
 
   await page.goto(captureUrl, { waitUntil: 'networkidle', timeout: 30000 });
-  await page.waitForTimeout(SETTLE_MS);
+  if (isGitHubCapture) {
+    const readme = page.locator('article.markdown-body');
+    await readme.waitFor({ state: 'visible', timeout: 30000 });
+    await readme.scrollIntoViewIfNeeded();
+  } else {
+    await page.waitForTimeout(SETTLE_MS);
+  }
 
-  // Clip to exact viewport — no full-page scrolling
-  const pngBuffer = await page.screenshot({
-    clip: { x: 0, y: 0, width: VIEWPORT_W * DEVICE_SCALE, height: VIEWPORT_H * DEVICE_SCALE }
-  });
+  const screenshotOptions = isGitHubCapture
+    ? undefined
+    : {
+        clip: { x: 0, y: 0, width: VIEWPORT_W * DEVICE_SCALE, height: VIEWPORT_H * DEVICE_SCALE }
+      };
+  const pngBuffer = await page.screenshot(screenshotOptions);
 
   await context.close();
 
