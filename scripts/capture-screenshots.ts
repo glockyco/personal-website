@@ -59,6 +59,9 @@ const QUALITY = 85;
 const THUMB_W = 900;
 const HERO_W = 1200;
 
+/** GitHub README captures use a taller square content slice inside the final 16:9 frame. */
+const GITHUB_CONTENT_HEIGHT_RATIO = 1;
+
 /** How long to wait after navigation before capturing (ms) */
 const SETTLE_MS = 2000;
 
@@ -100,31 +103,64 @@ for (const project of toCapture) {
 
   const page = await context.newPage();
 
-  await page.goto(captureUrl, { waitUntil: 'networkidle', timeout: 30000 });
-  if (isGitHubCapture) {
-    const readme = page.locator('article.markdown-body');
+  await page.goto(captureUrl, {
+    waitUntil: isGitHubCapture ? 'domcontentloaded' : 'networkidle',
+    timeout: 30000
+  });
+  const readme = isGitHubCapture ? page.locator('article.markdown-body') : null;
+  let pngBuffer;
+  if (readme) {
     await readme.waitFor({ state: 'visible', timeout: 30000 });
+    await page.addStyleTag({
+      content: '[class*="OverviewRepoFiles-module__Box_3__"] { display: none !important; }'
+    });
     await readme.scrollIntoViewIfNeeded();
+
+    const readmeBox = await readme.boundingBox();
+    if (!readmeBox) {
+      throw new Error(`Could not measure README for ${project.slug}`);
+    }
+    const frameHeight = Math.min(readmeBox.height, readmeBox.width * GITHUB_CONTENT_HEIGHT_RATIO);
+    pngBuffer = await page.screenshot({
+      clip: {
+        x: readmeBox.x,
+        y: readmeBox.y,
+        width: readmeBox.width,
+        height: frameHeight
+      }
+    });
   } else {
     await page.waitForTimeout(SETTLE_MS);
+    pngBuffer = await page.screenshot({
+      clip: { x: 0, y: 0, width: VIEWPORT_W * DEVICE_SCALE, height: VIEWPORT_H * DEVICE_SCALE }
+    });
   }
-
-  const screenshotOptions = isGitHubCapture
-    ? undefined
-    : {
-        clip: { x: 0, y: 0, width: VIEWPORT_W * DEVICE_SCALE, height: VIEWPORT_H * DEVICE_SCALE }
-      };
-  const pngBuffer = await page.screenshot(screenshotOptions);
 
   await context.close();
 
+  const thumbPipeline = sharp(pngBuffer);
+  const heroPipeline = sharp(pngBuffer);
+  if (isGitHubCapture) {
+    thumbPipeline.resize(THUMB_W, Math.round(THUMB_W * (VIEWPORT_H / VIEWPORT_W)), {
+      fit: 'contain',
+      background: '#ffffff'
+    });
+    heroPipeline.resize(HERO_W, HERO_W * (VIEWPORT_H / VIEWPORT_W), {
+      fit: 'contain',
+      background: '#ffffff'
+    });
+  } else {
+    thumbPipeline.resize(THUMB_W);
+    heroPipeline.resize(HERO_W);
+  }
+
   // Export thumb
   const thumbPath = resolve(OUT_DIR, `${project.slug}-thumb.webp`);
-  await sharp(pngBuffer).resize(THUMB_W).webp({ quality: QUALITY }).toFile(thumbPath);
+  await thumbPipeline.webp({ quality: QUALITY }).toFile(thumbPath);
 
   // Export hero
   const heroPath = resolve(OUT_DIR, `${project.slug}-hero.webp`);
-  await sharp(pngBuffer).resize(HERO_W).webp({ quality: QUALITY }).toFile(heroPath);
+  await heroPipeline.webp({ quality: QUALITY }).toFile(heroPath);
 
   const thumbSize = statSync(thumbPath).size;
   const heroSize = statSync(heroPath).size;
