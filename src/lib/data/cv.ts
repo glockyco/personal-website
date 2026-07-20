@@ -104,7 +104,7 @@ export const education: Education[] = [
     expectedEnd: '2026',
     thesis:
       'Formal Guarantees Meet Practical Constraints: From Semantic Differencing to Test Generalization for Regression Detection',
-    advisor: 'Prof. Martin Pinzger'
+    advisor: 'Prof. Martin Pinzger and Prof. Johann Eder'
   },
   {
     degree: 'MSc',
