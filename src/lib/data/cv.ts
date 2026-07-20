@@ -148,6 +148,7 @@ export const education: Education[] = [
     location: 'Braunau am Inn, Austria',
     startYear: 2007,
     endYear: 2012,
+    gpa: '1.25',
     distinction: 'With Distinction'
   }
 ].map((e) => EducationSchema.parse(e));
