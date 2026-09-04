@@ -156,12 +156,17 @@ export const education: Education[] = [
 export const workExperience: WorkExperience[] = [
   {
     title: 'Researcher and Senior Software Engineer',
-    company: 'Software Competence Center Hagenberg',
+    company: 'Software Competence Center Hagenberg – AISYS',
     location: 'Hagenberg, Austria',
-    startYear: 2026
+    startYear: 2026,
+    highlights: [
+      'Research on AI-based software systems and AI for software engineering (AI4SE).',
+      'Applied research with industry and academic partners.',
+      'Supervision and mentoring of junior researchers in project and research work.'
+    ]
   },
   {
-    title: 'Research Software Engineer (University Assistant)',
+    title: 'Researcher / Software Engineer (University Assistant)',
     company: 'University of Klagenfurt \u2013 Software Engineering Research Group',
     location: 'Klagenfurt, Austria',
     startYear: 2021,
@@ -173,7 +178,7 @@ export const workExperience: WorkExperience[] = [
     ]
   },
   {
-    title: 'Research Software Engineer (Research Associate)',
+    title: 'Researcher / Software Engineer (Research Associate)',
     company: 'University of Applied Sciences Upper Austria \u2013 AIST Research Group',
     location: 'Hagenberg, Austria',
     startYear: 2018,
