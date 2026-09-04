@@ -11,6 +11,7 @@ export const EducationSchema = z.object({
   startYear: z.number().int(),
   endYear: z.number().int().optional(),
   expectedEnd: z.string().optional(),
+  inPdfCv: z.boolean(),
   thesis: z.string().optional(),
   theses: z.array(z.object({ label: z.string(), title: z.string() })).optional(),
   advisor: z.string().optional(),
@@ -103,6 +104,7 @@ export const education: Education[] = [
     location: 'Klagenfurt, Austria',
     startYear: 2021,
     expectedEnd: profile.doctorate.expectedGraduation,
+    inPdfCv: true,
     thesis:
       'Formal Guarantees Meet Practical Constraints: From Semantic Differencing to Test Generalization for Regression Detection',
     advisor: 'Prof. Martin Pinzger and Prof. Johann Eder'
@@ -114,6 +116,7 @@ export const education: Education[] = [
     location: 'Hagenberg, Austria',
     startYear: 2018,
     endYear: 2020,
+    inPdfCv: true,
     thesis: 'Mining Software Repositories for the Effects of Design Patterns on Software Quality',
     advisor: 'Prof. Josef Pichler',
     gpa: '1.07',
@@ -127,6 +130,7 @@ export const education: Education[] = [
     location: 'Hagenberg, Austria',
     startYear: 2015,
     endYear: 2018,
+    inPdfCv: true,
     advisor: 'Prof. Herwig Mayr',
     theses: [
       {
@@ -149,6 +153,7 @@ export const education: Education[] = [
     location: 'Braunau am Inn, Austria',
     startYear: 2007,
     endYear: 2012,
+    inPdfCv: false,
     gpa: '1.25',
     distinction: 'With Distinction'
   }

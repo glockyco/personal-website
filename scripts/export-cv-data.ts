@@ -87,7 +87,7 @@ const data = {
     endYear: job.endYear ?? null,
     highlights: job.highlights ?? []
   })),
-  education: education.map((edu) => ({
+  education: education.filter((edu) => edu.inPdfCv).map((edu) => ({
     degree: edu.degree,
     field: edu.field,
     institution: edu.institution,
