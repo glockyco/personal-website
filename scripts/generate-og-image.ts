@@ -58,7 +58,7 @@ const svg = `<?xml version="1.0" encoding="UTF-8"?>
 
   <text x="80" y="${HEIGHT - 160}" font-family="Helvetica, Arial, sans-serif"
         font-size="30" font-weight="400" fill="${TEXT_MUTED}">
-    ${escapeXml(profile.affiliation)}
+    ${escapeXml(profile.employment.organization)}
   </text>
 
   <text x="80" y="${HEIGHT - 60}" font-family="Helvetica, Arial, sans-serif"

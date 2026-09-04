@@ -1,8 +1,8 @@
 # Personal website
 
-Personal portfolio website for Johann Glock — PhD researcher in empirical
-software engineering at University of Klagenfurt, bridging academia and
-practical engineering.
+Personal portfolio website for Johann Glock, a researcher and senior software
+engineer at SCCH and a PhD candidate in Informatics at the University of
+Klagenfurt. His work connects academic research and practical engineering.
 
 ## Tech Stack
 

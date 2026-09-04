@@ -37,12 +37,24 @@ export function personJsonLd() {
     '@type': 'Person',
     '@id': `${SITE_URL}/#person`,
     name: profile.name,
-    jobTitle: profile.tagline,
+    jobTitle: profile.employment.title,
     url: SITE_URL,
-    affiliation: {
+    worksFor: {
       '@type': 'Organization',
-      name: profile.affiliation,
-      url: profile.affiliationUrl
+      name: profile.employment.organization,
+      alternateName: profile.employment.shortOrganization,
+      url: profile.employment.organizationUrl,
+      department: {
+        '@type': 'Organization',
+        name: profile.employment.groupName,
+        alternateName: profile.employment.group,
+        url: profile.employment.groupUrl
+      }
+    },
+    affiliation: {
+      '@type': 'CollegeOrUniversity',
+      name: profile.doctorate.institution,
+      url: profile.doctorate.institutionUrl
     },
     sameAs: [...SAME_AS]
   };

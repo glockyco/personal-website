@@ -72,8 +72,8 @@ const data = {
   profile: {
     name: profile.name,
     tagline: profile.tagline,
-    affiliation: profile.affiliation,
-    affiliationUrl: profile.affiliationUrl,
+    employment: profile.employment,
+    doctorate: profile.doctorate,
     orcid: profile.orcid,
     github: profile.github,
     linkedin: profile.linkedin

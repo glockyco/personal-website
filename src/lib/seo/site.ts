@@ -16,8 +16,7 @@ export const SITE_AUTHOR = profile.name;
 
 export const DEFAULT_TITLE = `${profile.name} — ${profile.tagline}`;
 
-export const DEFAULT_DESCRIPTION =
-  'Personal website of Johann Glock — PhD candidate in software engineering at the University of Klagenfurt. Research, projects, and CV.';
+export const DEFAULT_DESCRIPTION = `Personal website of ${profile.name}, a ${profile.employment.title.toLowerCase()} at ${profile.employment.shortOrganization} and a ${profile.doctorate.title}. Research, projects, and CV.`;
 
 export const OG_LOCALE = 'en_US';
 
@@ -37,8 +36,7 @@ export const SAME_AS = [
   profile.github,
   profile.scholar,
   profile.semanticScholar,
-  profile.linkedin,
-  profile.affiliationUrl
+  profile.linkedin
 ] as const;
 
 /**

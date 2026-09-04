@@ -67,7 +67,6 @@
 <Seo
   path="/cv/"
   title="CV — Johann Glock"
-  description="Curriculum vitae of Johann Glock — PhD candidate in software engineering at the University of Klagenfurt. Experience, publications, teaching, and service."
   jsonLd={breadcrumbJsonLd([
     { name: 'Home', path: '/' },
     { name: 'CV', path: '/cv/' }
@@ -82,8 +81,10 @@
       <h1>{profile.name}</h1>
       <p class="header-subtitle">{profile.tagline}</p>
       <p class="header-meta">
-        <a href={profile.affiliationUrl}>{profile.affiliation}</a>
-        &middot; Advisor: Prof. Martin Pinzger &middot; Expected graduation: Q4 2026
+        <a href={profile.employment.organizationUrl}>{profile.employment.shortOrganization}</a>
+        &middot; PhD candidate at
+        <a href={profile.doctorate.institutionUrl}>{profile.doctorate.institution}</a>
+        &middot; Expected graduation: {profile.doctorate.expectedGraduation}
       </p>
       <p class="header-summary">{researchSummary}</p>
     </div>

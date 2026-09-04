@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { profile } from './links.ts';
 
 // ── Schemas ──────────────────────────────────────────────────────────────────
 
@@ -101,7 +102,7 @@ export const education: Education[] = [
     institution: 'University of Klagenfurt',
     location: 'Klagenfurt, Austria',
     startYear: 2021,
-    expectedEnd: '2026',
+    expectedEnd: profile.doctorate.expectedGraduation,
     thesis:
       'Formal Guarantees Meet Practical Constraints: From Semantic Differencing to Test Generalization for Regression Detection',
     advisor: 'Prof. Martin Pinzger and Prof. Johann Eder'

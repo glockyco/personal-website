@@ -1,6 +1,6 @@
 # Personal Website
 
-Personal portfolio and CV for Johann Glock, PhD researcher in empirical software engineering at the University of Klagenfurt.
+Personal portfolio and CV for Johann Glock, a researcher and senior software engineer at SCCH and a PhD candidate in Informatics.
 
 Live site: <https://glockyco.com>
 

@@ -12,11 +12,7 @@
   const featuredProjects = projects.filter((p) => p.featured);
 </script>
 
-<Seo
-  path="/"
-  description="PhD candidate in software engineering at the University of Klagenfurt. Research on program analysis, equivalence checking, and test generalization."
-  jsonLd={[websiteJsonLd(), personJsonLd()]}
-/>
+<Seo path="/" jsonLd={[websiteJsonLd(), personJsonLd()]} />
 
 <!-- ── Hero ──────────────────────────────────────────────────────────── -->
 <section class="hero" id="hero">
@@ -27,7 +23,7 @@
       <p class="tagline">{profile.tagline}</p>
       <p class="meta">
         {profile.location} &middot;
-        <a href={profile.affiliationUrl}>{profile.affiliation}</a>
+        <a href={profile.employment.organizationUrl}>{profile.employment.organization}</a>
       </p>
       <div class="actions">
         <a class="btn btn-primary" href="/research/">View Research</a>

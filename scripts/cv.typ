@@ -131,9 +131,9 @@
     text(size: 10.5pt, fill: c-muted)[#data.profile.tagline]
     v(2pt)
     text(size: 8.5pt, fill: c-muted)[
-      #link(data.profile.affiliationUrl)[#data.profile.affiliation]
-      #h(3pt)·#h(3pt) Advisor: Prof. Martin Pinzger
-      #h(3pt)·#h(3pt) Expected graduation: Q4 2026
+      #link(data.profile.employment.organizationUrl)[#data.profile.employment.shortOrganization]
+      #h(3pt)·#h(3pt) PhD candidate at #link(data.profile.doctorate.institutionUrl)[#data.profile.doctorate.institution]
+      #h(3pt)·#h(3pt) Expected graduation: #data.profile.doctorate.expectedGraduation
     ]
     v(2pt)
     text(size: 8.5pt, fill: c-muted)[
