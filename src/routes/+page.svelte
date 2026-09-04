@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { profile } from '$lib/data/links';
+  import { profile } from '$lib/data/profile';
   import profilePhoto from '$lib/assets/profile.png';
   import { sortedPublications } from '$lib/data/publications';
   import { projects } from '$lib/data/projects';
@@ -23,7 +23,7 @@
       <p class="tagline">{profile.tagline}</p>
       <p class="meta">
         {profile.location} &middot;
-        <a href={profile.employment.organizationUrl}>{profile.employment.organization}</a>
+        <a href={profile.employment.organization.url}>{profile.employment.organization.name}</a>
       </p>
       <div class="actions">
         <a class="btn btn-primary" href="/research/">View Research</a>
@@ -39,7 +39,7 @@
   <div class="section-head">
     <span class="section-label">About</span>
   </div>
-  <!-- eslint-disable-next-line svelte/no-at-html-tags -- bioHtml is authored in links.ts, not user input -->
+  <!-- eslint-disable-next-line svelte/no-at-html-tags -- bioHtml is authored in profile.ts, not user input -->
   <p class="bio">{@html profile.bioHtml}</p>
 </section>
 

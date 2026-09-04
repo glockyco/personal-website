@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { profile } from '$lib/data/links';
+  import { profile } from '$lib/data/profile';
   import CopyEmail from './CopyEmail.svelte';
 
   const currentYear = new Date().getFullYear();

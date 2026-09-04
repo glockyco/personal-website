@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from '$app/state';
-  import { profile } from '$lib/data/links';
+  import { profile } from '$lib/data/profile';
   import monogram from '$lib/assets/monogram.png';
 
   const navLinks = [

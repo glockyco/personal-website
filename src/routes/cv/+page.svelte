@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { profile } from '$lib/data/links';
+  import { profile } from '$lib/data/profile';
   import profilePhoto from '$lib/assets/profile.png';
   import { sortedPublications } from '$lib/data/publications';
   import { projects } from '$lib/data/projects';
@@ -81,9 +81,9 @@
       <h1>{profile.name}</h1>
       <p class="header-subtitle">{profile.tagline}</p>
       <p class="header-meta">
-        <a href={profile.employment.organizationUrl}>{profile.employment.shortOrganization}</a>
+        <a href={profile.employment.organization.url}>{profile.employment.organization.shortName}</a>
         &middot; PhD candidate at
-        <a href={profile.doctorate.institutionUrl}>{profile.doctorate.institution}</a>
+        <a href={profile.doctorate.institution.url}>{profile.doctorate.institution.name}</a>
         &middot; Expected graduation: {profile.doctorate.expectedGraduation}
       </p>
       <p class="header-summary">{researchSummary}</p>

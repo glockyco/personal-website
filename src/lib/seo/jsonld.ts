@@ -7,7 +7,7 @@
  * so each SERP-relevant schema (`Person`, `WebSite`, `ScholarlyArticle`,
  * `CreativeWork`, `BreadcrumbList`) declares its required fields up front.
  */
-import { profile } from '$lib/data/links';
+import { profile } from '$lib/data/profile';
 import type { Publication } from '$lib/data/publications';
 import type { Project } from '$lib/data/projects';
 import { SAME_AS, SITE_AUTHOR, SITE_NAME, SITE_URL, absoluteUrl, canonicalUrl } from './site';
@@ -41,20 +41,20 @@ export function personJsonLd() {
     url: SITE_URL,
     worksFor: {
       '@type': 'Organization',
-      name: profile.employment.organization,
-      alternateName: profile.employment.shortOrganization,
-      url: profile.employment.organizationUrl,
+      name: profile.employment.organization.name,
+      alternateName: profile.employment.organization.shortName,
+      url: profile.employment.organization.url,
       department: {
         '@type': 'Organization',
-        name: profile.employment.groupName,
-        alternateName: profile.employment.group,
-        url: profile.employment.groupUrl
+        name: profile.employment.group.name,
+        alternateName: profile.employment.group.shortName,
+        url: profile.employment.group.url
       }
     },
     affiliation: {
       '@type': 'CollegeOrUniversity',
-      name: profile.doctorate.institution,
-      url: profile.doctorate.institutionUrl
+      name: profile.doctorate.institution.name,
+      url: profile.doctorate.institution.url
     },
     sameAs: [...SAME_AS]
   };

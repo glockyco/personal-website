@@ -131,8 +131,8 @@
     text(size: 10.5pt, fill: c-muted)[#data.profile.tagline]
     v(2pt)
     text(size: 8.5pt, fill: c-muted)[
-      #link(data.profile.employment.organizationUrl)[#data.profile.employment.shortOrganization]
-      #h(3pt)·#h(3pt) PhD candidate at #link(data.profile.doctorate.institutionUrl)[#data.profile.doctorate.institution]
+      #link(data.profile.employment.organization.url)[#data.profile.employment.organization.shortName]
+      #h(3pt)·#h(3pt) PhD candidate at #link(data.profile.doctorate.institution.url)[#data.profile.doctorate.institution.name]
       #h(3pt)·#h(3pt) Expected graduation: #data.profile.doctorate.expectedGraduation
     ]
     v(2pt)

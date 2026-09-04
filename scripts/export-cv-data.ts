@@ -9,7 +9,7 @@ import { writeFileSync } from 'fs';
 import { resolve } from 'path';
 
 // Node can't resolve $lib aliases — import directly by path.
-import { profile } from '../src/lib/data/links.ts';
+import { profile } from '../src/lib/data/profile.ts';
 import {
   researchSummary,
   workExperience,

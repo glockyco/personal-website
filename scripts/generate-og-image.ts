@@ -13,7 +13,7 @@ import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
 import sharp from 'sharp';
 
-import { profile } from '../src/lib/data/links.ts';
+import { profile } from '../src/lib/data/profile.ts';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -58,7 +58,7 @@ const svg = `<?xml version="1.0" encoding="UTF-8"?>
 
   <text x="80" y="${HEIGHT - 160}" font-family="Helvetica, Arial, sans-serif"
         font-size="30" font-weight="400" fill="${TEXT_MUTED}">
-    ${escapeXml(profile.employment.organization)}
+    ${escapeXml(profile.employment.organization.name)}
   </text>
 
   <text x="80" y="${HEIGHT - 60}" font-family="Helvetica, Arial, sans-serif"

@@ -6,7 +6,7 @@
  * `$lib/components/Seo.svelte`), the sitemap, and robots.txt all read
  * from here so the public domain and brand metadata stay in sync.
  */
-import { profile } from '$lib/data/links';
+import { profile } from '$lib/data/profile';
 
 export const SITE_URL = 'https://glockyco.com';
 
@@ -16,7 +16,7 @@ export const SITE_AUTHOR = profile.name;
 
 export const DEFAULT_TITLE = `${profile.name} — ${profile.tagline}`;
 
-export const DEFAULT_DESCRIPTION = `Personal website of ${profile.name}, a ${profile.employment.title.toLowerCase()} at ${profile.employment.shortOrganization} and a ${profile.doctorate.title}. Research, projects, and CV.`;
+export const DEFAULT_DESCRIPTION = `Personal website of ${profile.name}, a ${profile.employment.title.toLowerCase()} at ${profile.employment.organization.shortName} and a ${profile.doctorate.candidateTitle}. Research, projects, and CV.`;
 
 export const OG_LOCALE = 'en_US';
 

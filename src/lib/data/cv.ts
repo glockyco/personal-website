@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { profile } from './links.ts';
+import { profile } from './profile.ts';
 
 // ── Schemas ──────────────────────────────────────────────────────────────────
 
@@ -98,16 +98,16 @@ export const researchSummary =
 
 export const education: Education[] = [
   {
-    degree: 'Dr. techn. (PhD)',
-    field: 'Informatics',
-    institution: 'University of Klagenfurt',
-    location: 'Klagenfurt, Austria',
-    startYear: 2021,
+    degree: profile.doctorate.degree,
+    field: profile.doctorate.field,
+    institution: profile.doctorate.institution.name,
+    location: profile.doctorate.location,
+    startYear: profile.doctorate.startYear,
     expectedEnd: profile.doctorate.expectedGraduation,
     inPdfCv: true,
     thesis:
       'Formal Guarantees Meet Practical Constraints: From Semantic Differencing to Test Generalization for Regression Detection',
-    advisor: 'Prof. Martin Pinzger and Prof. Johann Eder'
+    advisor: profile.doctorate.advisors.join(' and ')
   },
   {
     degree: 'MSc',
@@ -161,10 +161,10 @@ export const education: Education[] = [
 
 export const workExperience: WorkExperience[] = [
   {
-    title: 'Researcher and Senior Software Engineer',
-    company: 'Software Competence Center Hagenberg – AISYS',
-    location: 'Hagenberg, Austria',
-    startYear: 2026,
+    title: profile.employment.title,
+    company: `${profile.employment.organization.name} – ${profile.employment.group.shortName}`,
+    location: profile.employment.location,
+    startYear: profile.employment.startYear,
     highlights: [
       'Research on AI-based software systems and AI for software engineering (AI4SE).',
       'Applied research with industry and academic partners.',
