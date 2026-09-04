@@ -3,7 +3,7 @@
  *
  * Usage:
  *   pnpm cover-letter <application>        # e.g. pnpm cover-letter scch
- *   pnpm cover-letter:full <application>   # with email/phone from .env.local
+ *   pnpm cover-letter:full <application>   # with email/phone from the environment
  *
  * Prerequisites:
  *   brew install typst
@@ -11,8 +11,8 @@
  * Each application has its own letter.typ in applications/<name>/.
  * The compiled PDF is written to outputs/<name>/johann-glock-cover-letter.pdf.
  *
- * The full variant reads CV_EMAIL and CV_PHONE from environment variables
- * (loaded via --env-file=.env.local) and passes them as Typst inputs.
+ * The full variant reads CV_EMAIL and CV_PHONE from the shell or the optional
+ * .env.local file and passes them as Typst inputs.
  */
 
 import { existsSync, mkdirSync } from 'fs';

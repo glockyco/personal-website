@@ -14,11 +14,11 @@
     "test": "node --experimental-strip-types --test tests/*.test.ts",
     "format": "prettier --write .",
     "pdf": "node --experimental-strip-types scripts/generate-pdf.ts && vite build",
-    "pdf:full": "vite build && node --env-file=.env.local --experimental-strip-types scripts/generate-pdf.ts --full",
+    "pdf:full": "vite build && node --env-file-if-exists=.env.local --experimental-strip-types scripts/generate-pdf.ts --full",
     "screenshots": "node --experimental-strip-types scripts/capture-screenshots.ts",
     "og-image": "node --experimental-strip-types scripts/generate-og-image.ts",
     "cover-letter": "node --experimental-strip-types scripts/compile-cover-letter.ts",
-    "cover-letter:full": "node --env-file=.env.local --experimental-strip-types scripts/compile-cover-letter.ts --full",
+    "cover-letter:full": "node --env-file-if-exists=.env.local --experimental-strip-types scripts/compile-cover-letter.ts --full",
     "cf-deploy": "pnpm pdf && wrangler deploy"
   },
   "devDependencies": {

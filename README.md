@@ -98,7 +98,7 @@ Two flavors, generated locally from the same TypeScript data:
 
 ```bash
 pnpm pdf           # web variant, no contact info -> static/johann-glock-cv-web.pdf
-pnpm pdf:full      # application variant with email and phone from .env.local -> outputs/johann-glock-cv.pdf
+pnpm pdf:full      # application variant with email and phone -> outputs/johann-glock-cv.pdf
 ```
 
 Requires the Typst CLI:
@@ -109,13 +109,13 @@ brew install typst
 
 `pnpm build` and `pnpm pdf` are intentionally separate. Cloudflare Workers builds do not have Typst available, so the web variant is generated locally and picked up from `static/` during deploy.
 
-For the full variant, set `CV_EMAIL` and `CV_PHONE` in `.env.local` (see `.env.example`). These values never touch git or the deployed site.
+For the full variant, set `CV_EMAIL` and `CV_PHONE` in the shell or in `.env.local` (see `.env.example`). These values never touch git or the deployed site.
 
 ## Cover letters
 
 ```bash
 pnpm cover-letter <app>       # public variant
-pnpm cover-letter:full <app>  # with contact info from .env.local
+pnpm cover-letter:full <app>  # with contact info from the shell or .env.local
 ```
 
 Application-specific content lives in the private `applications/` submodule. The shared Typst template is in `scripts/cover-letter-base.typ`.

@@ -37,7 +37,7 @@ pnpm format                  # prettier --write
 pnpm pdf                     # build site + generate public CV PDF (no contact) → static/johann-glock-cv-web.pdf
 pnpm pdf:full                # build site + generate application CV PDF (with contact) → outputs/johann-glock-cv.pdf
 pnpm cover-letter <app>      # compile cover letter → outputs/<app>/johann-glock-cover-letter.pdf
-pnpm cover-letter:full <app> # same but with email/phone from .env.local
+pnpm cover-letter:full <app> # same but with email/phone from the shell or .env.local
 ```
 
 `pnpm build` and `pnpm pdf` are intentionally separate. `pnpm build` is used
@@ -80,7 +80,7 @@ imports the base template and contains the letter text.
 **Prerequisite:** `git submodule update --init` (one-time after cloning).
 
 - `pnpm cover-letter scch` outputs `outputs/scch/johann-glock-cover-letter.pdf`.
-- `pnpm cover-letter:full scch` — same but with email/phone from `.env.local`.
+- `pnpm cover-letter:full scch` — same but with email/phone from the shell or `.env.local`.
   Requires `CV_EMAIL` and `CV_PHONE` to be set.
 
 **Adding a new application:** Create `applications/<name>/letter.typ`,
