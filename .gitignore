@@ -1,4 +1,5 @@
 node_modules
+.direnv/
 
 # Private working notes — not part of the project
 notes/

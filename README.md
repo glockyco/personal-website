@@ -39,13 +39,31 @@ All site content lives as TypeScript modules under `src/lib/data/` and is valida
 
 ## Local development
 
+Install Nix with flakes and direnv support. Then allow the project environment:
+
+```bash
+direnv allow
+```
+
+The development shell supplies Node.js, pnpm, and Typst. Enter it directly if you do not use direnv:
+
+```bash
+nix develop
+```
+
+Download the Git LFS assets:
+
+```bash
+git lfs pull
+```
+
 Install dependencies:
 
 ```bash
-pnpm install
+pnpm install --frozen-lockfile
 ```
 
-If you have access to the private application content repository, also initialize the submodule:
+If you have access to the private application content repository, initialize the submodule:
 
 ```bash
 git submodule update --init
