@@ -165,6 +165,7 @@ export const workExperience: WorkExperience[] = [
     company: 'University of Klagenfurt \u2013 Software Engineering Research Group',
     location: 'Klagenfurt, Austria',
     startYear: 2021,
+    endYear: 2026,
     highlights: [
       'Research on semantic differencing and software test generalization under Prof. Martin Pinzger.',
       'Lab instructor for Software Engineering I & II (7 semesters). Ran lab sections independently.',
