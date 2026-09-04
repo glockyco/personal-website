@@ -53,7 +53,7 @@ const svg = `<?xml version="1.0" encoding="UTF-8"?>
 
   <text x="80" y="${HEIGHT - 230}" font-family="Helvetica, Arial, sans-serif"
         font-size="44" font-weight="500" fill="${TEXT_SECONDARY}">
-    ${escapeXml(profile.tagline)}
+    ${escapeXml(profile.employment.title)}
   </text>
 
   <text x="80" y="${HEIGHT - 160}" font-family="Helvetica, Arial, sans-serif"

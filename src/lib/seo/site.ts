@@ -25,7 +25,7 @@ export const OG_IMAGE_HEIGHT = 630;
 
 export const DEFAULT_OG_IMAGE = '/og-image.png';
 
-export const DEFAULT_OG_IMAGE_ALT = `${profile.name} — ${profile.tagline}`;
+export const DEFAULT_OG_IMAGE_ALT = `${profile.name} — ${profile.employment.title}`;
 
 /**
  * External profile URLs surfaced as `sameAs` in JSON-LD and as
