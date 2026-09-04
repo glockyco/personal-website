@@ -155,6 +155,12 @@ export const education: Education[] = [
 
 export const workExperience: WorkExperience[] = [
   {
+    title: 'Researcher and Senior Software Engineer',
+    company: 'Software Competence Center Hagenberg',
+    location: 'Hagenberg, Austria',
+    startYear: 2026
+  },
+  {
     title: 'Research Software Engineer (University Assistant)',
     company: 'University of Klagenfurt \u2013 Software Engineering Research Group',
     location: 'Klagenfurt, Austria',
