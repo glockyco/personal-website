@@ -113,7 +113,11 @@
       <div class="entry">
         <div class="entry-date">
           <span class="date">
-            {job.startYear}&ndash;{job.endYear ?? 'present'}
+            {#if job.endYear}
+              {job.startYear}&ndash;{job.endYear}
+            {:else}
+              since {job.startYear}
+            {/if}
           </span>
         </div>
         <div class="entry-content">
