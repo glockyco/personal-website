@@ -104,6 +104,25 @@ const rawProjects = [
     ]
   },
   {
+    slug: 'afallon',
+    title: 'Afallon Compendium',
+    tagline: 'Interactive world map and searchable game reference for Afallon',
+    status: 'active' as const,
+    featured: true,
+    inPdfCv: true,
+    liveUrl: 'https://afallon.compendiums.org/',
+    githubUrl: 'https://github.com/glockyco/afallon-compendium',
+    steamUrl: 'https://store.steampowered.com/app/2597810/Afallon/',
+    techStack: [
+      'SvelteKit',
+      'TypeScript',
+      'deck.gl',
+      'Bun',
+      'HotRepl',
+      'Cloudflare Workers'
+    ]
+  },
+  {
     slug: 'u27-gazette',
     title: 'The U27 Gazette',
     tagline:

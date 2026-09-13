@@ -63,6 +63,7 @@ const HERO_W = 1200;
 /** Per-project browser zoom. Values below 1 capture more of the page. */
 const SCREENSHOT_ZOOM_OVERRIDES: Record<string, number> = {
   erenshor: 0.85,
+  afallon: 0.8,
   compendiums: 0.8
 };
 
