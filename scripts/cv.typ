@@ -298,40 +298,6 @@
   #s.hsInterns.total high-school interns
 ]
 
-// ── Service & Outreach ────────────────────────────────────────────────────────
-
-#section-heading("Service & Outreach")
-
-#sub-heading("Peer Review")
-#for item in data.service.reviewer {
-  compact-line({
-    text(weight: 600, fill: c-head)[Reviewer]
-    text(fill: c-muted)[
-      #h(4pt)·#h(4pt)#item.venue#if item.note != none [#h(4pt)·#h(4pt)#item.note]
-    ]
-  })
-}
-#compact-line({
-  text(weight: 600, fill: c-head)[Sub-reviewer]
-  text(fill: c-muted)[
-    #h(4pt)·#h(4pt)#data.service.subreviewer.map(item =>
-      item.venue + " " + str(item.year) + if item.count > 1 { " ×" + str(item.count) } else { "" }
-    ).join(", ")
-  ]
-})
-
-#sub-heading("Outreach")
-#for item in data.service.outreach {
-  compact-line({
-    text(weight: 600, fill: c-head)[#item.venue]
-    if item.note != none {
-      text(fill: c-muted)[#h(4pt)·#h(4pt)#item.note]
-    } else if item.year != none {
-      text(fill: c-muted)[#h(4pt)·#h(4pt)#str(item.year)]
-    }
-  })
-}
-
 // ── Skills ────────────────────────────────────────────────────────────────────
 
 #section-heading("Skills")
