@@ -119,6 +119,7 @@ const rawProjects = [
       'deck.gl',
       'Bun',
       'HotRepl',
+      'Ghidra',
       'Cloudflare Workers'
     ]
   },
