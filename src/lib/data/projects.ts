@@ -106,7 +106,8 @@ const rawProjects = [
   {
     slug: 'afallon',
     title: 'Afallon Compendium',
-    tagline: 'Interactive world map and searchable game reference for Afallon',
+    tagline:
+      'Interactive world map and searchable game reference for the single-player RPG Afallon',
     status: 'active' as const,
     featured: true,
     inPdfCv: true,
