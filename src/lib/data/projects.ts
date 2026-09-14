@@ -112,7 +112,7 @@ const rawProjects = [
     inPdfCv: true,
     liveUrl: 'https://afallon.compendiums.org/',
     githubUrl: 'https://github.com/glockyco/afallon-compendium',
-    steamUrl: 'https://store.steampowered.com/app/2597810/Afallon/',
+    steamUrl: 'https://steamcommunity.com/sharedfiles/filedetails/?id=3800843227',
     techStack: [
       'SvelteKit',
       'TypeScript',
