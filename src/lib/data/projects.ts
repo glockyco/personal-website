@@ -118,7 +118,9 @@ const rawProjects = [
       'SvelteKit',
       'TypeScript',
       'deck.gl',
-      'Bun',
+      'C#',
+      'Unity',
+      'MelonLoader',
       'HotRepl',
       'Ghidra',
       'Cloudflare Workers'
