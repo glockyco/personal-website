@@ -123,6 +123,27 @@ const rawProjects = [
     ]
   },
   {
+    slug: 'hotrepl',
+    title: 'HotRepl',
+    tagline: 'Runtime C# REPL and typed command bridge for Unity games',
+    status: 'active' as const,
+    featured: true,
+    inPdfCv: false,
+    liveUrl: 'https://hotrepl.glockyco.com/',
+    githubUrl: 'https://github.com/glockyco/HotRepl',
+    techStack: [
+      'C#',
+      'TypeScript',
+      'Unity',
+      'BepInEx',
+      'MelonLoader',
+      'WebSockets',
+      'MCP',
+      'SvelteKit',
+      'Cloudflare Workers'
+    ]
+  },
+  {
     slug: 'u27-gazette',
     title: 'The U27 Gazette',
     tagline:
@@ -143,27 +164,6 @@ const rawProjects = [
     inPdfCv: false,
     githubUrl: 'https://github.com/glockyco/fractured-realms-companion#readme',
     techStack: ['TypeScript', 'Node.js', 'Electron', 'Steam', 'ASAR']
-  },
-  {
-    slug: 'hotrepl',
-    title: 'HotRepl',
-    tagline: 'Runtime C# REPL and typed command bridge for Unity games',
-    status: 'active' as const,
-    featured: false,
-    inPdfCv: false,
-    liveUrl: 'https://hotrepl.glockyco.com/',
-    githubUrl: 'https://github.com/glockyco/HotRepl',
-    techStack: [
-      'C#',
-      'TypeScript',
-      'Unity',
-      'BepInEx',
-      'MelonLoader',
-      'WebSockets',
-      'MCP',
-      'SvelteKit',
-      'Cloudflare Workers'
-    ]
   },
   {
     slug: 'compendiums',
