@@ -160,16 +160,6 @@ const rawProjects = [
     techStack: ['SvelteKit', 'TypeScript', 'Zod', 'Cloudflare Workers']
   },
   {
-    slug: 'fractured-realms-companion',
-    title: 'Fractured Realms Companion',
-    tagline: 'In-game item wiki and action planner for Fractured Realms',
-    status: 'active' as const,
-    featured: false,
-    inPdfCv: false,
-    githubUrl: 'https://github.com/glockyco/fractured-realms-companion#readme',
-    techStack: ['TypeScript', 'Node.js', 'Electron', 'Steam', 'ASAR']
-  },
-  {
     slug: 'compendiums',
     title: 'Compendiums Landing Page',
     tagline: 'Minimal landing page for my public game compendium projects',
@@ -190,6 +180,16 @@ const rawProjects = [
     liveUrl: 'https://glockyco.com/',
     githubUrl: 'https://github.com/glockyco/personal-website',
     techStack: ['SvelteKit', 'TypeScript', 'Typst', 'Zod', 'Playwright', 'Cloudflare Workers']
+  },
+  {
+    slug: 'fractured-realms-companion',
+    title: 'Fractured Realms Companion',
+    tagline: 'In-game item wiki and action planner for Fractured Realms',
+    status: 'inactive' as const,
+    featured: false,
+    inPdfCv: false,
+    githubUrl: 'https://github.com/glockyco/fractured-realms-companion#readme',
+    techStack: ['TypeScript', 'Node.js', 'Electron', 'Steam', 'ASAR']
   },
   {
     slug: '10-man-idle',
