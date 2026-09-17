@@ -148,7 +148,11 @@
       <div class="entry">
         <div class="entry-date">
           <span class="date">
-            {edu.startYear}&ndash;{edu.endYear ?? 'present'}
+            {#if edu.endYear}
+              {edu.startYear}&ndash;{edu.endYear}
+            {:else}
+              since {edu.startYear}
+            {/if}
           </span>
         </div>
         <div class="entry-content">
