@@ -26,7 +26,8 @@
  * pages keep background requests open. A capture fails when an image is broken or
  * the page never settles.
  *
- * Both capture paths export two WebP variants via sharp:
+ * Both capture paths export two WebP variants via sharp, unless the new hero differs from
+ * the existing one only by rendering noise, in which case both existing files are kept:
  *       <slug>-thumb.webp  900px wide  (used on project cards)
  *       <slug>-hero.webp  1200px wide  (used on detail pages without a live demo)
  *
@@ -36,7 +37,7 @@
 
 import { chromium, type Page } from 'playwright';
 import sharp from 'sharp';
-import { mkdirSync, statSync } from 'fs';
+import { existsSync, mkdirSync, statSync, writeFileSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -100,10 +101,7 @@ async function waitForRenderedContent(page: Page, area: Area): Promise<void> {
       const deadline = performance.now() + timeoutMs;
       const expire = (describe: () => string) =>
         new Promise<never>((_, reject) =>
-          setTimeout(
-            () => reject(new Error(describe())),
-            Math.max(0, deadline - performance.now())
-          )
+          setTimeout(() => reject(new Error(describe())), Math.max(0, deadline - performance.now()))
         );
 
       await Promise.race([document.fonts.ready, expire(() => 'Web fonts did not finish loading')]);
@@ -177,6 +175,32 @@ async function waitForRenderedContent(page: Page, area: Area): Promise<void> {
     },
     { area, quietMs: DOM_QUIET_MS, timeoutMs: READY_TIMEOUT_MS }
   );
+}
+
+/**
+ * A recapture that changes fewer pixels than this keeps the existing image, because the
+ * difference is rendering noise. Unchanged pages measured 0 changed pixels and the smallest
+ * real change, three small cards on compendiums.org, measured 3,392.
+ */
+const CHANGED_PIXELS = 500;
+
+/** Pixels whose summed RGB difference exceeds 60 between the existing image and `candidate`. */
+async function changedPixels(existingPath: string, candidate: Buffer): Promise<number> {
+  const [a, b] = await Promise.all(
+    [existingPath, candidate].map((input) =>
+      sharp(input).removeAlpha().raw().toBuffer({ resolveWithObject: true })
+    )
+  );
+  if (a.info.width !== b.info.width || a.info.height !== b.info.height) return Infinity;
+  let changed = 0;
+  for (let i = 0; i < a.data.length; i += 3) {
+    const delta =
+      Math.abs(a.data[i] - b.data[i]) +
+      Math.abs(a.data[i + 1] - b.data[i + 1]) +
+      Math.abs(a.data[i + 2] - b.data[i + 2]);
+    if (delta > 60) changed++;
+  }
+  return changed;
 }
 
 // ── Main ──────────────────────────────────────────────────────────────────────
@@ -272,18 +296,17 @@ for (const project of toCapture) {
     heroPipeline.resize(HERO_W);
   }
 
-  // Export thumb
   const thumbPath = resolve(OUT_DIR, `${project.slug}-thumb.webp`);
-  await thumbPipeline.webp({ quality: QUALITY }).toFile(thumbPath);
-
-  // Export hero
   const heroPath = resolve(OUT_DIR, `${project.slug}-hero.webp`);
-  await heroPipeline.webp({ quality: QUALITY }).toFile(heroPath);
-
-  const thumbSize = statSync(thumbPath).size;
-  const heroSize = statSync(heroPath).size;
+  const hero = await heroPipeline.webp({ quality: QUALITY }).toBuffer();
+  if (existsSync(heroPath) && (await changedPixels(heroPath, hero)) < CHANGED_PIXELS) {
+    console.log('    unchanged, kept the existing images');
+    continue;
+  }
+  await thumbPipeline.webp({ quality: QUALITY }).toFile(thumbPath);
+  writeFileSync(heroPath, hero);
   console.log(
-    `    thumb: ${(thumbSize / 1024).toFixed(1)} kB  hero: ${(heroSize / 1024).toFixed(1)} kB`
+    `    thumb: ${(statSync(thumbPath).size / 1024).toFixed(1)} kB  hero: ${(hero.length / 1024).toFixed(1)} kB`
   );
 }
 
