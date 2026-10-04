@@ -19,7 +19,7 @@
     "og-image": "node --experimental-strip-types scripts/generate-og-image.ts",
     "cover-letter": "node --experimental-strip-types scripts/compile-cover-letter.ts",
     "cover-letter:full": "node --env-file-if-exists=.env.local --experimental-strip-types scripts/compile-cover-letter.ts --full",
-    "cf-deploy": "pnpm pdf && wrangler deploy"
+    "cf-deploy": "pnpm check && pnpm lint && pnpm test && pnpm pdf && wrangler deploy"
   },
   "devDependencies": {
     "@commitlint/cli": "^21.0.0",
