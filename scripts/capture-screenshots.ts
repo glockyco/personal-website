@@ -20,6 +20,12 @@
  *   - Scrolls to the rendered README
  *   - Takes a viewport screenshot from the start of the README
  *
+ * Both capture paths wait until the captured area has rendered: the load event has
+ * fired, web fonts are ready, the DOM has stopped changing, and every image in the
+ * area has loaded and decoded. Network activity is not a readiness signal, because
+ * pages keep background requests open. A capture fails when an image is broken or
+ * the page never settles.
+ *
  * Both capture paths export two WebP variants via sharp:
  *       <slug>-thumb.webp  900px wide  (used on project cards)
  *       <slug>-hero.webp  1200px wide  (used on detail pages without a live demo)
@@ -28,7 +34,7 @@
  * in src/lib/assets/screenshots/ are preserved.
  */
 
-import { chromium } from 'playwright';
+import { chromium, type Page } from 'playwright';
 import sharp from 'sharp';
 import { mkdirSync, statSync } from 'fs';
 import { resolve, dirname } from 'path';
@@ -70,8 +76,108 @@ const SCREENSHOT_ZOOM_OVERRIDES: Record<string, number> = {
 /** GitHub README captures use a taller square content slice inside the final 16:9 frame. */
 const GITHUB_CONTENT_HEIGHT_RATIO = 1;
 
-/** How long to wait after navigation before capturing (ms) */
-const SETTLE_MS = 2000;
+/** How long a page may take to render the captured area before the capture fails (ms) */
+const READY_TIMEOUT_MS = 30000;
+
+/** The DOM counts as settled once it has not changed for this long (ms) */
+const DOM_QUIET_MS = 500;
+
+// ── Readiness ─────────────────────────────────────────────────────────────────
+
+/** A rectangle in viewport coordinates. */
+type Area = { x: number; y: number; width: number; height: number };
+
+/**
+ * Wait until the content inside `area` has rendered: web fonts are ready, the DOM has
+ * not changed for DOM_QUIET_MS, and every image intersecting the area has loaded and
+ * decoded. Playwright discourages 'networkidle' because background requests (bot
+ * detection, analytics) can keep the network busy indefinitely.
+ */
+async function waitForRenderedContent(page: Page, area: Area): Promise<void> {
+  await page.waitForLoadState('load', { timeout: READY_TIMEOUT_MS });
+  await page.evaluate(
+    async ({ area, quietMs, timeoutMs }) => {
+      const deadline = performance.now() + timeoutMs;
+      const expire = (describe: () => string) =>
+        new Promise<never>((_, reject) =>
+          setTimeout(
+            () => reject(new Error(describe())),
+            Math.max(0, deadline - performance.now())
+          )
+        );
+
+      await Promise.race([document.fonts.ready, expire(() => 'Web fonts did not finish loading')]);
+
+      let observer: MutationObserver | undefined;
+      await Promise.race([
+        new Promise<void>((resolve) => {
+          const settle = () => {
+            observer?.disconnect();
+            resolve();
+          };
+          let quiet = setTimeout(settle, quietMs);
+          observer = new MutationObserver(() => {
+            clearTimeout(quiet);
+            quiet = setTimeout(settle, quietMs);
+          });
+          observer.observe(document, {
+            subtree: true,
+            childList: true,
+            attributes: true,
+            characterData: true
+          });
+        }),
+        expire(() => {
+          observer?.disconnect();
+          return `The page kept changing for ${timeoutMs} ms`;
+        })
+      ]);
+
+      const images = [...document.images].filter((img) => {
+        const r = img.getBoundingClientRect();
+        return (
+          r.width > 0 &&
+          r.height > 0 &&
+          r.left < area.x + area.width &&
+          r.right > area.x &&
+          r.top < area.y + area.height &&
+          r.bottom > area.y
+        );
+      });
+      await Promise.race([
+        Promise.all(
+          images.map(
+            (img) =>
+              new Promise<void>((resolve) => {
+                img.addEventListener('load', () => resolve(), { once: true });
+                img.addEventListener('error', () => resolve(), { once: true });
+                if (img.complete) resolve();
+              })
+          )
+        ),
+        expire(
+          () =>
+            `Images did not finish loading: ${images
+              .filter((img) => !img.complete)
+              .map((img) => img.currentSrc || img.src)
+              .join(', ')}`
+        )
+      ]);
+
+      const broken = images.filter((img) => img.naturalWidth === 0);
+      if (broken.length > 0) {
+        throw new Error(
+          `Images failed to load: ${broken.map((img) => img.currentSrc || img.src).join(', ')}`
+        );
+      }
+      await Promise.race([
+        Promise.all(images.map((img) => img.decode())),
+        expire(() => 'Images did not finish decoding')
+      ]);
+    },
+    { area, quietMs: DOM_QUIET_MS, timeoutMs: READY_TIMEOUT_MS }
+  );
+}
 
 // ── Main ──────────────────────────────────────────────────────────────────────
 
@@ -120,14 +226,11 @@ for (const project of toCapture) {
 
   const page = await context.newPage();
 
-  await page.goto(captureUrl, {
-    waitUntil: isGitHubCapture ? 'domcontentloaded' : 'networkidle',
-    timeout: 30000
-  });
+  await page.goto(captureUrl, { waitUntil: 'domcontentloaded', timeout: READY_TIMEOUT_MS });
   const readme = isGitHubCapture ? page.locator('article.markdown-body') : null;
   let pngBuffer;
   if (readme) {
-    await readme.waitFor({ state: 'visible', timeout: 30000 });
+    await readme.waitFor({ state: 'visible', timeout: READY_TIMEOUT_MS });
     await page.addStyleTag({
       content: '[class*="OverviewRepoFiles-module__Box_3__"] { display: none !important; }'
     });
@@ -138,17 +241,17 @@ for (const project of toCapture) {
       throw new Error(`Could not measure README for ${project.slug}`);
     }
     const frameHeight = Math.min(readmeBox.height, readmeBox.width * GITHUB_CONTENT_HEIGHT_RATIO);
-    pngBuffer = await page.screenshot({
-      clip: {
-        x: readmeBox.x,
-        y: readmeBox.y,
-        width: readmeBox.width,
-        height: frameHeight
-      }
-    });
+    const clip = {
+      x: readmeBox.x,
+      y: readmeBox.y,
+      width: readmeBox.width,
+      height: frameHeight
+    };
+    await waitForRenderedContent(page, clip);
+    pngBuffer = await page.screenshot({ clip, animations: 'disabled' });
   } else {
-    await page.waitForTimeout(SETTLE_MS);
-    pngBuffer = await page.screenshot();
+    await waitForRenderedContent(page, { x: 0, y: 0, width: captureWidth, height: captureHeight });
+    pngBuffer = await page.screenshot({ animations: 'disabled' });
   }
 
   await context.close();
