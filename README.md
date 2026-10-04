@@ -37,6 +37,12 @@ notes/                local working notes (gitignored)
 
 All site content lives as TypeScript modules under `src/lib/data/` and is validated with Zod at build time.
 
+Content decisions that the code does not explain:
+
+- Teaching is part of `/cv`. There is no separate teaching page.
+- PASDA and Teralizer are research outputs, so they appear under `/research`, not `/projects`.
+- The site has six themes, indigo, navy, and warm in light and dark, selected with `data-theme` on `<html>`.
+
 ## Local development
 
 Install Nix with flakes and direnv support. Then allow the project environment:
@@ -107,7 +113,7 @@ Requires the Typst CLI:
 brew install typst
 ```
 
-`pnpm build` and `pnpm pdf` are intentionally separate. Cloudflare Workers builds do not have Typst available, so the web variant is generated locally and picked up from `static/` during deploy.
+`pnpm build` and `pnpm pdf` are intentionally separate. CI builds the site without Typst, so the web variant is generated locally into `static/` (gitignored) and picked up by the build during deploy.
 
 For the full variant, set `CV_EMAIL` and `CV_PHONE` in the shell or in `.env.local` (see `.env.example`). These values never touch git or the deployed site.
 
@@ -126,7 +132,7 @@ Application-specific content lives in the private `applications/` submodule. The
 pnpm screenshots
 ```
 
-Captures viewport thumbnails for each project's live URL via Playwright. One-time setup:
+Captures the start of each project's live site, or of its GitHub README when it has no live site, via Playwright. Images that changed only by rendering noise are kept, so `git status` afterwards lists exactly the stale screenshots. Look at them before deploying. One-time setup:
 
 ```bash
 pnpm exec playwright install chromium
@@ -138,7 +144,7 @@ pnpm exec playwright install chromium
 pnpm cf-deploy
 ```
 
-Builds the site, regenerates the web PDF CV, and deploys via Wrangler.
+Runs `pnpm check`, `pnpm lint`, and `pnpm test`, then regenerates the web PDF CV, builds the site, and deploys it via Wrangler. Push the deployed commits afterwards, so GitHub has what is live.
 
 ## License
 
