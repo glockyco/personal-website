@@ -197,11 +197,11 @@ export const workExperience: WorkExperience[] = [
     projectUrls: [
       {
         label: 'KIMIKU',
-        url: 'https://aist.fh-hagenberg.at/index.php/en/projects/project-kimiku'
+        url: 'https://aist.fh-hagenberg.at/en/projects/project-kimiku/'
       },
       {
         label: 'SOC-Toolkit',
-        url: 'https://aist.fh-hagenberg.at/index.php/en/projects/soc-toolkit'
+        url: 'https://aist.fh-hagenberg.at/en/projects/soc-toolkit/'
       }
     ]
   },

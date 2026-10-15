@@ -268,7 +268,7 @@ const rawAistProjects = [
     title: 'SOC-Toolkit',
     description:
       'Automated enrichment and correlation of security data from multiple sources to reduce incident response times for security analysts.',
-    url: 'https://aist.fh-hagenberg.at/index.php/en/projects/soc-toolkit',
+    url: 'https://aist.fh-hagenberg.at/en/projects/soc-toolkit/',
     years: '2020–2022',
     area: 'security' as const,
     funding: 'FFG General Programme'
@@ -277,7 +277,7 @@ const rawAistProjects = [
     title: 'KIMIKU',
     description:
       'AI-supported customer loyalty optimization, personalizing vouchers and offers using anonymized cross-company user data.',
-    url: 'https://aist.fh-hagenberg.at/index.php/en/projects/project-kimiku',
+    url: 'https://aist.fh-hagenberg.at/en/projects/project-kimiku/',
     years: '2019–2021',
     area: 'data-engineering' as const,
     funding: 'FFG General Programme'
@@ -286,7 +286,7 @@ const rawAistProjects = [
     title: 'i2f',
     description:
       'Mixed reality boardgame extending classical boardgames with AR, communication sensors, and software for up to 4 players.',
-    url: 'https://aist.fh-hagenberg.at/index.php/en/projects/project-rudy-games',
+    url: 'https://aist.fh-hagenberg.at/en/projects/project-rudy-games/',
     years: '2017–2020',
     area: 'augmented-reality' as const,
     funding: 'FFG General Programme'
@@ -295,7 +295,7 @@ const rawAistProjects = [
     title: 'Cooperation Weigl',
     description:
       'Emotion and stress prediction from sensor data on a wellness couch using ML time-series forecasting.',
-    url: 'https://aist.fh-hagenberg.at/index.php/en/projects/projectcooperation-weigl',
+    url: 'https://aist.fh-hagenberg.at/en/projects/projectcooperation-weigl/',
     years: '2020',
     area: 'data-engineering' as const,
     funding: 'FFG Innovation Voucher'
@@ -304,7 +304,7 @@ const rawAistProjects = [
     title: 'D4K',
     description:
       'AR driving safety training for civil service personnel using AR glasses and sensors to capture reaction times and vital signs.',
-    url: 'https://aist.fh-hagenberg.at/index.php/en/projects/project-formelracing',
+    url: 'https://aist.fh-hagenberg.at/en/projects/project-formelracing/',
     area: 'augmented-reality' as const,
     funding: 'FFG Innovation Voucher'
   }
