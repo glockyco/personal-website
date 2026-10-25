@@ -259,7 +259,7 @@ export const supervision: Supervision[] = [
   // MSc theses
   {
     type: 'msc-thesis',
-    status: 'ongoing',
+    status: 'completed',
     name: 'Merlin Volkmer',
     topic: 'Automated Detection and Refactoring of Test Smells in Java Test Suites'
   },
