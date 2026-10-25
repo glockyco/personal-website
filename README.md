@@ -1,153 +1,87 @@
 # Personal Website
 
-Personal portfolio and CV for Johann Glock, a researcher and senior software engineer at SCCH and a PhD candidate in Informatics.
+My portfolio and CV site presents my research, software projects and academic work. This repository is the source for [glockyco.com](https://glockyco.com), including the web CV and the local tools for PDF CVs and cover letters.
 
-Live site: <https://glockyco.com>
+## Run locally
 
-## What this is
+You need Git LFS, Node.js and pnpm. [flake.nix](flake.nix) supplies the development tools, including Typst for PDFs, on Linux and macOS:
 
-The site presents research and engineering work in one place. It includes:
-
-- portfolio sections for projects and research
-- a web-rendered CV at `/cv`
-- a downloadable PDF CV (web variant, no private contact info)
-- a local pipeline for application-specific PDF CVs and cover letters
-
-## Tech stack
-
-- SvelteKit 2 and Svelte 5
-- TypeScript
-- Plain CSS with custom properties (no Tailwind)
-- Zod for build-time data validation
-- Typst for PDF CV and cover letter generation
-- Cloudflare Workers via Wrangler
-- pnpm
-
-## Project structure
-
-```text
-src/lib/data/         site content (projects, publications, CV, links)
-src/lib/components/   shared UI components
-src/lib/assets/       images and project screenshots
-src/routes/           SvelteKit routes
-scripts/              PDF, cover letter, and screenshot pipelines
-applications/         private submodule for application-specific letters
-notes/                local working notes (gitignored)
-```
-
-All site content lives as TypeScript modules under `src/lib/data/` and is validated with Zod at build time.
-
-Content decisions that the code does not explain:
-
-- Teaching is part of `/cv`. There is no separate teaching page.
-- PASDA and Teralizer are research outputs, so they appear under `/research`, not `/projects`.
-- The site has six themes, indigo, navy, and warm in light and dark, selected with `data-theme` on `<html>`.
-
-## Local development
-
-Install Nix with flakes and direnv support. Then allow the project environment:
-
-```bash
-direnv allow
-```
-
-The development shell supplies Node.js, pnpm, and Typst. Enter it directly if you do not use direnv:
-
-```bash
+```sh
 nix develop
-```
-
-Download the Git LFS assets:
-
-```bash
 git lfs pull
-```
-
-Install dependencies:
-
-```bash
 pnpm install --frozen-lockfile
-```
-
-If you have access to the private application content repository, initialize the submodule:
-
-```bash
-git submodule update --init
-```
-
-Without the submodule, cover letter compilation will fail. Everything else still works.
-
-Start the development server:
-
-```bash
 pnpm dev
 ```
 
-## Build and preview
+If you already have those tools, skip `nix develop`. Use the pnpm version declared in [package.json](package.json).
 
-```bash
+To build and preview the static site:
+
+```sh
 pnpm build
 pnpm preview
 ```
 
-## Quality checks
+## Change the content
 
-```bash
-pnpm check
-pnpm lint
-pnpm format
+[src/lib/data](src/lib/data) is the source of truth for positions, publications, teaching, talks and projects. Update those TypeScript modules rather than editing the rendered pages or PDFs. Their Zod schemas validate the records when the modules load.
+
+Page layouts live in [src/routes](src/routes), and shared UI lives in [src/lib/components](src/lib/components). Teaching appears in the CV. Research tools appear under Research rather than Projects.
+
+For the contact link, copy [.env.example](.env.example) to `.env.local` and follow its base64 instructions. `PUBLIC_CONTACT_EMAIL_B64` is public site data, not a secret.
+
+## Generate PDFs
+
+Install Typst, or use the development shell above:
+
+```sh
+pnpm pdf
+pnpm pdf:full
 ```
 
-## PDF CV
+`pnpm pdf` generates the public CV and builds the site with it. `pnpm build` alone does not regenerate the PDF. The full variant writes a local application CV instead. See [scripts/generate-pdf.ts](scripts/generate-pdf.ts) for output locations.
 
-Two flavors, generated locally from the same TypeScript data:
+For the full variant, set `CV_EMAIL` and optionally `CV_PHONE` in your shell or `.env.local`. Do not publish the full PDF with the site.
 
-```bash
-pnpm pdf           # web variant, no contact info -> static/johann-glock-cv-web.pdf
-pnpm pdf:full      # application variant with email and phone -> outputs/johann-glock-cv.pdf
+Cover letters also require access to the private [applications](applications) submodule:
+
+```sh
+git submodule update --init
+pnpm cover-letter <application>
+pnpm cover-letter:full <application>
 ```
 
-Requires the Typst CLI:
+Replace `<application>` with a directory in that submodule. The full variant uses the same contact variables. [scripts/compile-cover-letter.ts](scripts/compile-cover-letter.ts) defines the input and output paths, and [scripts/cover-letter-base.typ](scripts/cover-letter-base.typ) holds the shared template. You do not need the submodule to work on the site or generate a CV.
 
-```bash
-brew install typst
-```
+## Refresh project screenshots
 
-`pnpm build` and `pnpm pdf` are intentionally separate. CI builds the site without Typst, so the web variant is generated locally into `static/` (gitignored) and picked up by the build during deploy.
-
-For the full variant, set `CV_EMAIL` and `CV_PHONE` in the shell or in `.env.local` (see `.env.example`). These values never touch git or the deployed site.
-
-## Cover letters
-
-```bash
-pnpm cover-letter <app>       # public variant
-pnpm cover-letter:full <app>  # with contact info from the shell or .env.local
-```
-
-Application-specific content lives in the private `applications/` submodule. The shared Typst template is in `scripts/cover-letter-base.typ`.
-
-## Project screenshots
-
-```bash
+```sh
+pnpm exec playwright install chromium
 pnpm screenshots
 ```
 
-Captures the start of each project's live site, or of its GitHub README when it has no live site, via Playwright. Images that changed only by rendering noise are kept, so `git status` afterwards lists exactly the stale screenshots. Look at them before deploying. One-time setup:
+The capture script visits the project links from the data modules and writes screenshots to the site assets. Review the changed images before publishing.
 
-```bash
-pnpm exec playwright install chromium
+## Checks and publishing
+
+[package.json](package.json) defines the commands, and the [CI workflow](.github/workflows/ci.yml) defines the automated checks:
+
+```sh
+pnpm check
+pnpm lint
+pnpm test
 ```
 
-## Deployment
+To format only a changed file, use `pnpm exec prettier --write <file>`. The `format` script formats the whole repository.
 
-```bash
+With access to the Cloudflare account, publish the site with:
+
+```sh
 pnpm cf-deploy
 ```
 
-Runs `pnpm check`, `pnpm lint`, and `pnpm test`, then regenerates the web PDF CV, builds the site, and deploys it via Wrangler. Push the deployed commits afterwards, so GitHub has what is live.
+This runs the checks, regenerates the public PDF, builds the site and uploads the build through Wrangler. It publishes your local checkout, not a GitHub branch. [wrangler.toml](wrangler.toml) defines the deployment target.
 
 ## License
 
-Source code in this repository is licensed under the MIT License. See [LICENSE](LICENSE).
-
-Site content (text, photographs, CV data, visual design, and other non-code assets) is © Johann Glock. All rights reserved. The MIT permissions apply to source code only.
+[LICENSE](LICENSE) applies the MIT License to source code only. Site content, photographs, CV data, visual design and other non-code assets are copyright Johann Glock. All rights reserved.
