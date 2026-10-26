@@ -2,5 +2,12 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "local>glockyco/renovate-config"
+  ],
+  "packageRules": [
+    {
+      "matchPackageNames": ["typescript"],
+      "allowedVersions": "<7.0.0 || >=7.1.0",
+      "description": "TypeScript 7.0 ships no compiler API. svelte-check and typescript-eslint need it, and no build step runs tsc. TypeScript 7.1 is expected to restore the API, so Renovate may propose 7.1 and later. Remove this rule when that update lands (https://github.com/typescript-eslint/typescript-eslint/issues/10940)."
+    }
   ]
 }
