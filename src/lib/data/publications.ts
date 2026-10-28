@@ -227,6 +227,38 @@ const rawPublications = [
     tags: ['mining software repositories', 'design patterns', 'software quality']
   },
   {
+    slug: 'coding-agents-debugger',
+    title:
+      'Do Coding Agents Still Need a Debugger? Frontier-Model-Based Fault Localization at the Accuracy Ceiling',
+    authors: [
+      { name: 'Christoph Daxerer' },
+      { name: 'Johann Glock', isMe: true },
+      { name: 'Christian Macho', url: 'https://mitschi.github.io/' },
+      { name: 'Rudolf Ramler' },
+      { name: 'Martin Pinzger', url: 'https://pinzger.github.io/' },
+      { name: 'Josef Pichler', url: 'https://pure.fh-ooe.at/de/persons/josef-pichler/' }
+    ],
+    venue: 'arXiv',
+    venueShort: 'arXiv',
+    year: 2026,
+    type: 'preprint' as const,
+    status: 'under-review' as const,
+    authorPosition: 'contributing' as const,
+    abstract:
+      "Background: To localize a fault, a coding agent can reason from source code alone or use debugger assistance by running the program and stepping through it in an interactive debugger. While earlier agents struggled with static execution tracing and debugger operation, frontier LLMs have improved at both. Objective: We evaluate how accurately coding agents localize faults without tools across original and transformed programs, how much debugger assistance improves accuracy and at what cost, and how agents use it when optional. Methods: We seed 610 single-line faults into 144 LeetCodeDataset solutions and rewrite each faulty program with five recipes of behavior-preserving transformations. Agents based on Sol 6.1, Luna 6, and Qwen 3.8 localize each fault with no, optional, or encouraged debugger assistance. Results: Without tools, the agents localized 98.2 to 99.9% of faults in original and 96.7 to 99.9% in transformed programs, losing accuracy mainly where recipes restructured loops and conditions. Encouraged assistance removed 63% and 61% of Luna 6's and Qwen 3.8's remaining transformed errors (+2.1 and +1.3 percentage points) at 14.7 to 27.0 times the token use, while Sol 6.1 stayed at 99.9%. With optional assistance, Luna 6 and Qwen 3.8 still gained +1.5 and +1.3 points, though the agents used the interactive debugger in only 0.2 to 6.2% of runs. Conclusions: On short, precisely specified programs, current coding agents localize nearly all faults from source code alone, and debugger assistance removes most errors that remain. Given the choice, agents executed the program far more often than they stepped through it, yet kept most of the benefit.",
+    tldr: 'Coding agents based on three frontier models localize 96.7 to 99.9% of 610 seeded faults in LeetCode solutions from source code alone. Debugger assistance removes most of the remaining errors at 14.7 to 27.0 times the token use, and agents rarely step through programs when the debugger is optional.',
+    metaDescription:
+      'Frontier-model coding agents localize nearly all seeded faults without tools. Debugger assistance removes most remaining errors at far higher token cost.',
+    pdf: '/pdfs/daxerer_2026_debugger.pdf',
+    arxivId: '2610.36015',
+    tags: [
+      'agentic software engineering',
+      'fault localization',
+      'large language models',
+      'debugging'
+    ]
+  },
+  {
     slug: 'security-incentivization',
     title: 'Security Incentivization: An Empirical Study of how Micropayments Impact Code Security',
     authors: [
