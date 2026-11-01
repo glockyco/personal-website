@@ -25,12 +25,13 @@
     {
       devShells = forAllSystems (pkgs: {
         default = pkgs.mkShellNoCC {
-          # pnpm uses the exact version in package.json after Nix supplies the
-          # major-version bootstrap package.
+          # pnpm switches to the exact version in package.json. pnpm 10 cannot
+          # switch to pnpm 12, because it skips the install script that puts
+          # pnpm 12's native binary in place, and nixpkgs here stops at pnpm 11.
           packages = [
             pkgs.git-lfs
             pkgs.nodejs_24
-            pkgs.pnpm_10
+            pkgs.pnpm_11
             pkgs.typst
           ];
         };

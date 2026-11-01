@@ -48,13 +48,5 @@
   "dependencies": {
     "zod": "^4.3.6"
   },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild",
-      "lefthook",
-      "sharp",
-      "workerd"
-    ]
-  },
   "packageManager": "pnpm@12.16.1"
 }
