@@ -1,5 +1,5 @@
 # Keep dependency resolution aligned with Renovate's release-age policy.
-minimumReleaseAge: 1440
+minimumReleaseAge: 4320
 allowBuilds:
   esbuild: true
   lefthook: true
