@@ -3,6 +3,7 @@
   "extends": [
     "local>glockyco/renovate-config"
   ],
+  "minimumReleaseAge": "1 day",
   "packageRules": [
     {
       "matchPackageNames": ["typescript"],
