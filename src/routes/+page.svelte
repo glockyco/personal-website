@@ -117,51 +117,51 @@
 </section>
 
 <!-- ── Featured Projects ─────────────────────────────────────────────── -->
-<section class="section section-no-bottom" id="projects">
+<section class="section" id="projects">
   <div class="section-head">
     <span class="section-label">Featured Projects</span>
     <a class="section-more" href="/projects/">All projects &rarr;</a>
   </div>
-</section>
 
-<div class="projects-grid wide">
-  {#each featuredProjects as project (project.slug)}
-    <article class="project-card">
-      {#if thumbnails[project.slug]}
-        <a href="/projects/{project.slug}/" tabindex="-1" aria-hidden="true">
-          <img
-            class="project-thumb"
-            src={thumbnails[project.slug]}
-            alt="{project.title} screenshot"
-            loading="lazy"
-          />
-        </a>
-      {/if}
-      <div class="project-body">
-        <div class="project-top">
-          <span class="project-title">
-            <a href="/projects/{project.slug}/">{project.title}</a>
-          </span>
-          <span class="project-status">
-            <span class="status-dot"></span>
-            {project.status.charAt(0).toUpperCase() + project.status.slice(1)}
-          </span>
-        </div>
-        <p class="project-tagline">{project.tagline}</p>
-        {#if project.liveUrl || project.githubUrl}
-          <div class="project-links">
-            {#if project.liveUrl}
-              <a class="pub-link" href={project.liveUrl}>Website</a>
-            {/if}
-            {#if project.githubUrl}
-              <a class="pub-link" href={project.githubUrl}>GitHub</a>
-            {/if}
-          </div>
+  <div class="projects-grid">
+    {#each featuredProjects as project (project.slug)}
+      <article class="project-card">
+        {#if thumbnails[project.slug]}
+          <a href="/projects/{project.slug}/" tabindex="-1" aria-hidden="true">
+            <img
+              class="project-thumb"
+              src={thumbnails[project.slug]}
+              alt="{project.title} screenshot"
+              loading="lazy"
+            />
+          </a>
         {/if}
-      </div>
-    </article>
-  {/each}
-</div>
+        <div class="project-body">
+          <div class="project-top">
+            <span class="project-title">
+              <a href="/projects/{project.slug}/">{project.title}</a>
+            </span>
+            <span class="project-status">
+              <span class="status-dot"></span>
+              {project.status.charAt(0).toUpperCase() + project.status.slice(1)}
+            </span>
+          </div>
+          <p class="project-tagline">{project.tagline}</p>
+          {#if project.liveUrl || project.githubUrl}
+            <div class="project-links">
+              {#if project.liveUrl}
+                <a class="pub-link" href={project.liveUrl}>Website</a>
+              {/if}
+              {#if project.githubUrl}
+                <a class="pub-link" href={project.githubUrl}>GitHub</a>
+              {/if}
+            </div>
+          {/if}
+        </div>
+      </article>
+    {/each}
+  </div>
+</section>
 
 <style>
   /* ── Hero ── */
@@ -273,10 +273,6 @@
     border-top: 1px solid var(--color-border);
     scroll-margin-top: 72px;
     transition: border-color var(--transition-base);
-  }
-
-  .section-no-bottom {
-    padding-bottom: 0;
   }
 
   .section-head {
@@ -421,9 +417,8 @@
   /* ── Project cards ── */
   .projects-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: 1fr 1fr;
     gap: 16px;
-    padding-bottom: 40px;
   }
 
   .project-card {
@@ -554,12 +549,6 @@
 
     .projects-grid {
       grid-template-columns: 1fr;
-    }
-  }
-
-  @media (min-width: 769px) and (max-width: 1100px) {
-    .projects-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 </style>

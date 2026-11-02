@@ -131,7 +131,7 @@ const rawProjects = [
     title: 'The Bloodline Compendium',
     tagline: 'Searchable wiki for the sandbox adventure RPG The\u00A0Bloodline, generated from the game files',
     status: 'active' as const,
-    featured: true,
+    featured: false,
     inPdfCv: true,
     liveUrl: 'https://the-bloodline.compendiums.org/',
     githubUrl: 'https://github.com/glockyco/bloodline-compendium',
