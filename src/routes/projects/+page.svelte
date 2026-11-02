@@ -19,7 +19,7 @@
   <h1>Projects</h1>
 </div>
 
-<div class="project-grid">
+<div class="project-grid wide">
   {#each projects as project (project.slug)}
     <article class="project-card">
       {#if thumbnails[project.slug]}
@@ -93,7 +93,7 @@
   /* ── Project grid ── */
   .project-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 16px;
     padding: 32px 0 40px;
   }
@@ -229,6 +229,12 @@
 
     .project-grid {
       grid-template-columns: 1fr;
+    }
+  }
+
+  @media (min-width: 769px) and (max-width: 1100px) {
+    .project-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 </style>
