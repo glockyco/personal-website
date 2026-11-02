@@ -127,6 +127,27 @@ const rawProjects = [
     ]
   },
   {
+    slug: 'the-bloodline',
+    title: 'The Bloodline Compendium',
+    tagline: 'Searchable wiki for the sandbox RPG The Bloodline, generated from the game files',
+    status: 'active' as const,
+    featured: true,
+    inPdfCv: true,
+    liveUrl: 'https://the-bloodline.compendiums.org/',
+    githubUrl: 'https://github.com/glockyco/bloodline-compendium',
+    techStack: [
+      'SvelteKit',
+      'TypeScript',
+      'Pagefind',
+      'C#',
+      'Unreal Engine',
+      'CUE4Parse',
+      'UE4SS',
+      'Lua',
+      'Cloudflare Workers'
+    ]
+  },
+  {
     slug: 'hotrepl',
     title: 'HotRepl',
     tagline: 'Runtime C# REPL and typed command bridge for Unity games',

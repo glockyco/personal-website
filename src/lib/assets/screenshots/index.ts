@@ -4,6 +4,8 @@ import ancientKingdomsThumb from './ancient-kingdoms-thumb.webp';
 import ancientKingdomsHero from './ancient-kingdoms-hero.webp';
 import afallonThumb from './afallon-thumb.webp';
 import afallonHero from './afallon-hero.webp';
+import theBloodlineThumb from './the-bloodline-thumb.webp';
+import theBloodlineHero from './the-bloodline-hero.webp';
 import u27GazetteThumb from './u27-gazette-thumb.webp';
 import u27GazetteHero from './u27-gazette-hero.webp';
 import fracturedRealmsCompanionThumb from './fractured-realms-companion-thumb.webp';
@@ -21,6 +23,7 @@ export const thumbnails: Record<string, string> = {
   erenshor: erenshorThumb,
   'ancient-kingdoms': ancientKingdomsThumb,
   afallon: afallonThumb,
+  'the-bloodline': theBloodlineThumb,
   'u27-gazette': u27GazetteThumb,
   'fractured-realms-companion': fracturedRealmsCompanionThumb,
   'personal-website': personalWebsiteThumb,
@@ -33,6 +36,7 @@ export const heroes: Record<string, string> = {
   erenshor: erenshorHero,
   'ancient-kingdoms': ancientKingdomsHero,
   afallon: afallonHero,
+  'the-bloodline': theBloodlineHero,
   'u27-gazette': u27GazetteHero,
   'fractured-realms-companion': fracturedRealmsCompanionHero,
   'personal-website': personalWebsiteHero,
