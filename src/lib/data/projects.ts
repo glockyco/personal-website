@@ -129,7 +129,7 @@ const rawProjects = [
   {
     slug: 'the-bloodline',
     title: 'The Bloodline Compendium',
-    tagline: 'Searchable wiki for the sandbox RPG The Bloodline, generated from the game files',
+    tagline: 'Searchable wiki for the sandbox adventure RPG The\u00A0Bloodline, generated from the game files',
     status: 'active' as const,
     featured: true,
     inPdfCv: true,
