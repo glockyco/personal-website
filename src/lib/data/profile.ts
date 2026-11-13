@@ -30,7 +30,7 @@ const doctorate = {
   location: 'Klagenfurt, Austria',
   startYear: 2021,
   advisors: ['Prof. Martin Pinzger', 'Prof. Johann Eder'],
-  expectedGraduation: 'Q4 2026'
+  expectedGraduation: 'Q1 2027'
 } as const;
 
 export const profile = {

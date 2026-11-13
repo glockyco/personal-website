@@ -119,10 +119,10 @@ const rawPublications = [
       { name: 'Clemens Bauer', url: 'https://www.aau.at/en/team/bauer-clemens/' },
       { name: 'Martin Pinzger', url: 'https://pinzger.github.io/' }
     ],
-    venue: 'ACM Transactions on Software Engineering and Methodology',
-    venueShort: 'TOSEM',
+    venue: 'arXiv',
+    venueShort: 'arXiv',
     year: 2025,
-    type: 'journal' as const,
+    type: 'preprint' as const,
     status: 'under-review' as const,
     authorPosition: 'first' as const,
     featured: true,
@@ -271,10 +271,10 @@ const rawPublications = [
       { name: 'Fabian Oraze' },
       { name: 'Christoph Wedenig' }
     ],
-    venue: 'Journal of Systems and Software',
-    venueShort: 'JSS',
+    venue: 'arXiv',
+    venueShort: 'arXiv',
     year: 2026,
-    type: 'journal' as const,
+    type: 'preprint' as const,
     status: 'under-review' as const,
     authorPosition: 'contributing' as const,
     abstract:

@@ -292,6 +292,12 @@ export const supervision: Supervision[] = [
   {
     type: 'bsc-thesis',
     status: 'completed',
+    name: 'Moritz Musel',
+    topic: 'Algorithmic Optimizations for Web Canvas Rendering of 2D Vectors'
+  },
+  {
+    type: 'bsc-thesis',
+    status: 'completed',
     name: 'Bodo Thausing',
     topic: 'Onboarding Methods in Software as a Service'
   },
