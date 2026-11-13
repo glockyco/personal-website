@@ -48,5 +48,5 @@
   "dependencies": {
     "zod": "^4.3.6"
   },
-  "packageManager": "pnpm@12.17.0"
+  "packageManager": "pnpm@12.18.0"
 }
