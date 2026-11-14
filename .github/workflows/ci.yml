@@ -32,3 +32,40 @@ jobs:
       - run: pnpm build
         env:
           PUBLIC_CONTACT_EMAIL_B64: ${{ secrets.CONTACT_EMAIL_B64 }}
+
+  # Publishes main after the checks passed, so the live site always matches main.
+  deploy:
+    needs: ci
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://glockyco.com/
+    concurrency:
+      group: production
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: lts/*
+          cache: pnpm
+
+      - uses: typst-community/setup-typst@v5
+        with:
+          typst-version: 0.15.1
+
+      - run: pnpm install --frozen-lockfile
+
+      # Regenerates the public CV PDF and builds the site.
+      - run: pnpm pdf
+        env:
+          PUBLIC_CONTACT_EMAIL_B64: ${{ secrets.CONTACT_EMAIL_B64 }}
+
+      - run: pnpm exec wrangler deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}

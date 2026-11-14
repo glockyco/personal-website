@@ -74,13 +74,9 @@ pnpm test
 
 To format only a changed file, use `pnpm exec prettier --write <file>`. The `format` script formats the whole repository.
 
-With access to the Cloudflare account, publish the site with:
+Every push to `main` publishes the site once the checks pass: the workflow's `deploy` job regenerates the public PDF, builds the site and uploads it through Wrangler to the target in [wrangler.toml](wrangler.toml). It uses the repository secret `CLOUDFLARE_API_TOKEN`, a Cloudflare API token limited to Workers Scripts: Edit, and the repository variable `CLOUDFLARE_ACCOUNT_ID`.
 
-```sh
-pnpm cf-deploy
-```
-
-This runs the checks, regenerates the public PDF, builds the site and uploads the build through Wrangler. It publishes your local checkout, not a GitHub branch. [wrangler.toml](wrangler.toml) defines the deployment target.
+With access to the Cloudflare account, `pnpm cf-deploy` runs the same steps from your local checkout, for example when the workflow cannot run. It publishes what you have checked out, not `main`.
 
 ## License
 
