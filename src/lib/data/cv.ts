@@ -260,14 +260,14 @@ export const supervision: Supervision[] = [
   {
     type: 'msc-thesis',
     status: 'completed',
-    name: 'Merlin Volkmer',
-    topic: 'Automated Detection and Refactoring of Test Smells in Java Test Suites'
+    name: 'Clemens Bauer',
+    topic: 'Generating Property-based Tests for Java Methods'
   },
   {
     type: 'msc-thesis',
     status: 'completed',
-    name: 'Clemens Bauer',
-    topic: 'Generating Property-based Tests for Java Methods'
+    name: 'Merlin Volkmer',
+    topic: 'Automated Detection and Refactoring of Test Smells in Java Test Suites'
   },
   {
     type: 'msc-thesis',
@@ -292,12 +292,6 @@ export const supervision: Supervision[] = [
   {
     type: 'bsc-thesis',
     status: 'completed',
-    name: 'Moritz Musel',
-    topic: 'Algorithmic Optimizations for Web Canvas Rendering of 2D Vectors'
-  },
-  {
-    type: 'bsc-thesis',
-    status: 'completed',
     name: 'Bodo Thausing',
     topic: 'Onboarding Methods in Software as a Service'
   },
@@ -313,6 +307,12 @@ export const supervision: Supervision[] = [
     status: 'completed',
     name: 'Markus Kofler',
     topic: 'Kubernetes Operator Management'
+  },
+  {
+    type: 'bsc-thesis',
+    status: 'completed',
+    name: 'Moritz Musel',
+    topic: 'Algorithmic Optimizations for Web Canvas Rendering of 2D Vectors'
   },
   {
     type: 'bsc-thesis',
