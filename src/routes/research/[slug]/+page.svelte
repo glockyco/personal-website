@@ -1,5 +1,6 @@
 <script lang="ts">
   import Seo from '$lib/components/Seo.svelte';
+  import { linkParts } from '$lib/links';
   import { breadcrumbJsonLd, scholarlyArticleJsonLd } from '$lib/seo/jsonld';
 
   const { data } = $props();
@@ -112,7 +113,10 @@
     <span class="section-label">Abstract</span>
   </div>
   {#each pub.abstract.split('\n') as paragraph, i (i)}
-    <p class="abstract-text">{paragraph}</p>
+    <p class="abstract-text">
+      {#each linkParts(paragraph) as part, j (j)}{#if part.href}<a href={part.href}>{part.text}</a
+          >{:else}{part.text}{/if}{/each}
+    </p>
   {/each}
 </section>
 
@@ -328,6 +332,13 @@
 
     &:last-child {
       margin-bottom: 0;
+    }
+
+    a {
+      color: var(--color-accent);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      overflow-wrap: anywhere;
     }
   }
 
