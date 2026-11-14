@@ -45,7 +45,10 @@ jobs:
       group: production
       cancel-in-progress: false
     steps:
+      # Images, fonts and PDFs live in Git LFS, and the site and the CV need the real files.
       - uses: actions/checkout@v7
+        with:
+          lfs: true
 
       - uses: pnpm/action-setup@v6
 
