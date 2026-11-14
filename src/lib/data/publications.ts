@@ -143,6 +143,30 @@ const rawPublications = [
     ]
   },
   {
+    slug: 'teralizer-tool',
+    title: 'Teralizer: A Tool for Generalizing JUnit Tests into Property-Based jqwik Tests',
+    authors: [
+      { name: 'Johann Glock', isMe: true },
+      { name: 'Clemens Bauer', url: 'https://www.aau.at/en/team/bauer-clemens/' },
+      { name: 'Martin Pinzger', url: 'https://pinzger.github.io/' }
+    ],
+    venue: 'arXiv',
+    venueShort: 'arXiv',
+    year: 2026,
+    type: 'preprint' as const,
+    status: 'under-review' as const,
+    authorPosition: 'first' as const,
+    abstract:
+      'Background: Property-based testing validates properties across many generated inputs and can thereby detect regressions that conventional unit tests miss. However, writing property-based tests is challenging for practitioners, which limits their adoption.\nTool: Teralizer automatically generalizes JUnit tests into property-based jqwik tests for regression detection. Through single-path symbolic analysis, it extracts from each test execution a path condition, which characterizes the inputs that follow the same execution path, and a symbolic output expression, which computes the expected output for these inputs. The generalized tests generate inputs that satisfy the path condition and use the symbolic output expression as the oracle.\nResults: In our evaluation, generalization increased the mutation scores of EvoSuite-generated test suites by 0.8 to 3.9 percentage points. On the EqBench benchmark, generalizing the test suites that EvoSuite generated with 1 s per class reached the mutation score of EvoSuite\'s 60 s test suites with 31.9% less total runtime.\nAvailability: Teralizer is available as open source at https://github.com/glockyco/Teralizer.',
+    tldr: 'Teralizer turns a JUnit test into a property-based jqwik test: it records the path condition and symbolic output of the tested execution and checks the output on generated inputs that follow the same path. This catches regressions such as a changed boundary that the original test misses. A one-script example shows the whole pipeline on a loan approval method.',
+    metaDescription:
+      'Teralizer generalizes JUnit tests into property-based jqwik tests via single-path symbolic analysis, catching regressions the original tests miss.',
+    pdf: '/pdfs/glock_2026_teralizer_tool.pdf',
+    github: 'https://github.com/glockyco/Teralizer',
+    tags: ['test generalization', 'property-based testing', 'regression testing', 'tool'],
+    relatedPapers: ['teralizer']
+  },
+  {
     slug: 'api-evolution',
     title: 'Microservice API Evolution in Practice: A Study on Strategies and Challenges',
     authors: [
