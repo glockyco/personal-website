@@ -211,10 +211,10 @@ importers:
         version: 1.65.0
       prettier:
         specifier: ^3.8.1
-        version: 3.9.10
+        version: 3.10.0
       prettier-plugin-svelte:
         specifier: ^4.0.0
-        version: 4.1.1(prettier@3.9.10)(svelte@5.57.3(@typescript-eslint/types@8.72.2))
+        version: 4.1.1(prettier@3.10.0)(svelte@5.57.3(@typescript-eslint/types@8.72.2))
       sharp:
         specifier: ^0.35.0
         version: 0.35.5(@types/node@26.2.0)
@@ -235,7 +235,7 @@ importers:
         version: 8.3.8(@types/node@26.2.0)(esbuild@0.28.2)(jiti@2.6.1)
       wrangler:
         specifier: ^4.69.0
-        version: 4.160.0(@types/node@26.2.0)
+        version: 4.160.1(@types/node@26.2.0)
 
 packages:
 
@@ -1578,8 +1578,8 @@ packages:
   magic-string@1.1.0:
     resolution: {integrity: sha512-kS3VHe0nEPST2saQV4Rbkchcd3UBRkVTQHo1D3h/ZTwFDhai/mfKkmtPAtD129EOI7K3HlHIsFOt0WrI2/oU9g==}
 
-  miniflare@5.20261110.0-beta:
-    resolution: {integrity: sha512-UiJRL6D4pNkHxgZ3QXDCaz/N27FFuuHRRgOmD/SucEZIwDOfWwX7s/n8ZrFemFlURRfnQpBfAdWy8ixsW0yJWA==}
+  miniflare@5.20261110.1-beta:
+    resolution: {integrity: sha512-CO8T1DO3/JFxEWvJ7yaHiPx5Ph/5FhRzYKve6cM8O2frHmY7yWudV5p8FU11bfGRAerChGpuK+l0HoxOCw2nFw==}
     engines: {node: '>=22.12.0'}
     peerDependencies:
       kerberos: ^2.0.0
@@ -1708,8 +1708,8 @@ packages:
       prettier: ^3.0.0
       svelte: ^5.0.0
 
-  prettier@3.9.10:
-    resolution: {integrity: sha512-skGHTH1Yb9QvaTC4hWnRTzEYtCpApF0UMBPz+t/0ZPzP8ihefo/btKd+QA7pUE0fEwA1SbS/NmhyEcstdXOIdA==}
+  prettier@3.10.0:
+    resolution: {integrity: sha512-mBi4765LgjO1PFjlEs7pUeK0nb1bw71c+N4/ItfeUWNdY5cV2pRKaFpbbFRYmDJMO+5ZwzGxHRqHxFZna7iv5w==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -1934,8 +1934,8 @@ packages:
     engines: {node: '>=16'}
     hasBin: true
 
-  wrangler@4.160.0:
-    resolution: {integrity: sha512-nwzmpu7Hd5Csax02twpCNRAloC+kduXKw9rjfq+oEuo8RnjWRaahSV+qk+p0w88EgafMcDE0XnZRSfOM3lKEKg==}
+  wrangler@4.160.1:
+    resolution: {integrity: sha512-gM8daj5geYTEw+038dV5OQAmrSIo/9e97FoJuNf+r9PllWR0ZnqMI2LXZZDSHpGsMez3mKKFYH5o/hBsf1ZTHg==}
     engines: {node: '>=22.12.0'}
     hasBin: true
     peerDependencies:
@@ -3137,7 +3137,7 @@ snapshots:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  miniflare@5.20261110.0-beta(@types/node@26.2.0):
+  miniflare@5.20261110.1-beta(@types/node@26.2.0):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       sharp: 0.35.5(@types/node@26.2.0)
@@ -3240,12 +3240,12 @@ snapshots:
 
   prelude-ls@1.2.1: {}
 
-  prettier-plugin-svelte@4.1.1(prettier@3.9.10)(svelte@5.57.3(@typescript-eslint/types@8.72.2)):
+  prettier-plugin-svelte@4.1.1(prettier@3.10.0)(svelte@5.57.3(@typescript-eslint/types@8.72.2)):
     dependencies:
-      prettier: 3.9.10
+      prettier: 3.10.0
       svelte: 5.57.3(@typescript-eslint/types@8.72.2)
 
-  prettier@3.9.10: {}
+  prettier@3.10.0: {}
 
   punycode@2.3.1: {}
 
@@ -3478,14 +3478,14 @@ snapshots:
       '@cloudflare/workerd-linux-arm64': 1.20261110.1
       '@cloudflare/workerd-windows-64': 1.20261110.1
 
-  wrangler@4.160.0(@types/node@26.2.0):
+  wrangler@4.160.1(@types/node@26.2.0):
     dependencies:
       '@cloudflare/kv-asset-handler': 0.5.0
       '@cloudflare/unenv-preset': 2.16.2(unenv@2.0.0-rc.24)(workerd@1.20261110.1)
       '@cspotcode/source-map-support': 0.8.1
       blake3-wasm: 2.1.5
       esbuild: 0.28.2
-      miniflare: 5.20261110.0-beta(@types/node@26.2.0)
+      miniflare: 5.20261110.1-beta(@types/node@26.2.0)
       path-to-regexp: 6.3.0
       unenv: 2.0.0-rc.24
       workerd: 1.20261110.1
