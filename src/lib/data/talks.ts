@@ -15,19 +15,18 @@ export const TalkSchema = z.object({
   /** One line on the talk itself, such as how it was selected. */
   note: z.string().optional(),
 
-  /** Two or three sentences for the talk's page and for featured cards. */
+  /** Two or three sentences for the talk's page. */
   summary: z.string().optional(),
   /** ≤155-char SERP-facing description. Falls back to `summary`. */
   metaDescription: z.string().max(160).optional(),
-  featured: z.boolean().optional(),
 
   /** Slugs of the publications the talk presents. */
   papers: z.array(z.string()),
 
   /** Path of the slides as a PDF. A talk with slides gets its own page. */
   slides: z.string().optional(),
-  /** Path of a 1200×675 picture of the title slide, for cards and link previews. */
-  preview: z.string().optional(),
+  /** Path of a 1200×675 picture of the title slide, for the talk's card and link previews. */
+  preview: z.string(),
   /** Repository of the slides' sources. */
   source: z.url().optional()
 });
@@ -49,7 +48,6 @@ const rawTalks = [
       'My PhD thesis topic in 20 minutes, around one question: how can symbolic analysis support regression detection without a complete proof? PASDA uses the partial results of an incomplete equivalence proof to give best-effort verdicts, and Teralizer uses the analysis to generalize existing unit tests into property-based tests.',
     metaDescription:
       'My PhD thesis topic in 20 minutes: how symbolic analysis supports regression detection without a complete proof, with PASDA and Teralizer.',
-    featured: true,
     papers: ['pasda', 'teralizer', 'teralizer-tool', 'icse-2024-doctoral-symposium'],
     slides: '/slides/glock_2026_phd_seminar.pdf',
     preview: '/slides/glock_2026_phd_seminar.png'
@@ -60,7 +58,8 @@ const rawTalks = [
     kind: 'invited' as const,
     event: '2nd SCCH Research Day',
     date: '2024-06-03',
-    papers: ['pasda']
+    papers: ['pasda'],
+    preview: '/slides/glock_2024_scch_research_day.png'
   },
   {
     slug: '2024-04-16-icse-doctoral-symposium',
@@ -71,7 +70,8 @@ const rawTalks = [
     location: 'Lisbon, Portugal',
     date: '2024-04-16',
     note: 'Oral presentation and poster. Selected as 1 of 7 oral presentations from 35 accepted (55 submissions).',
-    papers: ['icse-2024-doctoral-symposium']
+    papers: ['icse-2024-doctoral-symposium'],
+    preview: '/slides/glock_2024_icse_doctoral_symposium.png'
   },
   {
     slug: '2023-09-12-se-summer-school',
@@ -81,7 +81,8 @@ const rawTalks = [
     event: '3rd International Software Engineering Summer School',
     location: 'Lugano, Switzerland',
     date: '2023-09-12',
-    papers: []
+    papers: [],
+    preview: '/slides/glock_2023_se_summer_school.png'
   }
 ];
 
