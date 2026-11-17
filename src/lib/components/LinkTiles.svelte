@@ -38,11 +38,16 @@
     background: var(--color-surface);
     border: 1px solid var(--color-border);
     text-decoration: none;
-    transition: all var(--transition-fast);
+    transition: border-color var(--transition-fast);
 
+    /* As on the site's cards: the frame and the label respond, the surface stays. */
     &:hover {
       border-color: var(--color-accent);
-      background: var(--color-accent-dim);
+
+      .tile-label {
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
     }
   }
 

@@ -2,7 +2,7 @@
   import CiteSection from '$lib/components/CiteSection.svelte';
   import LinkTiles from '$lib/components/LinkTiles.svelte';
   import Seo from '$lib/components/Seo.svelte';
-  import { talkKindLabels, talkPath } from '$lib/data/talks';
+  import TalkRows from '$lib/components/TalkRows.svelte';
   import { linkParts } from '$lib/links';
   import { paperLinks, paperPdfLink } from '$lib/page-links';
   import { breadcrumbJsonLd, scholarlyArticleJsonLd } from '$lib/seo/jsonld';
@@ -132,21 +132,7 @@
     <div class="section-head">
       <span class="section-label">Presentations</span>
     </div>
-    <ul class="presentation-list">
-      {#each data.talks as talk (talk.slug)}
-        <li>
-          <span class="pres-type">{talkKindLabels[talk.kind]}</span>
-          <span class="pres-event">{talk.event}</span>
-          {#if talk.location}
-            <span class="pres-location">, {talk.location}</span>
-          {/if}
-          <span class="pres-year"> ({talk.date.slice(0, 4)})</span>
-          {#if talkPath(talk)}
-            <a class="pres-slides" href={talkPath(talk)}>Slides</a>
-          {/if}
-        </li>
-      {/each}
-    </ul>
+    <TalkRows talks={data.talks} />
   </section>
 {/if}
 
@@ -363,47 +349,6 @@
         text-decoration: underline;
         text-underline-offset: 3px;
       }
-    }
-  }
-
-  /* ── Presentations ── */
-  .presentation-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .presentation-list li {
-    font-size: var(--text-sm);
-    color: var(--color-text);
-    line-height: 1.5;
-  }
-
-  .pres-type {
-    font-weight: 600;
-    color: var(--color-heading);
-
-    &::after {
-      content: ' @ ';
-      color: var(--color-muted);
-      font-weight: 400;
-    }
-  }
-
-  .pres-location,
-  .pres-year {
-    color: var(--color-muted);
-  }
-
-  .pres-slides {
-    font-weight: 600;
-    color: var(--color-accent);
-    margin-left: 8px;
-
-    &:hover {
-      text-decoration: underline;
-      text-underline-offset: 3px;
     }
   }
 

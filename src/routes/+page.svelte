@@ -4,8 +4,8 @@
   import { sortedPublications } from '$lib/data/publications';
   import { projects } from '$lib/data/projects';
   import { thumbnails } from '$lib/assets/screenshots/index';
+  import PaperListLinks from '$lib/components/PaperListLinks.svelte';
   import Seo from '$lib/components/Seo.svelte';
-  import { paperListLinks } from '$lib/page-links';
   import { personJsonLd, websiteJsonLd } from '$lib/seo/jsonld';
 
   // Featured publications use the default reverse-chronological order.
@@ -91,11 +91,7 @@
       {#if pub.tldr}
         <p class="pub-tldr">{pub.tldr}</p>
       {/if}
-      <div class="pub-links">
-        {#each paperListLinks(pub) as link (link.href)}
-          <a class="pub-link" href={link.href}>{link.short}</a>
-        {/each}
-      </div>
+      <PaperListLinks {pub} />
     </article>
   {/each}
 </section>
@@ -389,13 +385,6 @@
     color: var(--color-muted);
     line-height: 1.6;
     margin-top: 10px;
-  }
-
-  .pub-links {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin-top: 12px;
   }
 
   /* ── Project cards ── */

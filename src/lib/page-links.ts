@@ -11,10 +11,13 @@ export interface PageLink {
   href: string;
 }
 
-/** A publication's link also has a one-line form for the lists of publications. */
+/** A publication's link also says what kind of thing it leads to. */
 export interface PaperLink extends PageLink {
-  short: string;
+  kind: LinkKind;
 }
+
+/** What a publication's link leads to, which picks its icon. */
+export type LinkKind = 'paper' | 'published' | 'archive' | 'code' | 'package' | 'sources';
 
 /** "https://github.com/glockyco/Teralizer/" as "github.com/glockyco/Teralizer". */
 function address(url: string): string {
@@ -26,7 +29,7 @@ function address(url: string): string {
 export function paperPdfLink(pub: Publication): PaperLink | undefined {
   if (!pub.pdf) return undefined;
   const label = pub.type === 'thesis' ? 'Read the thesis' : 'Read the paper';
-  return { label, where: 'PDF', short: `${label} (PDF)`, href: pub.pdf };
+  return { label, where: 'PDF', kind: 'paper', href: pub.pdf };
 }
 
 /** The PDF and every other link of a publication, for the lists of publications. */
@@ -41,7 +44,7 @@ export function paperLinks(pub: Publication): PaperLink[] {
     links.push({
       label: 'Published version',
       where: `doi.org/${pub.doi}`,
-      short: 'Published version (DOI)',
+      kind: 'published',
       href: `https://doi.org/${pub.doi}`
     });
   }
@@ -49,7 +52,7 @@ export function paperLinks(pub: Publication): PaperLink[] {
     links.push({
       label: 'Preprint',
       where: `arXiv:${pub.arxivId}`,
-      short: 'Preprint on arXiv',
+      kind: 'archive',
       href: `https://arxiv.org/abs/${pub.arxivId}`
     });
   }
@@ -57,7 +60,7 @@ export function paperLinks(pub: Publication): PaperLink[] {
     links.push({
       label: 'Code',
       where: address(pub.github),
-      short: 'Code on GitHub',
+      kind: 'code',
       href: pub.github
     });
   }
@@ -67,7 +70,7 @@ export function paperLinks(pub: Publication): PaperLink[] {
     links.push({
       label,
       where: address(pub.zenodo),
-      short: `${label} on Zenodo`,
+      kind: pub.type === 'thesis' ? 'archive' : 'package',
       href: pub.zenodo
     });
   }
@@ -75,7 +78,7 @@ export function paperLinks(pub: Publication): PaperLink[] {
     links.push({
       label: 'LaTeX sources',
       where: address(pub.latex),
-      short: 'LaTeX sources on GitHub',
+      kind: 'sources',
       href: pub.latex
     });
   }
@@ -83,7 +86,7 @@ export function paperLinks(pub: Publication): PaperLink[] {
     links.push({
       label: 'LaTeX sources',
       where: 'overleaf.com',
-      short: 'LaTeX sources on Overleaf',
+      kind: 'sources',
       href: pub.overleaf
     });
   }
