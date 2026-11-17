@@ -50,7 +50,8 @@ const rawTalks = [
       'My PhD thesis topic in 20 minutes: how symbolic analysis supports regression detection without a complete proof, with PASDA and Teralizer.',
     papers: ['pasda', 'teralizer', 'teralizer-tool', 'icse-2024-doctoral-symposium'],
     slides: '/slides/glock_2026_phd_seminar.pdf',
-    preview: '/slides/glock_2026_phd_seminar.png'
+    preview: '/slides/glock_2026_phd_seminar.png',
+    source: 'https://github.com/glockyco/talks/tree/2026-11-17-phd-seminar/2026-11-17-phd-seminar'
   },
   {
     slug: '2024-06-03-scch-research-day',
@@ -59,6 +60,7 @@ const rawTalks = [
     event: '2nd SCCH Research Day',
     date: '2024-06-03',
     papers: ['pasda'],
+    slides: '/slides/glock_2024_scch_research_day.pdf',
     preview: '/slides/glock_2024_scch_research_day.png'
   },
   {
@@ -71,6 +73,7 @@ const rawTalks = [
     date: '2024-04-16',
     note: 'Oral presentation and poster. Selected as 1 of 7 oral presentations from 35 accepted (55 submissions).',
     papers: ['icse-2024-doctoral-symposium'],
+    slides: '/slides/glock_2024_icse_doctoral_symposium.pdf',
     preview: '/slides/glock_2024_icse_doctoral_symposium.png'
   },
   {
@@ -82,6 +85,7 @@ const rawTalks = [
     location: 'Lugano, Switzerland',
     date: '2023-09-12',
     papers: [],
+    slides: '/slides/glock_2023_se_summer_school.pdf',
     preview: '/slides/glock_2023_se_summer_school.png'
   }
 ];

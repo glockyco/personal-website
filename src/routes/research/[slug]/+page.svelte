@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { bibtexEntry } from '$lib/bibtex';
   import Seo from '$lib/components/Seo.svelte';
   import { talkKindLabels, talkPath } from '$lib/data/talks';
   import { linkParts } from '$lib/links';
@@ -13,6 +14,14 @@
       pub.tldr ??
       `${pub.title} — ${pub.venue} (${pub.year}). Author${pub.authors.length > 1 ? 's' : ''}: ${pub.authors.map((a) => a.name).join(', ')}.`
   );
+
+  let copied = $state(false);
+
+  async function copyCitation() {
+    await navigator.clipboard.writeText(bibtexEntry(pub));
+    copied = true;
+    setTimeout(() => (copied = false), 2000);
+  }
 </script>
 
 <Seo
@@ -79,31 +88,32 @@
     </p>
   {/if}
 
-  {#if pub.pdf || pub.doi || pub.arxivId || pub.github || pub.zenodo || pub.latex || pub.overleaf}
-    <div class="pub-links">
-      {#if pub.pdf}
-        <a class="link-btn" href={pub.pdf} download>PDF</a>
-      {/if}
-      {#if pub.doi}
-        <a class="link-btn" href="https://doi.org/{pub.doi}">DOI</a>
-      {/if}
-      {#if pub.arxivId}
-        <a class="link-btn" href="https://arxiv.org/abs/{pub.arxivId}">arXiv</a>
-      {/if}
-      {#if pub.github}
-        <a class="link-btn" href={pub.github}>Code</a>
-      {/if}
-      {#if pub.zenodo}
-        <a class="link-btn" href={pub.zenodo}>Dataset</a>
-      {/if}
-      {#if pub.latex}
-        <a class="link-btn" href={pub.latex}>LaTeX</a>
-      {/if}
-      {#if pub.overleaf}
-        <a class="link-btn" href={pub.overleaf}>Overleaf</a>
-      {/if}
-    </div>
-  {/if}
+  <div class="pub-links">
+    {#if pub.pdf}
+      <a class="link-btn" href={pub.pdf} download>PDF</a>
+    {/if}
+    {#if pub.doi}
+      <a class="link-btn" href="https://doi.org/{pub.doi}">DOI</a>
+    {/if}
+    {#if pub.arxivId}
+      <a class="link-btn" href="https://arxiv.org/abs/{pub.arxivId}">arXiv</a>
+    {/if}
+    {#if pub.github}
+      <a class="link-btn" href={pub.github}>Code</a>
+    {/if}
+    {#if pub.zenodo}
+      <a class="link-btn" href={pub.zenodo}>Dataset</a>
+    {/if}
+    {#if pub.latex}
+      <a class="link-btn" href={pub.latex}>LaTeX</a>
+    {/if}
+    {#if pub.overleaf}
+      <a class="link-btn" href={pub.overleaf}>Overleaf</a>
+    {/if}
+    <button class="link-btn" type="button" onclick={copyCitation} title="Copy the BibTeX entry">
+      {copied ? 'Copied' : 'Cite'}
+    </button>
+  </div>
 </div>
 
 <!-- ── TL;DR ───────────────────────────────────────────────────── -->
