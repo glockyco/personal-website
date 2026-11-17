@@ -162,6 +162,7 @@ const rawPublications = [
     metaDescription:
       'Teralizer generalizes JUnit tests into property-based jqwik tests via single-path symbolic analysis, catching regressions the original tests miss.',
     pdf: '/pdfs/glock_2026_teralizer_tool.pdf',
+    arxivId: '2611.19242',
     github: 'https://github.com/glockyco/Teralizer',
     tags: ['test generalization', 'property-based testing', 'regression testing', 'tool'],
     relatedPapers: ['teralizer']
