@@ -1,7 +1,9 @@
 <script lang="ts">
   import Seo from '$lib/components/Seo.svelte';
+  import { talkKindLabels, talkPath } from '$lib/data/talks';
   import { linkParts } from '$lib/links';
   import { breadcrumbJsonLd, scholarlyArticleJsonLd } from '$lib/seo/jsonld';
+  import { scholarMetaTags } from '$lib/seo/scholar';
 
   const { data } = $props();
   const pub = $derived(data.pub);
@@ -27,6 +29,12 @@
     scholarlyArticleJsonLd(pub)
   ]}
 />
+
+<svelte:head>
+  {#each scholarMetaTags(pub) as tag, i (i)}
+    <meta name={tag.name} content={tag.content} />
+  {/each}
+</svelte:head>
 
 <div class="page-header" id="top">
   <a class="back-link" href="/research/">&larr; Research</a>
@@ -71,7 +79,7 @@
     </p>
   {/if}
 
-  {#if pub.pdf || pub.doi || pub.arxivId || pub.github || pub.zenodo || pub.overleaf}
+  {#if pub.pdf || pub.doi || pub.arxivId || pub.github || pub.zenodo || pub.latex || pub.overleaf}
     <div class="pub-links">
       {#if pub.pdf}
         <a class="link-btn" href={pub.pdf} download>PDF</a>
@@ -87,6 +95,9 @@
       {/if}
       {#if pub.zenodo}
         <a class="link-btn" href={pub.zenodo}>Dataset</a>
+      {/if}
+      {#if pub.latex}
+        <a class="link-btn" href={pub.latex}>LaTeX</a>
       {/if}
       {#if pub.overleaf}
         <a class="link-btn" href={pub.overleaf}>Overleaf</a>
@@ -138,23 +149,40 @@
 {/if}
 
 <!-- ── Presentations ───────────────────────────────────────────── -->
-{#if pub.presentations?.length}
+{#if data.talks.length}
   <section class="section" id="presentations">
     <div class="section-head">
       <span class="section-label">Presentations</span>
     </div>
     <ul class="presentation-list">
-      {#each pub.presentations as pres (pres.event)}
+      {#each data.talks as talk (talk.slug)}
         <li>
-          <span class="pres-type">{pres.type.charAt(0).toUpperCase() + pres.type.slice(1)}</span>
-          <span class="pres-event">{pres.event}</span>
-          {#if pres.location}
-            <span class="pres-location">, {pres.location}</span>
+          <span class="pres-type">{talkKindLabels[talk.kind]}</span>
+          <span class="pres-event">{talk.event}</span>
+          {#if talk.location}
+            <span class="pres-location">, {talk.location}</span>
           {/if}
-          <span class="pres-year"> ({pres.year})</span>
-          {#if pres.slides}
-            <a class="pres-slides" href={pres.slides} download>Slides</a>
+          <span class="pres-year"> ({talk.date.slice(0, 4)})</span>
+          {#if talkPath(talk)}
+            <a class="pres-slides" href={talkPath(talk)}>Slides</a>
           {/if}
+        </li>
+      {/each}
+    </ul>
+  </section>
+{/if}
+
+<!-- ── Related papers ──────────────────────────────────────────── -->
+{#if data.related.length}
+  <section class="section" id="related">
+    <div class="section-head">
+      <span class="section-label">Related Papers</span>
+    </div>
+    <ul class="related-list">
+      {#each data.related as other (other.slug)}
+        <li>
+          <a href="/research/{other.slug}/">{other.title}</a>
+          <span class="related-venue">{other.venueShort}, {other.year}</span>
         </li>
       {/each}
     </ul>
@@ -418,6 +446,34 @@
       text-decoration: underline;
       text-underline-offset: 3px;
     }
+  }
+
+  /* ── Related papers ── */
+  .related-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .related-list li {
+    font-size: var(--text-sm);
+    line-height: 1.5;
+  }
+
+  .related-list a {
+    font-weight: 600;
+    color: var(--color-accent);
+
+    &:hover {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+  }
+
+  .related-venue {
+    color: var(--color-muted);
+    margin-left: 8px;
   }
 
   /* ── Tags ── */

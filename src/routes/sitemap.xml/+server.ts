@@ -1,7 +1,7 @@
-import { publications, projects } from '$lib/data';
+import { publications, projects, talks, talkPath } from '$lib/data';
 import { SITE_URL } from '$lib/seo/site';
 
-const staticRoutes = ['/', '/research/', '/projects/', '/cv/'];
+const staticRoutes = ['/', '/research/', '/talks/', '/projects/', '/cv/'];
 
 export const prerender = true;
 
@@ -9,6 +9,7 @@ export function GET() {
   const urls = [
     ...staticRoutes,
     ...publications.map((p) => `/research/${p.slug}/`),
+    ...talks.flatMap((t) => talkPath(t) ?? []),
     ...projects.map((p) => `/projects/${p.slug}/`)
   ];
 

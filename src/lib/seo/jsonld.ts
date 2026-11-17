@@ -10,6 +10,7 @@
 import { profile } from '$lib/data/profile';
 import type { Publication } from '$lib/data/publications';
 import type { Project } from '$lib/data/projects';
+import type { Talk } from '$lib/data/talks';
 import { SAME_AS, SITE_AUTHOR, SITE_NAME, SITE_URL, absoluteUrl, canonicalUrl } from './site';
 
 export interface BreadcrumbItem {
@@ -92,6 +93,39 @@ export function scholarlyArticleJsonLd(pub: Publication) {
     url: canonicalUrl(`/research/${pub.slug}/`),
     ...(pub.doi ? { identifier: `doi:${pub.doi}` } : {}),
     ...(sameAs.length ? { sameAs } : {})
+  };
+}
+
+/** schema.org/PresentationDigitalDocument for a talk's page, linked to the papers it presents. */
+export function talkJsonLd(talk: Talk, papers: Publication[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'PresentationDigitalDocument',
+    headline: talk.title,
+    name: talk.title,
+    ...(talk.summary ? { description: talk.summary } : {}),
+    author: { '@id': `${SITE_URL}/#person` },
+    datePublished: talk.date,
+    url: canonicalUrl(`/talks/${talk.slug}/`),
+    ...(talk.preview ? { image: absoluteUrl(talk.preview) } : {}),
+    ...(talk.slides
+      ? {
+          encoding: {
+            '@type': 'MediaObject',
+            contentUrl: absoluteUrl(talk.slides),
+            encodingFormat: 'application/pdf'
+          }
+        }
+      : {}),
+    ...(papers.length
+      ? {
+          about: papers.map((pub) => ({
+            '@type': 'ScholarlyArticle',
+            name: pub.title,
+            url: canonicalUrl(`/research/${pub.slug}/`)
+          }))
+        }
+      : {})
   };
 }
 

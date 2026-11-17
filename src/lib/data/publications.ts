@@ -14,14 +14,6 @@ export const FigureSchema = z.object({
   caption: z.string().optional()
 });
 
-export const PaperPresentationSchema = z.object({
-  event: z.string(),
-  location: z.string().optional(),
-  year: z.number().int(),
-  type: z.enum(['talk', 'poster', 'invited', 'outreach']),
-  slides: z.string().optional()
-});
-
 export const PublicationSchema = z.object({
   slug: z.string(),
   title: z.string(),
@@ -52,11 +44,12 @@ export const PublicationSchema = z.object({
   zenodo: z.string().url().optional(),
   github: z.string().url().optional(),
   overleaf: z.string().url().optional(),
+  /** Repository of the paper's LaTeX sources. */
+  latex: z.string().url().optional(),
 
   tags: z.array(z.string()),
 
-  presentations: z.array(PaperPresentationSchema).optional(),
-
+  /** Slugs of related publications. Name a pair once: `relatedPublications` reads it from both ends. */
   relatedPapers: z.array(z.string()).optional(),
   relatedProjects: z.array(z.string()).optional(),
 
@@ -76,7 +69,6 @@ export const AistProjectSchema = z.object({
 
 export type Author = z.infer<typeof AuthorSchema>;
 export type Figure = z.infer<typeof FigureSchema>;
-export type PaperPresentation = z.infer<typeof PaperPresentationSchema>;
 export type Publication = z.infer<typeof PublicationSchema>;
 export type AistProject = z.infer<typeof AistProjectSchema>;
 
@@ -135,6 +127,7 @@ const rawPublications = [
     arxivId: '2512.14475',
     zenodo: 'https://zenodo.org/records/18242626',
     github: 'https://github.com/glockyco/Teralizer',
+    latex: 'https://github.com/glockyco/Teralizer-Paper',
     tags: [
       'test amplification',
       'test generalization',
@@ -157,13 +150,14 @@ const rawPublications = [
     status: 'under-review' as const,
     authorPosition: 'first' as const,
     abstract:
-      'Background: Property-based testing validates properties across many generated inputs and can thereby detect regressions that conventional unit tests miss. However, writing property-based tests is challenging for practitioners, which limits their adoption.\nTool: Teralizer automatically generalizes JUnit tests into property-based jqwik tests for regression detection. Through single-path symbolic analysis, it extracts from each test execution a path condition, which characterizes the inputs that follow the same execution path, and a symbolic output expression, which computes the expected output for these inputs. The generalized tests generate inputs that satisfy the path condition and use the symbolic output expression as the oracle.\nResults: In our evaluation, generalization increased the mutation scores of EvoSuite-generated test suites by 0.8 to 3.9 percentage points. On the EqBench benchmark, generalizing the test suites that EvoSuite generated with 1 s per class reached the mutation score of EvoSuite\'s 60 s test suites with 31.9% less total runtime.\nAvailability: Teralizer is available as open source at https://github.com/glockyco/Teralizer.',
+      "Background: Property-based testing validates properties across many generated inputs and can thereby detect regressions that conventional unit tests miss. However, writing property-based tests is challenging for practitioners, which limits their adoption.\nTool: Teralizer automatically generalizes JUnit tests into property-based jqwik tests for regression detection. Through single-path symbolic analysis, it extracts from each test execution a path condition, which characterizes the inputs that follow the same execution path, and a symbolic output expression, which computes the expected output for these inputs. The generalized tests generate inputs that satisfy the path condition and use the symbolic output expression as the oracle.\nResults: In our evaluation, generalization increased the mutation scores of EvoSuite-generated test suites by 0.8 to 3.9 percentage points. On the EqBench benchmark, generalizing the test suites that EvoSuite generated with 1 s per class reached the mutation score of EvoSuite's 60 s test suites with 31.9% less total runtime.\nAvailability: Teralizer is available as open source at https://github.com/glockyco/Teralizer.",
     tldr: 'Teralizer turns a JUnit test into a property-based jqwik test: it records the path condition and symbolic output of the tested execution and checks the output on generated inputs that follow the same path. This catches regressions such as a changed boundary that the original test misses. A one-script example shows the whole pipeline on a loan approval method.',
     metaDescription:
       'Teralizer generalizes JUnit tests into property-based jqwik tests via single-path symbolic analysis, catching regressions the original tests miss.',
     pdf: '/pdfs/glock_2026_teralizer_tool.pdf',
     arxivId: '2611.19242',
     github: 'https://github.com/glockyco/Teralizer',
+    latex: 'https://github.com/glockyco/Teralizer-Tool-Paper',
     tags: ['test generalization', 'property-based testing', 'regression testing', 'tool'],
     relatedPapers: ['teralizer']
   },
@@ -220,14 +214,6 @@ const rawPublications = [
       'semantic differencing',
       'equivalence checking',
       'symbolic execution'
-    ],
-    presentations: [
-      {
-        event: 'ICSE Doctoral Symposium',
-        location: 'Lisbon, Portugal',
-        year: 2024,
-        type: 'talk' as const
-      }
     ]
   },
   {
@@ -372,5 +358,22 @@ export const publications: Publication[] = rawPublications.map((p) => Publicatio
 
 /** Default display order: reverse-chronological by publication year. */
 export const sortedPublications: Publication[] = [...publications].sort((a, b) => b.year - a.year);
+
+// A mistyped slug would drop a link without a trace, so it fails the build instead.
+for (const publication of publications) {
+  for (const slug of publication.relatedPapers ?? []) {
+    if (slug === publication.slug || !publications.some((other) => other.slug === slug)) {
+      throw new Error(`Publication "${publication.slug}" names "${slug}" as related`);
+    }
+  }
+}
+
+/** The publications related to the given one, whichever of the two names the other. */
+export function relatedPublications(slug: string): Publication[] {
+  const own = publications.find((publication) => publication.slug === slug)?.relatedPapers ?? [];
+  return sortedPublications.filter(
+    (publication) => own.includes(publication.slug) || publication.relatedPapers?.includes(slug)
+  );
+}
 
 export const aistProjects: AistProject[] = rawAistProjects.map((p) => AistProjectSchema.parse(p));

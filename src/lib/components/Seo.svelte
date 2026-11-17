@@ -32,6 +32,9 @@
     type?: 'website' | 'article' | 'profile';
     /** Path to the OG image (defaults to the site-wide card). */
     image?: string;
+    /** Pixel size of the OG image. Give both for an image that is not the size of the card. */
+    imageWidth?: number;
+    imageHeight?: number;
     /** Alt text describing the OG image. */
     imageAlt?: string;
     /** Set true to suppress indexing (e.g., error pages). */
@@ -46,6 +49,8 @@
     path,
     type = 'website',
     image = DEFAULT_OG_IMAGE,
+    imageWidth = OG_IMAGE_WIDTH,
+    imageHeight = OG_IMAGE_HEIGHT,
     imageAlt = DEFAULT_OG_IMAGE_ALT,
     noindex = false,
     jsonLd
@@ -75,8 +80,8 @@
   <meta property="og:description" content={description} />
   <meta property="og:url" content={url} />
   <meta property="og:image" content={ogImage} />
-  <meta property="og:image:width" content={OG_IMAGE_WIDTH.toString()} />
-  <meta property="og:image:height" content={OG_IMAGE_HEIGHT.toString()} />
+  <meta property="og:image:width" content={imageWidth.toString()} />
+  <meta property="og:image:height" content={imageHeight.toString()} />
   <meta property="og:image:alt" content={imageAlt} />
 
   <meta name="twitter:card" content="summary_large_image" />

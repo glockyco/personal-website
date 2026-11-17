@@ -60,15 +60,6 @@ export const AcademicServiceSchema = z.object({
   note: z.string().optional()
 });
 
-export const PresentationSchema = z.object({
-  title: z.string(),
-  event: z.string(),
-  location: z.string().optional(),
-  year: z.number().int(),
-  type: z.enum(['talk', 'poster', 'invited', 'outreach']),
-  note: z.string().optional()
-});
-
 export const SkillSchema = z.object({
   category: z.string(),
   items: z.array(z.string())
@@ -87,7 +78,6 @@ export type WorkExperience = z.infer<typeof WorkExperienceSchema>;
 export type TeachingExperience = z.infer<typeof TeachingExperienceSchema>;
 export type Supervision = z.infer<typeof SupervisionSchema>;
 export type AcademicService = z.infer<typeof AcademicServiceSchema>;
-export type Presentation = z.infer<typeof PresentationSchema>;
 export type Skill = z.infer<typeof SkillSchema>;
 export type ContinuingEducation = z.infer<typeof ContinuingEducationSchema>;
 
@@ -375,31 +365,6 @@ export const academicService: AcademicService[] = [
     note: '2 editions (2024 and 2026), hands-on demos of software engineering research'
   }
 ].map((s) => AcademicServiceSchema.parse(s));
-
-export const presentations: Presentation[] = [
-  {
-    title:
-      'Aiding Developer Understanding of Software Changes via Symbolic Execution-based Semantic Differencing',
-    event: 'ICSE 2024 Doctoral Symposium',
-    location: 'Lisbon, Portugal',
-    year: 2024,
-    type: 'talk',
-    note: 'Oral presentation and poster. Selected as 1 of 7 oral presentations from 35 accepted (55 submissions).'
-  },
-  {
-    title: 'Invited Participant',
-    event: '2nd SCCH Research Day',
-    year: 2024,
-    type: 'invited'
-  },
-  {
-    title: 'PhD Research Presentation',
-    event: '3rd International Software Engineering Summer School',
-    location: 'Lugano, Switzerland',
-    year: 2023,
-    type: 'talk'
-  }
-].map((p) => PresentationSchema.parse(p));
 
 export const skills: Skill[] = [
   {
