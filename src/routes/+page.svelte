@@ -5,6 +5,7 @@
   import { projects } from '$lib/data/projects';
   import { thumbnails } from '$lib/assets/screenshots/index';
   import Seo from '$lib/components/Seo.svelte';
+  import { paperListLinks } from '$lib/page-links';
   import { personJsonLd, websiteJsonLd } from '$lib/seo/jsonld';
 
   // Featured publications use the default reverse-chronological order.
@@ -90,31 +91,11 @@
       {#if pub.tldr}
         <p class="pub-tldr">{pub.tldr}</p>
       {/if}
-      {#if pub.pdf || pub.doi || pub.arxivId || pub.github || pub.zenodo || pub.latex || pub.overleaf}
-        <div class="pub-links">
-          {#if pub.pdf}
-            <a class="pub-link" href={pub.pdf} download>PDF</a>
-          {/if}
-          {#if pub.doi}
-            <a class="pub-link" href="https://doi.org/{pub.doi}">DOI</a>
-          {/if}
-          {#if pub.arxivId}
-            <a class="pub-link" href="https://arxiv.org/abs/{pub.arxivId}">arXiv</a>
-          {/if}
-          {#if pub.github}
-            <a class="pub-link" href={pub.github}>Code</a>
-          {/if}
-          {#if pub.zenodo}
-            <a class="pub-link" href={pub.zenodo}>Dataset</a>
-          {/if}
-          {#if pub.latex}
-            <a class="pub-link" href={pub.latex}>LaTeX</a>
-          {/if}
-          {#if pub.overleaf}
-            <a class="pub-link" href={pub.overleaf}>Overleaf</a>
-          {/if}
-        </div>
-      {/if}
+      <div class="pub-links">
+        {#each paperListLinks(pub) as link (link.href)}
+          <a class="pub-link" href={link.href}>{link.short}</a>
+        {/each}
+      </div>
     </article>
   {/each}
 </section>

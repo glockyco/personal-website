@@ -23,13 +23,22 @@ function bibtexName(name: string): string {
   return parts.length ? `${family}, ${parts.join(' ')}` : name;
 }
 
+/**
+ * The title with braces around the words whose capitals a bibliography style must keep,
+ * such as "{PASDA}" and "{JUnit}". Bracing the whole title would stop a style from
+ * applying its own capitalization to the other words.
+ */
+function bibtexTitle(title: string): string {
+  return title.replace(/[A-Za-z0-9]*[a-zA-Z0-9][A-Z][A-Za-z0-9]*/g, '{$&}');
+}
+
 /** The publication as a BibTeX entry, for readers who want to cite it. */
 export function bibtexEntry(pub: Publication): string {
   const family = pub.authors[0].name.trim().split(/\s+/).pop() ?? '';
   const key = `${family}_${pub.year}_${pub.slug.replaceAll('-', '_')}`.toLowerCase();
 
   const fields: [string, string | undefined][] = [
-    ['title', `{${pub.title}}`],
+    ['title', bibtexTitle(pub.title)],
     ['author', pub.authors.map((author) => bibtexName(author.name)).join(' and ')],
     [VENUE_FIELD[pub.type] ?? '', VENUE_FIELD[pub.type] ? pub.venue : undefined],
     ['year', String(pub.year)],

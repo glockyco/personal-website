@@ -1,6 +1,8 @@
 <script lang="ts">
+  import LinkTiles from '$lib/components/LinkTiles.svelte';
   import Seo from '$lib/components/Seo.svelte';
   import { formatTalkDate, talkKindLabels } from '$lib/data/talks';
+  import { talkLinks } from '$lib/page-links';
   import { breadcrumbJsonLd, talkJsonLd } from '$lib/seo/jsonld';
 
   const { data } = $props();
@@ -53,10 +55,10 @@
   {/if}
 
   <div class="talk-links">
-    <a class="link-btn" href={data.slides} download>PDF</a>
-    {#if talk.source}
-      <a class="link-btn" href={talk.source}>Source</a>
-    {/if}
+    <LinkTiles
+      primary={{ label: 'Open the slides', where: 'PDF', href: data.slides }}
+      links={talkLinks(talk)}
+    />
   </div>
 </div>
 
@@ -166,29 +168,7 @@
   }
 
   .talk-links {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
     margin-top: 20px;
-  }
-
-  .link-btn {
-    display: inline-flex;
-    align-items: center;
-    padding: 6px 16px;
-    border-radius: var(--radius-base);
-    font-size: var(--text-sm);
-    font-weight: 600;
-    background: var(--color-surface);
-    color: var(--color-accent);
-    border: 1px solid var(--color-border);
-    text-decoration: none;
-    transition: all var(--transition-fast);
-
-    &:hover {
-      border-color: var(--color-accent);
-      background: var(--color-accent-dim);
-    }
   }
 
   /* ── Sections ── */

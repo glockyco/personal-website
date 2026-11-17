@@ -6,11 +6,11 @@ import { publications } from '../src/lib/data/publications.ts';
 
 const entry = (slug: string) => bibtexEntry(publications.find((pub) => pub.slug === slug)!);
 
-test('a preprint cites its arXiv identifier and puts family names first', () => {
+test('a preprint cites its arXiv identifier, puts family names first and braces only names', () => {
   assert.equal(
     entry('teralizer-tool'),
     `@misc{glock_2026_teralizer_tool,
-  title         = {{Teralizer: A Tool for Generalizing JUnit Tests into Property-Based jqwik Tests}},
+  title         = {Teralizer: A Tool for Generalizing {JUnit} Tests into Property-Based jqwik Tests},
   author        = {Glock, Johann and Bauer, Clemens and Pinzger, Martin},
   year          = {2026},
   eprint        = {2611.19242},

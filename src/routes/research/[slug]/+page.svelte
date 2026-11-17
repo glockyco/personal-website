@@ -1,8 +1,10 @@
 <script lang="ts">
-  import { bibtexEntry } from '$lib/bibtex';
+  import CiteSection from '$lib/components/CiteSection.svelte';
+  import LinkTiles from '$lib/components/LinkTiles.svelte';
   import Seo from '$lib/components/Seo.svelte';
   import { talkKindLabels, talkPath } from '$lib/data/talks';
   import { linkParts } from '$lib/links';
+  import { paperLinks, paperPdfLink } from '$lib/page-links';
   import { breadcrumbJsonLd, scholarlyArticleJsonLd } from '$lib/seo/jsonld';
   import { scholarMetaTags } from '$lib/seo/scholar';
 
@@ -14,14 +16,6 @@
       pub.tldr ??
       `${pub.title} — ${pub.venue} (${pub.year}). Author${pub.authors.length > 1 ? 's' : ''}: ${pub.authors.map((a) => a.name).join(', ')}.`
   );
-
-  let copied = $state(false);
-
-  async function copyCitation() {
-    await navigator.clipboard.writeText(bibtexEntry(pub));
-    copied = true;
-    setTimeout(() => (copied = false), 2000);
-  }
 </script>
 
 <Seo
@@ -75,45 +69,19 @@
     {/each}
   </div>
 
-  {#if pub.status !== 'under-review' || pub.arxivId || pub.acceptanceRate}
+  <!-- A preprint's arXiv identifier stands on its tile below, so the venue line leaves it out. -->
+  {#if pub.status !== 'under-review' || pub.acceptanceRate}
     <p class="pub-venue">
-      {#if pub.status === 'under-review'}
-        {#if pub.arxivId}arXiv:{pub.arxivId}{/if}
-      {:else}
-        {pub.venue}
-      {/if}
+      {#if pub.status !== 'under-review'}{pub.venue}{/if}
       {#if pub.acceptanceRate}
         <span class="acceptance-rate">&middot; {pub.acceptanceRate}</span>
       {/if}
     </p>
+  {:else}
+    <div class="venue-gap"></div>
   {/if}
 
-  <div class="pub-links">
-    {#if pub.pdf}
-      <a class="link-btn" href={pub.pdf} download>PDF</a>
-    {/if}
-    {#if pub.doi}
-      <a class="link-btn" href="https://doi.org/{pub.doi}">DOI</a>
-    {/if}
-    {#if pub.arxivId}
-      <a class="link-btn" href="https://arxiv.org/abs/{pub.arxivId}">arXiv</a>
-    {/if}
-    {#if pub.github}
-      <a class="link-btn" href={pub.github}>Code</a>
-    {/if}
-    {#if pub.zenodo}
-      <a class="link-btn" href={pub.zenodo}>Dataset</a>
-    {/if}
-    {#if pub.latex}
-      <a class="link-btn" href={pub.latex}>LaTeX</a>
-    {/if}
-    {#if pub.overleaf}
-      <a class="link-btn" href={pub.overleaf}>Overleaf</a>
-    {/if}
-    <button class="link-btn" type="button" onclick={copyCitation} title="Copy the BibTeX entry">
-      {copied ? 'Copied' : 'Cite'}
-    </button>
-  </div>
+  <LinkTiles primary={paperPdfLink(pub)} links={paperLinks(pub)} />
 </div>
 
 <!-- ── TL;DR ───────────────────────────────────────────────────── -->
@@ -199,6 +167,8 @@
   </section>
 {/if}
 
+<CiteSection {pub} />
+
 <!-- ── Tags ────────────────────────────────────────────────────── -->
 <section class="section" id="tags">
   <div class="section-head">
@@ -272,33 +242,12 @@
     margin-bottom: 20px;
   }
 
+  .venue-gap {
+    height: 16px;
+  }
+
   .acceptance-rate {
     color: var(--color-muted);
-  }
-
-  .pub-links {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-
-  .link-btn {
-    display: inline-flex;
-    align-items: center;
-    padding: 6px 16px;
-    border-radius: var(--radius-base);
-    font-size: var(--text-sm);
-    font-weight: 600;
-    background: var(--color-surface);
-    color: var(--color-accent);
-    border: 1px solid var(--color-border);
-    text-decoration: none;
-    transition: all var(--transition-fast);
-
-    &:hover {
-      border-color: var(--color-accent);
-      background: var(--color-accent-dim);
-    }
   }
 
   /* ── Sections ── */

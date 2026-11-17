@@ -1,10 +1,13 @@
 <script lang="ts">
   import { page } from '$app/state';
   import { heroes } from '$lib/assets/screenshots/index';
+  import LinkTiles from '$lib/components/LinkTiles.svelte';
   import Seo from '$lib/components/Seo.svelte';
+  import { projectLinks } from '$lib/page-links';
   import { breadcrumbJsonLd, projectJsonLd } from '$lib/seo/jsonld';
 
   const { project } = $derived(page.data as { project: import('$lib/data/projects').Project });
+  const links = $derived(projectLinks(project));
 
   /** Embed URL with dark theme forced for supported sites */
   const demoUrl = $derived(() => {
@@ -46,25 +49,11 @@
 
   <p class="project-tagline">{project.tagline}</p>
 
-  {#if project.liveUrl || project.githubUrl || project.steamUrl || project.thunderstoreUrl || project.wikiUrl}
-    <div class="project-links">
-      {#if project.liveUrl}
-        <a class="link-btn" href={project.liveUrl}>Website</a>
-      {/if}
-      {#if project.githubUrl}
-        <a class="link-btn" href={project.githubUrl}>GitHub</a>
-      {/if}
-      {#if project.steamUrl}
-        <a class="link-btn" href={project.steamUrl}>Steam</a>
-      {/if}
-      {#if project.thunderstoreUrl}
-        <a class="link-btn" href={project.thunderstoreUrl}>Thunderstore</a>
-      {/if}
-      {#if project.wikiUrl}
-        <a class="link-btn" href={project.wikiUrl}>Wiki</a>
-      {/if}
-    </div>
-  {/if}
+  <!-- The website is the project itself, so its tile stands out as a paper's PDF does. -->
+  <LinkTiles
+    primary={project.liveUrl ? links[0] : undefined}
+    links={project.liveUrl ? links.slice(1) : links}
+  />
 </div>
 
 <!-- ── Hero image (shown only when there's no live demo) ───────── -->
@@ -246,31 +235,6 @@
     color: var(--color-muted);
     line-height: 1.6;
     margin-bottom: 16px;
-  }
-
-  .project-links {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-
-  .link-btn {
-    display: inline-flex;
-    align-items: center;
-    padding: 6px 16px;
-    border-radius: 20px;
-    font-size: var(--text-sm);
-    font-weight: 600;
-    color: var(--color-accent);
-    border: 1px solid var(--color-accent);
-    transition:
-      background var(--transition-fast),
-      color var(--transition-fast);
-
-    &:hover {
-      background: var(--color-accent);
-      color: white;
-    }
   }
 
   /* ── Sections ── */

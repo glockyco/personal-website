@@ -20,6 +20,7 @@ export function load({ params }: { params: { slug: string } }) {
   if (pub.pdf) sections.push({ id: 'paper', label: 'Paper' });
   if (talks.length) sections.push({ id: 'presentations', label: 'Presentations' });
   if (related.length) sections.push({ id: 'related', label: 'Related' });
+  sections.push({ id: 'cite', label: 'Cite' });
   sections.push({ id: 'tags', label: 'Tags' });
 
   return { pub, talks, related, sections };
