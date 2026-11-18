@@ -15,7 +15,6 @@ export function load({ params }: { params: { slug: string } }) {
   const sections: Section[] = [{ id: 'top', label: 'Top' }];
   if (talk.summary) sections.push({ id: 'summary', label: 'Summary' });
   sections.push({ id: 'slides', label: 'Slides' });
-  if (talk.poster) sections.push({ id: 'poster', label: 'Poster' });
   if (papers.length) sections.push({ id: 'papers', label: 'Papers' });
 
   return { talk, slides: talk.slides, papers, sections };

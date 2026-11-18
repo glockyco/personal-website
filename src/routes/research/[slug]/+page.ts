@@ -18,6 +18,7 @@ export function load({ params }: { params: { slug: string } }) {
   if (pub.tldr) sections.push({ id: 'tldr', label: 'TL;DR' });
   sections.push({ id: 'abstract', label: 'Abstract' });
   if (pub.pdf) sections.push({ id: 'paper', label: 'Paper' });
+  if (pub.poster) sections.push({ id: 'poster', label: 'Poster' });
   if (talks.length) sections.push({ id: 'presentations', label: 'Presentations' });
   if (related.length) sections.push({ id: 'related', label: 'Related' });
   sections.push({ id: 'cite', label: 'Cite' });

@@ -53,6 +53,14 @@ export const PublicationSchema = z.object({
   relatedPapers: z.array(z.string()).optional(),
   relatedProjects: z.array(z.string()).optional(),
 
+  /**
+   * The paper on one sheet: its PDF and a picture of it with the picture's size. A poster
+   * presents one paper, so it lives here and not with a talk.
+   */
+  poster: z
+    .object({ pdf: z.string(), image: z.string(), width: z.number(), height: z.number() })
+    .optional(),
+
   figures: z.array(FigureSchema).optional()
 });
 
@@ -210,6 +218,12 @@ const rawPublications = [
     acceptanceRate: '35 of 55 accepted; 7 of 35 selected for oral presentation',
     doi: '10.1145/3639478.3639783',
     latex: 'https://github.com/glockyco/icse2024-docsym-paper',
+    poster: {
+      pdf: '/pdfs/glock_2024_docsym_poster.pdf',
+      image: '/pdfs/glock_2024_docsym_poster.png',
+      width: 1600,
+      height: 2263
+    },
     tags: [
       'program comprehension',
       'semantic differencing',

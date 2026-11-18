@@ -4,12 +4,13 @@
   import Seo from '$lib/components/Seo.svelte';
   import TalkRows from '$lib/components/TalkRows.svelte';
   import { linkParts } from '$lib/links';
-  import { paperLinks, paperPdfLink } from '$lib/page-links';
+  import { paperLinks, paperPdfLink, paperPosterLink } from '$lib/page-links';
   import { breadcrumbJsonLd, scholarlyArticleJsonLd } from '$lib/seo/jsonld';
   import { scholarMetaTags } from '$lib/seo/scholar';
 
   const { data } = $props();
   const pub = $derived(data.pub);
+  const poster = $derived(paperPosterLink(pub));
 
   const description = $derived(
     pub.metaDescription ??
@@ -81,7 +82,10 @@
     <div class="venue-gap"></div>
   {/if}
 
-  <LinkTiles primary={paperPdfLink(pub)} links={paperLinks(pub)} />
+  <LinkTiles
+    primary={paperPdfLink(pub)}
+    links={[...paperLinks(pub), ...(poster ? [poster] : [])]}
+  />
 </div>
 
 <!-- ── TL;DR ───────────────────────────────────────────────────── -->
@@ -124,6 +128,24 @@
       </p>
     </object>
   </div>
+{/if}
+
+<!-- ── Poster ──────────────────────────────────────────────────── -->
+{#if pub.poster}
+  <section class="section" id="poster">
+    <div class="section-head">
+      <span class="section-label">Poster</span>
+    </div>
+    <a class="poster" href={pub.poster.pdf}>
+      <img
+        src={pub.poster.image}
+        alt="Poster of {pub.title}"
+        width={pub.poster.width}
+        height={pub.poster.height}
+        loading="lazy"
+      />
+    </a>
+  </section>
 {/if}
 
 <!-- ── Presentations ───────────────────────────────────────────── -->
@@ -312,6 +334,25 @@
       text-decoration: underline;
       text-underline-offset: 3px;
       overflow-wrap: anywhere;
+    }
+  }
+
+  /* A poster is read as a whole, so it is shown at the width of the text and opens as a PDF. */
+  .poster {
+    display: block;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-base);
+    overflow: hidden;
+    transition: border-color var(--transition-base);
+
+    &:hover {
+      border-color: var(--color-accent);
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
     }
   }
 

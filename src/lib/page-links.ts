@@ -32,6 +32,11 @@ export function paperPdfLink(pub: Publication): PaperLink | undefined {
   return { label, where: 'PDF', kind: 'paper', href: pub.pdf };
 }
 
+/** The publication's poster as a PDF. */
+export function paperPosterLink(pub: Publication): PageLink | undefined {
+  return pub.poster && { label: 'View the poster', where: 'PDF', href: pub.poster.pdf };
+}
+
 /** The PDF and every other link of a publication, for the lists of publications. */
 export function paperListLinks(pub: Publication): PaperLink[] {
   const pdf = paperPdfLink(pub);
@@ -93,10 +98,9 @@ export function paperLinks(pub: Publication): PaperLink[] {
   return links;
 }
 
-/** A talk's poster and where its deck lives, apart from the slides' PDF. */
+/** Where a talk's deck lives apart from its PDF. */
 export function talkLinks(talk: Talk): PageLink[] {
   const links: PageLink[] = [];
-  if (talk.poster) links.push({ label: 'View the poster', where: 'PDF', href: talk.poster.pdf });
   if (talk.source) {
     links.push({
       label: 'Deck sources',
