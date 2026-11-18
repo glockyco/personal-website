@@ -28,7 +28,11 @@ export const TalkSchema = z.object({
   /** Path of a 1200×675 picture of the title slide, for the talk's card and link previews. */
   preview: z.string(),
   /** Repository of the slides' sources. */
-  source: z.url().optional()
+  source: z.url().optional(),
+  /** A poster shown along with the talk: its PDF and a picture of it with the picture's size. */
+  poster: z
+    .object({ pdf: z.string(), image: z.string(), width: z.number(), height: z.number() })
+    .optional()
 });
 
 export type Talk = z.infer<typeof TalkSchema>;
@@ -57,7 +61,7 @@ const rawTalks = [
     slug: '2024-06-07-benchmarking',
     title: 'Benchmarking of Software Systems',
     kind: 'seminar' as const,
-    event: 'Study Planning, University of Klagenfurt',
+    event: 'Doctoral course Experiment/Study Planning and Data Analysis, University of Klagenfurt',
     date: '2024-06-07',
     papers: [],
     slides: '/slides/glock_2024_benchmarking.pdf',
@@ -84,7 +88,13 @@ const rawTalks = [
     note: 'Oral presentation and poster. Selected as 1 of 7 oral presentations from 35 accepted (55 submissions).',
     papers: ['icse-2024-doctoral-symposium'],
     slides: '/slides/glock_2024_icse_doctoral_symposium.pdf',
-    preview: '/slides/glock_2024_icse_doctoral_symposium.png'
+    preview: '/slides/glock_2024_icse_doctoral_symposium.png',
+    poster: {
+      pdf: '/slides/glock_2024_icse_doctoral_symposium_poster.pdf',
+      image: '/slides/glock_2024_icse_doctoral_symposium_poster.png',
+      width: 1600,
+      height: 2263
+    }
   }
 ];
 

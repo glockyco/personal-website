@@ -93,11 +93,18 @@ export function paperLinks(pub: Publication): PaperLink[] {
   return links;
 }
 
-/** Where a talk's deck lives apart from its PDF. */
+/** A talk's poster and where its deck lives, apart from the slides' PDF. */
 export function talkLinks(talk: Talk): PageLink[] {
-  return talk.source
-    ? [{ label: 'Deck sources', where: address(talk.source).split('/tree/')[0], href: talk.source }]
-    : [];
+  const links: PageLink[] = [];
+  if (talk.poster) links.push({ label: 'View the poster', where: 'PDF', href: talk.poster.pdf });
+  if (talk.source) {
+    links.push({
+      label: 'Deck sources',
+      where: address(talk.source).split('/tree/')[0],
+      href: talk.source
+    });
+  }
+  return links;
 }
 
 /** Where a project lives, with its website first. */

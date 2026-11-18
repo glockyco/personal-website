@@ -209,6 +209,7 @@ const rawPublications = [
     pdf: '/pdfs/glock_2024_docsym.pdf',
     acceptanceRate: '35 of 55 accepted; 7 of 35 selected for oral presentation',
     doi: '10.1145/3639478.3639783',
+    latex: 'https://github.com/glockyco/icse2024-docsym-paper',
     tags: [
       'program comprehension',
       'semantic differencing',

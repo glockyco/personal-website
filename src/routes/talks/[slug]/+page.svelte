@@ -89,6 +89,24 @@
   </object>
 </div>
 
+<!-- ── Poster ──────────────────────────────────────────────────── -->
+{#if talk.poster}
+  <section class="section" id="poster">
+    <div class="section-head">
+      <span class="section-label">Poster</span>
+    </div>
+    <a class="poster" href={talk.poster.pdf}>
+      <img
+        src={talk.poster.image}
+        alt="Poster of {talk.title}"
+        width={talk.poster.width}
+        height={talk.poster.height}
+        loading="lazy"
+      />
+    </a>
+  </section>
+{/if}
+
 <!-- ── Papers ──────────────────────────────────────────────────── -->
 {#if data.papers.length}
   <section class="section" id="papers">
@@ -223,6 +241,25 @@
     width: 100%;
     height: 80vh;
     min-height: 600px;
+  }
+
+  /* A poster is read as a whole, so it is shown at the width of the text and opens as a PDF. */
+  .poster {
+    display: block;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-base);
+    overflow: hidden;
+    transition: border-color var(--transition-base);
+
+    &:hover {
+      border-color: var(--color-accent);
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
   }
 
   .pdf-fallback {
