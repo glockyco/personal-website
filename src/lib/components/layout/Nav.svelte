@@ -5,8 +5,8 @@
 
   const navLinks = [
     { href: '/research/', label: 'Research' },
-    { href: '/talks/', label: 'Talks' },
     { href: '/projects/', label: 'Projects' },
+    { href: '/talks/', label: 'Talks' },
     { href: '/cv/', label: 'CV' }
   ];
 
