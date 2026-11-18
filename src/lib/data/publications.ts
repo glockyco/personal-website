@@ -248,7 +248,7 @@ const rawPublications = [
       'Mining 90,000 Maven Central projects to study how design patterns correlate with software quality — confirming functionality and reusability gains.',
     pdf: '/pdfs/aichberger_2020_msc_thesis.pdf',
     zenodo: 'https://zenodo.org/records/4048275',
-    github: 'https://github.com/jaichberg/qualisign',
+    github: 'https://github.com/glockyco/qualisign',
     overleaf: 'https://www.overleaf.com/read/vnfhydqxmpvx',
     tags: ['mining software repositories', 'design patterns', 'software quality']
   },
