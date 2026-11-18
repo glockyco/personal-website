@@ -7,7 +7,7 @@ export const TalkSchema = z.object({
   slug: z.string(),
   title: z.string(),
   /** A seminar is a talk inside the speaker's own institution. Lists label it as such. */
-  kind: z.enum(['talk', 'poster', 'invited', 'outreach', 'seminar']),
+  kind: z.enum(['talk', 'poster', 'invited', 'seminar']),
   event: z.string(),
   location: z.string().optional(),
   /** Day of the talk, as YYYY-MM-DD. */
@@ -54,6 +54,16 @@ const rawTalks = [
     source: 'https://github.com/glockyco/talks/tree/2026-11-17-phd-seminar/2026-11-17-phd-seminar'
   },
   {
+    slug: '2024-06-07-benchmarking',
+    title: 'Benchmarking of Software Systems',
+    kind: 'seminar' as const,
+    event: 'Study Planning, University of Klagenfurt',
+    date: '2024-06-07',
+    papers: [],
+    slides: '/slides/glock_2024_benchmarking.pdf',
+    preview: '/slides/glock_2024_benchmarking.png'
+  },
+  {
     slug: '2024-06-03-scch-research-day',
     title: 'Symbolic Execution-based Semantic Differencing',
     kind: 'invited' as const,
@@ -75,18 +85,6 @@ const rawTalks = [
     papers: ['icse-2024-doctoral-symposium'],
     slides: '/slides/glock_2024_icse_doctoral_symposium.pdf',
     preview: '/slides/glock_2024_icse_doctoral_symposium.png'
-  },
-  {
-    slug: '2023-09-12-se-summer-school',
-    title:
-      'Aiding Developer Understanding of Software Changes via Symbolic Execution-based Semantic Differencing',
-    kind: 'talk' as const,
-    event: '3rd International Software Engineering Summer School',
-    location: 'Lugano, Switzerland',
-    date: '2023-09-12',
-    papers: [],
-    slides: '/slides/glock_2023_se_summer_school.pdf',
-    preview: '/slides/glock_2023_se_summer_school.png'
   }
 ];
 
@@ -109,7 +107,6 @@ export const talkKindLabels: Record<Talk['kind'], string> = {
   talk: 'Talk',
   poster: 'Poster',
   invited: 'Invited Talk',
-  outreach: 'Outreach',
   seminar: 'Seminar'
 };
 

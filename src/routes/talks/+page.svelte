@@ -24,7 +24,7 @@
   <h1>Talks</h1>
 </div>
 
-<div class="talk-grid wide">
+<div class="talk-grid">
   {#each sortedTalks as talk (talk.slug)}
     {@const path = talkPath(talk)}
     <article class="talk-card">
@@ -99,7 +99,7 @@
   /* ── Talk grid ── */
   .talk-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 16px;
     padding: 32px 0 40px;
   }
@@ -186,12 +186,6 @@
   }
 
   /* ── Responsive ── */
-  @media (max-width: 1100px) {
-    .talk-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-
   @media (max-width: 768px) {
     .page-header {
       padding: 40px 0 16px;
