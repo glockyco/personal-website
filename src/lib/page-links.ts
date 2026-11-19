@@ -79,6 +79,14 @@ export function paperLinks(pub: Publication): PaperLink[] {
       href: pub.zenodo
     });
   }
+  if (pub.replication) {
+    links.push({
+      label: 'Replication package',
+      where: address(pub.replication),
+      kind: 'package',
+      href: pub.replication
+    });
+  }
   if (pub.latex) {
     links.push({
       label: 'LaTeX sources',

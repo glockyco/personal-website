@@ -43,6 +43,8 @@ export const PublicationSchema = z.object({
   scholarUrl: z.string().url().optional(),
   zenodo: z.string().url().optional(),
   github: z.string().url().optional(),
+  /** A replication package that is not a Zenodo record, such as a repository of data and scripts. */
+  replication: z.string().url().optional(),
   overleaf: z.string().url().optional(),
   /** Repository of the paper's LaTeX sources. */
   latex: z.string().url().optional(),
@@ -310,7 +312,7 @@ const rawPublications = [
       'Controlled experiment with 84 students: tying bonuses to automated SAST results significantly reduces security issue density, especially in back-ends.',
     pdf: '/pdfs/rass_2026_security_incentivization.pdf',
     arxivId: '2605.13100',
-    github: 'https://github.com/jku-lit-scsl/SecurityIncentivization_AnEmpiricalStudy',
+    replication: 'https://github.com/jku-lit-scsl/SecurityIncentivization_AnEmpiricalStudy',
     tags: [
       'security',
       'incentivization',
