@@ -172,6 +172,31 @@ const rawPublications = [
     relatedPapers: ['teralizer']
   },
   {
+    slug: 'property-based-regression-tests',
+    title: 'Generating Property-Based Regression Tests from Source Code Semantics',
+    authors: [
+      { name: 'Clemens Bauer', url: 'https://www.aau.at/en/team/bauer-clemens/' },
+      { name: 'Johann Glock', isMe: true },
+      { name: 'Martin Pinzger', url: 'https://pinzger.github.io/' }
+    ],
+    venue: 'arXiv',
+    venueShort: 'arXiv',
+    year: 2026,
+    type: 'preprint' as const,
+    status: 'under-review' as const,
+    authorPosition: 'contributing' as const,
+    abstract:
+      'Conventional unit tests (CUTs) check a method under test at fixed concrete inputs. A test can therefore miss a regression if its input produces the expected output despite a fault. Property-based testing (PBT) checks universally quantified specifications across many randomly generated inputs, but writing properties and input generators by hand is difficult. Existing approaches automate PBT creation by generalizing an existing or generated unit test suite. They either over-approximate concrete inputs across repetitive tests or apply single-path symbolic analysis along concrete test runs. This paper presents an approach that derives property-based regression tests directly from source code semantics via multipath symbolic execution (SE). For each explored path through a target method, the approach records a path semantics comprising the path condition, the symbolic return value, and the state change map. Each path semantics induces a Hoare triple that compiles into an executable property. Because SE leaves parts of a class unspecified, the approach complements the generated properties with search-based CUTs for the whole class. We evaluate our Java implementation against EvoSuite and the test generalization tool Teralizer on EqBench and on 11 projects from TOGBench. On EqBench, our approach keeps validated properties for 82.0% of all methods. Its mean mutation score of 63.8% exceeds the 55.2% of EvoSuite and the 60.3% of Teralizer. On TOGBench, target selection, SE limitations, and property validation restrict validated properties to 2.8% of all methods. The resulting mean mutation score of 48.6% falls below the 50.9% of EvoSuite and the 51.1% of Teralizer. Failures during test generation leave a few classes without effective tests and lead to this gap.',
+    tldr: 'EvoSuite-PBT generates property-based regression tests for Java from source code semantics: it derives a Hoare triple from each path that symbolic execution explores through a method, compiles the triple into a jqwik property, and complements the properties with search-based unit tests from EvoSuite. On EqBench, the properties raise the mean mutation score above those of EvoSuite and Teralizer, whereas on object-oriented code the construction of valid objects limits property generation.',
+    metaDescription:
+      'EvoSuite-PBT derives property-based regression tests for Java from source code semantics, outperforming EvoSuite and Teralizer on EqBench.',
+    pdf: '/pdfs/bauer_2026_pbt_regression.pdf',
+    arxivId: '2611.32636',
+    zenodo: 'https://zenodo.org/records/23976317',
+    tags: ['property-based testing', 'symbolic execution', 'regression testing', 'test generation'],
+    relatedPapers: ['teralizer']
+  },
+  {
     slug: 'api-evolution',
     title: 'Microservice API Evolution in Practice: A Study on Strategies and Challenges',
     authors: [
